@@ -146,7 +146,7 @@ class LoginView: UIView {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[createPassword]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[requestID]-(10)-|", options: [], metrics: nil, views: views)
         
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(55)-[welcome]-(15)-[line(2)]-(15)-[icon]-(30)-[id(30)]-(10)-[password(30)]-(15)-[remainConntectedLabel]-(40)-[login]-(>=15)-[line2(2)]-(20)-[createPassword]-(15)-[requestID]-(>=20)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(79)-[welcome]-(15)-[line(2)]-(15)-[icon]-(30)-[id(30)]-(10)-[password(30)]-(15)-[remainConntectedLabel]-(40)-[login]-(>=15)-[line2(2)]-(20)-[createPassword]-(15)-[requestID]-(>=20)-|", options: [], metrics: nil, views: views)
         
         NSLayoutConstraint.activate(layoutConstraints)
     }
