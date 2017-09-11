@@ -1,5 +1,5 @@
 //
-//  CreatePasswordView.swift
+//  RequestIDView.swift
 //  OnBoarding
 //
 //  Created by mmaalej on 11/09/2017.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class CreatePasswordView: UIView {
+class RequestIDView: UIView {
     
     //MARK: properties
     var closeButtonAction: (()->())?
-
+    
     private let closeBtn: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named:"Close"), for: .normal)
@@ -43,9 +43,9 @@ class CreatePasswordView: UIView {
         return imageView
     }()
     
-    private let passTxtF: UITextField = {
+    private let mailTxtF: UITextField = {
         let textField = UITextField ()
-        textField.placeholder = "Enter a password"
+        textField.placeholder = "Enter your E-Mail address"
         textField.layer.borderWidth = 1.0
         textField.layer.borderColor = UIColor.white.cgColor
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(7.0, 0.0, 0.0)
@@ -53,30 +53,9 @@ class CreatePasswordView: UIView {
         return textField
     }()
     
-    private let repatPassTxtF: UITextField = {
-        let textField = UITextField ()
-        textField.placeholder = "Enter a password"
-        textField.layer.borderWidth = 1.0
-        textField.layer.borderColor = UIColor.white.cgColor
-        textField.layer.sublayerTransform = CATransform3DMakeTranslation(7.0, 0.0, 0.0)
-        textField.layer.cornerRadius = 5.0
-        return textField
-    }()
-    
-    private let passwordTxtF: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Repeat your password"
-        textField.layer.borderWidth = 1.0
-        textField.layer.borderColor = UIColor.white.cgColor
-        textField.layer.sublayerTransform = CATransform3DMakeTranslation(7.0, 0.0, 0.0)
-        textField.layer.cornerRadius = 5.0
-        textField.isSecureTextEntry = true
-        return textField
-    }()
-    
-    private let loginBtn: UIButton = {
+    private let sendRequestBtn: UIButton = {
         let button = UIButton()
-        button.setTitle("Log in", for: .normal)
+        button.setTitle("Send request", for: .normal)
         button.titleEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
         button.titleLabel?.textColor = .white
         button.backgroundColor = UIColor.buttonColor
@@ -84,8 +63,8 @@ class CreatePasswordView: UIView {
         return button
     }()
     
-    //MARK:- init
-    override init(frame: CGRect) {
+    //Init
+    override init(frame:CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.bgColor
         layout()
@@ -97,7 +76,7 @@ class CreatePasswordView: UIView {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["close":closeBtn, "welcome": welcomeLbl, "line": line1ImgV, "logo": iconImgV, "pass": passTxtF, "repeatPass": repatPassTxtF, "login": loginBtn]
+        let views: [String: UIView] = ["close":closeBtn, "welcome": welcomeLbl, "line": line1ImgV, "logo": iconImgV, "mail": mailTxtF, "sendRequest": sendRequestBtn]
         
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -110,14 +89,13 @@ class CreatePasswordView: UIView {
             line1ImgV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             iconImgV.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ]
-        
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(20)-[close]", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[line(100)]", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[pass]-(10)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[repeatPass]-(10)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(60)-[login]-(60)-|", options: [], metrics: nil, views: views)
 
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(30)-[close]-(25)-[welcome]-(15)-[line(2)]-(15)-[logo]-(30)-[pass(30)]-(10)-[repeatPass(30)]-(40)-[login]", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[line(100)]", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[mail]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(60)-[sendRequest]-(60)-|", options: [], metrics: nil, views: views)
+        
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(30)-[close]-(25)-[welcome]-(15)-[line(2)]-(15)-[logo]-(30)-[mail(30)]-(40)-[sendRequest]", options: [], metrics: nil, views: views)
         
         NSLayoutConstraint.activate(layoutConstraints)
     }
@@ -129,5 +107,5 @@ class CreatePasswordView: UIView {
         }
         action()
     }
+    
 }
-

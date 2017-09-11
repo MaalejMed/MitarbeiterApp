@@ -10,9 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    override func loadView() {
-        super.loadView()
-    }
+    //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -37,14 +35,25 @@ class LoginViewController: UIViewController {
         loginView.createPasswordAction = {
             self.loadCreatePasswordView()
         }
-        loginView.generateIDAction = {
-            print("generate ID")
+        loginView.requestIDAction = {
+            self.loadRequestIDView()
         }
         layout(forView: loginView)
     }
     
     func loadCreatePasswordView() {
         let createPasswordView = CreatePasswordView(frame: .zero)
+        createPasswordView.closeButtonAction = {
+            self.loadLoginView()
+        }
         layout(forView: createPasswordView)
+    }
+    
+    func loadRequestIDView() {
+        let requestIDView = RequestIDView(frame: .zero)
+        requestIDView.closeButtonAction = {
+            self.loadLoginView()
+        }
+        layout(forView: requestIDView)
     }
 }

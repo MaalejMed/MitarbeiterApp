@@ -12,7 +12,7 @@ class LoginView: UIView {
     
     //MARK:- Properties
     var createPasswordAction: (() -> ())?
-    var generateIDAction: (() ->())?
+    var requestIDAction: (() ->())?
     
     private let welcomeLbl: UILabel = {
         let label = UILabel()
@@ -95,16 +95,16 @@ class LoginView: UIView {
         button.setTitle("Create a password", for: .normal)
         button.backgroundColor = UIColor.buttonColor
         button.layer.cornerRadius = 5.0
-        button.addTarget(self, action: #selector(CreatePassowrd), for: .touchUpInside)
+        button.addTarget(self, action: #selector(createPassowrd), for: .touchUpInside)
         return button
     }()
     
-    private let generateIdBtn: UIButton = {
+    private let requestIdBtn: UIButton = {
         let button = UIButton()
         button.setTitle("I do not have an ID yet", for: .normal)
         button.backgroundColor = UIColor.buttonColor
         button.layer.cornerRadius = 5.0
-        button.addTarget(self, action: #selector(GenerateID), for: .touchUpInside)
+        button.addTarget(self, action: #selector(requestID), for: .touchUpInside)
         return button
     }()
     
@@ -121,7 +121,7 @@ class LoginView: UIView {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["welcome": welcomeLbl, "line": line1ImgV, "icon": iconImgV, "id": idTxtF, "password": passwordTxtF, "remainConntectedLabel": remainConnectedLbl, "reaminConnectedButton": remainConnectedSwt, "login": loginBtn, "line2": line2ImgV, "createPassword": createPasswordBtn, "generateID": generateIdBtn]
+        let views: [String: UIView] = ["welcome": welcomeLbl, "line": line1ImgV, "icon": iconImgV, "id": idTxtF, "password": passwordTxtF, "remainConntectedLabel": remainConnectedLbl, "reaminConnectedButton": remainConnectedSwt, "login": loginBtn, "line2": line2ImgV, "createPassword": createPasswordBtn, "requestID": requestIdBtn]
         
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -144,23 +144,23 @@ class LoginView: UIView {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(60)-[login]-(60)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[line2(100)]", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[createPassword]-(10)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[generateID]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[requestID]-(10)-|", options: [], metrics: nil, views: views)
         
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(55)-[welcome]-(15)-[line(2)]-(15)-[icon]-(30)-[id(30)]-(10)-[password(30)]-(15)-[remainConntectedLabel]-(40)-[login]-(>=15)-[line2(2)]-(20)-[createPassword]-(15)-[generateID]-(>=20)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(55)-[welcome]-(15)-[line(2)]-(15)-[icon]-(30)-[id(30)]-(10)-[password(30)]-(15)-[remainConntectedLabel]-(40)-[login]-(>=15)-[line2(2)]-(20)-[createPassword]-(15)-[requestID]-(>=20)-|", options: [], metrics: nil, views: views)
         
         NSLayoutConstraint.activate(layoutConstraints)
     }
     
     //MARK:- Buttons actions
-    @objc func CreatePassowrd() {
+    @objc func createPassowrd() {
         guard let action = createPasswordAction else {
             return
         }
         action()
     }
     
-    @objc func GenerateID() {
-        guard let action = generateIDAction else {
+    @objc func requestID() {
+        guard let action = requestIDAction else {
             return
         }
         action()
