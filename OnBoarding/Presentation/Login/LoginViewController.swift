@@ -14,9 +14,11 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        self.navigationController?.isNavigationBarHidden = true
         loadLoginView()
     }
     
+    //MARK:- Layout
     func layout(forView view: UIView) {
         for view in self.view.subviews {
             view.removeFromSuperview()
@@ -38,6 +40,11 @@ class LoginViewController: UIViewController {
         loginView.requestIDAction = {
             self.loadRequestIDView()
         }
+        loginView.loginAction = {
+            let homeVC = HomeViewController()
+            self.navigationController?.pushViewController(homeVC, animated: true)
+        }
+        
         layout(forView: loginView)
     }
     

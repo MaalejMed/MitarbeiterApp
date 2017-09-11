@@ -11,6 +11,7 @@
 		7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA241F66E3D5005197ED /* RequestIDView.swift */; };
 		7754CA281F66E476005197ED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA271F66E476005197ED /* LoginViewController.swift */; };
 		7754CA2A1F66E48C005197ED /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA291F66E48C005197ED /* LoginView.swift */; };
+		7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA2C1F66E638005197ED /* HomeViewController.swift */; };
 		776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC5A1F62BB5400D0A0AC /* AppDelegate.swift */; };
 		776EDC601F62BB5400D0A0AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776EDC5E1F62BB5400D0A0AC /* Main.storyboard */; };
 		776EDC621F62BB5400D0A0AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 776EDC611F62BB5400D0A0AC /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		7754CA241F66E3D5005197ED /* RequestIDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIDView.swift; sourceTree = "<group>"; };
 		7754CA271F66E476005197ED /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7754CA291F66E48C005197ED /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		7754CA2C1F66E638005197ED /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		776EDC571F62BB5400D0A0AC /* OnBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		776EDC5A1F62BB5400D0A0AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		776EDC5F1F62BB5400D0A0AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -91,6 +93,14 @@
 				7754CA241F66E3D5005197ED /* RequestIDView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		7754CA2B1F66E628005197ED /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7754CA2C1F66E638005197ED /* HomeViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		776EDC4E1F62BB5400D0A0AC = {
@@ -149,6 +159,7 @@
 		776EDC891F62BC5700D0A0AC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				7754CA2B1F66E628005197ED /* Home */,
 				7754CA201F66E3B5005197ED /* Login */,
 			);
 			path = Presentation;
@@ -308,6 +319,7 @@
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
+				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
 				7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

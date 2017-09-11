@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let loginVC = LoginViewController()
-        self.window?.rootViewController = loginVC
+        let loginNC = UINavigationController.init(rootViewController: loginVC)
+        self.window?.rootViewController = loginNC
         return true
     }
 

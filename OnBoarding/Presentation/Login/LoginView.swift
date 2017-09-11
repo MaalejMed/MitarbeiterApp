@@ -11,6 +11,7 @@ import UIKit
 class LoginView: UIView {
     
     //MARK:- Properties
+    var loginAction: (()->())?
     var createPasswordAction: (() -> ())?
     var requestIDAction: (() ->())?
     
@@ -80,6 +81,7 @@ class LoginView: UIView {
         button.titleLabel?.textColor = .white
         button.backgroundColor = UIColor.buttonColor
         button.layer.cornerRadius = 5.0
+        button.addTarget(self, action: #selector(login), for: .touchUpInside)
         return button
     }()
     
@@ -161,6 +163,13 @@ class LoginView: UIView {
     
     @objc func requestID() {
         guard let action = requestIDAction else {
+            return
+        }
+        action()
+    }
+    
+    @objc func login() {
+        guard let action = loginAction else {
             return
         }
         action()
