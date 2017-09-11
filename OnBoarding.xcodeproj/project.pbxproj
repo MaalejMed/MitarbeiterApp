@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7754CA1D1F66AA38005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA1C1F66AA38005197ED /* CreatePasswordView.swift */; };
-		7754CA1F1F66B716005197ED /* RequestIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA1E1F66B716005197ED /* RequestIDView.swift */; };
+		7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA231F66E3D4005197ED /* CreatePasswordView.swift */; };
+		7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA241F66E3D5005197ED /* RequestIDView.swift */; };
+		7754CA281F66E476005197ED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA271F66E476005197ED /* LoginViewController.swift */; };
+		7754CA2A1F66E48C005197ED /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA291F66E48C005197ED /* LoginView.swift */; };
 		776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC5A1F62BB5400D0A0AC /* AppDelegate.swift */; };
 		776EDC601F62BB5400D0A0AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776EDC5E1F62BB5400D0A0AC /* Main.storyboard */; };
 		776EDC621F62BB5400D0A0AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 776EDC611F62BB5400D0A0AC /* Assets.xcassets */; };
 		776EDC651F62BB5400D0A0AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776EDC631F62BB5400D0A0AC /* LaunchScreen.storyboard */; };
 		776EDC701F62BB5400D0A0AC /* OnBoardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC6F1F62BB5400D0A0AC /* OnBoardingTests.swift */; };
 		776EDC7B1F62BB5400D0A0AC /* OnBoardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC7A1F62BB5400D0A0AC /* OnBoardingUITests.swift */; };
-		776EDC8E1F62BF0D00D0A0AC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC8D1F62BF0D00D0A0AC /* LoginViewController.swift */; };
-		776EDC901F62BF3000D0A0AC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC8F1F62BF3000D0A0AC /* LoginView.swift */; };
 		776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC921F62C76700D0A0AC /* UIColor+.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7754CA1C1F66AA38005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
-		7754CA1E1F66B716005197ED /* RequestIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestIDView.swift; sourceTree = "<group>"; };
+		7754CA231F66E3D4005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
+		7754CA241F66E3D5005197ED /* RequestIDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIDView.swift; sourceTree = "<group>"; };
+		7754CA271F66E476005197ED /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7754CA291F66E48C005197ED /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		776EDC571F62BB5400D0A0AC /* OnBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		776EDC5A1F62BB5400D0A0AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		776EDC5F1F62BB5400D0A0AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -52,8 +54,6 @@
 		776EDC761F62BB5400D0A0AC /* OnBoardingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnBoardingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		776EDC7A1F62BB5400D0A0AC /* OnBoardingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingUITests.swift; sourceTree = "<group>"; };
 		776EDC7C1F62BB5400D0A0AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		776EDC8D1F62BF0D00D0A0AC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Login/LoginViewController.swift; sourceTree = "<group>"; };
-		776EDC8F1F62BF3000D0A0AC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Login/LoginView.swift; sourceTree = "<group>"; };
 		776EDC921F62C76700D0A0AC /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +82,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7754CA201F66E3B5005197ED /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7754CA291F66E48C005197ED /* LoginView.swift */,
+				7754CA271F66E476005197ED /* LoginViewController.swift */,
+				7754CA231F66E3D4005197ED /* CreatePasswordView.swift */,
+				7754CA241F66E3D5005197ED /* RequestIDView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		776EDC4E1F62BB5400D0A0AC = {
 			isa = PBXGroup;
 			children = (
@@ -138,10 +149,7 @@
 		776EDC891F62BC5700D0A0AC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				776EDC8D1F62BF0D00D0A0AC /* LoginViewController.swift */,
-				776EDC8F1F62BF3000D0A0AC /* LoginView.swift */,
-				7754CA1C1F66AA38005197ED /* CreatePasswordView.swift */,
-				7754CA1E1F66B716005197ED /* RequestIDView.swift */,
+				7754CA201F66E3B5005197ED /* Login */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -295,12 +303,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				776EDC8E1F62BF0D00D0A0AC /* LoginViewController.swift in Sources */,
-				776EDC901F62BF3000D0A0AC /* LoginView.swift in Sources */,
-				7754CA1D1F66AA38005197ED /* CreatePasswordView.swift in Sources */,
+				7754CA2A1F66E48C005197ED /* LoginView.swift in Sources */,
+				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
-				7754CA1F1F66B716005197ED /* RequestIDView.swift in Sources */,
+				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
+				7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
