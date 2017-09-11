@@ -11,7 +11,10 @@ import UIKit
 class LoginView: UIView {
     
     //MARK:- Properties
-    let welcomeL: UILabel = {
+    var createPasswordAction: (() -> ())?
+    var generateIDAction: (() ->())?
+    
+    private let welcomeLbl: UILabel = {
         let label = UILabel()
         label.text = "Welcome To Cognizant"
         label.font = UIFont.boldSystemFont(ofSize: 17)
@@ -20,20 +23,20 @@ class LoginView: UIView {
         return label
     }()
     
-    let line1IV: UIImageView = {
+    private let line1ImgV: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
         return imageView
     }()
     
-    let iconIV: UIImageView = {
+    private let iconImgV: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: "Logo")
         return imageView
     }()
     
-    let idTF: UITextField = {
+    private let idTxtF: UITextField = {
         let textField = UITextField ()
         textField.placeholder = "Associate ID"
         textField.layer.borderWidth = 1.0
@@ -43,7 +46,7 @@ class LoginView: UIView {
         return textField
     }()
     
-    let passwordTF: UITextField = {
+    private let passwordTxtF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Password"
         textField.layer.borderWidth = 1.0
@@ -54,7 +57,7 @@ class LoginView: UIView {
         return textField
     }()
     
-    let remainConnectedL: UILabel = {
+    private let remainConnectedLbl: UILabel = {
         let label = UILabel()
         label.text = "Remain connected"
         label.font = UIFont.systemFont(ofSize: 13)
@@ -62,7 +65,7 @@ class LoginView: UIView {
         return label
     }()
     
-    let remainConnectedS: UISwitch = {
+    private let remainConnectedSwt: UISwitch = {
         let switchButton = UISwitch ()
         switchButton.isOn = true
         switchButton.onTintColor = UIColor.buttonColor
@@ -70,7 +73,7 @@ class LoginView: UIView {
         return switchButton
     }()
     
-    let loginB: UIButton = {
+    private let loginBtn: UIButton = {
         let button = UIButton()
         button.setTitle("Log in", for: .normal)
         button.titleEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
@@ -80,24 +83,28 @@ class LoginView: UIView {
         return button
     }()
     
-    let line2IV: UIImageView = {
+    private let line2ImgV: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
         return imageView
     }()
     
     
-    let createPasswordB: UIButton = {
+    private let createPasswordBtn: UIButton = {
         let button = UIButton()
         button.setTitle("Create a password", for: .normal)
         button.backgroundColor = UIColor.buttonColor
+        button.layer.cornerRadius = 5.0
+        button.addTarget(self, action: #selector(CreatePassowrd), for: .touchUpInside)
         return button
     }()
     
-    let generateIdB: UIButton = {
+    private let generateIdBtn: UIButton = {
         let button = UIButton()
         button.setTitle("I do not have an ID yet", for: .normal)
         button.backgroundColor = UIColor.buttonColor
+        button.layer.cornerRadius = 5.0
+        button.addTarget(self, action: #selector(GenerateID), for: .touchUpInside)
         return button
     }()
     
@@ -114,7 +121,7 @@ class LoginView: UIView {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["welcome": welcomeL, "line": line1IV, "icon": iconIV, "id": idTF, "password": passwordTF, "remainConntectedLabel": remainConnectedL, "reaminConnectedButton": remainConnectedS, "login": loginB, "line2": line2IV, "createPassword": createPasswordB, "generateID": generateIdB]
+        let views: [String: UIView] = ["welcome": welcomeLbl, "line": line1ImgV, "icon": iconImgV, "id": idTxtF, "password": passwordTxtF, "remainConntectedLabel": remainConnectedLbl, "reaminConnectedButton": remainConnectedSwt, "login": loginBtn, "line2": line2ImgV, "createPassword": createPasswordBtn, "generateID": generateIdBtn]
         
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -123,24 +130,39 @@ class LoginView: UIView {
         
         var layoutConstraints: [NSLayoutConstraint] = []
         layoutConstraints += [
-            welcomeL.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            line1IV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            iconIV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            remainConnectedS.centerYAnchor.constraint(equalTo: remainConnectedL.centerYAnchor),
-            line2IV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            welcomeLbl.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            line1ImgV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            iconImgV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            remainConnectedSwt.centerYAnchor.constraint(equalTo: remainConnectedLbl.centerYAnchor),
+            line2ImgV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ]
-    
+        
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[line(100)]", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[id]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[password]-(10)-|", options: [], metrics: nil, views: views)
-         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[remainConntectedLabel]-(>=10)-[reaminConnectedButton]-(10)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[login]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[remainConntectedLabel]-(>=10)-[reaminConnectedButton]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(60)-[login]-(60)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[line2(100)]", options: [], metrics: nil, views: views)
-         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[createPassword]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[createPassword]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[generateID]-(10)-|", options: [], metrics: nil, views: views)
         
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(55)-[welcome]-(15)-[line(2)]-(15)-[icon]-(30)-[id(30)]-(10)-[password(30)]-(15)-[remainConntectedLabel]-(15)-[login]-(>=15)-[line2(2)]-(20)-[createPassword]-(15)-[generateID]-(>=20)-|", options: [], metrics: nil, views: views)
-
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(55)-[welcome]-(15)-[line(2)]-(15)-[icon]-(30)-[id(30)]-(10)-[password(30)]-(15)-[remainConntectedLabel]-(40)-[login]-(>=15)-[line2(2)]-(20)-[createPassword]-(15)-[generateID]-(>=20)-|", options: [], metrics: nil, views: views)
+        
         NSLayoutConstraint.activate(layoutConstraints)
+    }
+    
+    //MARK:- Buttons actions
+    @objc func CreatePassowrd() {
+        guard let action = createPasswordAction else {
+            return
+        }
+        action()
+    }
+    
+    @objc func GenerateID() {
+        guard let action = generateIDAction else {
+            return
+        }
+        action()
     }
 }

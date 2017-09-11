@@ -10,8 +10,15 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    let loginView = LoginView(frame: .zero)
+    var containerView: UIView = UIView()
+    var loginView: LoginView?
 
+    override func loadView() {
+        super.loadView()
+        loadLoginView()
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -19,12 +26,24 @@ class LoginViewController: UIViewController {
     }
     
     func layout() {
-        self.loginView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(loginView)
-        loginView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        loginView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        loginView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        loginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(containerView)
+        containerView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        containerView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+    }
+    
+    //MARK:- Login view
+    func loadLoginView() {
+        loginView = LoginView(frame: .zero)
+        loginView?.createPasswordAction = {
+            print("create password")
+        }
+        loginView?.generateIDAction = {
+            print("generate ID")
+        }
+        containerView = loginView!
     }
 
 
