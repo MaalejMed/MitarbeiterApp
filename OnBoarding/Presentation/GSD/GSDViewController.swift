@@ -1,16 +1,16 @@
 //
-//  HomeViewController.swift
+//  GSDViewController.swift
 //  OnBoarding
 //
-//  Created by mmaalej on 11/09/2017.
+//  Created by mmaalej on 12/09/2017.
 //  Copyright © 2017 mmaalej. All rights reserved.
 //
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class GSDViewController: UIViewController {
     
-    //MARK:- Views lifecycle
+    //Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -18,9 +18,5 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.setHidesBackButton(true, animated: false)
     }
-    
-    
 }
