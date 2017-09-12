@@ -15,6 +15,9 @@
 		7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA301F67CC22005197ED /* ProfileViewController.swift */; };
 		7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA321F67CC60005197ED /* GSDViewController.swift */; };
 		7754CA361F67D52A005197ED /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA351F67D52A005197ED /* TabBar.swift */; };
+		7754CA381F67D8D1005197ED /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA371F67D8D1005197ED /* HomeView.swift */; };
+		7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA391F67DCBB005197ED /* CellViewProtocols.swift */; };
+		7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA3B1F67E059005197ED /* HomeCollectionViewCell.swift */; };
 		776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC5A1F62BB5400D0A0AC /* AppDelegate.swift */; };
 		776EDC601F62BB5400D0A0AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776EDC5E1F62BB5400D0A0AC /* Main.storyboard */; };
 		776EDC621F62BB5400D0A0AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 776EDC611F62BB5400D0A0AC /* Assets.xcassets */; };
@@ -50,6 +53,9 @@
 		7754CA301F67CC22005197ED /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7754CA321F67CC60005197ED /* GSDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDViewController.swift; sourceTree = "<group>"; };
 		7754CA351F67D52A005197ED /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		7754CA371F67D8D1005197ED /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		7754CA391F67DCBB005197ED /* CellViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewProtocols.swift; sourceTree = "<group>"; };
+		7754CA3B1F67E059005197ED /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		776EDC571F62BB5400D0A0AC /* OnBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		776EDC5A1F62BB5400D0A0AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		776EDC5F1F62BB5400D0A0AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -105,6 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				7754CA2C1F66E638005197ED /* HomeViewController.swift */,
+				7754CA371F67D8D1005197ED /* HomeView.swift */,
+				7754CA3B1F67E059005197ED /* HomeCollectionViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -129,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				7754CA351F67D52A005197ED /* TabBar.swift */,
+				7754CA391F67DCBB005197ED /* CellViewProtocols.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -352,8 +361,11 @@
 				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
+				7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */,
+				7754CA381F67D8D1005197ED /* HomeView.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
+				7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */,
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,
 				7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */,
 				7754CA361F67D52A005197ED /* TabBar.swift in Sources */,
