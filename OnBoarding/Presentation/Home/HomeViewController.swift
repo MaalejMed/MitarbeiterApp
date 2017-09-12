@@ -19,8 +19,5 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.setHidesBackButton(true, animated: false)
     }
-    
-    
 }
