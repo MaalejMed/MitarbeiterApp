@@ -8,32 +8,21 @@
 
 import UIKit
 
-enum CollectionItem: String{
-    case Time = "Timesheet"
-    case Expenses = "Travel expenses"
-    case Elearning = "E-Learning"
-    case Others = "Others"
-    
-   static let allValues = [Time, Expenses, Elearning, Others]
-    
-    func icon() -> UIImage {
-        switch self {
-        case .Time:
-            return UIImage.init(named: "Time")!
-        case .Expenses:
-            return UIImage.init(named: "Expenses")!
-        case .Elearning:
-            return UIImage.init(named: "Elearning")!
-        case .Others:
-            return UIImage.init(named: "Others")!
-        }
-    }
-}
+let modules: [(String, UIImage)] = [
+    ("Time recording", UIImage.init(named: "Time")!),
+    ("Travel Expenses", UIImage.init(named: "Expenses")!),
+    ("Others", UIImage.init(named: "Others")!),
+    ("E-Learning", UIImage.init(named: "Elearning")!)
+]
 
 class HomeViewController: UIViewController {
     
     //Properties
-    let homeView = HomeView(frame: .zero)
+    let homeView: HomeView = {
+        let contentView = CollectionView(items: modules)
+        let view = HomeView (header: "The following modules help you completing your day to day operations", contentView: contentView)
+        return view
+    }()
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
@@ -52,7 +41,6 @@ class HomeViewController: UIViewController {
     func layout() {
         homeView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(homeView)
-        
         homeView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         homeView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         homeView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true

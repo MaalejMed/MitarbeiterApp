@@ -19,6 +19,7 @@ class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols 
             (self.cellView as! HomeCellView).data = (title: data?.title, icon: data?.icon)
         }
     }
+    
     //Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,6 +31,7 @@ class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols 
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK:-Layout
     func layout() {
         self.contentView.addSubview(cellView.view)
         cellView.view.translatesAutoresizingMaskIntoConstraints = false
@@ -91,8 +93,7 @@ class HomeCellView: UIView, cellViewProtocol {
         var layoutConstraints: [NSLayoutConstraint] = []
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[title]-(0)-|", options: [], metrics: nil, views: views)
          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon]-(0)-|", options: [], metrics: nil, views: views)
-        
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(8)-[title]-(8)-[icon]-(8)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title]-(8)-[icon]-(0)-|", options: [], metrics: nil, views: views)
         
         NSLayoutConstraint.activate(layoutConstraints)
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		772BD9801F681815003FEC2B /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD97F1F681815003FEC2B /* CollectionView.swift */; };
 		7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA231F66E3D4005197ED /* CreatePasswordView.swift */; };
 		7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA241F66E3D5005197ED /* RequestIDView.swift */; };
 		7754CA281F66E476005197ED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA271F66E476005197ED /* LoginViewController.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		772BD97F1F681815003FEC2B /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		7754CA231F66E3D4005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		7754CA241F66E3D5005197ED /* RequestIDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIDView.swift; sourceTree = "<group>"; };
 		7754CA271F66E476005197ED /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			children = (
 				7754CA351F67D52A005197ED /* TabBar.swift */,
 				7754CA391F67DCBB005197ED /* CellViewProtocols.swift */,
+				772BD97F1F681815003FEC2B /* CollectionView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			files = (
 				7754CA2A1F66E48C005197ED /* LoginView.swift in Sources */,
 				7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */,
+				772BD9801F681815003FEC2B /* CollectionView.swift in Sources */,
 				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
