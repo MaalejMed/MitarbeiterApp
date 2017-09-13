@@ -24,14 +24,14 @@ class CollectionView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = .white
         return collectionView
     }()
     
     //Init
-    init(items: [(String, UIImage)]) {
+    init(items: [(String, UIImage)], bgColor: UIColor) {
         self.items = items
         super.init(frame: .zero)
+        self.menuCV.backgroundColor = UIColor.bgColor
         layout()
         menuCV.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.cellIdentifier)
     }
@@ -55,6 +55,10 @@ extension CollectionView: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (self.frame.size.width - cellPadding) / 2, height: HomeCollectionViewCell.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return cellPadding
     }
 }
 

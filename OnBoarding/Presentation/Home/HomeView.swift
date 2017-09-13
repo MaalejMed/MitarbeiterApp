@@ -45,7 +45,7 @@ class HomeView: UIView {
         var layoutConstraints: [NSLayoutConstraint] = []
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(20)-[header]-(20)-|", options:[] , metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(20)-[content]-(20)-|", options:[] , metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(30)-[header]-(20)-[content]-(0)-|", options:[] , metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(30)-[header]-(20)-[content]-(20)-|", options:[] , metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
 }
