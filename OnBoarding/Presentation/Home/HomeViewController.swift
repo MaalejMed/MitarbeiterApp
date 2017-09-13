@@ -59,7 +59,7 @@ class HomeViewController: UIViewController {
     
     //MARK:- Views
     func setupProfileView() {
-        profileView.data = (name: "Mohamed Maalej (645438)", profileImage: UIImage.init(named: "Logo")!)
+        profileView.data = (name: "Mohamed Maalej (645438)", profileImage: UIImage.init(named: "Logo")!, profileImageAction: nil)
         profileView.backgroundColor = UIColor.bgColor
     }
 }

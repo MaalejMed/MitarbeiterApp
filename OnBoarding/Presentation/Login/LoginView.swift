@@ -153,7 +153,7 @@ class LoginView: UIView {
         NSLayoutConstraint.activate(layoutConstraints)
     }
     
-    //MARK:- Buttons actions
+    //MARK:- Selectors
     @objc func createPassowrd() {
         guard let action = createPasswordAction else {
             return

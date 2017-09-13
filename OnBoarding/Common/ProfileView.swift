@@ -13,21 +13,32 @@ let imageSize = CGSize(width: 40.0, height: 40.0)
 class ProfileView: UIView {
     
     //MARK:- Properties
-    var data : (name: String?, profileImage: UIImage?)? {
+    var data : (name: String?, profileImage: UIImage?, profileImageAction: (()->())?)? {
         didSet {
             let scaledImage = data?.profileImage?.scale(size: imageSize)
             profileImgV.image = scaledImage
             nameLbl.text = data?.name
+            guard let imgAction = data?.profileImageAction else {
+                return
+            }
+            profileImageAction = imgAction
+            let gr = UITapGestureRecognizer(target: self, action: #selector(changeImage))
+            profileImgV.isUserInteractionEnabled = true
+            profileImgV.addGestureRecognizer(gr)
         }
     }
-    let profileImgV: UIImageView = {
+    
+    var profileImageAction: (()->())?
+    
+    private let profileImgV: UIImageView = {
         let imageView  = UIImageView()
         imageView.frame.size = CGSize (width: 40.0, height: 40.0)
         imageView.contentMode = .scaleAspectFit
         imageView.rounded()
         return imageView
     }()
-    let nameLbl: UILabel = {
+    
+    private let nameLbl: UILabel = {
         let label = UILabel()
         return label
     }()
@@ -58,5 +69,13 @@ class ProfileView: UIView {
             nameLbl.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ]
         NSLayoutConstraint.activate(layoutConstraints)
+    }
+    
+    //MARK:- Selectors
+    @objc func changeImage() {
+        guard let action = profileImageAction else {
+            return
+        }
+        action()
     }
 }
