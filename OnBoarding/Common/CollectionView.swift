@@ -31,7 +31,7 @@ class CollectionView: UIView {
     init(items: [(String, UIImage)], bgColor: UIColor) {
         self.items = items
         super.init(frame: .zero)
-        self.menuCV.backgroundColor = UIColor.bgColor
+        self.menuCV.backgroundColor = bgColor
         layout()
         menuCV.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.cellIdentifier)
     }

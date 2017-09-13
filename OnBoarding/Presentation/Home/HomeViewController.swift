@@ -18,6 +18,8 @@ let modules: [(String, UIImage)] = [
 class HomeViewController: UIViewController {
     
     //Properties
+    let profileView = ProfileView(frame: .zero)
+    
     let homeView: HomeView = {
         let contentView = CollectionView(items: modules, bgColor: UIColor.bgColor)
         let view = HomeView (header: "The following modules help you completing your day to day operations", contentView: contentView)
@@ -28,6 +30,7 @@ class HomeViewController: UIViewController {
     //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupProfileView()
         layout()
     }
     
@@ -40,11 +43,23 @@ class HomeViewController: UIViewController {
     
     //MARK:- Layout
     func layout() {
-        homeView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(homeView)
-        homeView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        let views: [String: UIView] = ["profile": profileView, "home": homeView]
+        for (_, view) in views{
+            view.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(view)
+            view.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+            view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        }
+        
+        profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        profileView.bottomAnchor.constraint(equalTo: homeView.topAnchor).isActive = true
         homeView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        homeView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        homeView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+       
+    }
+    
+    //MARK:- Views
+    func setupProfileView() {
+        profileView.data = (name: "Mohamed Maalej (645438)", profileImage: UIImage.init(named: "Logo")!)
+        profileView.backgroundColor = UIColor.bgColor
     }
 }
