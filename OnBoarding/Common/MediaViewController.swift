@@ -1,5 +1,5 @@
 //
-//  PhotoLibraryReaderViewController.swift
+//  MediaViewController.swift
 //  OnBoarding
 //
 //  Created by mmaalej on 15/09/2017.
@@ -8,25 +8,22 @@
 
 import UIKit
 
-class PhotoLibraryReaderViewController: UIViewController {
+protocol MediaViewControllerDelegate: class {
+    func didSelectProfileImage(image: UIImage?)
+}
+class MediaViewController: UIViewController {
     
     //MARK:- Properties
-    var profileImage: UIImage?
+    private var selectedImage: UIImage?
+    var delegate:MediaViewControllerDelegate?
     
-    //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setupimagePickerController()
     }
     
-    //MARK:- Service
-    func selectedImage() ->  UIImage? {
-        return profileImage
-    }
-    
-    //MARK:-
-    func setupimagePickerController() {
+    //MARK:- Read image
+    func setupImagePickerController() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
@@ -36,11 +33,11 @@ class PhotoLibraryReaderViewController: UIViewController {
     }
 }
 
-extension PhotoLibraryReaderViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension MediaViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            profileImage = image
-        }
-        picker.dismiss(animated: true, completion: nil)
+        let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        picker.dismiss(animated: true, completion:{
+            self.delegate?.didSelectProfileImage(image: image)
+        })
     }
 }

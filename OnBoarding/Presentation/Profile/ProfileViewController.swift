@@ -44,12 +44,29 @@ class ProfileViewController: UIViewController {
         NSLayoutConstraint.activate(layoutConstraints)
     }
     
-    //MARK:- Views
+    //MARK:- Setup views
     func setupProfileView() {
         profileView.data = (name: "Mohamed Maalej (645438)", profileImage: UIImage.init(named: "Logo")!, changeProfileImageAction: {
-            let controller = PhotoLibraryReaderViewController()
-            self.present(controller, animated: true, completion: nil)
+            self.changeProfileImage()
         })
         profileView.backgroundColor = UIColor.bgColor
     }
+    
+    //MARK:- Others
+    func changeProfileImage() {
+        let mediaController = MediaViewController()
+        mediaController.setupImagePickerController()
+        mediaController.delegate = self
+        self.present(mediaController, animated: true, completion: nil)
+    }
 }
+
+extension ProfileViewController: MediaViewControllerDelegate {
+    func didSelectProfileImage(image: UIImage?) {
+        profileView.data = (name: "Mohamed Maalej (645438)", profileImage: image!, changeProfileImageAction: {
+            self.changeProfileImage()
+        })
+    }
+}
+
+
