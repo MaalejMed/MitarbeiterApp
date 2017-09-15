@@ -8,16 +8,24 @@
 
 import UIKit
 
+enum Settings: String {
+    case changePass = "Change password"
+    
+    static let allValues = [changePass]
+}
+
 class ProfileViewController: UIViewController {
     
     //Properties
     let profileView = ProfileView(frame: .zero)
+    let profileTableView = ProfileTableView(frame: .zero)
     
     //Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
         setupProfileView()
+        setupProfileTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,7 +36,7 @@ class ProfileViewController: UIViewController {
     
     //MARK:- Layout
     func layout() {
-        let views:[String: UIView] = ["profile": profileView]
+        let views:[String: UIView] = ["profile": profileView, "profileTV": profileTableView]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
@@ -37,6 +45,8 @@ class ProfileViewController: UIViewController {
         var layoutConstraints: [NSLayoutConstraint] = []
         
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[profile]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[profileTV]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[profile]-(10)-[profileTV]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
             profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
         ]
@@ -50,6 +60,10 @@ class ProfileViewController: UIViewController {
             self.changeProfileImage()
         })
         profileView.backgroundColor = UIColor.bgColor
+    }
+    
+    func setupProfileTableView() {
+        profileTableView.dataSource = Settings.allValues
     }
     
     //MARK:- Others

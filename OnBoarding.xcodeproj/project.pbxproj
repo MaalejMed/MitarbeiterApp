@@ -30,6 +30,7 @@
 		776EDC701F62BB5400D0A0AC /* OnBoardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC6F1F62BB5400D0A0AC /* OnBoardingTests.swift */; };
 		776EDC7B1F62BB5400D0A0AC /* OnBoardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC7A1F62BB5400D0A0AC /* OnBoardingUITests.swift */; };
 		776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC921F62C76700D0A0AC /* UIColor+.swift */; };
+		77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601951F6BDB70000BC777 /* ProfileTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		776EDC7A1F62BB5400D0A0AC /* OnBoardingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingUITests.swift; sourceTree = "<group>"; };
 		776EDC7C1F62BB5400D0A0AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		776EDC921F62C76700D0A0AC /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		77B601951F6BDB70000BC777 /* ProfileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				7754CA301F67CC22005197ED /* ProfileViewController.swift */,
+				77B601951F6BDB70000BC777 /* ProfileTableView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				7754CA381F67D8D1005197ED /* HomeView.swift in Sources */,
 				7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
+				77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */,
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
 				7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */,
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,
