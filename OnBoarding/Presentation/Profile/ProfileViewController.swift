@@ -46,8 +46,9 @@ class ProfileViewController: UIViewController {
     
     //MARK:- Views
     func setupProfileView() {
-        profileView.data = (name: "Mohamed Maalej (645438)", profileImage: UIImage.init(named: "Logo")!, profileImageAction: {
-            print("change image")
+        profileView.data = (name: "Mohamed Maalej (645438)", profileImage: UIImage.init(named: "Logo")!, changeProfileImageAction: {
+            let controller = PhotoLibraryReaderViewController()
+            self.present(controller, animated: true, completion: nil)
         })
         profileView.backgroundColor = UIColor.bgColor
     }

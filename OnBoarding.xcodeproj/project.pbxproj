@@ -11,6 +11,7 @@
 		772BD9821F695C7B003FEC2B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9811F695C7B003FEC2B /* ProfileView.swift */; };
 		772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9831F695E2C003FEC2B /* UIImageView+.swift */; };
 		772BD9861F69731F003FEC2B /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9851F69731F003FEC2B /* UIImage+.swift */; };
+		7749AC791F6BB94100F1939C /* PhotoLibraryReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7749AC781F6BB94100F1939C /* PhotoLibraryReaderViewController.swift */; };
 		7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA231F66E3D4005197ED /* CreatePasswordView.swift */; };
 		7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA241F66E3D5005197ED /* RequestIDView.swift */; };
 		7754CA281F66E476005197ED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA271F66E476005197ED /* LoginViewController.swift */; };
@@ -53,6 +54,7 @@
 		772BD9811F695C7B003FEC2B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		772BD9831F695E2C003FEC2B /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		772BD9851F69731F003FEC2B /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		7749AC781F6BB94100F1939C /* PhotoLibraryReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryReaderViewController.swift; sourceTree = "<group>"; };
 		7754CA231F66E3D4005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		7754CA241F66E3D5005197ED /* RequestIDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIDView.swift; sourceTree = "<group>"; };
 		7754CA271F66E476005197ED /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		772BD9871F6BAA05003FEC2B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		7754CA201F66E3B5005197ED /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +153,7 @@
 		7754CA341F67D512005197ED /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7749AC781F6BB94100F1939C /* PhotoLibraryReaderViewController.swift */,
 				7754CA351F67D52A005197ED /* TabBar.swift */,
 				7754CA391F67DCBB005197ED /* CellViewProtocols.swift */,
 				772BD97F1F681815003FEC2B /* CollectionView.swift */,
@@ -175,6 +185,7 @@
 		776EDC591F62BB5400D0A0AC /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
+				772BD9871F6BAA05003FEC2B /* Service */,
 				7754CA341F67D512005197ED /* Common */,
 				776EDC911F62C75A00D0A0AC /* Extension */,
 				776EDC8A1F62BC6F00D0A0AC /* Model */,
@@ -379,6 +390,7 @@
 				7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */,
 				772BD9821F695C7B003FEC2B /* ProfileView.swift in Sources */,
 				7754CA381F67D8D1005197ED /* HomeView.swift in Sources */,
+				7749AC791F6BB94100F1939C /* PhotoLibraryReaderViewController.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
 				7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */,

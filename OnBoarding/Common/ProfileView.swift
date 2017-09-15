@@ -13,12 +13,12 @@ let imageSize = CGSize(width: 40.0, height: 40.0)
 class ProfileView: UIView {
     
     //MARK:- Properties
-    var data : (name: String?, profileImage: UIImage?, profileImageAction: (()->())?)? {
+    var data : (name: String?, profileImage: UIImage?, changeProfileImageAction: (()->())?)? {
         didSet {
             let scaledImage = data?.profileImage?.scale(size: imageSize)
             profileImgV.image = scaledImage
             nameLbl.text = data?.name
-            guard let imgAction = data?.profileImageAction else {
+            guard let imgAction = data?.changeProfileImageAction else {
                 return
             }
             profileImageAction = imgAction
