@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionView: UIView {
+class HomeCollectionView: UIView {
     
     //Properties
     let cellPadding: CGFloat = 30.0
@@ -51,7 +51,7 @@ class CollectionView: UIView {
     }
 }
 
-extension CollectionView: UICollectionViewDelegateFlowLayout {
+extension HomeCollectionView: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (self.frame.size.width - cellPadding) / 2, height: HomeCollectionViewCell.height)
@@ -62,7 +62,7 @@ extension CollectionView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension CollectionView: UICollectionViewDataSource {
+extension HomeCollectionView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count

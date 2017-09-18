@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK:- Properties
 struct CellMetrics {
     let topAnchor: CGFloat
     let leftAnchor: CGFloat
@@ -15,6 +16,7 @@ struct CellMetrics {
     let rightAnchor: CGFloat
 }
 
+//MARK: CollectionTableViewCell protocols
 protocol CollectionViewCellProtocols: class {
     static var cellIdentifier: String {get}
     static var staticMetrics: CellMetrics {get}
@@ -31,6 +33,25 @@ extension CollectionViewCellProtocols where Self: UICollectionViewCell {
     }
 }
 
+//MARK:- UITableViewCell protocols
+protocol TableViewCellProtocols {
+    static var cellIdentifier: String {get}
+    static var staticMetrics: CellMetrics {get}
+    var metrics: CellMetrics {get}
+    var cellView: CellViewProtocol{get}
+}
+
+extension TableViewCellProtocols where Self: UITableViewCell {
+    static var cellIdentifier: String {
+        return NSStringFromClass(self)
+    }
+    
+    var metrics: CellMetrics {
+        return Self.staticMetrics
+    }
+}
+
+//MARK:- Common protocols
 protocol CellViewProtocol {
     var  view: UIView {get}
     static var dummy: CellViewProtocol {get}
@@ -41,3 +62,4 @@ extension CellViewProtocol where Self: UIView {
         return self
     }
 }
+

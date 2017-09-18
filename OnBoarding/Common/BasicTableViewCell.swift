@@ -10,12 +10,10 @@ import UIKit
 
 class BasicTableViewCell: UITableViewCell, TableViewCellProtocols {
 
+    //MARK:- Properties
     static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 8.0, leftAnchor: 8.0, bottomAnchor: 8.0, rightAnchor: 8.0)
-
-    var cellView: TVCellViewProtocol = CellContentView()
-
+    var cellView: CellViewProtocol = CellContentView()
     static let height: CGFloat = CellContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
-    
     var data: (title: String?, icon: UIImage?) {
         didSet {
             (cellView as! CellContentView).data = (title: data.title, icon: data.icon)
@@ -26,7 +24,6 @@ class BasicTableViewCell: UITableViewCell, TableViewCellProtocols {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,10 +41,10 @@ class BasicTableViewCell: UITableViewCell, TableViewCellProtocols {
     }
 }
 
-class CellContentView: UIView, TVCellViewProtocol {
+class CellContentView: UIView, CellViewProtocol {
     
     //MARK:- Properties
-    static var dummy: TVCellViewProtocol = {
+    static var dummy: CellViewProtocol = {
         let view = CellContentView()
         view.data = (title: "title", icon: UIImage.init(named: "Logo"))
         return view
@@ -77,10 +74,12 @@ class CellContentView: UIView, TVCellViewProtocol {
         layout()
     }
     
+    //MARK:- Inits
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK:- Layout
     func layout() {
         let views: [String: UIView] = ["title": titleLbl, "icon": iconImgV]
         for (_, view) in views {
