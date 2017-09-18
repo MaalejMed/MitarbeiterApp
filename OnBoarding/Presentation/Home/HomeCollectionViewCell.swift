@@ -13,7 +13,7 @@ class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols 
     //Properties
     static var staticMetrics = CellMetrics(topAnchor: 8.0, leftAnchor: 8.0, bottomAnchor: 8.0, rightAnchor: 8.0)
     static let height = HomeCellView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
-    var cellView: cellViewProtocol = HomeCellView()
+    var cellView: CellViewProtocol = HomeCellView()
     var data: (title: String?, icon: UIImage?)? {
         didSet {
             (self.cellView as! HomeCellView).data = (title: data?.title, icon: data?.icon)
@@ -42,10 +42,10 @@ class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols 
     }
 }
 
-class HomeCellView: UIView, cellViewProtocol {
+class HomeCellView: UIView, CellViewProtocol {
     
     //MARK:- Properties
-    static var dummy: cellViewProtocol = {
+    static var dummy: CellViewProtocol = {
         let cell = HomeCellView()
         cell.data = (title: "title", icon: UIImage.init(named: "Elearning"))
         return cell

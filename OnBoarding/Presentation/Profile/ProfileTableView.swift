@@ -25,7 +25,7 @@ class ProfileTableView: UIView {
         super.init(frame: frame)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "identifier")
+        tableView.register(BasicTableViewCell.self, forCellReuseIdentifier: BasicTableViewCell.cellIdentifier)
         layout()
     }
     
@@ -48,18 +48,22 @@ extension ProfileTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (dataSource?.count != nil) ?  (dataSource?.count)! : 0
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "identifier")
+        let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.cellIdentifier) as? BasicTableViewCell
         
         let item = dataSource![indexPath.row]
-        cell?.textLabel?.text = item.rawValue
+        cell?.data = (title: item.rawValue, icon: item.icon())
         return cell!
     }
 }
 
 extension ProfileTableView: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BasicTableViewCell.height
+    }
 }

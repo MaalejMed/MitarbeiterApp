@@ -31,6 +31,8 @@
 		776EDC7B1F62BB5400D0A0AC /* OnBoardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC7A1F62BB5400D0A0AC /* OnBoardingUITests.swift */; };
 		776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC921F62C76700D0A0AC /* UIColor+.swift */; };
 		77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601951F6BDB70000BC777 /* ProfileTableView.swift */; };
+		77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */; };
+		77B6019A1F6BF6DA000BC777 /* TableViewCellProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601991F6BF6DA000BC777 /* TableViewCellProtocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		776EDC7C1F62BB5400D0A0AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		776EDC921F62C76700D0A0AC /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		77B601951F6BDB70000BC777 /* ProfileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableView.swift; sourceTree = "<group>"; };
+		77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
+		77B601991F6BF6DA000BC777 /* TableViewCellProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +165,8 @@
 				7754CA391F67DCBB005197ED /* CellViewProtocols.swift */,
 				772BD97F1F681815003FEC2B /* CollectionView.swift */,
 				772BD9811F695C7B003FEC2B /* ProfileView.swift */,
+				77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */,
+				77B601991F6BF6DA000BC777 /* TableViewCellProtocols.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -386,6 +392,7 @@
 				7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */,
 				772BD9801F681815003FEC2B /* CollectionView.swift in Sources */,
 				772BD9861F69731F003FEC2B /* UIImage+.swift in Sources */,
+				77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */,
 				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,
 				772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */,
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
@@ -399,6 +406,7 @@
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
 				7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */,
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,
+				77B6019A1F6BF6DA000BC777 /* TableViewCellProtocols.swift in Sources */,
 				7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */,
 				7754CA361F67D52A005197ED /* TabBar.swift in Sources */,
 			);

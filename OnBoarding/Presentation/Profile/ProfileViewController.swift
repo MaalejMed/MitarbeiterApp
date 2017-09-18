@@ -10,8 +10,17 @@ import UIKit
 
 enum Settings: String {
     case changePass = "Change password"
+    case logout = "Logout"
+    static let allValues = [changePass, logout]
     
-    static let allValues = [changePass]
+    func icon() -> UIImage {
+        switch self {
+        case .changePass:
+            return UIImage.init(named: "Password")!
+        case .logout:
+            return UIImage.init(named:"Logout")!
+        }
+    }
 }
 
 class ProfileViewController: UIViewController {

@@ -19,7 +19,7 @@ protocol CollectionViewCellProtocols: class {
     static var cellIdentifier: String {get}
     static var staticMetrics: CellMetrics {get}
     var metrics: CellMetrics {get}
-    var cellView: cellViewProtocol {get}
+    var cellView: CellViewProtocol {get}
 }
 
 extension CollectionViewCellProtocols where Self: UICollectionViewCell {
@@ -31,12 +31,12 @@ extension CollectionViewCellProtocols where Self: UICollectionViewCell {
     }
 }
 
-protocol cellViewProtocol {
+protocol CellViewProtocol {
     var  view: UIView {get}
-    static var dummy: cellViewProtocol {get}
+    static var dummy: CellViewProtocol {get}
 }
 
-extension cellViewProtocol where Self: UIView {
+extension CellViewProtocol where Self: UIView {
     var view: UIView {
         return self
     }
