@@ -32,6 +32,8 @@
 		776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC921F62C76700D0A0AC /* UIColor+.swift */; };
 		77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601951F6BDB70000BC777 /* ProfileTableView.swift */; };
 		77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */; };
+		77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF631F6FEF610097CF46 /* MessageViewController.swift */; };
+		77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF651F6FEF7F0097CF46 /* MessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		776EDC921F62C76700D0A0AC /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		77B601951F6BDB70000BC777 /* ProfileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableView.swift; sourceTree = "<group>"; };
 		77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
+		77BEDF631F6FEF610097CF46 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		77BEDF651F6FEF7F0097CF46 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				7754CA321F67CC60005197ED /* GSDViewController.swift */,
+				77BEDF631F6FEF610097CF46 /* MessageViewController.swift */,
+				77BEDF651F6FEF7F0097CF46 /* MessageView.swift */,
 			);
 			path = GSD;
 			sourceTree = "<group>";
@@ -391,6 +397,7 @@
 				77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */,
 				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,
 				772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */,
+				77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */,
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
 				7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */,
@@ -398,6 +405,7 @@
 				7754CA381F67D8D1005197ED /* HomeView.swift in Sources */,
 				7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
+				77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */,
 				77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */,
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
 				7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */,
