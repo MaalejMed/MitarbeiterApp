@@ -34,11 +34,11 @@ class LoginViewController: UIViewController {
     //MARK:- Login view
     func loadLoginView() {
         let loginView = LoginView(frame: .zero)
-        loginView.createPasswordAction = {
-            self.loadCreatePasswordView()
+        loginView.createPasswordAction = { [weak self] in
+            self?.loadCreatePasswordView()
         }
-        loginView.requestIDAction = {
-            self.loadRequestIDView()
+        loginView.requestIDAction = { [weak self] in
+            self?.loadRequestIDView()
         }
         loginView.loginAction = {
             TabBar.setupAppTabBar()
@@ -49,16 +49,16 @@ class LoginViewController: UIViewController {
     
     func loadCreatePasswordView() {
         let createPasswordView = CreatePasswordView(frame: .zero)
-        createPasswordView.closeButtonAction = {
-            self.loadLoginView()
+        createPasswordView.closeButtonAction = { [weak self] in
+            self?.loadLoginView()
         }
         layout(forView: createPasswordView)
     }
     
     func loadRequestIDView() {
         let requestIDView = RequestIDView(frame: .zero)
-        requestIDView.closeButtonAction = {
-            self.loadLoginView()
+        requestIDView.closeButtonAction = { [weak self] in
+            self?.loadLoginView()
         }
         layout(forView: requestIDView)
     }

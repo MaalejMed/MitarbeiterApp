@@ -65,7 +65,9 @@ class ProfileViewController: UIViewController {
     
     //MARK:- Setup views
     func setupProfileView() {
-        profileView.data = (name: "Mohamed Maalej (645438)", profileImage: UIImage.init(named: "Logo")!, changeProfileImageAction: {
+        // unowned because the profileView lives as long as the VC lives
+        // If profileView lives shorter than VC, it could be set as weak
+        profileView.data = (name: "Mohamed Maalej (645438)", profileImage: UIImage.init(named: "Logo")!, changeProfileImageAction: { [unowned self] in
             self.changeProfileImage()
         })
         profileView.backgroundColor = UIColor.bgColor
@@ -86,7 +88,7 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: MediaViewControllerDelegate {
     func didSelectProfileImage(image: UIImage?) {
-        profileView.data = (name: "Mohamed Maalej (645438)", profileImage: image!, changeProfileImageAction: {
+        profileView.data = (name: "Mohamed Maalej (645438)", profileImage: image!, changeProfileImageAction: { [unowned self] in
             self.changeProfileImage()
         })
     }

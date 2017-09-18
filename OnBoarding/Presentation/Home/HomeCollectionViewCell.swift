@@ -8,6 +8,8 @@
 
 import UIKit
 
+let homeCollectionViewCellPadding: CGFloat = 30.0
+
 class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols {
     
     //Properties

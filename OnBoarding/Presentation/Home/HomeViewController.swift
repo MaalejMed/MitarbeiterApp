@@ -19,7 +19,6 @@ class HomeViewController: UIViewController {
     
     //Properties
     let profileView = ProfileView(frame: .zero)
-    
     let homeView: HomeView = {
         let contentView = HomeCollectionView(items: modules, bgColor: UIColor.bgColor)
         let view = HomeView (header: "The following modules help you completing your day to day operations", contentView: contentView)

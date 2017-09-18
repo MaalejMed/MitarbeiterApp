@@ -11,8 +11,6 @@ import UIKit
 class HomeCollectionView: UIView {
     
     //Properties
-    let cellPadding: CGFloat = 30.0
-
     var items: [(String, UIImage)] {
         didSet {
             menuCV.reloadData()
@@ -54,11 +52,11 @@ class HomeCollectionView: UIView {
 extension HomeCollectionView: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (self.frame.size.width - cellPadding) / 2, height: HomeCollectionViewCell.height)
+        return CGSize(width: (self.frame.size.width - homeCollectionViewCellPadding) / 2, height: HomeCollectionViewCell.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return cellPadding
+        return homeCollectionViewCellPadding
     }
 }
 
