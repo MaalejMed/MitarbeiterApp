@@ -38,6 +38,7 @@ class HomeViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.topItem?.title = "Welcome on Board"
+        self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
     }
     
     //MARK:- Layout

@@ -18,4 +18,8 @@ extension UIColor {
         return UIColor.init(red: 0, green: 102/255, blue: 204/255, alpha: 1.0)
     }
     
+    static var navigationBarBgColor: UIColor {
+        return UIColor.init(red: 0, green: 153/255, blue: 0, alpha: 1.0)
+    }
+    
 }

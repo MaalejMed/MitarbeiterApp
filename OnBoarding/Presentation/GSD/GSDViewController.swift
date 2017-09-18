@@ -18,5 +18,7 @@ class GSDViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.topItem?.title = "Global Service Desk"
+        self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
     }
 }

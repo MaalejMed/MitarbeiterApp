@@ -39,8 +39,9 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.backgroundColor = UIColor.bgColor
+        self.view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = "Profile"
+        self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
     }
     
     //MARK:- Layout
