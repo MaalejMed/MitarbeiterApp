@@ -19,7 +19,7 @@ class TabBar {
         
         let gsdVC = GSDViewController()
         let gsdNC = UINavigationController.init(rootViewController: gsdVC)
-        let gsdTBI = UITabBarItem.init(title: "GSD", image: UIImage.init(named: "Gsd"), tag: 02)
+        let gsdTBI = UITabBarItem.init(title: "GSD", image: UIImage.init(named: "Help"), tag: 02)
         gsdVC.tabBarItem = gsdTBI
         
         let profileVC = ProfileViewController()

@@ -52,5 +52,4 @@ class MessageViewController: UIViewController {
         let dismissBtn = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = dismissBtn
     }
-
 }

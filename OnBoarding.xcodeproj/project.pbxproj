@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		772BD9821F695C7B003FEC2B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9811F695C7B003FEC2B /* ProfileView.swift */; };
+		772BD9821F695C7B003FEC2B /* BasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9811F695C7B003FEC2B /* BasicView.swift */; };
 		772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9831F695E2C003FEC2B /* UIImageView+.swift */; };
 		772BD9861F69731F003FEC2B /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9851F69731F003FEC2B /* UIImage+.swift */; };
 		773C17271F6FC6DD007366A0 /* HomeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773C17261F6FC6DD007366A0 /* HomeCollectionView.swift */; };
@@ -54,7 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		772BD9811F695C7B003FEC2B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		772BD9811F695C7B003FEC2B /* BasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicView.swift; sourceTree = "<group>"; };
 		772BD9831F695E2C003FEC2B /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		772BD9851F69731F003FEC2B /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		773C17261F6FC6DD007366A0 /* HomeCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionView.swift; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 				7749AC781F6BB94100F1939C /* MediaViewController.swift */,
 				7754CA351F67D52A005197ED /* TabBar.swift */,
 				7754CA391F67DCBB005197ED /* CellViewProtocols.swift */,
-				772BD9811F695C7B003FEC2B /* ProfileView.swift */,
+				772BD9811F695C7B003FEC2B /* BasicView.swift */,
 				77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */,
 			);
 			path = Common;
@@ -401,7 +401,7 @@
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
 				7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */,
-				772BD9821F695C7B003FEC2B /* ProfileView.swift in Sources */,
+				772BD9821F695C7B003FEC2B /* BasicView.swift in Sources */,
 				7754CA381F67D8D1005197ED /* HomeView.swift in Sources */,
 				7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,

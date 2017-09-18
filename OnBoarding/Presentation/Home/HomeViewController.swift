@@ -18,7 +18,7 @@ let modules: [(String, UIImage)] = [
 class HomeViewController: UIViewController {
     
     //Properties
-    let profileView = ProfileView(frame: .zero)
+    let profileView = BasicView(frame: .zero)
     let homeView: HomeView = {
         let contentView = HomeCollectionView(items: modules, bgColor: UIColor.bgColor)
         let view = HomeView (header: "The following modules help you completing your day to day operations", contentView: contentView)
@@ -59,7 +59,7 @@ class HomeViewController: UIViewController {
     
     //MARK:- Views
     func setupProfileView() {
-        profileView.data = (name: "Mohamed Maalej (645438)", profileImage: UIImage.init(named: "Logo")!, changeProfileImageAction: nil)
+        profileView.data = (title: "Mohamed Maalej (645438)", icon: UIImage.init(named: "Logo")!, action: nil)
         profileView.backgroundColor = UIColor.bgColor
     }
 }
