@@ -26,15 +26,18 @@ enum Direction {
 class MainMenuView: UIView {
     
     //Properties
+    let lineImgV: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .gray
+        return imageView
+    }()
     lazy var menuCV: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor.bgColor
         collectionView.isScrollEnabled = false
-        let panGR = UIPanGestureRecognizer(target: self, action:#selector(respondToGesture))
-        collectionView.addGestureRecognizer(panGR)
         return collectionView
     }()
     
@@ -51,6 +54,8 @@ class MainMenuView: UIView {
     //MARK: init
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        setupGestureRecognizer()
+        self.backgroundColor = UIColor.bgColor
         menuCV.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.cellIdentifier)
         layout()
     }
@@ -61,12 +66,30 @@ class MainMenuView: UIView {
     
     //MARK:- Layout
     func layout() {
-        menuCV.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(menuCV)
-        menuCV.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        menuCV.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        menuCV.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        menuCV.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        let views:[String: UIView] = ["line": lineImgV, "menu": menuCV]
+        for (_, view) in views {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(view)
+        }
+        
+        var layoutConstraints: [NSLayoutConstraint] = []
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[line(50)]", options: [], metrics: nil, views: views)
+         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(5)-[line(3)]", options: [], metrics: nil, views: views)
+
+        layoutConstraints += [
+            lineImgV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            menuCV.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
+            menuCV.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            menuCV.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            menuCV.topAnchor.constraint(equalTo: lineImgV.bottomAnchor, constant: 10)
+        ]
+        NSLayoutConstraint.activate(layoutConstraints)
+
+        
+//        menuCV.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
+//        menuCV.topAnchor.constraint(equalTo: lineImgV.bottomAnchor, constant: 10).isActive = true
+//        menuCV.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+//        menuCV.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
      }
     
     //MARK:- Selectors
@@ -84,12 +107,18 @@ class MainMenuView: UIView {
             return
         }
     }
+    
+    //MARK:- Others
+    func setupGestureRecognizer() {
+        let panGR = UIPanGestureRecognizer(target: self, action:#selector(respondToGesture))
+        self.addGestureRecognizer(panGR)
+    }
 }
 
 extension MainMenuView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (self.frame.size.width - homeCollectionViewCellPadding) / 2, height: HomeCollectionViewCell.height)
+        return CGSize(width: (self.frame.size.width - homeCollectionViewCellPadding - 40) / 3, height: HomeCollectionViewCell.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
