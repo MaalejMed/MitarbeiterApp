@@ -1,5 +1,5 @@
 //
-//  CollectionView.swift
+//  HomeView.swift
 //  OnBoarding
 //
 //  Created by mmaalej on 12/09/2017.
@@ -8,30 +8,51 @@
 
 import UIKit
 
-class HomeCollectionView: UIView {
+protocol MainMenuViewDelegate: class {
+    func didMoveMainMenu(direction: Direction, currentPosition: Position)
+}
+
+enum Position {
+    case idle
+    case middle
+    case top
+}
+
+enum Direction {
+    case top
+    case bottom
+}
+
+class MainMenuView: UIView {
     
     //Properties
-    var items: [(String, UIImage)] {
-        didSet {
-            menuCV.reloadData()
-        }
-    }
-    
     lazy var menuCV: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.backgroundColor = .white
+        collectionView.isScrollEnabled = false
+        let panGR = UIPanGestureRecognizer(target: self, action:#selector(respondToGesture))
+        collectionView.addGestureRecognizer(panGR)
         return collectionView
     }()
     
-    //Init
-    init(items: [(String, UIImage)], bgColor: UIColor) {
-        self.items = items
+    var currentPostion: Position = .idle
+    
+    var items: [(String, UIImage)]? {
+        didSet {
+            menuCV.reloadData()
+        }
+    }
+    
+    weak var delegate: MainMenuViewDelegate?
+    
+    //MARK: init
+    override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.menuCV.backgroundColor = bgColor
-        layout()
         menuCV.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.cellIdentifier)
+        layout()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,15 +63,31 @@ class HomeCollectionView: UIView {
     func layout() {
         menuCV.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(menuCV)
-        menuCV.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         menuCV.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        menuCV.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         menuCV.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         menuCV.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+     }
+    
+    //MARK:- Selectors
+    @objc func respondToGesture(gesture: UIPanGestureRecognizer){
+        guard gesture.state == .began else {
+            return
+        }
+        let velocity: CGPoint = gesture.velocity(in: self)
+        
+        if (velocity.y < 0) {
+            delegate?.didMoveMainMenu(direction: .top, currentPosition: currentPostion)
+        } else if velocity.y > 0 {
+            delegate?.didMoveMainMenu(direction: .bottom, currentPosition: currentPostion)
+        } else {
+            return
+        }
     }
 }
 
-extension HomeCollectionView: UICollectionViewDelegateFlowLayout {
-
+extension MainMenuView: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (self.frame.size.width - homeCollectionViewCellPadding) / 2, height: HomeCollectionViewCell.height)
     }
@@ -60,17 +97,19 @@ extension HomeCollectionView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension HomeCollectionView: UICollectionViewDataSource {
-
+extension MainMenuView: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        guard let count = items?.count else {
+            return 0
+        }
+        return count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.cellIdentifier, for: indexPath) as! HomeCollectionViewCell
-        let item = items[indexPath.row]
-        cell.data = (title: item.0, icon:item.1)
+        let item = items?[indexPath.row]
+        cell.data = (title: item?.0, icon:item?.1)
         return cell
     }
 }
-

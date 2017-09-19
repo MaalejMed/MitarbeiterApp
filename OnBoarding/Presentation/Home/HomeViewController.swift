@@ -8,29 +8,28 @@
 
 import UIKit
 
-let modules: [(String, UIImage)] = [
+let menuItems: [(String, UIImage)] = [
     ("Time recording", UIImage.init(named: "Time")!),
     ("Travel Expenses", UIImage.init(named: "Expenses")!),
     ("Benefits", UIImage.init(named: "Benefits")!),
-    ("Others", UIImage.init(named: "Others")!),
     ("E-Learning", UIImage.init(named: "Elearning")!),
+    ("GSD", UIImage.init(named: "Help")!),
+    ("Profile", UIImage.init(named: "Profile")!),
 ]
 
 class HomeViewController: UIViewController {
     
     //Properties
     let profileView = InfoView(frame: .zero)
-    let homeView: HomeView = {
-        let contentView = HomeCollectionView(items: modules, bgColor: UIColor.bgColor)
-        let view = HomeView (header: "The following modules help you completing your day to day operations", contentView: contentView)
-        view.backgroundColor = UIColor.bgColor
-        return view
-    }()
+    let mainMenuView = MainMenuView(frame: .zero)
+    var mainMenuViewTopAnchor: NSLayoutConstraint?
+
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupProfileView()
+        setupMainMenuView()
         layout()
     }
     
@@ -40,11 +39,12 @@ class HomeViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.topItem?.title = "Welcome on Board"
         self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
+        self.navigationItem.setHidesBackButton(true, animated:false);
     }
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["profile": profileView, "home": homeView]
+        let views: [String: UIView] = ["profile": profileView, "menu": mainMenuView]
         for (_, view) in views{
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
@@ -53,14 +53,60 @@ class HomeViewController: UIViewController {
         }
         
         profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        profileView.bottomAnchor.constraint(equalTo: homeView.topAnchor).isActive = true
-        homeView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-       
+        mainMenuView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -40)
+        mainMenuViewTopAnchor?.isActive = true
+    }
+    
+    func updateMainMenuViewPosition(newPosition: Position) {
+        self.view.removeConstraint(mainMenuViewTopAnchor!)
+        switch newPosition {
+        case .idle:
+           mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -40)
+        case .middle:
+            mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.centerYAnchor)
+        case .top:
+            mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: profileView.bottomAnchor)
+        }
+        mainMenuViewTopAnchor?.isActive = true
     }
     
     //MARK:- Views
     func setupProfileView() {
         profileView.data = (title: "Mohamed Maalej (645438)", icon: UIImage.init(named: "Logo")!, action: nil)
         profileView.backgroundColor = UIColor.bgColor
+    }
+    func setupMainMenuView() {
+        mainMenuView.items = menuItems
+        mainMenuView.delegate = self
+    }
+}
+
+extension HomeViewController: MainMenuViewDelegate {
+    func didMoveMainMenu(direction: Direction, currentPosition: Position) {
+        switch currentPosition {
+        case .idle:
+            guard direction == .top else {
+                return
+            }
+            mainMenuView.currentPostion = .middle
+            updateMainMenuViewPosition(newPosition: .middle)
+        case .middle:
+            switch direction {
+            case .top:
+                mainMenuView.currentPostion = .top
+                updateMainMenuViewPosition(newPosition: .top)
+            case .bottom:
+                mainMenuView.currentPostion = .idle
+                updateMainMenuViewPosition(newPosition: .idle)
+            }
+        case .top:
+            guard direction == .bottom  else {
+                return
+            }
+            mainMenuView.currentPostion = .middle
+            updateMainMenuViewPosition(newPosition: .middle)
+        }
     }
 }

@@ -41,7 +41,8 @@ class LoginViewController: UIViewController {
             self?.loadRequestIDView()
         }
         loginView.loginAction = {
-            TabBar.setupAppTabBar()
+            let homeVC = HomeViewController()
+            self.navigationController?.pushViewController(homeVC, animated: true)
         }
         
         layout(forView: loginView)

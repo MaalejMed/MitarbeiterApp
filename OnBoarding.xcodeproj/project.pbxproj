@@ -10,7 +10,6 @@
 		772BD9821F695C7B003FEC2B /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9811F695C7B003FEC2B /* InfoView.swift */; };
 		772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9831F695E2C003FEC2B /* UIImageView+.swift */; };
 		772BD9861F69731F003FEC2B /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9851F69731F003FEC2B /* UIImage+.swift */; };
-		773C17271F6FC6DD007366A0 /* HomeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773C17261F6FC6DD007366A0 /* HomeCollectionView.swift */; };
 		7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7749AC781F6BB94100F1939C /* MediaViewController.swift */; };
 		7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA231F66E3D4005197ED /* CreatePasswordView.swift */; };
 		7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA241F66E3D5005197ED /* RequestIDView.swift */; };
@@ -20,7 +19,7 @@
 		7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA301F67CC22005197ED /* ProfileViewController.swift */; };
 		7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA321F67CC60005197ED /* GSDViewController.swift */; };
 		7754CA361F67D52A005197ED /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA351F67D52A005197ED /* TabBar.swift */; };
-		7754CA381F67D8D1005197ED /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA371F67D8D1005197ED /* HomeView.swift */; };
+		7754CA381F67D8D1005197ED /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA371F67D8D1005197ED /* MainMenuView.swift */; };
 		7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA391F67DCBB005197ED /* CellViewProtocols.swift */; };
 		7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA3B1F67E059005197ED /* HomeCollectionViewCell.swift */; };
 		776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC5A1F62BB5400D0A0AC /* AppDelegate.swift */; };
@@ -58,7 +57,6 @@
 		772BD9811F695C7B003FEC2B /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		772BD9831F695E2C003FEC2B /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		772BD9851F69731F003FEC2B /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
-		773C17261F6FC6DD007366A0 /* HomeCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionView.swift; sourceTree = "<group>"; };
 		7749AC781F6BB94100F1939C /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		7754CA231F66E3D4005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		7754CA241F66E3D5005197ED /* RequestIDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIDView.swift; sourceTree = "<group>"; };
@@ -68,7 +66,7 @@
 		7754CA301F67CC22005197ED /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7754CA321F67CC60005197ED /* GSDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDViewController.swift; sourceTree = "<group>"; };
 		7754CA351F67D52A005197ED /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		7754CA371F67D8D1005197ED /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		7754CA371F67D8D1005197ED /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		7754CA391F67DCBB005197ED /* CellViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewProtocols.swift; sourceTree = "<group>"; };
 		7754CA3B1F67E059005197ED /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		776EDC571F62BB5400D0A0AC /* OnBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,9 +135,8 @@
 		7754CA2B1F66E628005197ED /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				773C17261F6FC6DD007366A0 /* HomeCollectionView.swift */,
 				7754CA2C1F66E638005197ED /* HomeViewController.swift */,
-				7754CA371F67D8D1005197ED /* HomeView.swift */,
+				7754CA371F67D8D1005197ED /* MainMenuView.swift */,
 				7754CA3B1F67E059005197ED /* HomeCollectionViewCell.swift */,
 			);
 			path = Home;
@@ -405,7 +402,7 @@
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
 				7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */,
 				772BD9821F695C7B003FEC2B /* InfoView.swift in Sources */,
-				7754CA381F67D8D1005197ED /* HomeView.swift in Sources */,
+				7754CA381F67D8D1005197ED /* MainMenuView.swift in Sources */,
 				7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
 				77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */,
@@ -416,7 +413,6 @@
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,
 				7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */,
 				7754CA361F67D52A005197ED /* TabBar.swift in Sources */,
-				773C17271F6FC6DD007366A0 /* HomeCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
