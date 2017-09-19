@@ -22,6 +22,8 @@ class HomeViewController: UIViewController {
     //Properties
     let profileView = InfoView(frame: .zero)
     let mainMenuView = MainMenuView(frame: .zero)
+    let newsTableView = NewsTableView(frame: .zero)
+    
     var mainMenuViewTopAnchor: NSLayoutConstraint?
 
     
@@ -29,6 +31,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupProfileView()
+        setupNewsTableView()
         setupMainMenuView()
         layout()
     }
@@ -44,7 +47,7 @@ class HomeViewController: UIViewController {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["profile": profileView, "menu": mainMenuView]
+        let views: [String: UIView] = ["profile": profileView, "menu": mainMenuView, "news": newsTableView]
         for (_, view) in views{
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
@@ -53,12 +56,16 @@ class HomeViewController: UIViewController {
         }
         
         profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        newsTableView.topAnchor.constraint(equalTo: profileView.bottomAnchor).isActive = true
+        newsTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         mainMenuView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
         
         mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         mainMenuViewTopAnchor?.isActive = true
     }
     
+    //MARK: Layout MainMenu animation
     func updateMainMenuViewPosition(newPosition: Position) {
         self.view.removeConstraint(mainMenuViewTopAnchor!)
         switch newPosition {
@@ -75,18 +82,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    //MARK:- Views
-    func setupProfileView() {
-        profileView.data = (title: "Mohamed Maalej (645438)", icon: UIImage.init(named: "Logo")!, action: nil)
-        profileView.backgroundColor = UIColor.bgColor
-    }
-    func setupMainMenuView() {
-        mainMenuView.items = menuItems
-        mainMenuView.delegate = self
-    }
-}
-
-extension HomeViewController: MainMenuViewDelegate {
     func didMoveMainMenu(direction: Direction, currentPosition: Position) {
         switch currentPosition {
         case .idle:
@@ -111,5 +106,31 @@ extension HomeViewController: MainMenuViewDelegate {
             mainMenuView.currentPostion = .middle
             updateMainMenuViewPosition(newPosition: .middle)
         }
+    }
+    
+    //MARK:- Views
+    func setupProfileView() {
+        profileView.data = (title: "Mohamed Maalej (645438)", icon: UIImage.init(named: "Logo")!, action: nil)
+        profileView.backgroundColor = UIColor.bgColor
+    }
+    func setupMainMenuView() {
+        mainMenuView.items = menuItems
+        mainMenuView.delegate = self
+    }
+    
+    func setupNewsTableView() {
+        newsTableView.delgate = self
+    }
+}
+
+extension HomeViewController: NewsTableViewDelegate {
+    func didScrollNewsTableView() {
+        didMoveMainMenu(direction: .bottom, currentPosition: mainMenuView.currentPostion)
+    }
+}
+
+extension HomeViewController: MainMenuViewDelegate {
+    func didMoveMainMenu(mainMenuView: MainMenuView, direction: Direction, currentPosition: Position) {
+        didMoveMainMenu(direction: direction, currentPosition: currentPosition)
     }
 }

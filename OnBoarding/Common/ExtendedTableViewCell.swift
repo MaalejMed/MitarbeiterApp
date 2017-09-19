@@ -1,25 +1,19 @@
 //
-//  BasicTableViewCell.swift
+//  ExtendedTableViewCell.swift
 //  OnBoarding
 //
-//  Created by mmaalej on 15/09/2017.
+//  Created by mmaalej on 19/09/2017.
 //  Copyright © 2017 mmaalej. All rights reserved.
 //
 
 import UIKit
 
-class BasicTableViewCell: UITableViewCell, TableViewCellProtocols {
-
-    //MARK:- Properties
+class ExtendedTableViewCell: UITableViewCell, TableViewCellProtocols {
     static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 8.0, leftAnchor: 8.0, bottomAnchor: 8.0, rightAnchor: 8.0)
-    var cellView: CellViewProtocol = BasicCellContentView()
-    static let height: CGFloat = BasicCellContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
-    var data: (title: String?, icon: UIImage?) {
-        didSet {
-            (cellView as! BasicCellContentView).data = (title: data.title, icon: data.icon)
-        }
-    }
+    static let height: CGFloat =  ExtendedCellContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
     
+    var cellView: CellViewProtocol = ExtendedCellContentView()
+
     //MARK:- Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,25 +33,37 @@ class BasicTableViewCell: UITableViewCell, TableViewCellProtocols {
         cellView.view.rightAnchor.constraint(equalTo:self.rightAnchor, constant: -metrics.rightAnchor).isActive = true
         cellView.view.bottomAnchor.constraint(equalTo:self.bottomAnchor, constant: -metrics.rightAnchor).isActive = true
     }
+    
 }
 
-class BasicCellContentView: UIView, CellViewProtocol {
-    
+class ExtendedCellContentView: UIView, CellViewProtocol {
     //MARK:- Properties
     static var dummy: CellViewProtocol = {
-        let view = BasicCellContentView()
-        view.data = (title: "title", icon: UIImage.init(named: "Logo"))
+        let view = ExtendedCellContentView()
+        view.data = (title: "title", description: "description", details: "details", icon: nil)
         return view
     }()
     
-    var data: (title: String?, icon: UIImage?)? {
+    var data: (title: String?, description: String?, details: String?, icon: UIImage?)? {
         didSet {
             titleLbl.text = data?.title
+            descriptionLbl.text = data?.description
+            detailsLbl.text = data?.details
             iconImgV.image = data?.icon
         }
     }
     
     let titleLbl: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    let descriptionLbl: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    let detailsLbl: UILabel = {
         let label = UILabel()
         return label
     }()
@@ -81,19 +87,22 @@ class BasicCellContentView: UIView, CellViewProtocol {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["title": titleLbl, "icon": iconImgV]
+        let views: [String: UIView] = ["title": titleLbl, "description": descriptionLbl, "details": detailsLbl, "icon": iconImgV]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
         }
         
         var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon(30)]-(10)-[title]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[icon(30)]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += [
-            titleLbl.centerYAnchor.constraint(equalTo: self.centerYAnchor)
-        ]
         
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon(40)]-(10)-[title]-(10)-[details]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[icon(40)]", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title]-(5)-[description]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:[description]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += [
+            descriptionLbl.leftAnchor.constraint(equalTo: titleLbl.leftAnchor),
+        ]
         NSLayoutConstraint.activate(layoutConstraints)
+
     }
 }

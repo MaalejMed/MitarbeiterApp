@@ -34,6 +34,9 @@
 		77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF631F6FEF610097CF46 /* MessageViewController.swift */; };
 		77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF651F6FEF7F0097CF46 /* MessageView.swift */; };
 		77FFA8661F700D390034B746 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8651F700D390034B746 /* AlertView.swift */; };
+		77FFA8681F7132870034B746 /* NewsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8671F7132870034B746 /* NewsTableView.swift */; };
+		77FFA86A1F7135B70034B746 /* ExtendedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */; };
+		77FFA86D1F7153EC0034B746 /* News.json in Resources */ = {isa = PBXBuildFile; fileRef = 77FFA86C1F7153EC0034B746 /* News.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,9 @@
 		77BEDF631F6FEF610097CF46 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		77BEDF651F6FEF7F0097CF46 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		77FFA8651F700D390034B746 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		77FFA8671F7132870034B746 /* NewsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableView.swift; sourceTree = "<group>"; };
+		77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedTableViewCell.swift; sourceTree = "<group>"; };
+		77FFA86C1F7153EC0034B746 /* News.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = News.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,7 @@
 				7754CA2C1F66E638005197ED /* HomeViewController.swift */,
 				7754CA371F67D8D1005197ED /* MainMenuView.swift */,
 				7754CA3B1F67E059005197ED /* HomeCollectionViewCell.swift */,
+				77FFA8671F7132870034B746 /* NewsTableView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -170,6 +177,7 @@
 				772BD9811F695C7B003FEC2B /* InfoView.swift */,
 				77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */,
 				77FFA8651F700D390034B746 /* AlertView.swift */,
+				77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -197,6 +205,7 @@
 		776EDC591F62BB5400D0A0AC /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
+				77FFA86B1F7153D50034B746 /* DummyJsons */,
 				772BD9871F6BAA05003FEC2B /* Service */,
 				7754CA341F67D512005197ED /* Common */,
 				776EDC911F62C75A00D0A0AC /* Extension */,
@@ -255,6 +264,14 @@
 				772BD9851F69731F003FEC2B /* UIImage+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		77FFA86B1F7153D50034B746 /* DummyJsons */ = {
+			isa = PBXGroup;
+			children = (
+				77FFA86C1F7153EC0034B746 /* News.json */,
+			);
+			path = DummyJsons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,6 +383,7 @@
 			files = (
 				776EDC651F62BB5400D0A0AC /* LaunchScreen.storyboard in Resources */,
 				776EDC621F62BB5400D0A0AC /* Assets.xcassets in Resources */,
+				77FFA86D1F7153EC0034B746 /* News.json in Resources */,
 				776EDC601F62BB5400D0A0AC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,8 +427,10 @@
 				77FFA8661F700D390034B746 /* AlertView.swift in Sources */,
 				77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */,
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
+				77FFA86A1F7135B70034B746 /* ExtendedTableViewCell.swift in Sources */,
 				7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */,
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,
+				77FFA8681F7132870034B746 /* NewsTableView.swift in Sources */,
 				7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */,
 				7754CA361F67D52A005197ED /* TabBar.swift in Sources */,
 			);

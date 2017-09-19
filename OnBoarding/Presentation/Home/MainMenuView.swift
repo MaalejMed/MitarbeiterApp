@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MainMenuViewDelegate: class {
-    func didMoveMainMenu(direction: Direction, currentPosition: Position)
+    func didMoveMainMenu(mainMenuView:MainMenuView, direction: Direction, currentPosition: Position)
 }
 
 enum Position {
@@ -100,9 +100,9 @@ class MainMenuView: UIView {
         let velocity: CGPoint = gesture.velocity(in: self)
         
         if (velocity.y < 0) {
-            delegate?.didMoveMainMenu(direction: .top, currentPosition: currentPostion)
+            delegate?.didMoveMainMenu(mainMenuView: self, direction: .top, currentPosition: currentPostion)
         } else if velocity.y > 0 {
-            delegate?.didMoveMainMenu(direction: .bottom, currentPosition: currentPostion)
+            delegate?.didMoveMainMenu(mainMenuView: self, direction: .bottom, currentPosition: currentPostion)
         } else {
             return
         }
