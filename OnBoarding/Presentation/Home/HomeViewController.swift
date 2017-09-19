@@ -11,6 +11,7 @@ import UIKit
 let modules: [(String, UIImage)] = [
     ("Time recording", UIImage.init(named: "Time")!),
     ("Travel Expenses", UIImage.init(named: "Expenses")!),
+    ("Benefits", UIImage.init(named: "Benefits")!),
     ("Others", UIImage.init(named: "Others")!),
     ("E-Learning", UIImage.init(named: "Elearning")!),
 ]
