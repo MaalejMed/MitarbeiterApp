@@ -11,14 +11,13 @@ import UIKit
 class GSDViewController: UIViewController {
     
     //MARK:- properties
-    let gsdInfoView = BasicView(frame: .zero)
+    let contactView = InfoView(frame: .zero)
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNaviBarButtons()
         setupGSDInfoView()
-        layout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,6 +25,10 @@ class GSDViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = "Global Service Desk"
         self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
+        //IF no messages
+        let alertView = AlertView(frame:.zero)
+        alertView.data = (title:"No Messages", description:"You still did not exchange any message with the Global Service Desk", icon: UIImage.init(named:"NoMails"))
+        layout(contentView: alertView)
     }
     
     //MARK- Setup
@@ -38,8 +41,8 @@ class GSDViewController: UIViewController {
     }
     
     func setupGSDInfoView() {
-        gsdInfoView.data = (title: "Tel: 0049 283213 12", icon:UIImage(named:"GSD"), action: nil)
-        gsdInfoView.backgroundColor = UIColor.bgColor
+        contactView.data = (title: "Tel: 0049 283213 12", icon:UIImage(named:"GSD"), action: nil)
+        contactView.backgroundColor = UIColor.bgColor
     }
     
     //MARK:- Selectors
@@ -50,17 +53,17 @@ class GSDViewController: UIViewController {
     }
     
     //MARK:-Layout
-    func layout() {
-        let views: [String: UIView] = ["contact": gsdInfoView]
+    func layout(contentView: UIView) {
+        let views: [String: UIView] = ["contact": contactView, "content": contentView]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
+            view.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+            view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         }
         
-        self.gsdInfoView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        self.gsdInfoView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.gsdInfoView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-       
-        
+        self.contactView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: contactView.bottomAnchor, constant: 10.0).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }

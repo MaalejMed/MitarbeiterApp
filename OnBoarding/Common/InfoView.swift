@@ -1,5 +1,5 @@
 //
-//  ProfileView.swift
+//  InfoView.swift
 //  OnBoarding
 //
 //  Created by mmaalej on 13/09/2017.
@@ -10,7 +10,7 @@ import UIKit
 
 let imageSize = CGSize(width: 40.0, height: 40.0)
 
-class BasicView: UIView {
+class InfoView: UIView {
     
     var action: (()->())?
     
@@ -66,7 +66,7 @@ class BasicView: UIView {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[icon(40)]-(10)-|", options:[], metrics: nil, views: views)
         layoutConstraints += [
             titleLbl.centerYAnchor.constraint(equalTo: self.centerYAnchor)
-        ]
+        ]   
         NSLayoutConstraint.activate(layoutConstraints)
     }
     

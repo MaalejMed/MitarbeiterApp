@@ -26,7 +26,7 @@ enum Settings: String {
 class ProfileViewController: UIViewController {
     
     //Properties
-    let profileView = BasicView(frame: .zero)
+    let profileView = InfoView(frame: .zero)
     let profileTableView = ProfileTableView(frame: .zero)
     
     //Views lifecycle
