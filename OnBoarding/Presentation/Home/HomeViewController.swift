@@ -70,6 +70,9 @@ class HomeViewController: UIViewController {
             mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: profileView.bottomAnchor)
         }
         mainMenuViewTopAnchor?.isActive = true
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     //MARK:- Views
