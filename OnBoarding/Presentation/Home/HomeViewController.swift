@@ -8,14 +8,33 @@
 
 import UIKit
 
-let menuItems: [(String, UIImage)] = [
-    ("Time recording", UIImage.init(named: "Time")!),
-    ("Travel Expenses", UIImage.init(named: "Expenses")!),
-    ("Benefits", UIImage.init(named: "Benefits")!),
-    ("E-Learning", UIImage.init(named: "Elearning")!),
-    ("GSD", UIImage.init(named: "Help")!),
-    ("Profile", UIImage.init(named: "Profile")!),
-]
+enum Item: String {
+    case time = "Time recording"
+    case travelExp = "Travel expenses"
+    case benefits = "benefits"
+    case eLearning = "E-Learning"
+    case gsd = "GSD"
+    case profile = "Profile"
+    
+    static let allMenuItems = [time, travelExp, benefits, eLearning, gsd, profile]
+    
+    func icon() -> UIImage {
+        switch self {
+        case .time:
+            return UIImage.init(named: "Time")!
+        case .travelExp:
+            return UIImage.init(named: "Expenses")!
+        case .benefits:
+            return UIImage.init(named: "Benefits")!
+        case .eLearning:
+            return UIImage.init(named: "Elearning")!
+        case .gsd:
+            return UIImage.init(named: "Help")!
+        case .profile:
+            return UIImage.init(named: "Profile")!
+        }
+    }
+}
 
 class HomeViewController: UIViewController {
     
@@ -46,7 +65,7 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.topItem?.title = "Welcome on Board"
+        self.navigationController?.navigationBar.topItem?.title = "Home"
         self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
         self.navigationItem.setHidesBackButton(true, animated:false);
     }
@@ -120,6 +139,11 @@ class HomeViewController: UIViewController {
         profileView.backgroundColor = UIColor.bgColor
     }
     func setupMainMenuView() {
+        var menuItems: [MenuItem] = []
+        for item in Item.allMenuItems {
+            let menuItem = MenuItem(item: item)
+            menuItems.append(menuItem)
+        }
         mainMenuView.items = menuItems
         mainMenuView.delegate = self
     }
@@ -146,5 +170,23 @@ extension HomeViewController: FeedTableViewDelegate {
 extension HomeViewController: MainMenuViewDelegate {
     func didMoveMainMenu(mainMenuView: MainMenuView, direction: Direction, currentPosition: Position) {
         didMoveMainMenu(direction: direction, currentPosition: currentPosition)
+    }
+    
+    func didSelect(mainMenuView: MainMenuView, menuItem: MenuItem) {
+        switch menuItem.item {
+        case .time:
+            break
+        case .travelExp:
+            break
+        case .benefits:
+            break
+        case .eLearning:
+            break
+        case .gsd:
+            break
+        case .profile:
+            let profileVC = ProfileViewController()
+            self.navigationController?.pushViewController(profileVC, animated: true)
+        }
     }
 }

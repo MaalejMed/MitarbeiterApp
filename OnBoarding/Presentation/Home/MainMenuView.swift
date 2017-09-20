@@ -10,6 +10,7 @@ import UIKit
 
 protocol MainMenuViewDelegate: class {
     func didMoveMainMenu(mainMenuView:MainMenuView, direction: Direction, currentPosition: Position)
+    func didSelect(mainMenuView:MainMenuView, menuItem: MenuItem)
 }
 
 enum Position {
@@ -43,7 +44,7 @@ class MainMenuView: UIView {
     
     var currentPostion: Position = .idle
     
-    var items: [(String, UIImage)]? {
+    var items: [MenuItem]? {
         didSet {
             menuCV.reloadData()
         }
@@ -84,12 +85,6 @@ class MainMenuView: UIView {
             menuCV.topAnchor.constraint(equalTo: lineImgV.bottomAnchor, constant: 10)
         ]
         NSLayoutConstraint.activate(layoutConstraints)
-
-        
-//        menuCV.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
-//        menuCV.topAnchor.constraint(equalTo: lineImgV.bottomAnchor, constant: 10).isActive = true
-//        menuCV.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-//        menuCV.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
      }
     
     //MARK:- Selectors
@@ -138,7 +133,14 @@ extension MainMenuView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.cellIdentifier, for: indexPath) as! HomeCollectionViewCell
         let item = items?[indexPath.row]
-        cell.data = (title: item?.0, icon:item?.1)
+        cell.data = (title: item?.description, icon:item?.icon)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = items?[indexPath.row] else {
+            return
+        }
+        delegate?.didSelect(mainMenuView: self, menuItem: item)
     }
 }
