@@ -40,6 +40,7 @@
 		77D919201F7276AA00BFAB45 /* TimeRecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191F1F7276AA00BFAB45 /* TimeRecordingViewController.swift */; };
 		77D919221F72786700BFAB45 /* ProjectInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919211F72786700BFAB45 /* ProjectInfoTableView.swift */; };
 		77D919241F728C2100BFAB45 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919231F728C2100BFAB45 /* PickerView.swift */; };
+		77FB51E71F72A7B4006E73AB /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB51E61F72A7B4006E73AB /* TimerView.swift */; };
 		77FFA8661F700D390034B746 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8651F700D390034B746 /* AlertView.swift */; };
 		77FFA8681F7132870034B746 /* FeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8671F7132870034B746 /* FeedTableView.swift */; };
 		77FFA86A1F7135B70034B746 /* ExtendedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */; };
@@ -107,6 +108,7 @@
 		77D9191F1F7276AA00BFAB45 /* TimeRecordingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRecordingViewController.swift; sourceTree = "<group>"; };
 		77D919211F72786700BFAB45 /* ProjectInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoTableView.swift; sourceTree = "<group>"; };
 		77D919231F728C2100BFAB45 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		77FB51E61F72A7B4006E73AB /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		77FFA8651F700D390034B746 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		77FFA8671F7132870034B746 /* FeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableView.swift; sourceTree = "<group>"; };
 		77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedTableViewCell.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 			children = (
 				77D9191F1F7276AA00BFAB45 /* TimeRecordingViewController.swift */,
 				77D919211F72786700BFAB45 /* ProjectInfoTableView.swift */,
+				77FB51E61F72A7B4006E73AB /* TimerView.swift */,
 			);
 			path = TimeRecording;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */,
 				772BD9861F69731F003FEC2B /* UIImage+.swift in Sources */,
 				77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */,
+				77FB51E71F72A7B4006E73AB /* TimerView.swift in Sources */,
 				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,
 				772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */,
 				77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */,

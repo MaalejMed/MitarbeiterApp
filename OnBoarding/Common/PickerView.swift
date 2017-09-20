@@ -113,7 +113,6 @@ extension PickerView: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return (dataSource?.count != nil) ?  (dataSource?.count)! : 0
     }
-    
 }
 
 extension PickerView: UIPickerViewDelegate {

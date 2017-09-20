@@ -16,6 +16,7 @@ class ProjectInfoTableView: UIView {
     //MARK:- Properties
     let tableView: UITableView = {
         let tableView = UITableView()
+        tableView.isScrollEnabled = false
         return tableView
     }()
     
@@ -24,6 +25,8 @@ class ProjectInfoTableView: UIView {
             tableView.reloadData()
         }
     }
+    
+    static let height: CGFloat =  BasicTableViewCell.height * CGFloat(ProjectParamter.allValues.count) + 40
     
     weak var delegate: ProjectInfoTableViewDelegate?
     

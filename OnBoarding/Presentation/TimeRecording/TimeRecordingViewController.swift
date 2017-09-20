@@ -21,6 +21,7 @@ class TimeRecordingViewController: UIViewController {
     
     //MARK:- Properties
     let projectInfoTableView = ProjectInfoTableView(frame: .zero)
+    let timerView = TimerView(frame:.zero)
     let pickerView = PickerView(frame: .zero)
     
     var selectedProjectParameter: ProjectParamter?
@@ -42,7 +43,7 @@ class TimeRecordingViewController: UIViewController {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["projectInfo": projectInfoTableView,]
+        let views: [String: UIView] = ["projectInfo": projectInfoTableView, "timer": timerView]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
@@ -51,8 +52,11 @@ class TimeRecordingViewController: UIViewController {
         }
         
         projectInfoTableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        projectInfoTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
+        projectInfoTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: ProjectInfoTableView.height).isActive = true
+
+        timerView.topAnchor.constraint(equalTo: projectInfoTableView.bottomAnchor).isActive = true
+        timerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
     func layoutPickerView() {
