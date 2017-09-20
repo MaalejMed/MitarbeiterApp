@@ -15,7 +15,6 @@ class PickerView: UIView {
         return picker
     }()
     
-    
     private let doneBtn: UIButton = {
         let button = UIButton()
         button.setTitle("Done", for: .normal)
@@ -53,7 +52,7 @@ class PickerView: UIView {
         }
     }
     
-    var doneButtonAction: (()->())?
+    var doneButtonAction: ((_ selectedItem: String)->())?
     var cancelButtonAction: (()->())?
     
     //MARK:- Init
@@ -93,7 +92,9 @@ class PickerView: UIView {
         guard let action = doneButtonAction else {
             return
         }
-        action()
+        let selectedIndex = pickerView.selectedRow(inComponent: 0)
+        
+        action((dataSource?[selectedIndex])!)
     }
     
     @objc func cancel() {

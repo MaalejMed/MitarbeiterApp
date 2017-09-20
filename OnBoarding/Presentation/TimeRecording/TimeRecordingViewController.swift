@@ -23,6 +23,9 @@ class TimeRecordingViewController: UIViewController {
     let projectInfoTableView = ProjectInfoTableView(frame: .zero)
     let pickerView = PickerView(frame: .zero)
     
+    var selectedProjectParameter: ProjectParamter?
+    var selectedItem: String?
+    
     //MARK:- Views lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,15 +76,27 @@ class TimeRecordingViewController: UIViewController {
         case .date:
             break
         case .identifier:
-            break
+            dataSource = ["000001", "000002", "000003", "000004"]
         case .activity:
-            break
+            dataSource = ["Activity 1", "Activity 2", "Activity 3", "Activity 4"]
         case .buillable:
             dataSource = ["YES", "NO"]
         }
         
         pickerView.dataSource = dataSource
-        pickerView.doneButtonAction = { [weak self] in
+        
+        pickerView.doneButtonAction = { [weak self] (selectedItem: String) in
+            guard let parameter = self?.selectedProjectParameter else {
+                return
+            }
+            
+            guard let parameterIndex = ProjectParamter.allValues.index(of: parameter) else {
+                return
+            }
+            
+            let indexPath = IndexPath(row: parameterIndex, section:0)
+            let cell: BasicTableViewCell = self?.projectInfoTableView.tableView.cellForRow(at: indexPath) as! BasicTableViewCell
+            cell.data = (title: self?.selectedProjectParameter?.rawValue, details: selectedItem, icon: nil)
             self?.dismissPickerView()
         }
         
@@ -90,23 +105,23 @@ class TimeRecordingViewController: UIViewController {
         }
     }
     
+    //MARK:- PickerView
     func presentPickerView(parameter: ProjectParamter) {
         setupPickerView(parameter: parameter)
-        UIView.animate(withDuration: 1) {
             self.layoutPickerView()
-        }
-        
     }
     
     func dismissPickerView() {
-        UIView.animate(withDuration: 1) {
-            self.pickerView.removeFromSuperview()
-        }
+        self.pickerView.removeFromSuperview()
+        selectedProjectParameter = nil
+        selectedItem = nil
     }
 }
 
 extension TimeRecordingViewController: ProjectInfoTableViewDelegate {
     func didSelectProjectParamter(projectInfoTableView: ProjectInfoTableView, parameter: ProjectParamter) {
         presentPickerView(parameter: parameter)
+        selectedProjectParameter = parameter
     }
 }
+
