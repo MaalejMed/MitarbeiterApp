@@ -23,6 +23,11 @@ class HomeViewController: UIViewController {
     let profileView = InfoView(frame: .zero)
     let mainMenuView = MainMenuView(frame: .zero)
     let newsTableView = NewsTableView(frame: .zero)
+    var feeds: [Feed] = [] {
+        didSet {
+            newsTableView.dataSource = feeds
+        }
+    }
     
     var mainMenuViewTopAnchor: NSLayoutConstraint?
 
@@ -30,6 +35,7 @@ class HomeViewController: UIViewController {
     //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchFeeds()
         setupProfileView()
         setupNewsTableView()
         setupMainMenuView()
@@ -120,6 +126,14 @@ class HomeViewController: UIViewController {
     
     func setupNewsTableView() {
         newsTableView.delgate = self
+    }
+    
+    //MARK:- Feeds
+    func fetchFeeds () {
+        guard let newFeeds = FeedService.updateFeeds() else {
+            return
+        }
+        feeds = newFeeds
     }
 }
 

@@ -20,7 +20,7 @@ class NewsTableView: UIView {
         return tableView
     }()
     
-    var dataSource: [Settings]? {
+    var dataSource: [Feed]? {
         didSet {
             tableView.reloadData()
         }
@@ -68,10 +68,10 @@ extension NewsTableView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.cellIdentifier) as? BasicTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ExtendedTableViewCell.cellIdentifier) as? ExtendedTableViewCell
         
-        let item = dataSource![indexPath.row]
-        cell?.data = (title: item.rawValue, icon: item.icon())
+        let feed = dataSource![indexPath.row]
+        cell?.data = (title:feed.title , description: feed.description, details: feed.date, icon: nil)
         return cell!
     }
 }

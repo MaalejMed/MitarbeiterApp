@@ -33,10 +33,12 @@
 		77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */; };
 		77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF631F6FEF610097CF46 /* MessageViewController.swift */; };
 		77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF651F6FEF7F0097CF46 /* MessageView.swift */; };
+		77D919171F7258FF00BFAB45 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919161F7258FF00BFAB45 /* FeedService.swift */; };
+		77D919191F72591C00BFAB45 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919181F72591C00BFAB45 /* Feed.swift */; };
 		77FFA8661F700D390034B746 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8651F700D390034B746 /* AlertView.swift */; };
 		77FFA8681F7132870034B746 /* NewsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8671F7132870034B746 /* NewsTableView.swift */; };
 		77FFA86A1F7135B70034B746 /* ExtendedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */; };
-		77FFA86D1F7153EC0034B746 /* News.json in Resources */ = {isa = PBXBuildFile; fileRef = 77FFA86C1F7153EC0034B746 /* News.json */; };
+		77FFA86D1F7153EC0034B746 /* Feeds.json in Resources */ = {isa = PBXBuildFile; fileRef = 77FFA86C1F7153EC0034B746 /* Feeds.json */; };
 		FA7672CEFE7EB9ABA6B7067D /* Pods_OnBoarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8FACB739714BCEC9757CA2 /* Pods_OnBoarding.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,10 +95,12 @@
 		77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
 		77BEDF631F6FEF610097CF46 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		77BEDF651F6FEF7F0097CF46 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		77D919161F7258FF00BFAB45 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
+		77D919181F72591C00BFAB45 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		77FFA8651F700D390034B746 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		77FFA8671F7132870034B746 /* NewsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableView.swift; sourceTree = "<group>"; };
 		77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedTableViewCell.swift; sourceTree = "<group>"; };
-		77FFA86C1F7153EC0034B746 /* News.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = News.json; sourceTree = "<group>"; };
+		77FFA86C1F7153EC0034B746 /* Feeds.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Feeds.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,7 @@
 		772BD9871F6BAA05003FEC2B /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				77D919161F7258FF00BFAB45 /* FeedService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -212,11 +217,11 @@
 		776EDC591F62BB5400D0A0AC /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
+				77D919151F7258ED00BFAB45 /* Model */,
 				77FFA86B1F7153D50034B746 /* DummyJsons */,
 				772BD9871F6BAA05003FEC2B /* Service */,
 				7754CA341F67D512005197ED /* Common */,
 				776EDC911F62C75A00D0A0AC /* Extension */,
-				776EDC8A1F62BC6F00D0A0AC /* Model */,
 				776EDC891F62BC5700D0A0AC /* Presentation */,
 				776EDC5A1F62BB5400D0A0AC /* AppDelegate.swift */,
 				776EDC5E1F62BB5400D0A0AC /* Main.storyboard */,
@@ -256,13 +261,6 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		776EDC8A1F62BC6F00D0A0AC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		776EDC911F62C75A00D0A0AC /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,10 +271,18 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		77D919151F7258ED00BFAB45 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				77D919181F72591C00BFAB45 /* Feed.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		77FFA86B1F7153D50034B746 /* DummyJsons */ = {
 			isa = PBXGroup;
 			children = (
-				77FFA86C1F7153EC0034B746 /* News.json */,
+				77FFA86C1F7153EC0034B746 /* Feeds.json */,
 			);
 			path = DummyJsons;
 			sourceTree = "<group>";
@@ -410,7 +416,7 @@
 			files = (
 				776EDC651F62BB5400D0A0AC /* LaunchScreen.storyboard in Resources */,
 				776EDC621F62BB5400D0A0AC /* Assets.xcassets in Resources */,
-				77FFA86D1F7153EC0034B746 /* News.json in Resources */,
+				77FFA86D1F7153EC0034B746 /* Feeds.json in Resources */,
 				776EDC601F62BB5400D0A0AC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,6 +497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7754CA2A1F66E48C005197ED /* LoginView.swift in Sources */,
+				77D919191F72591C00BFAB45 /* Feed.swift in Sources */,
 				7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */,
 				772BD9861F69731F003FEC2B /* UIImage+.swift in Sources */,
 				77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */,
@@ -509,6 +516,7 @@
 				77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */,
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
 				77FFA86A1F7135B70034B746 /* ExtendedTableViewCell.swift in Sources */,
+				77D919171F7258FF00BFAB45 /* FeedService.swift in Sources */,
 				7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */,
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,
 				77FFA8681F7132870034B746 /* NewsTableView.swift in Sources */,
@@ -682,7 +690,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = OnBoarding/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Cognizant.OnBoarding;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -698,7 +706,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = OnBoarding/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Cognizant.OnBoarding;
 				PRODUCT_NAME = "$(TARGET_NAME)";

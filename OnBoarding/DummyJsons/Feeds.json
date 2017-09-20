@@ -1,25 +1,30 @@
 [
  {
+ "identifier": "01",
  "title": "Great news 1",
  "description": "This is the description of the great news 1",
  "date": "19.09.2017",
  },
  {
+  "identifier": "02",
  "title": "Great news 2",
- "description": "This is the description of the great news 1",
+ "description": "This is the description of the great news 2",
  "date" : "17.09.2017",
  },
  {
+  "identifier": "03",
  "title": "Great news 3",
- "description": "This is the description of the great news 1",
- "date",
+ "description": "Exclusive! This is the description of the great news 3",
+ "date": "19.09.2017",
  },
  {
+  "identifier": "04",
  "title": "Great news 4",
- "description": "This is the description of the great news 1",
+ "description": "This is the description of the great news 4",
  "date": "13.09.2017",
  },
  {
+  "identifier": "05",
  "title": "Great news 5",
  "description": "This is the description of the great news 1",
  "date": "10.09.2017",

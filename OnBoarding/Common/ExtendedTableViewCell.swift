@@ -9,10 +9,16 @@
 import UIKit
 
 class ExtendedTableViewCell: UITableViewCell, TableViewCellProtocols {
-    static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 8.0, leftAnchor: 8.0, bottomAnchor: 8.0, rightAnchor: 8.0)
+    static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 15.0, leftAnchor: 15.0, bottomAnchor: 15.0, rightAnchor: 15.0)
     static let height: CGFloat =  ExtendedCellContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
     
     var cellView: CellViewProtocol = ExtendedCellContentView()
+    
+    var data: (title: String?, description: String?, details: String?, icon: UIImage?)? {
+        didSet {
+            (cellView as! ExtendedCellContentView).data = (title: data?.title, description: data?.description, details: data?.details, icon: nil)
+        }
+    }
 
     //MARK:- Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -55,16 +61,20 @@ class ExtendedCellContentView: UIView, CellViewProtocol {
     
     let titleLbl: UILabel = {
         let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 13)
         return label
     }()
     
     let descriptionLbl: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
     
     let detailsLbl: UILabel = {
         let label = UILabel()
+        label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 11)
         return label
     }()
     
@@ -96,11 +106,12 @@ class ExtendedCellContentView: UIView, CellViewProtocol {
         var layoutConstraints: [NSLayoutConstraint] = []
         
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon(40)]-(10)-[title]-(10)-[details]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:[description]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[icon(40)]", options: [], metrics: nil, views: views)
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title]-(5)-[description]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:[description]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
             descriptionLbl.leftAnchor.constraint(equalTo: titleLbl.leftAnchor),
+            detailsLbl.topAnchor.constraint(equalTo: titleLbl.topAnchor)
         ]
         NSLayoutConstraint.activate(layoutConstraints)
 
