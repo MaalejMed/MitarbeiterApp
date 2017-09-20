@@ -72,7 +72,7 @@ extension FeedTableView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: ExtendedTableViewCell.cellIdentifier) as? ExtendedTableViewCell
         
         let feed = dataSource![indexPath.row]
-        cell?.data = (title:feed.title , description: feed.description, details: feed.date, icon: nil)
+        cell?.data = (title:feed.title , description: feed.description, details: feed.date, icon: UIImage.init(named: "Logo")!)
         return cell!
     }
 }

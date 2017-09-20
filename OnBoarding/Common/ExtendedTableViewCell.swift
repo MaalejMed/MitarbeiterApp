@@ -16,7 +16,7 @@ class ExtendedTableViewCell: UITableViewCell, TableViewCellProtocols {
     
     var data: (title: String?, description: String?, details: String?, icon: UIImage?)? {
         didSet {
-            (cellView as! ExtendedCellContentView).data = (title: data?.title, description: data?.description, details: data?.details, icon: nil)
+            (cellView as! ExtendedCellContentView).data = (title: data?.title, description: data?.description, details: data?.details, icon: data?.icon)
         }
     }
 
