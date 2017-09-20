@@ -10,7 +10,7 @@ import UIKit
 
 struct Associate {
     var identifier: String?
-    var email: String?
+    var name: String?
     var image: UIImage?
     
     func profileImage() -> UIImage {

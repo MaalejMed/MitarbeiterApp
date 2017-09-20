@@ -88,8 +88,8 @@ class BasicCellContentView: UIView, CellViewProtocol {
         }
         
         var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon(30)]-(10)-[title]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[icon(30)]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon(25)]-(10)-[title]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[icon(25)]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
             titleLbl.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ]
