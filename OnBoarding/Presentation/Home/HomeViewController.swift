@@ -141,6 +141,7 @@ class HomeViewController: UIViewController {
         profileView.data = (title: "Mohamed Maalej (645438)", icon: UIImage.init(named: "Logo")!, action: nil)
         profileView.backgroundColor = UIColor.bgColor
     }
+    
     func setupMainMenuView() {
         var menuItems: [MenuItem] = []
         for item in Item.allMenuItems {
