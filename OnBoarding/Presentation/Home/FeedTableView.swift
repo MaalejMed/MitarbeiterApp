@@ -1,5 +1,5 @@
 //
-//  NewsTableView.swift
+//  FeedTableView.swift
 //  OnBoarding
 //
 //  Created by mmaalej on 19/09/2017.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol NewsTableViewDelegate: class {
-    func didScrollNewsTableView()
+protocol FeedTableViewDelegate: class {
+    func didScrollFeedTableView()
 }
 
-class NewsTableView: UIView {
+class FeedTableView: UIView {
     
     //MARK:- Properties
     let tableView: UITableView = {
@@ -26,7 +26,7 @@ class NewsTableView: UIView {
         }
     }
     
-    weak var delgate: NewsTableViewDelegate?
+    weak var delgate: FeedTableViewDelegate?
     
     //MARK:- Init
     override init(frame: CGRect) {
@@ -52,13 +52,13 @@ class NewsTableView: UIView {
     }
 }
 
-extension NewsTableView: UIScrollViewDelegate {
+extension FeedTableView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        delgate?.didScrollNewsTableView()
+        delgate?.didScrollFeedTableView()
     }
 }
 
-extension NewsTableView: UITableViewDataSource {
+extension FeedTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -76,7 +76,7 @@ extension NewsTableView: UITableViewDataSource {
     }
 }
 
-extension NewsTableView: UITableViewDelegate {
+extension FeedTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ExtendedTableViewCell.height
     }

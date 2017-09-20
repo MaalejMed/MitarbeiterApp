@@ -22,7 +22,7 @@ class HomeViewController: UIViewController {
     //Properties
     let profileView = InfoView(frame: .zero)
     let mainMenuView = MainMenuView(frame: .zero)
-    let newsTableView = NewsTableView(frame: .zero)
+    let newsTableView = FeedTableView(frame: .zero)
     var feeds: [Feed] = [] {
         didSet {
             newsTableView.dataSource = feeds
@@ -137,8 +137,8 @@ class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController: NewsTableViewDelegate {
-    func didScrollNewsTableView() {
+extension HomeViewController: FeedTableViewDelegate {
+    func didScrollFeedTableView() {
         didMoveMainMenu(direction: .bottom, currentPosition: mainMenuView.currentPostion)
     }
 }
