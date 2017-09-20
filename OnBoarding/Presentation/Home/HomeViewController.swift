@@ -184,7 +184,8 @@ extension HomeViewController: MainMenuViewDelegate {
     func didSelect(mainMenuView: MainMenuView, menuItem: MenuItem) {
         switch menuItem.item {
         case .time:
-            break
+            let timeVC = TimeRecordingViewController()
+            self.navigationController?.pushViewController(timeVC, animated: true)
         case .travelExp:
             break
         case .benefits:

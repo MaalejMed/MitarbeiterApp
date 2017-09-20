@@ -1,25 +1,26 @@
 //
-//  ProfileTableView.swift
+//  ProjectInfoTableView.swift
 //  OnBoarding
 //
-//  Created by mmaalej on 15/09/2017.
+//  Created by mmaalej on 20/09/2017.
 //  Copyright © 2017 mmaalej. All rights reserved.
 //
 
 import UIKit
 
-class ProfileTableView: UIView {
+class ProjectInfoTableView: UIView {
     //MARK:- Properties
     let tableView: UITableView = {
-       let tableView = UITableView()
+        let tableView = UITableView()
         return tableView
     }()
     
-    var dataSource: [Settings]? {
+    var dataSource: [ProjectParamter]? {
         didSet {
             tableView.reloadData()
         }
     }
+    
     //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,6 +28,7 @@ class ProfileTableView: UIView {
         tableView.delegate = self
         tableView.register(BasicTableViewCell.self, forCellReuseIdentifier: BasicTableViewCell.cellIdentifier)
         layout()
+        tableView.tableFooterView = UIView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,9 +44,16 @@ class ProfileTableView: UIView {
         tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
+    
 }
 
-extension ProfileTableView: UITableViewDataSource {
+extension ProjectInfoTableView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BasicTableViewCell.height
+    }
+}
+
+extension ProjectInfoTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -57,13 +66,11 @@ extension ProfileTableView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.cellIdentifier) as? BasicTableViewCell
         
         let item = dataSource![indexPath.row]
-        cell?.data = (title: item.rawValue, details: nil, icon: item.icon())
+        cell?.data = (title: item.rawValue, details: "default",  icon: nil)
         return cell!
     }
-}
-
-extension ProfileTableView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return BasicTableViewCell.height
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Project Info"
     }
 }

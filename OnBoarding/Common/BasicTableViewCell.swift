@@ -14,9 +14,9 @@ class BasicTableViewCell: UITableViewCell, TableViewCellProtocols {
     static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 8.0, leftAnchor: 8.0, bottomAnchor: 8.0, rightAnchor: 8.0)
     var cellView: CellViewProtocol = BasicCellContentView()
     static let height: CGFloat = BasicCellContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
-    var data: (title: String?, icon: UIImage?) {
+    var data: (title: String?,details: String?, icon: UIImage?) {
         didSet {
-            (cellView as! BasicCellContentView).data = (title: data.title, icon: data.icon)
+            (cellView as! BasicCellContentView).data = (title: data.title, details:data.details, icon: data.icon)
         }
     }
     
@@ -46,19 +46,21 @@ class BasicCellContentView: UIView, CellViewProtocol {
     //MARK:- Properties
     static var dummy: CellViewProtocol = {
         let view = BasicCellContentView()
-        view.data = (title: "title", icon: UIImage.init(named: "Logo"))
+        view.data = (title: "title", details: "details", icon: UIImage.init(named: "Logo"))
         return view
     }()
     
-    var data: (title: String?, icon: UIImage?)? {
+    var data: (title: String?, details: String?, icon: UIImage?)? {
         didSet {
             titleLbl.text = data?.title
             iconImgV.image = data?.icon
+            detailsLbl.text = data?.details
         }
     }
     
     let titleLbl: UILabel = {
         let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 13)
         return label
     }()
     
@@ -66,6 +68,13 @@ class BasicCellContentView: UIView, CellViewProtocol {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
+    }()
+    
+    let detailsLbl: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 11)
+        return label
     }()
     
     //MARK:- Layout
@@ -81,17 +90,18 @@ class BasicCellContentView: UIView, CellViewProtocol {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["title": titleLbl, "icon": iconImgV]
+        let views: [String: UIView] = ["title": titleLbl, "details": detailsLbl, "icon": iconImgV]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
         }
         
         var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon(25)]-(10)-[title]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon(25)]-(10)-[title]-(10)-[details]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[icon(25)]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
-            titleLbl.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            titleLbl.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            detailsLbl.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor)
         ]
         
         NSLayoutConstraint.activate(layoutConstraints)
