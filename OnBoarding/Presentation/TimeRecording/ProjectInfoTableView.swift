@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ProjectInfoTableViewDelegate: class {
+    func didSelectProjectParamter(projectInfoTableView:ProjectInfoTableView, parameter: ProjectParamter)
+}
+
 class ProjectInfoTableView: UIView {
     //MARK:- Properties
     let tableView: UITableView = {
@@ -20,6 +24,8 @@ class ProjectInfoTableView: UIView {
             tableView.reloadData()
         }
     }
+    
+    weak var delegate: ProjectInfoTableViewDelegate?
     
     //MARK:- Init
     override init(frame: CGRect) {
@@ -50,6 +56,11 @@ class ProjectInfoTableView: UIView {
 extension ProjectInfoTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BasicTableViewCell.height
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let parameter = dataSource![indexPath.row]
+        delegate?.didSelectProjectParamter(projectInfoTableView: self, parameter: parameter)
     }
 }
 

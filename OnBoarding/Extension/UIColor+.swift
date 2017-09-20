@@ -22,4 +22,8 @@ extension UIColor {
         return UIColor.init(red: 0, green: 153/255, blue: 0, alpha: 1.0)
     }
     
+    static var pickerViewBgColor: UIColor {
+        return UIColor.init(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
+    }
+    
 }
