@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MainMenuViewDelegate: class {
-    func didMoveMainMenu(mainMenuView:MainMenuView, direction: Direction, currentPosition: Position)
+    func didPullMainMenu(mainMenuView:MainMenuView, direction: Direction, currentPosition: Position)
     func didSelect(mainMenuView:MainMenuView, menuItem: MenuItem)
 }
 
@@ -95,9 +95,9 @@ class MainMenuView: UIView {
         let velocity: CGPoint = gesture.velocity(in: self)
         
         if (velocity.y < 0) {
-            delegate?.didMoveMainMenu(mainMenuView: self, direction: .top, currentPosition: currentPostion)
+            delegate?.didPullMainMenu(mainMenuView: self, direction: .top, currentPosition: currentPostion)
         } else if velocity.y > 0 {
-            delegate?.didMoveMainMenu(mainMenuView: self, direction: .bottom, currentPosition: currentPostion)
+            delegate?.didPullMainMenu(mainMenuView: self, direction: .bottom, currentPosition: currentPostion)
         } else {
             return
         }

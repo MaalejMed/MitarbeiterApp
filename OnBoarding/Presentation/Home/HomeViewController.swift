@@ -49,7 +49,6 @@ class HomeViewController: UIViewController {
     }
     
     var mainMenuViewTopAnchor: NSLayoutConstraint?
-
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
@@ -68,6 +67,10 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "Home"
         self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
         self.navigationItem.setHidesBackButton(true, animated:false);
+        if mainMenuView.currentPostion != .idle {
+            updateMenuViewLayout(newPosition: .idle)
+            mainMenuView.currentPostion = .idle
+        }
     }
     
     //MARK:- Layout
@@ -90,8 +93,8 @@ class HomeViewController: UIViewController {
         mainMenuViewTopAnchor?.isActive = true
     }
     
-    //MARK: Layout MainMenu animation
-    func updateMainMenuViewPosition(newPosition: Position) {
+    //MARK: Layout MainMenu
+    func updateMenuViewLayout(newPosition: Position) {
         self.view.removeConstraint(mainMenuViewTopAnchor!)
         switch newPosition {
         case .idle:
@@ -107,29 +110,29 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func didMoveMainMenu(direction: Direction, currentPosition: Position) {
+    func moveMenuFrom(currentPosition: Position, direction: Direction) {
         switch currentPosition {
         case .idle:
             guard direction == .top else {
                 return
             }
             mainMenuView.currentPostion = .middle
-            updateMainMenuViewPosition(newPosition: .middle)
+            updateMenuViewLayout(newPosition: .middle)
         case .middle:
             switch direction {
             case .top:
                 mainMenuView.currentPostion = .top
-                updateMainMenuViewPosition(newPosition: .top)
+                updateMenuViewLayout(newPosition: .top)
             case .bottom:
                 mainMenuView.currentPostion = .idle
-                updateMainMenuViewPosition(newPosition: .idle)
+                updateMenuViewLayout(newPosition: .idle)
             }
         case .top:
             guard direction == .bottom  else {
                 return
             }
             mainMenuView.currentPostion = .middle
-            updateMainMenuViewPosition(newPosition: .middle)
+            updateMenuViewLayout(newPosition: .middle)
         }
     }
     
@@ -162,14 +165,18 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: FeedTableViewDelegate {
-    func didScrollFeedTableView() {
-        didMoveMainMenu(direction: .bottom, currentPosition: mainMenuView.currentPostion)
+    func didScrollFeedTableView(feedTableView: FeedTableView) {
+        moveMenuFrom(currentPosition: mainMenuView.currentPostion, direction: .bottom)
+    }
+    
+    func didSelectFeed(feedTableView: FeedTableView, feed: Feed) {
+        moveMenuFrom(currentPosition: mainMenuView.currentPostion, direction: .bottom)
     }
 }
 
 extension HomeViewController: MainMenuViewDelegate {
-    func didMoveMainMenu(mainMenuView: MainMenuView, direction: Direction, currentPosition: Position) {
-        didMoveMainMenu(direction: direction, currentPosition: currentPosition)
+    func didPullMainMenu(mainMenuView: MainMenuView, direction: Direction, currentPosition: Position) {
+        moveMenuFrom(currentPosition: currentPosition, direction: direction)
     }
     
     func didSelect(mainMenuView: MainMenuView, menuItem: MenuItem) {

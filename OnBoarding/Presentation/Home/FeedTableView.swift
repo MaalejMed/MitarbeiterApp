@@ -9,7 +9,8 @@
 import UIKit
 
 protocol FeedTableViewDelegate: class {
-    func didScrollFeedTableView()
+    func didScrollFeedTableView(feedTableView: FeedTableView)
+    func didSelectFeed(feedTableView: FeedTableView, feed: Feed)
 }
 
 class FeedTableView: UIView {
@@ -54,7 +55,7 @@ class FeedTableView: UIView {
 
 extension FeedTableView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        delgate?.didScrollFeedTableView()
+        delgate?.didScrollFeedTableView(feedTableView: self)
     }
 }
 
@@ -79,5 +80,12 @@ extension FeedTableView: UITableViewDataSource {
 extension FeedTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ExtendedTableViewCell.height
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedFeed = dataSource?[indexPath.row] else {
+            return
+        }
+        delgate?.didSelectFeed(feedTableView: self, feed: selectedFeed)
     }
 }
