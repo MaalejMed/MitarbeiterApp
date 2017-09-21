@@ -108,7 +108,13 @@ extension TimesheetDataTableView: UITableViewDataSource {
         case .project:
             let details = dataSource[parameter] as! [ProjectDetail]
             let detail = details[indexPath.row]
-            cell?.data = (title: detail.rawValue, details: "-",  icon: nil)
+            var detailsDefaulValue = "-"
+            if detail == .date {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                detailsDefaulValue = dateFormatter.string(from: Date())
+            }
+            cell?.data = (title: detail.rawValue, details: detailsDefaulValue,  icon: nil)
         case .time:
             let details = dataSource[parameter] as! [TimeDetail]
             let detail = details[indexPath.row]
