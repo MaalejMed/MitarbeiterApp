@@ -1,5 +1,5 @@
 //
-//  ProjectInfoTableView.swift
+//  TimesheetDataTableView.swift
 //  OnBoarding
 //
 //  Created by mmaalej on 20/09/2017.
@@ -8,11 +8,12 @@
 
 import UIKit
 
-protocol ProjectInfoTableViewDelegate: class {
-    func didSelectProjectParamter(projectInfoTableView:ProjectInfoTableView, parameter: InfoParamter)
+protocol TimesheetDataTableViewDelegate: class {
+    func didSelectProjectDetail(timesheetDataTableView: TimesheetDataTableView, detail: ProjectDetail)
 }
 
-class ProjectInfoTableView: UIView {
+class TimesheetDataTableView: UIView {
+    
     //MARK:- Properties
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -20,22 +21,19 @@ class ProjectInfoTableView: UIView {
         return tableView
     }()
     
-    var dataSource: [InfoKey : [InfoParamter]]? {
+    var dataSource: [Parameter : [Any]]? {
         didSet {
             tableView.reloadData()
         }
     }
     
     static var height: CGFloat {
-        var numberOfParams = 0
-        let keys = Array(InfoParamter.allValues.keys)
-        for key in keys {
-            numberOfParams += (InfoParamter.allValues[key]?.count)!
-        }
-        return BasicTableViewCell.height * CGFloat(numberOfParams) + 40
+        let projectDetails = ProjectDetail.allValues.count
+        let timeDetails = TimeDetail.allValues.count
+        return BasicTableViewCell.height * CGFloat(projectDetails + timeDetails) + 40
     }
     
-    weak var delegate: ProjectInfoTableViewDelegate?
+    weak var delegate: TimesheetDataTableViewDelegate?
     
     //MARK:- Init
     override init(frame: CGRect) {
@@ -43,8 +41,8 @@ class ProjectInfoTableView: UIView {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(BasicTableViewCell.self, forCellReuseIdentifier: BasicTableViewCell.cellIdentifier)
-        layout()
         tableView.tableFooterView = UIView()
+        layout()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,10 +58,9 @@ class ProjectInfoTableView: UIView {
         tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
-    
 }
 
-extension ProjectInfoTableView: UITableViewDelegate {
+extension TimesheetDataTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BasicTableViewCell.height
     }
@@ -72,16 +69,16 @@ extension ProjectInfoTableView: UITableViewDelegate {
         guard let dataSource = self.dataSource else {
             return
         }
-        let key = Array(dataSource.keys) [indexPath.section]
-        guard key == .project else {
+        let parameter = Array(dataSource.keys) [indexPath.section]
+        guard parameter == .project else {
             return
         }
-        let params = dataSource[key]
-        delegate?.didSelectProjectParamter(projectInfoTableView: self, parameter: params![indexPath.row])
+        let details = dataSource[parameter] as! [ProjectDetail]
+        delegate?.didSelectProjectDetail(timesheetDataTableView: self, detail: details[indexPath.row])
     }
 }
 
-extension ProjectInfoTableView: UITableViewDataSource {
+extension TimesheetDataTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let dataSource = self.dataSource else {
             return 0
@@ -93,21 +90,30 @@ extension ProjectInfoTableView: UITableViewDataSource {
         guard let dataSource = self.dataSource else {
             return 0
         }
-        let key = Array(dataSource.keys) [section]
-        let params = dataSource[key]
-        return (params?.count)!
+        let  parameter = Array(dataSource.keys) [section]
+        let details = dataSource[parameter]
+        return (details?.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.cellIdentifier) as? BasicTableViewCell
+        
         guard let dataSource = self.dataSource else {
             return UITableViewCell()
         }
     
-        let key = Array(dataSource.keys) [indexPath.section]
-        let params = dataSource[key]
-        let item = params![indexPath.row]
-        cell?.data = (title: item.rawValue, details: "default",  icon: nil)
+        let parameter = Array(dataSource.keys) [indexPath.section]
+        
+        switch parameter {
+        case .project:
+            let details = dataSource[parameter] as! [ProjectDetail]
+            let detail = details[indexPath.row]
+            cell?.data = (title: detail.rawValue, details: "-",  icon: nil)
+        case .time:
+            let details = dataSource[parameter] as! [TimeDetail]
+            let detail = details[indexPath.row]
+            cell?.data = (title: detail.rawValue, details: "-",  icon: nil)
+        }
         return cell!
     }
     
@@ -115,13 +121,12 @@ extension ProjectInfoTableView: UITableViewDataSource {
         guard let dataSource = self.dataSource else {
             return ""
         }
-        let key = Array(dataSource.keys) [section]
-        switch key {
+        let parameter = Array(dataSource.keys) [section]
+        switch parameter {
         case .project:
             return "Project info"
         case .time:
             return "Time recording"
         }
-
     }
 }
