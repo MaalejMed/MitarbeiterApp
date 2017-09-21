@@ -39,11 +39,8 @@ class TimesheetViewController: UIViewController {
     let timerView = TimerView(frame:.zero)
     let pickerView = PickerView(frame: .zero)
     var selectedProjectDetail: ProjectDetail?
-    
-    
-    
-    var selectedinfoValue: String?
     var startBreak: Date?
+    var timesheet = Timesheet(date: Date().dayReadableFormat(), projectID: "-", activity: "-", buillable: "-", workedHours: "-", lunchBreak: "-")
     
     //MARK:- Views lifecycles
     override func viewDidLoad() {
@@ -128,6 +125,7 @@ class TimesheetViewController: UIViewController {
             let indexPath = IndexPath(row: index, section: Parameter.allValues.index(of: .project)!)
             let cell: BasicTableViewCell = self?.timesheetDataTV.tableView.cellForRow(at: indexPath) as! BasicTableViewCell
             cell.data = (title: self?.selectedProjectDetail?.rawValue, details: selectedPickerItem, icon: nil)
+            self?.updateTimesheet(property: detail, value: selectedPickerItem)
             self?.dismissPickerView()
         }
         
@@ -142,14 +140,11 @@ class TimesheetViewController: UIViewController {
             var index: Int?
             var dateString: String?
             let timeDetails = TimeDetail.allValues
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm:ss"
 
             switch (self?.timerView.timerBtn.status)! {
             case .startWorking:
                 index = timeDetails.index(of: .from)
-                dateString = dateFormatter.string(from: Date())
+                dateString = Date().hoursReadableFormat()
                 self?.updateTimerButton(status: .startLunchBreak)
             case .startLunchBreak:
                 self?.startBreak = Date()
@@ -164,9 +159,10 @@ class TimesheetViewController: UIViewController {
                 break
             case .stopWorking:
                 index = timeDetails.index(of: .until)
-                dateString = dateFormatter.string(from: Date())
+                dateString = Date().hoursReadableFormat()
                 self?.updateTimerButton(status: .submit)
-            case .submit: break
+            case .submit:
+                self?.submitTimesheet()
             }
 
             guard let detailIndex = index else {
@@ -194,7 +190,23 @@ class TimesheetViewController: UIViewController {
     func dismissPickerView() {
         self.pickerView.removeFromSuperview()
         self.selectedProjectDetail = nil
-        selectedinfoValue = nil
+    }
+    
+    //MARK:- timesheet submission
+    func submitTimesheet() {
+        print(timesheet)
+    }
+    
+    func updateTimesheet(property: ProjectDetail, value: String) {
+        switch property {
+        case .activity:
+            timesheet.activity = value
+        case .buillable:
+            timesheet.buillable = value
+        case .identifier:
+            timesheet.projectID = value
+        case .date: break
+        }
     }
 }
 

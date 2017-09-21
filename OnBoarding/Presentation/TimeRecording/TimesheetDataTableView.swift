@@ -110,9 +110,7 @@ extension TimesheetDataTableView: UITableViewDataSource {
             let detail = details[indexPath.row]
             var detailsDefaulValue = "-"
             if detail == .date {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                detailsDefaulValue = dateFormatter.string(from: Date())
+                detailsDefaulValue = Date().dayReadableFormat()
             }
             cell?.data = (title: detail.rawValue, details: detailsDefaulValue,  icon: nil)
         case .time:

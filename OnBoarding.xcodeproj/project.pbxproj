@@ -10,6 +10,8 @@
 		772BD9821F695C7B003FEC2B /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9811F695C7B003FEC2B /* InfoView.swift */; };
 		772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9831F695E2C003FEC2B /* UIImageView+.swift */; };
 		772BD9861F69731F003FEC2B /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9851F69731F003FEC2B /* UIImage+.swift */; };
+		772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F315E1F74081B00775AA8 /* Timesheet.swift */; };
+		772F31611F7409D400775AA8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F31601F7409D400775AA8 /* Date+.swift */; };
 		7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7749AC781F6BB94100F1939C /* MediaViewController.swift */; };
 		7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA231F66E3D4005197ED /* CreatePasswordView.swift */; };
 		7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA241F66E3D5005197ED /* RequestIDView.swift */; };
@@ -74,6 +76,8 @@
 		772BD9811F695C7B003FEC2B /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		772BD9831F695E2C003FEC2B /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		772BD9851F69731F003FEC2B /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		772F315E1F74081B00775AA8 /* Timesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timesheet.swift; sourceTree = "<group>"; };
+		772F31601F7409D400775AA8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		7749AC781F6BB94100F1939C /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		7754CA231F66E3D4005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		7754CA241F66E3D5005197ED /* RequestIDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIDView.swift; sourceTree = "<group>"; };
@@ -286,6 +290,7 @@
 				772BD9831F695E2C003FEC2B /* UIImageView+.swift */,
 				772BD9851F69731F003FEC2B /* UIImage+.swift */,
 				77FB51EC1F73D438006E73AB /* TimeInterval+.swift */,
+				772F31601F7409D400775AA8 /* Date+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 				77D919181F72591C00BFAB45 /* Feed.swift */,
 				77D9191A1F7262B100BFAB45 /* MenuItem.swift */,
 				77D9191C1F72719D00BFAB45 /* Associate.swift */,
+				772F315E1F74081B00775AA8 /* Timesheet.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -546,6 +552,7 @@
 				7754CA381F67D8D1005197ED /* MainMenuView.swift in Sources */,
 				7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */,
 				77D919241F728C2100BFAB45 /* PickerView.swift in Sources */,
+				772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
 				77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */,
 				77FFA8661F700D390034B746 /* AlertView.swift in Sources */,
@@ -554,6 +561,7 @@
 				77FFA86A1F7135B70034B746 /* ExtendedTableViewCell.swift in Sources */,
 				77D919221F72786700BFAB45 /* TimesheetDataTableView.swift in Sources */,
 				77D919171F7258FF00BFAB45 /* FeedService.swift in Sources */,
+				772F31611F7409D400775AA8 /* Date+.swift in Sources */,
 				7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */,
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,
 				77D919201F7276AA00BFAB45 /* TimesheetViewController.swift in Sources */,
