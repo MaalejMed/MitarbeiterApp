@@ -193,7 +193,8 @@ extension HomeViewController: MainMenuViewDelegate {
         case .eLearning:
             break
         case .gsd:
-            break
+            let gsdVC = GSDViewController()
+            self.navigationController?.pushViewController(gsdVC, animated: true)
         case .profile:
             let profileVC = ProfileViewController()
             self.navigationController?.pushViewController(profileVC, animated: true)
