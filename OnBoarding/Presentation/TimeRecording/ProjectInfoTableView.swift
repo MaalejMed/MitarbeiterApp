@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ProjectInfoTableViewDelegate: class {
-    func didSelectProjectParamter(projectInfoTableView:ProjectInfoTableView, parameter: ProjectParamter)
+    func didSelectProjectParamter(projectInfoTableView:ProjectInfoTableView, parameter: InfoParamter)
 }
 
 class ProjectInfoTableView: UIView {
@@ -20,13 +20,20 @@ class ProjectInfoTableView: UIView {
         return tableView
     }()
     
-    var dataSource: [ProjectParamter]? {
+    var dataSource: [InfoKey : [InfoParamter]]? {
         didSet {
             tableView.reloadData()
         }
     }
     
-    static let height: CGFloat =  BasicTableViewCell.height * CGFloat(ProjectParamter.allValues.count) + 40
+    static var height: CGFloat {
+        var numberOfParams = 0
+        let keys = Array(InfoParamter.allValues.keys)
+        for key in keys {
+            numberOfParams += (InfoParamter.allValues[key]?.count)!
+        }
+        return BasicTableViewCell.height * CGFloat(numberOfParams) + 40
+    }
     
     weak var delegate: ProjectInfoTableViewDelegate?
     
@@ -62,29 +69,59 @@ extension ProjectInfoTableView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let parameter = dataSource![indexPath.row]
-        delegate?.didSelectProjectParamter(projectInfoTableView: self, parameter: parameter)
+        guard let dataSource = self.dataSource else {
+            return
+        }
+        let key = Array(dataSource.keys) [indexPath.section]
+        guard key == .project else {
+            return
+        }
+        let params = dataSource[key]
+        delegate?.didSelectProjectParamter(projectInfoTableView: self, parameter: params![indexPath.row])
     }
 }
 
 extension ProjectInfoTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        guard let dataSource = self.dataSource else {
+            return 0
+        }
+        return Array(dataSource.keys).count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dataSource?.count != nil) ?  (dataSource?.count)! : 0
+        guard let dataSource = self.dataSource else {
+            return 0
+        }
+        let key = Array(dataSource.keys) [section]
+        let params = dataSource[key]
+        return (params?.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.cellIdentifier) as? BasicTableViewCell
-        
-        let item = dataSource![indexPath.row]
+        guard let dataSource = self.dataSource else {
+            return UITableViewCell()
+        }
+    
+        let key = Array(dataSource.keys) [indexPath.section]
+        let params = dataSource[key]
+        let item = params![indexPath.row]
         cell?.data = (title: item.rawValue, details: "default",  icon: nil)
         return cell!
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Project Info"
+        guard let dataSource = self.dataSource else {
+            return ""
+        }
+        let key = Array(dataSource.keys) [section]
+        switch key {
+        case .project:
+            return "Project info"
+        case .time:
+            return "Time recording"
+        }
+
     }
 }

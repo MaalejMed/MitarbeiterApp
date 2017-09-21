@@ -8,13 +8,21 @@
 
 import UIKit
 
-enum ProjectParamter: String {
+enum InfoKey {
+    case project
+    case time
+}
+enum InfoParamter: String {
     case date = "Date"
     case identifier = "Project ID"
     case activity = "Activity"
     case buillable = "Buillable"
     
-    static let allValues = [date, identifier, activity, buillable]
+    case startWork = "From"
+    case stopWork = "Until"
+    case lunchBreak = "Lunch break"
+    
+    static let allValues: [InfoKey: [InfoParamter]] = [ .project: [date, identifier, activity, buillable], .time : [startWork, stopWork, lunchBreak]]
 }
 
 class TimeRecordingViewController: UIViewController {
@@ -24,7 +32,7 @@ class TimeRecordingViewController: UIViewController {
     let timerView = TimerView(frame:.zero)
     let pickerView = PickerView(frame: .zero)
     
-    var selectedProjectParameter: ProjectParamter?
+    var selectedParameter: InfoParamter?
     var selectedItem: String?
     
     //MARK:- Views lifecycles
@@ -55,8 +63,8 @@ class TimeRecordingViewController: UIViewController {
         
         projectInfoTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: ProjectInfoTableView.height).isActive = true
 
-        timerView.topAnchor.constraint(equalTo: projectInfoTableView.bottomAnchor).isActive = true
-        timerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        timerView.topAnchor.constraint(equalTo: projectInfoTableView.bottomAnchor, constant: 10).isActive = true
+        
     }
     
     func layoutPickerView() {
@@ -70,11 +78,11 @@ class TimeRecordingViewController: UIViewController {
     
     //MARK:- Setup views
     func setupProjectInfoView() {
-        projectInfoTableView.dataSource = ProjectParamter.allValues
+        projectInfoTableView.dataSource = InfoParamter.allValues
         projectInfoTableView.delegate = self
     }
     
-    func setupPickerView(parameter: ProjectParamter) {
+    func setupPickerView(parameter: InfoParamter) {
         var dataSource: [String] = []
         switch parameter {
         case .date:
@@ -85,22 +93,24 @@ class TimeRecordingViewController: UIViewController {
             dataSource = ["Activity 1", "Activity 2", "Activity 3", "Activity 4"]
         case .buillable:
             dataSource = ["YES", "NO"]
+        case .startWork, .stopWork, .lunchBreak: break
         }
         
         pickerView.dataSource = dataSource
         
         pickerView.doneButtonAction = { [weak self] (selectedItem: String) in
-            guard let parameter = self?.selectedProjectParameter else {
+            guard let parameter = self?.selectedParameter else {
                 return
             }
             
-            guard let parameterIndex = ProjectParamter.allValues.index(of: parameter) else {
+            let projectParam = InfoParamter.allValues[.project]
+            guard let parameterIndex = projectParam?.index(of: parameter) else {
                 return
             }
             
             let indexPath = IndexPath(row: parameterIndex, section:0)
             let cell: BasicTableViewCell = self?.projectInfoTableView.tableView.cellForRow(at: indexPath) as! BasicTableViewCell
-            cell.data = (title: self?.selectedProjectParameter?.rawValue, details: selectedItem, icon: nil)
+            cell.data = (title: self?.selectedParameter?.rawValue, details: selectedItem, icon: nil)
             self?.dismissPickerView()
         }
         
@@ -110,22 +120,22 @@ class TimeRecordingViewController: UIViewController {
     }
     
     //MARK:- PickerView
-    func presentPickerView(parameter: ProjectParamter) {
+    func presentPickerView(parameter: InfoParamter) {
         setupPickerView(parameter: parameter)
             self.layoutPickerView()
     }
     
     func dismissPickerView() {
         self.pickerView.removeFromSuperview()
-        selectedProjectParameter = nil
+        selectedParameter = nil
         selectedItem = nil
     }
 }
 
 extension TimeRecordingViewController: ProjectInfoTableViewDelegate {
-    func didSelectProjectParamter(projectInfoTableView: ProjectInfoTableView, parameter: ProjectParamter) {
+    func didSelectProjectParamter(projectInfoTableView: ProjectInfoTableView, parameter: InfoParamter) {
         presentPickerView(parameter: parameter)
-        selectedProjectParameter = parameter
+        selectedParameter = parameter
     }
 }
 
