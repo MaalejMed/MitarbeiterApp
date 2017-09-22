@@ -9,10 +9,14 @@
 import Foundation
 
 struct Timesheet {
-    var date: String
-    var projectID: String
-    var activity: String
-    var buillable: String
-    var workedHours: String
-    var lunchBreak: String
+    var date: Date?
+    var projectID: String?
+    var activity: String?
+    var buillable: Bool?
+    var workFrom: Date?
+    var workUntil: Date?
+    var workedHours: (hours: Int, minutes: Int)?
+    var breakFrom: Date?
+    var breakUntil: Date?
+    var lunchBreak: (hours: Int, minutes: Int)?
 }

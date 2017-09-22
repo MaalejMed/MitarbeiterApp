@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TimesheetDataTableViewDelegate: class {
-    func didSelectProjectDetail(timesheetDataTableView: TimesheetDataTableView, detail: ProjectDetail)
+    func didSelectProjectDetail(timesheetDataTableView: TimesheetDataTableView, detail: ProjectVisibleDetail)
 }
 
 class TimesheetDataTableView: UIView {
@@ -28,8 +28,8 @@ class TimesheetDataTableView: UIView {
     }
     
     static var height: CGFloat {
-        let projectDetails = ProjectDetail.allValues.count
-        let timeDetails = TimeDetail.allValues.count
+        let projectDetails = ProjectVisibleDetail.allValues.count
+        let timeDetails = TimeVisibleDetail.allValues.count
         return BasicTableViewCell.height * CGFloat(projectDetails + timeDetails) + 40
     }
     
@@ -73,7 +73,7 @@ extension TimesheetDataTableView: UITableViewDelegate {
         guard parameter == .project else {
             return
         }
-        let details = dataSource[parameter] as! [ProjectDetail]
+        let details = dataSource[parameter] as! [ProjectVisibleDetail]
         delegate?.didSelectProjectDetail(timesheetDataTableView: self, detail: details[indexPath.row])
     }
 }
@@ -106,15 +106,15 @@ extension TimesheetDataTableView: UITableViewDataSource {
         
         switch parameter {
         case .project:
-            let details = dataSource[parameter] as! [ProjectDetail]
+            let details = dataSource[parameter] as! [ProjectVisibleDetail]
             let detail = details[indexPath.row]
             var detailsDefaulValue = "-"
             if detail == .date {
-                detailsDefaulValue = Date().dayReadableFormat()
+                detailsDefaulValue = Date().simpleDateFormat()
             }
             cell?.data = (title: detail.rawValue, details: detailsDefaulValue,  icon: nil)
         case .time:
-            let details = dataSource[parameter] as! [TimeDetail]
+            let details = dataSource[parameter] as! [TimeVisibleDetail]
             let detail = details[indexPath.row]
             cell?.data = (title: detail.rawValue, details: "-",  icon: nil)
         }

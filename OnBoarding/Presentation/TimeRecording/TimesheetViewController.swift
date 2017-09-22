@@ -15,7 +15,7 @@ enum Parameter: String {
     static let allValues = [project, time]
 }
 
-enum ProjectDetail: String {
+enum ProjectVisibleDetail: String {
     case date = "Date"
     case identifier = "Project ID"
     case activity = "Activity"
@@ -24,12 +24,12 @@ enum ProjectDetail: String {
     static let allValues = [date, identifier, activity, buillable]
 }
 
-enum TimeDetail: String {
-    case from = "From"
-    case until = "Until"
+enum TimeVisibleDetail:String {
+    case workFrom = "From"
+    case workUntil = "Until"
     case lunchBreak = "Lunch break"
     
-    static let allValues = [from, until, lunchBreak]
+    static let allValues = [workFrom, workUntil, lunchBreak]
 }
 
 class TimesheetViewController: UIViewController {
@@ -38,14 +38,14 @@ class TimesheetViewController: UIViewController {
     let timesheetDataTV = TimesheetDataTableView(frame: .zero)
     let timerView = TimerView(frame:.zero)
     let pickerView = PickerView(frame: .zero)
-    var selectedProjectDetail: ProjectDetail?
-    var startBreak: Date?
-    var timesheet = Timesheet(date: Date().dayReadableFormat(), projectID: "-", activity: "-", buillable: "-", workedHours: "-", lunchBreak: "-")
+    
+    var selectedProjectDetail: ProjectVisibleDetail?
+    var timesheet = Timesheet(date: Date(), projectID: nil, activity: nil, buillable: nil, workFrom: nil, workUntil: nil, workedHours:nil, breakFrom: nil, breakUntil: nil, lunchBreak: nil)
     
     //MARK:- Views lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupProjectInfoTableView()
+        setupTimesheetDataTV()
         setupTimerView()
         layout()
     }
@@ -81,25 +81,9 @@ class TimesheetViewController: UIViewController {
         pickerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -200).isActive = true
     }
     
-    //MARK:- Setup views
-    func setupProjectInfoTableView() {
-        var dataSource: [Parameter: [Any]] = [:]
-        for parameter in Parameter.allValues {
-            switch parameter {
-            case .project:
-                dataSource [parameter] = ProjectDetail.allValues
-            case .time:
-                dataSource [parameter] = TimeDetail.allValues
-            }
-        }
-        timesheetDataTV.dataSource = dataSource
-        timesheetDataTV.delegate = self
-    }
-    
-    func setupPickerView(detail: ProjectDetail) {
+    //MARK:- Picker view
+    func setupPickerView(detail: ProjectVisibleDetail) {
         var dataSource: [String] = []
-        
-        //Data source
         switch detail {
         case .date:
             break
@@ -118,14 +102,13 @@ class TimesheetViewController: UIViewController {
                 return
             }
             
-            guard let index = ProjectDetail.allValues.index(of: detail) else {
+            guard let index = ProjectVisibleDetail.allValues.index(of: detail) else {
                 return
             }
             
+            let updatedData:(detail: ProjectVisibleDetail, newValue: String) = (detail: detail, newValue: selectedPickerItem)
             let indexPath = IndexPath(row: index, section: Parameter.allValues.index(of: .project)!)
-            let cell: BasicTableViewCell = self?.timesheetDataTV.tableView.cellForRow(at: indexPath) as! BasicTableViewCell
-            cell.data = (title: self?.selectedProjectDetail?.rawValue, details: selectedPickerItem, icon: nil)
-            self?.updateTimesheet(property: detail, value: selectedPickerItem)
+            self?.updateProjectVisibleDetails(indexPath: indexPath, data: updatedData)
             self?.dismissPickerView()
         }
         
@@ -135,31 +118,54 @@ class TimesheetViewController: UIViewController {
         }
     }
     
+    func presentPickerView(detail: ProjectVisibleDetail) {
+        setupPickerView(detail: detail)
+        self.layoutPickerView()
+    }
+    
+    func dismissPickerView() {
+        self.pickerView.removeFromSuperview()
+        self.selectedProjectDetail = nil
+    }
+    
+    //MARK: - Timesheet data tableview
+    func setupTimesheetDataTV() {
+        var dataSource: [Parameter: [Any]] = [:]
+        for parameter in Parameter.allValues {
+            switch parameter {
+            case .project:
+                dataSource [parameter] = ProjectVisibleDetail.allValues
+            case .time:
+                dataSource [parameter] = TimeVisibleDetail.allValues
+            }
+        }
+        timesheetDataTV.dataSource = dataSource
+        timesheetDataTV.delegate = self
+    }
+    
+    //MARK:- Timer view
     func setupTimerView() {
         timerView.timerBtnAction = { [weak self] in
             var index: Int?
-            var dateString: String?
-            let timeDetails = TimeDetail.allValues
+            var newValue: Date?
+            let timeDetails = TimeVisibleDetail.allValues
 
             switch (self?.timerView.timerBtn.status)! {
             case .startWorking:
-                index = timeDetails.index(of: .from)
-                dateString = Date().hoursReadableFormat()
+                newValue = Date()
                 self?.updateTimerButton(status: .startLunchBreak)
+                index = timeDetails.index(of: .workFrom)
             case .startLunchBreak:
-                self?.startBreak = Date()
+                self?.timesheet.breakFrom = Date()
                 self?.updateTimerButton(status: .stopLunchBreak)
             case .stopLunchBreak:
-                index = timeDetails.index(of: .lunchBreak)
-                let now = Date()
-                let interval = now.timeIntervalSince((self?.startBreak)!)
-                let lunch: (minutes: Int, seconds: Int) = interval.inMinutes()
-                dateString = "\(lunch.minutes) : \(lunch.seconds)"
+                newValue = Date()
                 self?.updateTimerButton(status: .stopWorking)
+                index = timeDetails.index(of: .lunchBreak)
                 break
             case .stopWorking:
-                index = timeDetails.index(of: .until)
-                dateString = Date().hoursReadableFormat()
+                newValue = Date()
+                index = timeDetails.index(of: .workUntil)
                 self?.updateTimerButton(status: .submit)
             case .submit:
                 self?.submitTimesheet()
@@ -168,11 +174,11 @@ class TimesheetViewController: UIViewController {
             guard let detailIndex = index else {
                 return
             }
-            
+        
             let info = timeDetails[detailIndex]
             let indexPath = IndexPath(row: detailIndex, section:1)
-            let cell: BasicTableViewCell = self?.timesheetDataTV.tableView.cellForRow(at: indexPath) as! BasicTableViewCell
-            cell.data = (title: info.rawValue, details: dateString, icon: nil)
+            let data: (detail: TimeVisibleDetail, newValue: Date) = (detail: info, newValue: newValue!)
+            self?.updateTimeVisibleDetails(indexPath: indexPath, data: data)
         }
     }
     
@@ -181,39 +187,55 @@ class TimesheetViewController: UIViewController {
         timerView.timerBtn.status = status
     }
     
-    //MARK:- PickerView
-    func presentPickerView(detail: ProjectDetail) {
-        setupPickerView(detail: detail)
-            self.layoutPickerView()
+    //MARK:- Update data
+    func updateProjectVisibleDetails (indexPath: IndexPath, data:(detail: ProjectVisibleDetail, newValue: String)) {
+        // update UI
+        let cell: BasicTableViewCell = timesheetDataTV.tableView.cellForRow(at: indexPath) as! BasicTableViewCell
+        cell.data = (title: data.detail.rawValue, details: data.newValue, icon: nil)
+        // update model
+        switch (data.detail) {
+            case .activity:
+                timesheet.activity = data.newValue
+            case .buillable:
+                timesheet.buillable = NSString(string: data.newValue).boolValue
+            case .identifier:
+                timesheet.projectID = data.newValue
+            case .date: break
+        }
     }
     
-    func dismissPickerView() {
-        self.pickerView.removeFromSuperview()
-        self.selectedProjectDetail = nil
+    func updateTimeVisibleDetails (indexPath: IndexPath?, data:(detail: TimeVisibleDetail, newValue: Date)) {
+        var displayedValue: String?
+        //update model
+        switch data.detail {
+        case .workFrom:
+            timesheet.workFrom = data.newValue
+            displayedValue = data.newValue.simpleHoursFormat()
+        case .lunchBreak:
+            timesheet.breakUntil = data.newValue
+            let lunchBreak = TimeCalculator.lunckBreak(start: (self.timesheet.breakFrom)!, end: (self.timesheet.breakUntil)!)
+            timesheet.lunchBreak = lunchBreak
+            displayedValue = "\(lunchBreak.hours) : \(lunchBreak.minutes)"
+        case .workUntil:
+            timesheet.workUntil = data.newValue
+            displayedValue = data.newValue.simpleHoursFormat()
+            self.timesheet.workedHours = TimeCalculator.workedHours(start: (self.timesheet.workFrom)!, end: (self.timesheet.workUntil)!, lunchBreak: timesheet.lunchBreak!)
+        }
+        // update UI
+        if let index = indexPath {
+            let cell: BasicTableViewCell = timesheetDataTV.tableView.cellForRow(at: index) as! BasicTableViewCell
+            cell.data = (title: data.detail.rawValue, details: displayedValue, icon: nil)
+        }
     }
     
     //MARK:- timesheet submission
     func submitTimesheet() {
         print(timesheet)
     }
-    
-    func updateTimesheet(property: ProjectDetail, value: String) {
-        switch property {
-        case .activity:
-            timesheet.activity = value
-        case .buillable:
-            timesheet.buillable = value
-        case .identifier:
-            timesheet.projectID = value
-        case .date: break
-        }
-    }
 }
-
 extension TimesheetViewController: TimesheetDataTableViewDelegate {
-    func didSelectProjectDetail(timesheetDataTableView: TimesheetDataTableView, detail: ProjectDetail) {
+    func didSelectProjectDetail(timesheetDataTableView: TimesheetDataTableView, detail: ProjectVisibleDetail) {
         presentPickerView(detail: detail)
         self.selectedProjectDetail = detail
     }
 }
-

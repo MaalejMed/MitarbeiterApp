@@ -12,6 +12,7 @@
 		772BD9861F69731F003FEC2B /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9851F69731F003FEC2B /* UIImage+.swift */; };
 		772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F315E1F74081B00775AA8 /* Timesheet.swift */; };
 		772F31611F7409D400775AA8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F31601F7409D400775AA8 /* Date+.swift */; };
+		772F31631F7505E000775AA8 /* TimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F31621F7505E000775AA8 /* TimeCalculator.swift */; };
 		7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7749AC781F6BB94100F1939C /* MediaViewController.swift */; };
 		7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA231F66E3D4005197ED /* CreatePasswordView.swift */; };
 		7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA241F66E3D5005197ED /* RequestIDView.swift */; };
@@ -78,6 +79,7 @@
 		772BD9851F69731F003FEC2B /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		772F315E1F74081B00775AA8 /* Timesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timesheet.swift; sourceTree = "<group>"; };
 		772F31601F7409D400775AA8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		772F31621F7505E000775AA8 /* TimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculator.swift; sourceTree = "<group>"; };
 		7749AC781F6BB94100F1939C /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		7754CA231F66E3D4005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		7754CA241F66E3D5005197ED /* RequestIDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIDView.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				77FFA8651F700D390034B746 /* AlertView.swift */,
 				77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */,
 				77D919231F728C2100BFAB45 /* PickerView.swift */,
+				772F31621F7505E000775AA8 /* TimeCalculator.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,
 				772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */,
 				77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */,
+				772F31631F7505E000775AA8 /* TimeCalculator.swift in Sources */,
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
 				7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */,

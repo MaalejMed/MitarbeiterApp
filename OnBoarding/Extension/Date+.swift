@@ -9,13 +9,13 @@
 import Foundation
 
 extension Date {
-    func dayReadableFormat () -> String {
+    func simpleDateFormat () -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: self)
     }
     
-    func hoursReadableFormat() -> String {
+    func simpleHoursFormat() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm:ss"
         return dateFormatter.string(from: self)

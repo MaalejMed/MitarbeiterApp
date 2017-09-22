@@ -9,9 +9,27 @@
 import Foundation
 
 extension TimeInterval {
-    func inMinutes() -> (minutes: Int, seconds: Int) {
-        let minutes = self / 60
-        let seconds = self.truncatingRemainder(dividingBy: 60)
-        return (minutes: Int(minutes), seconds: Int(seconds))
+    func lunckBreak() -> (hours: Int, minutes: Int) {
+        let hours = self / 3600
+        let minutes = self.truncatingRemainder(dividingBy: 3600) / 60
+        return (hours: Int(hours), minutes: Int(minutes))
+    }
+    
+    func workedHours(lunchBreak: (hours: Int, minutes: Int)) -> (hours: Int, minutes: Int) {
+        let totlaHours = Int(self / 3600)
+        let totalMinutes = Int(self.truncatingRemainder(dividingBy: 3600) / 60)
+        
+        var workedHours: (hours: Int, minutes: Int) = (0,0)
+        
+        if totalMinutes >= lunchBreak.minutes {
+            workedHours.minutes = totalMinutes - lunchBreak.minutes
+            workedHours.hours = totlaHours - lunchBreak.hours
+        } else {
+            workedHours.hours = totlaHours - 1
+            workedHours.minutes =  60 - (lunchBreak.minutes - totalMinutes)
+        }
+        
+        return workedHours
+        
     }
 }
