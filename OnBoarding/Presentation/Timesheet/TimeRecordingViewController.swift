@@ -1,5 +1,5 @@
 //
-//  TimesheetViewController.swift
+//  TimeRecordingViewController.swift
 //  OnBoarding
 //
 //  Created by mmaalej on 20/09/2017.
@@ -32,10 +32,10 @@ enum TimeVisibleDetail:String {
     static let allValues = [workFrom, workUntil, lunchBreak]
 }
 
-class TimesheetViewController: UIViewController {
+class TimeRecordingViewController: UIViewController {
     
     //MARK:- Properties
-    let timesheetDataTV = TimesheetDataTableView(frame: .zero)
+    let timeRecordingDataTV = TimeRecordingDataTableView(frame: .zero)
     let timerView = TimerView(frame:.zero)
     let pickerView = PickerView(frame: .zero)
     
@@ -45,7 +45,7 @@ class TimesheetViewController: UIViewController {
     //MARK:- Views lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTimesheetDataTV()
+        setupTimeRecordingDataTV()
         setupTimerView()
         layout()
     }
@@ -59,7 +59,7 @@ class TimesheetViewController: UIViewController {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["tableView": timesheetDataTV, "timer": timerView]
+        let views: [String: UIView] = ["tableView": timeRecordingDataTV, "timer": timerView]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
@@ -67,9 +67,9 @@ class TimesheetViewController: UIViewController {
             view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         }
         
-        timesheetDataTV.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        timesheetDataTV.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: TimesheetDataTableView.height).isActive = true
-        timerView.topAnchor.constraint(equalTo: timesheetDataTV.bottomAnchor, constant: 10).isActive = true
+        timeRecordingDataTV.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        timeRecordingDataTV.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: timeRecordingDataTV.height).isActive = true
+        timerView.topAnchor.constraint(equalTo: timeRecordingDataTV.bottomAnchor, constant: 10).isActive = true
     }
     
     func layoutPickerView() {
@@ -128,8 +128,8 @@ class TimesheetViewController: UIViewController {
         self.selectedProjectDetail = nil
     }
     
-    //MARK: - Timesheet data tableview
-    func setupTimesheetDataTV() {
+    //MARK: - TimeRecording data tableview
+    func setupTimeRecordingDataTV() {
         var dataSource: [Parameter: [Any]] = [:]
         for parameter in Parameter.allValues {
             switch parameter {
@@ -139,8 +139,8 @@ class TimesheetViewController: UIViewController {
                 dataSource [parameter] = TimeVisibleDetail.allValues
             }
         }
-        timesheetDataTV.dataSource = dataSource
-        timesheetDataTV.delegate = self
+        timeRecordingDataTV.dataSource = dataSource
+        timeRecordingDataTV.delegate = self
     }
     
     //MARK:- Timer view
@@ -190,7 +190,7 @@ class TimesheetViewController: UIViewController {
     //MARK:- Update data
     func updateProjectVisibleDetails (indexPath: IndexPath, data:(detail: ProjectVisibleDetail, newValue: String)) {
         // update UI
-        let cell: BasicTableViewCell = timesheetDataTV.tableView.cellForRow(at: indexPath) as! BasicTableViewCell
+        let cell: BasicTableViewCell = timeRecordingDataTV.tableView.cellForRow(at: indexPath) as! BasicTableViewCell
         cell.data = (title: data.detail.rawValue, details: data.newValue, icon: nil)
         // update model
         switch (data.detail) {
@@ -223,18 +223,22 @@ class TimesheetViewController: UIViewController {
         }
         // update UI
         if let index = indexPath {
-            let cell: BasicTableViewCell = timesheetDataTV.tableView.cellForRow(at: index) as! BasicTableViewCell
+            let cell: BasicTableViewCell = timeRecordingDataTV.tableView.cellForRow(at: index) as! BasicTableViewCell
             cell.data = (title: data.detail.rawValue, details: displayedValue, icon: nil)
         }
     }
     
-    //MARK:- timesheet submission
+    //MARK:- TimeRecording submission
     func submitTimesheet() {
-        print(timesheet)
+        guard let date = timesheet.date, let projectID = timesheet.projectID, let activity = timesheet.activity, let buillable = timesheet.buillable, let workFrom = timesheet.workFrom, let workUntil = timesheet.workUntil, let lunchBreak = timesheet.lunchBreak else {
+            print ("cannot submit")
+            return
+        }
+        print("can submit")
     }
 }
-extension TimesheetViewController: TimesheetDataTableViewDelegate {
-    func didSelectProjectDetail(timesheetDataTableView: TimesheetDataTableView, detail: ProjectVisibleDetail) {
+extension TimeRecordingViewController: TimeRecordingDataTableViewDelegate {
+    func didSelectProjectDetail(timesheetDataTableView: TimeRecordingDataTableView, detail: ProjectVisibleDetail) {
         presentPickerView(detail: detail)
         self.selectedProjectDetail = detail
     }

@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol TimesheetDataTableViewDelegate: class {
-    func didSelectProjectDetail(timesheetDataTableView: TimesheetDataTableView, detail: ProjectVisibleDetail)
+protocol TimeRecordingTableViewDelegate: class {
+    func didSelectProjectDetail(timeRecordingTableView: TimeRecordingTableView, detail: ProjectVisibleDetail)
 }
 
-class TimesheetDataTableView: UIView {
+class TimeRecordingTableView: UIView {
     
     //MARK:- Properties
     let tableView: UITableView = {
@@ -33,7 +33,7 @@ class TimesheetDataTableView: UIView {
         return BasicTableViewCell.height * CGFloat(projectDetails + timeDetails) + 40
     }
     
-    weak var delegate: TimesheetDataTableViewDelegate?
+    weak var delegate: TimeRecordingTableViewDelegate?
     
     //MARK:- Init
     override init(frame: CGRect) {
@@ -60,7 +60,7 @@ class TimesheetDataTableView: UIView {
     }
 }
 
-extension TimesheetDataTableView: UITableViewDelegate {
+extension TimeRecordingTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BasicTableViewCell.height
     }
@@ -74,11 +74,11 @@ extension TimesheetDataTableView: UITableViewDelegate {
             return
         }
         let details = dataSource[parameter] as! [ProjectVisibleDetail]
-        delegate?.didSelectProjectDetail(timesheetDataTableView: self, detail: details[indexPath.row])
+        delegate?.didSelectProjectDetail(timeRecordingTableView: self, detail: details[indexPath.row])
     }
 }
 
-extension TimesheetDataTableView: UITableViewDataSource {
+extension TimeRecordingTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let dataSource = self.dataSource else {
             return 0
