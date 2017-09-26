@@ -29,6 +29,8 @@ class TimerView: UIView {
         return button
     }()
     
+    
+    
     var timerBtnAction: (()->())?
     
     //MARK:- Init
@@ -63,6 +65,8 @@ class TimerView: UIView {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[line(2)]-(10)-[timer(100)]-(10)-|", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
+    
+   
     
     //MARK:- Selectors
     @objc func buttonTapped() {

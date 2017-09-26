@@ -189,7 +189,7 @@ class TimesheetViewController: UIViewController {
             case .submit:
                 self?.preview()
                 return
-            case .send:
+            case .send, .idle:
                 return
             }
             self?.update(key: key!, value: value!)

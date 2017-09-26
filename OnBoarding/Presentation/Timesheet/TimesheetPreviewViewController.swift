@@ -20,6 +20,7 @@ class TimesheetPreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTimesheetInfoTV()
+        setupTimerView()
         layout()
     }
     
@@ -84,6 +85,21 @@ class TimesheetPreviewViewController: UIViewController {
             timesheetEntries[info] = entries
         }
         timesheetInfoTV.dataSource = timesheetEntries
+    }
+    
+    func setupTimerView() {
+        timerView.timerBtnAction = { [weak self] in
+            self?.timerView.timerBtn.status = .idle
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                for vc in (self?.navigationController?.viewControllers)! {
+                    if  vc.isKind(of: HomeViewController.self){
+                        self?.navigationController?.popToViewController(vc, animated: true)
+                        return
+                    }
+                }
+            })
         }
+    }
+    
 }
 

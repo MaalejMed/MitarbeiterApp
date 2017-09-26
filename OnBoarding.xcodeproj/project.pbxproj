@@ -21,7 +21,6 @@
 		7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA2C1F66E638005197ED /* HomeViewController.swift */; };
 		7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA301F67CC22005197ED /* ProfileViewController.swift */; };
 		7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA321F67CC60005197ED /* GSDViewController.swift */; };
-		7754CA361F67D52A005197ED /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA351F67D52A005197ED /* TabBar.swift */; };
 		7754CA381F67D8D1005197ED /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA371F67D8D1005197ED /* MainMenuView.swift */; };
 		7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA391F67DCBB005197ED /* CellViewProtocols.swift */; };
 		7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA3B1F67E059005197ED /* HomeCollectionViewCell.swift */; };
@@ -89,7 +88,6 @@
 		7754CA2C1F66E638005197ED /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7754CA301F67CC22005197ED /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7754CA321F67CC60005197ED /* GSDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDViewController.swift; sourceTree = "<group>"; };
-		7754CA351F67D52A005197ED /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		7754CA371F67D8D1005197ED /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		7754CA391F67DCBB005197ED /* CellViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewProtocols.swift; sourceTree = "<group>"; };
 		7754CA3B1F67E059005197ED /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -206,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				7749AC781F6BB94100F1939C /* MediaViewController.swift */,
-				7754CA351F67D52A005197ED /* TabBar.swift */,
 				7754CA391F67DCBB005197ED /* CellViewProtocols.swift */,
 				772BD9811F695C7B003FEC2B /* InfoView.swift */,
 				77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */,
@@ -576,7 +573,6 @@
 				77FFA8681F7132870034B746 /* FeedTableView.swift in Sources */,
 				77D9191B1F7262B100BFAB45 /* MenuItem.swift in Sources */,
 				7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */,
-				7754CA361F67D52A005197ED /* TabBar.swift in Sources */,
 				77FB51ED1F73D438006E73AB /* TimeInterval+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
