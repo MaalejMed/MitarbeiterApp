@@ -13,7 +13,7 @@ class TimesheetPreviewViewController: UIViewController {
     //MARK:- Properties
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
     let timerView = TimerView(status: .send)
-
+    
     var timesheet: Timesheet?
     
     //MARK:- Views lifecycle
@@ -52,14 +52,14 @@ class TimesheetPreviewViewController: UIViewController {
         let allKeys: [TimesheetKey] = TimesheetKey.allProjectKeys + TimesheetKey.allTimeKeys
         for key in allKeys {
             switch key {
-                case .date:
-                    timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.date?.simpleDateFormat())!))
-                case .identifier:
-                    timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.projectID)!))
-                case .activity:
-                    timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.activity)!))
-                case .buillable:
-                    timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.buillable)!))
+            case .date:
+                timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.date?.simpleDateFormat())!))
+            case .identifier:
+                timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.projectID)!))
+            case .activity:
+                timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.activity)!))
+            case .buillable:
+                timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.buillable)!))
             case .startWorking:
                 timesheetEntries.append(TimesheetEntry(info:.time, key: key, value: (timesheet?.workFrom?.simpleDateFormat())!))
             case .stopWorking:
@@ -73,3 +73,4 @@ class TimesheetPreviewViewController: UIViewController {
         timesheetInfoTV.dataSource = timesheetEntries
     }
 }
+

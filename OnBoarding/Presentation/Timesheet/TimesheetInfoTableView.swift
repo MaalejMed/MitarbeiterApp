@@ -69,7 +69,7 @@ extension TimesheetInfoTableView: UITableViewDelegate {
         guard let dataSource = self.dataSource else {
             return
         }
-
+        
         let timesheetEntry = dataSource[indexPath.row]
         guard timesheetEntry.info == .project else {
             return
@@ -102,7 +102,7 @@ extension TimesheetInfoTableView: UITableViewDataSource {
         guard let dataSource = self.dataSource else {
             return UITableViewCell()
         }
-    
+        
         let info = TimesheetInfo.allValues[indexPath.section]
         let index = info.startIndex() + indexPath.row
         let timesheeEntry = dataSource[index]
@@ -126,3 +126,4 @@ extension TimesheetInfoTableView: UITableViewDataSource {
         }
     }
 }
+

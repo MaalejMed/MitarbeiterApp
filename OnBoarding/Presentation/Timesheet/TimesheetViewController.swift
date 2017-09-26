@@ -69,7 +69,7 @@ class TimesheetViewController: UIViewController {
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
     let timerView = TimerView(status: .startWorking)
     let pickerView = PickerView(frame: .zero)
-
+    
     var timesheetEntries: [TimesheetEntry] = []
     var timesheet = Timesheet(date: Date(), projectID: nil, activity: nil, buillable: nil, workFrom: nil, workUntil: nil, workedHours:nil, breakFrom: nil, breakUntil: nil, lunchBreak: nil)
     
@@ -253,3 +253,4 @@ extension TimesheetViewController: TimesheetInfoTableViewDelegate {
         presentPickerView(entry: entry)
     }
 }
+
