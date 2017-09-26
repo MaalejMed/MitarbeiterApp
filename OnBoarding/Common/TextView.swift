@@ -15,9 +15,8 @@ class TextView: UITextView {
                 self.text = ""
                 return
             }
-            self.textColor = .lightGray
+            self.textColor = UIColor.placehoderTextColor
             self.text = placeholder
-            self.font = UIFont.systemFont(ofSize: 16.0)
         }
     }
 }

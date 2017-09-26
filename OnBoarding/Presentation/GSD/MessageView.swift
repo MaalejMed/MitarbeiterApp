@@ -24,6 +24,7 @@ class MessageView: UIView {
     lazy var messageTxtV: TextView = {
         let textView = TextView()
         textView.placeholder = "Message"
+        textView.font = UIFont.systemFont(ofSize: 18.0)
         textView.layer.borderWidth = 1.0
         textView.layer.borderColor = UIColor.gray.cgColor
         textView.layer.sublayerTransform = CATransform3DMakeTranslation(4.0, 0.0, 0.0)

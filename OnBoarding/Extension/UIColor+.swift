@@ -26,4 +26,8 @@ extension UIColor {
         return UIColor.init(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
     }
     
+    static var placehoderTextColor: UIColor {
+        return UIColor.init(red: 195/255, green: 195/255, blue: 195/255, alpha: 1.0)
+    }
+    
 }
