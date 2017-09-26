@@ -8,20 +8,23 @@
 
 import UIKit
 
-enum TimesheetInfo: String {
-    case project = "project"
-    case time = "time"
-    static let allValues = [project, time]
+struct TimesheetEntry: Equatable {
+    var info: EntryInfo
+    var key: EntryKey
+    var value: String
     
-    func startIndex() -> Int {
-        switch self {
-        case .project: return 0
-        case .time: return TimesheetKey.allProjectKeys.count
-        }
+    static func ==(lhs: TimesheetEntry, rhs: TimesheetEntry) -> Bool {
+        return lhs.key == rhs.key
     }
 }
 
-enum TimesheetKey: String {
+enum EntryInfo: String {
+    case project = "project"
+    case time = "time"
+    static let allValues = [project, time]
+}
+
+enum EntryKey: String {
     case date = "Date"
     case identifier = "Project ID"
     case activity = "Activity"
@@ -33,33 +36,21 @@ enum TimesheetKey: String {
     static let allProjectKeys = [date, identifier, activity, buillable]
     static let allTimeKeys = [startWorking, stopWorking, lunchBreak]
     
-    func section() -> TimesheetInfo {
+    func section() -> EntryInfo {
         switch self {
-        case .date, .identifier, .activity, .buillable: return TimesheetInfo.allValues[0]
-        case .startWorking, .stopWorking, .lunchBreak: return TimesheetInfo.allValues[1]
+        case .date, .identifier, .activity, .buillable: return EntryInfo.allValues[0]
+        case .startWorking, .stopWorking, .lunchBreak: return EntryInfo.allValues[1]
         }
     }
     
-    func indexPathForKey() -> IndexPath {
+    func index() -> Int {
         let section = self.section()
-        var index = section.startIndex()
         switch section {
         case .project:
-            index += TimesheetKey.allProjectKeys.index(of: self)!
+            return EntryKey.allProjectKeys.index(of: self)!
         case .time:
-            index += TimesheetKey.allTimeKeys.index(of: self)!
+            return EntryKey.allTimeKeys.index(of: self)!
         }
-        return IndexPath(row: index, section: section.hashValue)
-    }
-}
-
-struct TimesheetEntry: Equatable {
-    var info: TimesheetInfo
-    var key: TimesheetKey
-    var value: String
-    
-    static func ==(lhs: TimesheetEntry, rhs: TimesheetEntry) -> Bool {
-        return lhs.key == rhs.key
     }
 }
 
@@ -70,7 +61,7 @@ class TimesheetViewController: UIViewController {
     let timerView = TimerView(status: .startWorking)
     let pickerView = PickerView(frame: .zero)
     
-    var timesheetEntries: [TimesheetEntry] = []
+    var timesheetEntries: [EntryInfo: [TimesheetEntry]] = [:]
     var timesheet = Timesheet(date: Date(), projectID: nil, activity: nil, buillable: nil, workFrom: nil, workUntil: nil, workedHours:nil, breakFrom: nil, breakUntil: nil, lunchBreak: nil)
     
     //MARK:- Views lifecycles
@@ -151,17 +142,21 @@ class TimesheetViewController: UIViewController {
     
     //MARK: - Timesheet data tableview
     func setupTimesheetInfoTV() {
-        for parameter in TimesheetInfo.allValues {
+        for parameter in EntryInfo.allValues {
             switch parameter {
             case .project:
-                for key in TimesheetKey.allProjectKeys {
+                var entries: [TimesheetEntry] = []
+                for key in EntryKey.allProjectKeys {
                     let timesheetEntry = TimesheetEntry (info: parameter, key: key, value: "-")
-                    timesheetEntries.append(timesheetEntry)
+                    entries.append(timesheetEntry)
+                    timesheetEntries [.project] = entries
                 }
             case .time:
-                for key in TimesheetKey.allTimeKeys {
+                var entries: [TimesheetEntry] = []
+                for key in EntryKey.allTimeKeys {
                     let timesheetEntry = TimesheetEntry (info: parameter, key: key, value: "-")
-                    timesheetEntries.append(timesheetEntry)
+                    entries.append(timesheetEntry)
+                    timesheetEntries [.time] = entries
                 }
             }
         }
@@ -172,7 +167,7 @@ class TimesheetViewController: UIViewController {
     //MARK:- Timer view
     func setupTimerView() {
         timerView.timerBtnAction = { [weak self] in
-            var key: TimesheetKey?
+            var key: EntryKey?
             var value: Any?
             switch (self?.timerView.timerBtn.status)! {
             case .startWorking:
@@ -207,31 +202,34 @@ class TimesheetViewController: UIViewController {
     }
     
     //MARK:- Update data
-    func update(key:TimesheetKey, value: Any) {
+    func update(key:EntryKey, value: Any) {
+        let section = key.section()
         switch (key) {
         case .activity:
             timesheet.activity = value as? String ?? nil
-            self.timesheetEntries[key.indexPathForKey().row].value = timesheet.activity!
+            timesheetEntries[section]![key.index()].value = timesheet.activity!
         case .buillable:
             timesheet.buillable = value as? String ?? nil
-            self.timesheetEntries[key.indexPathForKey().row].value = timesheet.buillable!
+            timesheetEntries[section]![key.index()].value = timesheet.buillable!
         case .identifier:
             timesheet.projectID = value as? String ?? nil
-            self.timesheetEntries[key.indexPathForKey().row].value = timesheet.projectID!
+            timesheetEntries[section]![key.index()].value = timesheet.projectID!
         case .date:
             break
         case .startWorking:
             timesheet.workFrom = value as? Date ?? nil
-            self.timesheetEntries[key.indexPathForKey().row].value = (timesheet.workFrom?.simpleHoursFormat())!
+            timesheetEntries[section]![key.index()].value = (timesheet.workFrom?.simpleHoursFormat())!
         case .lunchBreak:
             timesheet.breakUntil = value as? Date ?? nil
-            self.timesheetEntries[key.indexPathForKey().row].value = (timesheet.breakUntil?.simpleHoursFormat())!
             let lunchBreak = TimeCalculator.lunckBreak(start: (self.timesheet.breakFrom)!, end: (self.timesheet.breakUntil)!)
             timesheet.lunchBreak = lunchBreak
-            self.timesheetEntries[key.indexPathForKey().row].value = "\(lunchBreak.hours) : \(lunchBreak.minutes)"
+            let hours = (timesheet.lunchBreak?.hours)!
+            let minutes = (timesheet.lunchBreak?.minutes)!
+            timesheetEntries[section]![key.index()].value = "\(hours) : \(minutes)"
+
         case . stopWorking:
             timesheet.workUntil = value as? Date ?? nil
-            self.timesheetEntries[key.indexPathForKey().row].value = (timesheet.breakUntil?.simpleHoursFormat())!
+            timesheetEntries[section]![key.index()].value = (timesheet.workUntil?.simpleHoursFormat())!
             self.timesheet.workedHours = TimeCalculator.workedHours(start: (self.timesheet.workFrom)!, end: (self.timesheet.workUntil)!, lunchBreak: timesheet.lunchBreak!)
         }
         

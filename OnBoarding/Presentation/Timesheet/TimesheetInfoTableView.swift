@@ -21,15 +21,15 @@ class TimesheetInfoTableView: UIView {
         return tableView
     }()
     
-    var dataSource: [TimesheetEntry]? {
+    var dataSource: [EntryInfo:[TimesheetEntry]]? {
         didSet {
             tableView.reloadData()
         }
     }
     
     static var height: CGFloat {
-        let projectKeys = TimesheetKey.allProjectKeys.count
-        let timeKeys = TimesheetKey.allTimeKeys.count
+        let projectKeys = EntryKey.allProjectKeys.count
+        let timeKeys = EntryKey.allTimeKeys.count
         return BasicTableViewCell.height * CGFloat(projectKeys + timeKeys) + 40
     }
     
@@ -66,58 +66,42 @@ extension TimesheetInfoTableView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let dataSource = self.dataSource else {
+        let info = EntryInfo.allValues[indexPath.section]
+        let entry = Array(dataSource![info]!)[indexPath.row]
+        guard entry.info == .project,  entry.key != .date else {
             return
         }
-        
-        let timesheetEntry = dataSource[indexPath.row]
-        guard timesheetEntry.info == .project else {
-            return
-        }
-        guard timesheetEntry.key != .date else {
-            return
-        }
-        delegate?.didSelectTimesheetInfo(timesheetInfoTableView: self, entry: timesheetEntry)
+        delegate?.didSelectTimesheetInfo(timesheetInfoTableView: self, entry: entry)
     }
 }
 
 extension TimesheetInfoTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return TimesheetInfo.allValues.count
+        return (EntryInfo.allValues.count)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let info = TimesheetInfo.allValues[section]
+        let info = EntryInfo.allValues[section]
         switch info {
         case .project:
-            return TimesheetKey.allProjectKeys.count
+            return EntryKey.allProjectKeys.count
         case .time:
-            return TimesheetKey.allTimeKeys.count
+            return EntryKey.allTimeKeys.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.cellIdentifier) as? BasicTableViewCell
-        
-        guard let dataSource = self.dataSource else {
-            return UITableViewCell()
-        }
-        
-        let info = TimesheetInfo.allValues[indexPath.section]
-        let index = info.startIndex() + indexPath.row
-        let timesheeEntry = dataSource[index]
-        
-        if  timesheeEntry.key == .date {
-            cell?.data = (title: timesheeEntry.key.rawValue, details: Date().simpleDateFormat(),  icon: nil)
-        } else {
-            cell?.data = (title: timesheeEntry.key.rawValue, details: timesheeEntry.value,  icon: nil)
-        }
+        let info = EntryInfo.allValues[indexPath.section]
+        let entry = Array(dataSource![info]!)[indexPath.row]
+        let value = entry.key == .date ? Date().simpleDateFormat() : entry.value
+        cell?.data = (title: entry.key.rawValue, details: value,  icon: nil)
         cell?.selectionStyle = .none
         return cell!
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let parameter = TimesheetInfo.allValues[section]
+        let parameter = EntryInfo.allValues[section]
         switch parameter {
         case .project:
             return "Project info"

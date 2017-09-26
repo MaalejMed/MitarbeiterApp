@@ -48,29 +48,42 @@ class TimesheetPreviewViewController: UIViewController {
     
     //MARK:- Setup views
     func setupTimesheetInfoTV() {
-        var timesheetEntries: [TimesheetEntry] = []
-        let allKeys: [TimesheetKey] = TimesheetKey.allProjectKeys + TimesheetKey.allTimeKeys
-        for key in allKeys {
-            switch key {
-            case .date:
-                timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.date?.simpleDateFormat())!))
-            case .identifier:
-                timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.projectID)!))
-            case .activity:
-                timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.activity)!))
-            case .buillable:
-                timesheetEntries.append(TimesheetEntry(info:.project, key: key, value: (timesheet?.buillable)!))
-            case .startWorking:
-                timesheetEntries.append(TimesheetEntry(info:.time, key: key, value: (timesheet?.workFrom?.simpleDateFormat())!))
-            case .stopWorking:
-                timesheetEntries.append(TimesheetEntry(info:.time, key: key, value: (timesheet?.workUntil?.simpleDateFormat())!))
-            case .lunchBreak:
-                let hours = (timesheet?.lunchBreak!.hours)!
-                let minutes = (timesheet?.lunchBreak!.minutes)!
-                timesheetEntries.append(TimesheetEntry(info:.time, key: key, value:  "\(hours) : \(minutes)"))
+        var timesheetEntries: [EntryInfo:[TimesheetEntry]] = [:]
+        for info in EntryInfo.allValues {
+            var entries: [TimesheetEntry] = []
+            switch info {
+            case .project:
+                for key in EntryKey.allProjectKeys {
+                    switch key {
+                    case .date:
+                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (timesheet?.date?.simpleDateFormat())! ))
+                    case .identifier:
+                        entries.append(TimesheetEntry(info: .project, key: key, value: (timesheet?.projectID)! ))
+                    case .activity:
+                        entries.append(TimesheetEntry(info: .project, key: key, value: (timesheet?.activity)! ))
+                    case .buillable:
+                        entries.append(TimesheetEntry(info: .project, key: key, value: (timesheet?.buillable)! ))
+                    case .startWorking, .stopWorking, .lunchBreak: break
+                    }
+                }
+            case .time:
+                for key in EntryKey.allTimeKeys {
+                    switch key {
+                    case .date, .activity, .identifier, .buillable: break
+                    case .startWorking:
+                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (timesheet?.workFrom?.simpleHoursFormat())! ))
+                    case .stopWorking:
+                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (timesheet?.workUntil?.simpleHoursFormat())! ))
+                    case .lunchBreak:
+                        let hours = (timesheet?.lunchBreak?.hours)!
+                        let minutes = (timesheet?.lunchBreak?.minutes)!
+                        entries.append(TimesheetEntry(info: key.section(), key: key, value: "\(hours) : \(minutes)"))
+                    }
+                }
             }
+            timesheetEntries[info] = entries
         }
         timesheetInfoTV.dataSource = timesheetEntries
-    }
+        }
 }
 
