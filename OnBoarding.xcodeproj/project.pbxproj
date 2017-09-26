@@ -36,6 +36,7 @@
 		7782B1E11F7A530E0024F976 /* TimesheetInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E01F7A530E0024F976 /* TimesheetInfoTableView.swift */; };
 		7782B1E31F7A53220024F976 /* TimesheetPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E21F7A53220024F976 /* TimesheetPreviewViewController.swift */; };
 		7782B1E51F7A53370024F976 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E41F7A53370024F976 /* TimerView.swift */; };
+		7782B1E91F7A82BD0024F976 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E81F7A82BD0024F976 /* TextView.swift */; };
 		77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601951F6BDB70000BC777 /* ProfileTableView.swift */; };
 		77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */; };
 		77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF631F6FEF610097CF46 /* MessageViewController.swift */; };
@@ -109,6 +110,7 @@
 		7782B1E01F7A530E0024F976 /* TimesheetInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetInfoTableView.swift; sourceTree = "<group>"; };
 		7782B1E21F7A53220024F976 /* TimesheetPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetPreviewViewController.swift; sourceTree = "<group>"; };
 		7782B1E41F7A53370024F976 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		7782B1E81F7A82BD0024F976 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		77B601951F6BDB70000BC777 /* ProfileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableView.swift; sourceTree = "<group>"; };
 		77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
 		77BEDF631F6FEF610097CF46 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 		7754CA341F67D512005197ED /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7782B1E81F7A82BD0024F976 /* TextView.swift */,
 				7749AC781F6BB94100F1939C /* MediaViewController.swift */,
 				7754CA391F67DCBB005197ED /* CellViewProtocols.swift */,
 				772BD9811F695C7B003FEC2B /* InfoView.swift */,
@@ -554,6 +557,7 @@
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
 				7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */,
 				772BD9821F695C7B003FEC2B /* InfoView.swift in Sources */,
+				7782B1E91F7A82BD0024F976 /* TextView.swift in Sources */,
 				7754CA381F67D8D1005197ED /* MainMenuView.swift in Sources */,
 				7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */,
 				77D919241F728C2100BFAB45 /* PickerView.swift in Sources */,

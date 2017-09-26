@@ -10,13 +10,13 @@ import UIKit
 
 enum Item: String {
     case time = "Time recording"
+    case gsd = "GSD"
+    case profile = "Profile"
     case travelExp = "Travel expenses"
     case benefits = "benefits"
     case eLearning = "E-Learning"
-    case gsd = "GSD"
-    case profile = "Profile"
     
-    static let allMenuItems = [time, travelExp, benefits, eLearning, gsd, profile]
+    static let allMenuItems = [time, gsd, profile, travelExp, benefits, eLearning]
     
     func icon() -> UIImage {
         switch self {
