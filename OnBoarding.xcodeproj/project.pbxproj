@@ -40,11 +40,7 @@
 		77D919191F72591C00BFAB45 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919181F72591C00BFAB45 /* Feed.swift */; };
 		77D9191B1F7262B100BFAB45 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191A1F7262B100BFAB45 /* MenuItem.swift */; };
 		77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191C1F72719D00BFAB45 /* Associate.swift */; };
-		77D919201F7276AA00BFAB45 /* TimeRecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191F1F7276AA00BFAB45 /* TimeRecordingViewController.swift */; };
-		77D919221F72786700BFAB45 /* TimeRecordingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919211F72786700BFAB45 /* TimeRecordingTableView.swift */; };
 		77D919241F728C2100BFAB45 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919231F728C2100BFAB45 /* PickerView.swift */; };
-		77FB51E71F72A7B4006E73AB /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB51E61F72A7B4006E73AB /* TimerView.swift */; };
-		77FB51EB1F73C2D9006E73AB /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB51EA1F73C2D9006E73AB /* TimerButton.swift */; };
 		77FB51ED1F73D438006E73AB /* TimeInterval+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB51EC1F73D438006E73AB /* TimeInterval+.swift */; };
 		77FFA8661F700D390034B746 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8651F700D390034B746 /* AlertView.swift */; };
 		77FFA8681F7132870034B746 /* FeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8671F7132870034B746 /* FeedTableView.swift */; };
@@ -113,12 +109,13 @@
 		77D919181F72591C00BFAB45 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		77D9191A1F7262B100BFAB45 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		77D9191C1F72719D00BFAB45 /* Associate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Associate.swift; sourceTree = "<group>"; };
-		77D9191F1F7276AA00BFAB45 /* TimeRecordingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRecordingViewController.swift; sourceTree = "<group>"; };
-		77D919211F72786700BFAB45 /* TimeRecordingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRecordingTableView.swift; sourceTree = "<group>"; };
 		77D919231F728C2100BFAB45 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
-		77FB51E61F72A7B4006E73AB /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		77FB51EA1F73C2D9006E73AB /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		77FB51EC1F73D438006E73AB /* TimeInterval+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+.swift"; sourceTree = "<group>"; };
+		77FCCC1F1F7A4ED000BCE497 /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
+		77FCCC201F7A4ED000BCE497 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		77FCCC211F7A4ED000BCE497 /* TimesheetInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetInfoTableView.swift; sourceTree = "<group>"; };
+		77FCCC221F7A4ED000BCE497 /* TimesheetPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetPreviewViewController.swift; sourceTree = "<group>"; };
+		77FCCC231F7A4ED000BCE497 /* TimesheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetViewController.swift; sourceTree = "<group>"; };
 		77FFA8651F700D390034B746 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		77FFA8671F7132870034B746 /* FeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableView.swift; sourceTree = "<group>"; };
 		77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedTableViewCell.swift; sourceTree = "<group>"; };
@@ -277,7 +274,7 @@
 		776EDC891F62BC5700D0A0AC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				77D9191E1F72769C00BFAB45 /* TimeRecording */,
+				77FCCC1E1F7A4ED000BCE497 /* TimeRecording */,
 				7754CA2F1F67CBFC005197ED /* Profile */,
 				7754CA2E1F67CBF3005197ED /* GSD */,
 				7754CA2B1F66E628005197ED /* Home */,
@@ -309,13 +306,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		77D9191E1F72769C00BFAB45 /* TimeRecording */ = {
+		77FCCC1E1F7A4ED000BCE497 /* TimeRecording */ = {
 			isa = PBXGroup;
 			children = (
-				77D9191F1F7276AA00BFAB45 /* TimeRecordingViewController.swift */,
-				77D919211F72786700BFAB45 /* TimeRecordingTableView.swift */,
-				77FB51E61F72A7B4006E73AB /* TimerView.swift */,
-				77FB51EA1F73C2D9006E73AB /* TimerButton.swift */,
+				77FCCC1F1F7A4ED000BCE497 /* TimerButton.swift */,
+				77FCCC201F7A4ED000BCE497 /* TimerView.swift */,
+				77FCCC211F7A4ED000BCE497 /* TimesheetInfoTableView.swift */,
+				77FCCC221F7A4ED000BCE497 /* TimesheetPreviewViewController.swift */,
+				77FCCC231F7A4ED000BCE497 /* TimesheetViewController.swift */,
 			);
 			path = TimeRecording;
 			sourceTree = "<group>";
@@ -537,14 +535,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77FB51EB1F73C2D9006E73AB /* TimerButton.swift in Sources */,
 				7754CA2A1F66E48C005197ED /* LoginView.swift in Sources */,
 				77D919191F72591C00BFAB45 /* Feed.swift in Sources */,
 				77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */,
 				7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */,
 				772BD9861F69731F003FEC2B /* UIImage+.swift in Sources */,
 				77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */,
-				77FB51E71F72A7B4006E73AB /* TimerView.swift in Sources */,
 				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,
 				772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */,
 				77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */,
@@ -563,12 +559,10 @@
 				77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */,
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
 				77FFA86A1F7135B70034B746 /* ExtendedTableViewCell.swift in Sources */,
-				77D919221F72786700BFAB45 /* TimeRecordingTableView.swift in Sources */,
 				77D919171F7258FF00BFAB45 /* FeedService.swift in Sources */,
 				772F31611F7409D400775AA8 /* Date+.swift in Sources */,
 				7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */,
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,
-				77D919201F7276AA00BFAB45 /* TimeRecordingViewController.swift in Sources */,
 				77FFA8681F7132870034B746 /* FeedTableView.swift in Sources */,
 				77D9191B1F7262B100BFAB45 /* MenuItem.swift in Sources */,
 				7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  TimesheetDataTableView.swift
+//  TimesheetInfoTableView.swift
 //  OnBoarding
 //
 //  Created by mmaalej on 20/09/2017.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol TimeRecordingTableViewDelegate: class {
-    func didSelectProjectDetail(timeRecordingTableView: TimeRecordingTableView, detail: ProjectVisibleDetail)
+protocol TimesheetInfoTableViewDelegate: class {
+    func didSelectTimesheetInfo(timesheetInfoTableView: TimesheetInfoTableView, entry: TimesheetEntry)
 }
 
-class TimeRecordingTableView: UIView {
+class TimesheetInfoTableView: UIView {
     
     //MARK:- Properties
     let tableView: UITableView = {
@@ -21,19 +21,19 @@ class TimeRecordingTableView: UIView {
         return tableView
     }()
     
-    var dataSource: [Parameter : [Any]]? {
+    var dataSource: [TimesheetEntry]? {
         didSet {
             tableView.reloadData()
         }
     }
     
     static var height: CGFloat {
-        let projectDetails = ProjectVisibleDetail.allValues.count
-        let timeDetails = TimeVisibleDetail.allValues.count
-        return BasicTableViewCell.height * CGFloat(projectDetails + timeDetails) + 40
+        let projectKeys = TimesheetKey.allProjectKeys.count
+        let timeKeys = TimesheetKey.allTimeKeys.count
+        return BasicTableViewCell.height * CGFloat(projectKeys + timeKeys) + 40
     }
     
-    weak var delegate: TimeRecordingTableViewDelegate?
+    weak var delegate: TimesheetInfoTableViewDelegate?
     
     //MARK:- Init
     override init(frame: CGRect) {
@@ -60,7 +60,7 @@ class TimeRecordingTableView: UIView {
     }
 }
 
-extension TimeRecordingTableView: UITableViewDelegate {
+extension TimesheetInfoTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BasicTableViewCell.height
     }
@@ -69,30 +69,31 @@ extension TimeRecordingTableView: UITableViewDelegate {
         guard let dataSource = self.dataSource else {
             return
         }
-        let parameter = Array(dataSource.keys) [indexPath.section]
-        guard parameter == .project else {
+
+        let timesheetEntry = dataSource[indexPath.row]
+        guard timesheetEntry.info == .project else {
             return
         }
-        let details = dataSource[parameter] as! [ProjectVisibleDetail]
-        delegate?.didSelectProjectDetail(timeRecordingTableView: self, detail: details[indexPath.row])
+        guard timesheetEntry.key != .date else {
+            return
+        }
+        delegate?.didSelectTimesheetInfo(timesheetInfoTableView: self, entry: timesheetEntry)
     }
 }
 
-extension TimeRecordingTableView: UITableViewDataSource {
+extension TimesheetInfoTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let dataSource = self.dataSource else {
-            return 0
-        }
-        return Array(dataSource.keys).count
+        return TimesheetInfo.allValues.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let dataSource = self.dataSource else {
-            return 0
+        let info = TimesheetInfo.allValues[section]
+        switch info {
+        case .project:
+            return TimesheetKey.allProjectKeys.count
+        case .time:
+            return TimesheetKey.allTimeKeys.count
         }
-        let  parameter = Array(dataSource.keys) [section]
-        let details = dataSource[parameter]
-        return (details?.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,35 +103,26 @@ extension TimeRecordingTableView: UITableViewDataSource {
             return UITableViewCell()
         }
     
-        let parameter = Array(dataSource.keys) [indexPath.section]
+        let info = TimesheetInfo.allValues[indexPath.section]
+        let index = info.startIndex() + indexPath.row
+        let timesheeEntry = dataSource[index]
         
-        switch parameter {
-        case .project:
-            let details = dataSource[parameter] as! [ProjectVisibleDetail]
-            let detail = details[indexPath.row]
-            var detailsDefaulValue = "-"
-            if detail == .date {
-                detailsDefaulValue = Date().simpleDateFormat()
-            }
-            cell?.data = (title: detail.rawValue, details: detailsDefaulValue,  icon: nil)
-        case .time:
-            let details = dataSource[parameter] as! [TimeVisibleDetail]
-            let detail = details[indexPath.row]
-            cell?.data = (title: detail.rawValue, details: "-",  icon: nil)
+        if  timesheeEntry.key == .date {
+            cell?.data = (title: timesheeEntry.key.rawValue, details: Date().simpleDateFormat(),  icon: nil)
+        } else {
+            cell?.data = (title: timesheeEntry.key.rawValue, details: timesheeEntry.value,  icon: nil)
         }
+        cell?.selectionStyle = .none
         return cell!
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let dataSource = self.dataSource else {
-            return ""
-        }
-        let parameter = Array(dataSource.keys) [section]
+        let parameter = TimesheetInfo.allValues[section]
         switch parameter {
         case .project:
             return "Project info"
         case .time:
-            return "Time recording"
+            return "Time info"
         }
     }
 }

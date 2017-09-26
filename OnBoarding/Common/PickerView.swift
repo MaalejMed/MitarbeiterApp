@@ -94,7 +94,10 @@ class PickerView: UIView {
         }
         let selectedIndex = pickerView.selectedRow(inComponent: 0)
         
-        action((dataSource?[selectedIndex])!)
+        guard let value = dataSource?[selectedIndex] else {
+            return
+        }
+        action(value)
     }
     
     @objc func cancel() {

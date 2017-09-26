@@ -12,7 +12,7 @@ struct Timesheet {
     var date: Date?
     var projectID: String?
     var activity: String?
-    var buillable: Bool?
+    var buillable: String?
     var workFrom: Date?
     var workUntil: Date?
     var workedHours: (hours: Int, minutes: Int)?

@@ -8,14 +8,19 @@
 
 import UIKit
 
-enum status: String {
+enum Status: String {
     case startWorking = "Start"
     case startLunchBreak = "Lunch time"
     case stopLunchBreak = "Back to work"
     case stopWorking = "Go home!"
     case submit = "Submit"
+    case send = "Send"
 }
 
 class TimerButton: UIButton {
-    var status: status?
+    var status: Status? {
+        didSet {
+            self.setTitle(status?.rawValue, for: .normal)
+        }
+    }
 }

@@ -19,8 +19,6 @@ class TimerView: UIView {
     
     let timerBtn: TimerButton = {
         let button = TimerButton()
-        button.status = .startWorking
-        button.setTitle("Start", for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.sizeToFit()
         button.titleEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
@@ -34,8 +32,9 @@ class TimerView: UIView {
     var timerBtnAction: (()->())?
     
     //MARK:- Init
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(status: Status) {
+        super.init(frame: .zero)
+        timerBtn.status = status
         layout()
     }
     
