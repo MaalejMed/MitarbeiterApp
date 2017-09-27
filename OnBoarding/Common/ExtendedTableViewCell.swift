@@ -9,7 +9,7 @@
 import UIKit
 
 class ExtendedTableViewCell: UITableViewCell, TableViewCellProtocols {
-    static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 15.0, leftAnchor: 15.0, bottomAnchor: 15.0, rightAnchor: 15.0)
+    static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 10.0, leftAnchor: 10.0, bottomAnchor: 10.0, rightAnchor: 10.0)
     static let height: CGFloat =  ExtendedCellContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
     
     var cellView: CellViewProtocol = ExtendedCellContentView()
@@ -105,9 +105,9 @@ class ExtendedCellContentView: UIView, CellViewProtocol {
         
         var layoutConstraints: [NSLayoutConstraint] = []
         
-        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon(40)]-(10)-[title]-(10)-[details]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon(30)]-(10)-[title]-(10)-[details]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:[description]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[icon(40)]", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[icon(30)]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title]-(5)-[description]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
             descriptionLbl.leftAnchor.constraint(equalTo: titleLbl.leftAnchor),

@@ -12,7 +12,7 @@ class TimesheetPreviewViewController: UIViewController {
     
     //MARK:- Properties
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
-    let timerView = TimerView(status: .send)
+    let contextView = ContextView(context: .send)
     
     var timesheet: Timesheet?
     
@@ -34,7 +34,7 @@ class TimesheetPreviewViewController: UIViewController {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["tableView": timesheetInfoTV, "timer": timerView]
+        let views: [String: UIView] = ["tableView": timesheetInfoTV, "context": contextView]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
@@ -44,7 +44,7 @@ class TimesheetPreviewViewController: UIViewController {
         
         timesheetInfoTV.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         timesheetInfoTV.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: TimesheetInfoTableView.height).isActive = true
-        timerView.topAnchor.constraint(equalTo: timesheetInfoTV.bottomAnchor, constant: 10).isActive = true
+        contextView.topAnchor.constraint(equalTo: timesheetInfoTV.bottomAnchor, constant: 10).isActive = true
     }
     
     //MARK:- Setup views
@@ -88,8 +88,8 @@ class TimesheetPreviewViewController: UIViewController {
     }
     
     func setupTimerView() {
-        timerView.timerBtnAction = { [weak self] in
-            self?.timerView.timerBtn.status = .idle
+        contextView.contextBtnAction = { [weak self] in
+            self?.contextView.contextBtn.context = .idle
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
                 for vc in (self?.navigationController?.viewControllers)! {
                     if  vc.isKind(of: HomeViewController.self){
@@ -100,6 +100,4 @@ class TimesheetPreviewViewController: UIViewController {
             })
         }
     }
-    
 }
-

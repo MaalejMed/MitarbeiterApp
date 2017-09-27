@@ -60,7 +60,7 @@ extension MessageTableView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: ExtendedTableViewCell.cellIdentifier) as? ExtendedTableViewCell
         
         let message = dataSource![indexPath.row]
-        cell?.data = (title:message.title , description: message.body, details: message.date.simpleDateFormat(), icon: UIImage.init(named: "Logo")!)
+        cell?.data = (title:message.title , description: message.body, details: message.date.simpleDateFormat(), icon: UIImage.init(named: "Mail")!)
         return cell!
     }
 }
@@ -70,4 +70,3 @@ extension MessageTableView: UITableViewDelegate {
         return ExtendedTableViewCell.height
     }
 }
-

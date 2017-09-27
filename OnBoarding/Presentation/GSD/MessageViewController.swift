@@ -15,7 +15,7 @@ class MessageViewController: UIViewController {
     
     //MARK:- Properties
     let messageView = MessageView(frame: .zero)
-    let timerView = TimerView(status: .send)
+    let contextView = ContextView(context: .send)
     
     weak var delegate: MessageViewControllerDelegate?
         
@@ -36,7 +36,7 @@ class MessageViewController: UIViewController {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["message": messageView, "button": timerView]
+        let views: [String: UIView] = ["message": messageView, "context": contextView]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
@@ -44,15 +44,15 @@ class MessageViewController: UIViewController {
         
         var layoutConstraints: [NSLayoutConstraint] = []
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[message]-(10)-|", options: [], metrics: nil, views: views)
-          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[button]-(10)-|", options: [], metrics: nil, views: views)
+          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[context]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
             messageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10)
         ]
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[message]-(10)-[button]", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[message]-(10)-[context]", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
     
-    //MARK:- setup
+    //MARK:- Setup views
     func setupNaviBarButtons() {
         let button = UIButton.init(type: .custom)
         button.setImage(UIImage(named:"Close"), for: .normal)
@@ -63,11 +63,11 @@ class MessageViewController: UIViewController {
     }
     
     func setupTimerView() {
-        timerView.timerBtnAction = { [weak self] in
+        contextView.contextBtnAction = { [weak self] in
             guard self?.messageView.titleTxtF.text != nil, self?.messageView.messageTxtV.text != nil else {
                 return
             }
-            self?.timerView.timerBtn.status = .idle
+            self?.contextView.contextBtn.context = .idle
             let message = Message(identifier: "01", associateID: "645438", title: self?.messageView.titleTxtF.text, body: self?.messageView.messageTxtV.text, response: nil, date: Date())
             self?.delegate?.didSendMessage(messageVC: (self)!, message: message)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {

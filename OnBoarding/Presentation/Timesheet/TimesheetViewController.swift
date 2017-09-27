@@ -58,7 +58,7 @@ class TimesheetViewController: UIViewController {
     
     //MARK:- Properties
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
-    let timerView = TimerView(status: .startWorking)
+    let contextView = ContextView(context: .startWorking)
     let pickerView = PickerView(frame: .zero)
     
     var timesheetEntries: [EntryInfo: [TimesheetEntry]] = [:]
@@ -68,7 +68,7 @@ class TimesheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTimesheetInfoTV()
-        setupTimerView()
+        setupContextView()
         layout()
     }
     
@@ -79,9 +79,18 @@ class TimesheetViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
     }
     
+    func presentPickerView(entry: TimesheetEntry) {
+        setupPickerView(entry: entry)
+        self.layoutPickerView()
+    }
+    
+    func dismissPickerView() {
+        self.pickerView.removeFromSuperview()
+    }
+    
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["tableView": timesheetInfoTV, "timer": timerView]
+        let views: [String: UIView] = ["tableView": timesheetInfoTV, "context": contextView]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
@@ -91,7 +100,7 @@ class TimesheetViewController: UIViewController {
         
         timesheetInfoTV.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         timesheetInfoTV.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: TimesheetInfoTableView.height).isActive = true
-        timerView.topAnchor.constraint(equalTo: timesheetInfoTV.bottomAnchor, constant: 10).isActive = true
+        contextView.topAnchor.constraint(equalTo: timesheetInfoTV.bottomAnchor, constant: 10).isActive = true
     }
     
     func layoutPickerView() {
@@ -103,7 +112,7 @@ class TimesheetViewController: UIViewController {
         pickerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -200).isActive = true
     }
     
-    //MARK:- Picker view
+    //MARK:- Setup views
     func setupPickerView(entry: TimesheetEntry) {
         var dataSource: [String] = []
         switch entry.key {
@@ -131,16 +140,6 @@ class TimesheetViewController: UIViewController {
         }
     }
     
-    func presentPickerView(entry: TimesheetEntry) {
-        setupPickerView(entry: entry)
-        self.layoutPickerView()
-    }
-    
-    func dismissPickerView() {
-        self.pickerView.removeFromSuperview()
-    }
-    
-    //MARK: - Timesheet data tableview
     func setupTimesheetInfoTV() {
         for parameter in EntryInfo.allValues {
             switch parameter {
@@ -163,27 +162,26 @@ class TimesheetViewController: UIViewController {
         timesheetInfoTV.dataSource = timesheetEntries
         timesheetInfoTV.delegate = self
     }
-    
-    //MARK:- Timer view
-    func setupTimerView() {
-        timerView.timerBtnAction = { [weak self] in
+
+    func setupContextView() {
+        contextView.contextBtnAction = { [weak self] in
             var key: EntryKey?
             var value: Any?
-            switch (self?.timerView.timerBtn.status)! {
+            switch (self?.contextView.contextBtn.context)! {
             case .startWorking:
-                self?.updateTimerButton(status: .startLunchBreak)
+                self?.contextView.contextBtn.context = .startLunchBreak
                 key = .startWorking
                 value = Date()
             case .startLunchBreak: // there is No UI update for this action
                 self?.timesheet.breakFrom = Date()
-                self?.updateTimerButton(status: .stopLunchBreak)
+                self?.contextView.contextBtn.context = .stopLunchBreak
                 return
             case .stopLunchBreak:
-                self?.updateTimerButton(status: .stopWorking)
+                self?.contextView.contextBtn.context = .stopWorking
                 key = .lunchBreak
                 value = Date()
             case .stopWorking:
-                self?.updateTimerButton(status: .submit)
+                self?.contextView.contextBtn.context = .submit
                 key = .stopWorking
                 value = Date()
             case .submit:
@@ -194,11 +192,6 @@ class TimesheetViewController: UIViewController {
             }
             self?.update(key: key!, value: value!)
         }
-    }
-    
-    func updateTimerButton(status: Status) {
-        timerView.timerBtn.setTitle(status.rawValue, for: .normal)
-        timerView.timerBtn.status = status
     }
     
     //MARK:- Update data
@@ -236,7 +229,7 @@ class TimesheetViewController: UIViewController {
         timesheetInfoTV.dataSource = self.timesheetEntries
     }
     
-    //MARK:- timesheet submission
+    //MARK:- Preview
     func preview() {
         guard timesheet.date != nil, timesheet.projectID != nil, timesheet.activity != nil, timesheet.buillable != nil, timesheet.workFrom != nil, timesheet.workUntil != nil, timesheet.workedHours != nil, timesheet.breakFrom != nil, timesheet.breakUntil != nil, timesheet.lunchBreak != nil else {
             return
@@ -246,6 +239,7 @@ class TimesheetViewController: UIViewController {
         self.navigationController?.pushViewController(timesheetPreviewVC, animated: true)
     }
 }
+
 extension TimesheetViewController: TimesheetInfoTableViewDelegate {
     func didSelectTimesheetInfo(timesheetInfoTableView: TimesheetInfoTableView, entry: TimesheetEntry) {
         presentPickerView(entry: entry)

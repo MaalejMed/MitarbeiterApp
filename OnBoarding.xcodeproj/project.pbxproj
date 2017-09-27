@@ -32,10 +32,8 @@
 		776EDC7B1F62BB5400D0A0AC /* OnBoardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC7A1F62BB5400D0A0AC /* OnBoardingUITests.swift */; };
 		776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776EDC921F62C76700D0A0AC /* UIColor+.swift */; };
 		7782B1DD1F7A52D80024F976 /* TimesheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1DC1F7A52D80024F976 /* TimesheetViewController.swift */; };
-		7782B1DF1F7A52F90024F976 /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1DE1F7A52F90024F976 /* TimerButton.swift */; };
 		7782B1E11F7A530E0024F976 /* TimesheetInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E01F7A530E0024F976 /* TimesheetInfoTableView.swift */; };
 		7782B1E31F7A53220024F976 /* TimesheetPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E21F7A53220024F976 /* TimesheetPreviewViewController.swift */; };
-		7782B1E51F7A53370024F976 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E41F7A53370024F976 /* TimerView.swift */; };
 		7782B1E91F7A82BD0024F976 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E81F7A82BD0024F976 /* TextView.swift */; };
 		7782B1EB1F7A948C0024F976 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1EA1F7A948C0024F976 /* Message.swift */; };
 		7782B1ED1F7A94E00024F976 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1EC1F7A94E00024F976 /* MessageResponse.swift */; };
@@ -49,6 +47,8 @@
 		77D9191B1F7262B100BFAB45 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191A1F7262B100BFAB45 /* MenuItem.swift */; };
 		77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191C1F72719D00BFAB45 /* Associate.swift */; };
 		77D919241F728C2100BFAB45 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919231F728C2100BFAB45 /* PickerView.swift */; };
+		77E9C27F1F7B966A008B97FC /* ContextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E9C27E1F7B966A008B97FC /* ContextButton.swift */; };
+		77E9C2811F7B98A8008B97FC /* ContextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E9C2801F7B98A7008B97FC /* ContextView.swift */; };
 		77FB51ED1F73D438006E73AB /* TimeInterval+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB51EC1F73D438006E73AB /* TimeInterval+.swift */; };
 		77FFA8661F700D390034B746 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8651F700D390034B746 /* AlertView.swift */; };
 		77FFA8681F7132870034B746 /* FeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8671F7132870034B746 /* FeedTableView.swift */; };
@@ -109,10 +109,8 @@
 		776EDC7C1F62BB5400D0A0AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		776EDC921F62C76700D0A0AC /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		7782B1DC1F7A52D80024F976 /* TimesheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetViewController.swift; sourceTree = "<group>"; };
-		7782B1DE1F7A52F90024F976 /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		7782B1E01F7A530E0024F976 /* TimesheetInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetInfoTableView.swift; sourceTree = "<group>"; };
 		7782B1E21F7A53220024F976 /* TimesheetPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetPreviewViewController.swift; sourceTree = "<group>"; };
-		7782B1E41F7A53370024F976 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		7782B1E81F7A82BD0024F976 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		7782B1EA1F7A948C0024F976 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7782B1EC1F7A94E00024F976 /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
@@ -126,6 +124,8 @@
 		77D9191A1F7262B100BFAB45 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		77D9191C1F72719D00BFAB45 /* Associate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Associate.swift; sourceTree = "<group>"; };
 		77D919231F728C2100BFAB45 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		77E9C27E1F7B966A008B97FC /* ContextButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextButton.swift; sourceTree = "<group>"; };
+		77E9C2801F7B98A7008B97FC /* ContextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextView.swift; sourceTree = "<group>"; };
 		77FB51EC1F73D438006E73AB /* TimeInterval+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+.swift"; sourceTree = "<group>"; };
 		77FFA8651F700D390034B746 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		77FFA8671F7132870034B746 /* FeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableView.swift; sourceTree = "<group>"; };
@@ -212,6 +212,8 @@
 		7754CA341F67D512005197ED /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				77E9C2801F7B98A7008B97FC /* ContextView.swift */,
+				77E9C27E1F7B966A008B97FC /* ContextButton.swift */,
 				7782B1E81F7A82BD0024F976 /* TextView.swift */,
 				7749AC781F6BB94100F1939C /* MediaViewController.swift */,
 				7754CA391F67DCBB005197ED /* CellViewProtocols.swift */,
@@ -311,10 +313,8 @@
 			isa = PBXGroup;
 			children = (
 				7782B1DC1F7A52D80024F976 /* TimesheetViewController.swift */,
-				7782B1DE1F7A52F90024F976 /* TimerButton.swift */,
 				7782B1E01F7A530E0024F976 /* TimesheetInfoTableView.swift */,
 				7782B1E21F7A53220024F976 /* TimesheetPreviewViewController.swift */,
-				7782B1E41F7A53370024F976 /* TimerView.swift */,
 			);
 			path = Timesheet;
 			sourceTree = "<group>";
@@ -560,7 +560,6 @@
 				7782B1DD1F7A52D80024F976 /* TimesheetViewController.swift in Sources */,
 				7782B1EB1F7A948C0024F976 /* Message.swift in Sources */,
 				772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */,
-				7782B1E51F7A53370024F976 /* TimerView.swift in Sources */,
 				77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */,
 				772F31631F7505E000775AA8 /* TimeCalculator.swift in Sources */,
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
@@ -572,7 +571,6 @@
 				7782B1ED1F7A94E00024F976 /* MessageResponse.swift in Sources */,
 				7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */,
 				77D919241F728C2100BFAB45 /* PickerView.swift in Sources */,
-				7782B1DF1F7A52F90024F976 /* TimerButton.swift in Sources */,
 				772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
 				77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */,
@@ -581,6 +579,7 @@
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
 				77FFA86A1F7135B70034B746 /* ExtendedTableViewCell.swift in Sources */,
 				7782B1E31F7A53220024F976 /* TimesheetPreviewViewController.swift in Sources */,
+				77E9C2811F7B98A8008B97FC /* ContextView.swift in Sources */,
 				77D919171F7258FF00BFAB45 /* FeedService.swift in Sources */,
 				772F31611F7409D400775AA8 /* Date+.swift in Sources */,
 				7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */,
@@ -589,6 +588,7 @@
 				77D9191B1F7262B100BFAB45 /* MenuItem.swift in Sources */,
 				7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */,
 				7782B1EF1F7A9A740024F976 /* MessageTableView.swift in Sources */,
+				77E9C27F1F7B966A008B97FC /* ContextButton.swift in Sources */,
 				77FB51ED1F73D438006E73AB /* TimeInterval+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
