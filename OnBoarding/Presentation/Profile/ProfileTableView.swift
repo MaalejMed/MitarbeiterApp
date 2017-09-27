@@ -12,6 +12,8 @@ class ProfileTableView: UIView {
     //MARK:- Properties
     let tableView: UITableView = {
        let tableView = UITableView()
+        tableView.backgroundColor = UIColor.BgColor
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -59,6 +61,9 @@ extension ProfileTableView: UITableViewDataSource {
         
         let item = dataSource![indexPath.row]
         cell?.data = (title: item.rawValue, details: nil, icon: item.icon())
+        cell?.backgroundColor = UIColor.BgColor
+        cell?.cellView.view.backgroundColor = UIColor.elementBgColor
+        cell?.selectionStyle = .none
         return cell!
     }
 }

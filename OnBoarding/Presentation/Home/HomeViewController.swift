@@ -9,14 +9,14 @@
 import UIKit
 
 enum Item: String {
-    case time = "Time recording"
+    case time = "Time"
     case gsd = "GSD"
+    case travelExp = "Expenses"
     case profile = "Profile"
-    case travelExp = "Travel expenses"
     case benefits = "benefits"
     case eLearning = "E-Learning"
     
-    static let allMenuItems = [time, gsd, profile, travelExp, benefits, eLearning]
+    static let allMenuItems = [time, gsd, travelExp,profile, benefits, eLearning]
     
     func icon() -> UIImage {
         switch self {
@@ -62,10 +62,10 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor.BgColor
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.topItem?.title = "Home"
-        self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
+        self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
         self.navigationItem.setHidesBackButton(true, animated:false);
         if mainMenuView.currentPostion != .idle {
             updateMenuViewLayout(newPosition: .idle)
@@ -83,8 +83,8 @@ class HomeViewController: UIViewController {
             view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         }
         
-        profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        newsTableView.topAnchor.constraint(equalTo: profileView.bottomAnchor).isActive = true
+        profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5.0).isActive = true
+        newsTableView.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 10.0).isActive = true
         newsTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         mainMenuView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
@@ -140,7 +140,6 @@ class HomeViewController: UIViewController {
     func setupProfileView() {
         let associate = Associate(identifier: "645438", name: "Mohamed Maalej", image: nil)
         profileView.data = (title: associate.name, icon: associate.profileImage(), action: nil)
-        profileView.backgroundColor = UIColor.bgColor
     }
     
     func setupMainMenuView() {

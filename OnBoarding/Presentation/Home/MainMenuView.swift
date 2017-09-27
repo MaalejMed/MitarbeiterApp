@@ -37,7 +37,7 @@ class MainMenuView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = UIColor.bgColor
+        collectionView.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
         collectionView.isScrollEnabled = false
         return collectionView
     }()
@@ -56,7 +56,7 @@ class MainMenuView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupGestureRecognizer()
-        self.backgroundColor = UIColor.bgColor
+        self.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
         menuCV.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.cellIdentifier)
         layout()
     }
@@ -79,8 +79,8 @@ class MainMenuView: UIView {
 
         layoutConstraints += [
             lineImgV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            menuCV.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
-            menuCV.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            menuCV.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
+            menuCV.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
             menuCV.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             menuCV.topAnchor.constraint(equalTo: lineImgV.bottomAnchor, constant: 10)
         ]
@@ -113,7 +113,7 @@ class MainMenuView: UIView {
 extension MainMenuView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (self.frame.size.width - homeCollectionViewCellPadding - 40) / 3, height: HomeCollectionViewCell.height)
+        return CGSize(width: (self.frame.size.width - homeCollectionViewCellPadding - 40) / 4, height: HomeCollectionViewCell.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

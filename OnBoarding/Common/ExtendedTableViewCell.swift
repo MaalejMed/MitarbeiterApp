@@ -9,7 +9,7 @@
 import UIKit
 
 class ExtendedTableViewCell: UITableViewCell, TableViewCellProtocols {
-    static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 10.0, leftAnchor: 10.0, bottomAnchor: 10.0, rightAnchor: 10.0)
+    static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 5.0, leftAnchor: 10.0, bottomAnchor: 5.0, rightAnchor: 10.0)
     static let height: CGFloat =  ExtendedCellContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
     
     var cellView: CellViewProtocol = ExtendedCellContentView()
@@ -68,6 +68,7 @@ class ExtendedCellContentView: UIView, CellViewProtocol {
     let descriptionLbl: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
+        label.sizeToFit()
         return label
     }()
     
@@ -87,6 +88,7 @@ class ExtendedCellContentView: UIView, CellViewProtocol {
     //MARK:- Layout
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.layer.cornerRadius = 5.0
         layout()
     }
     
@@ -105,15 +107,16 @@ class ExtendedCellContentView: UIView, CellViewProtocol {
         
         var layoutConstraints: [NSLayoutConstraint] = []
         
-        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon(30)]-(10)-[title]-(10)-[details]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:[description]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[icon(30)]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title]-(5)-[description]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[icon(30)]-(10)-[title]-(10)-[details]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:[description]-(10)-|", options: [], metrics: nil, views: views)
+       
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title]-(5)-[description]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:[icon(30)]", options: [], metrics: nil, views: views)
         layoutConstraints += [
             descriptionLbl.leftAnchor.constraint(equalTo: titleLbl.leftAnchor),
-            detailsLbl.topAnchor.constraint(equalTo: titleLbl.topAnchor)
+            detailsLbl.topAnchor.constraint(equalTo: titleLbl.topAnchor),
+            iconImgV.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ]
         NSLayoutConstraint.activate(layoutConstraints)
-
     }
 }

@@ -31,7 +31,8 @@ class MessageViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.topItem?.title = "New message"
         self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor.BgColor
+
     }
     
     //MARK:- Layout

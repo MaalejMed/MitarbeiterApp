@@ -28,9 +28,10 @@ class GSDViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.backgroundColor = .white
-        self.navigationController?.navigationBar.topItem?.title = "Global Service Desk"
-        self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
+        self.view.backgroundColor = UIColor.BgColor
+        self.title = "GSD"
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
         presentContentView()
         
     }
@@ -45,8 +46,7 @@ class GSDViewController: UIViewController {
     }
     
     func setupGSDInfoView() {
-        contactView.data = (title: "Tel: 0049 283213 12", icon:UIImage(named:"GSD"), action: nil)
-        contactView.backgroundColor = UIColor.bgColor
+        contactView.data = (title: "Tel: 0049 283213 12", icon:UIImage(named:"Help"), action: nil)
     }
     
     func setupMessageTableView() {
@@ -85,7 +85,7 @@ class GSDViewController: UIViewController {
             view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         }
         
-        self.contactView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.contactView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5.0).isActive = true
         contentView.topAnchor.constraint(equalTo: contactView.bottomAnchor, constant: 10.0).isActive = true
         contentView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }

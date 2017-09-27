@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		772BD9821F695C7B003FEC2B /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9811F695C7B003FEC2B /* InfoView.swift */; };
 		772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9831F695E2C003FEC2B /* UIImageView+.swift */; };
-		772BD9861F69731F003FEC2B /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9851F69731F003FEC2B /* UIImage+.swift */; };
 		772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F315E1F74081B00775AA8 /* Timesheet.swift */; };
 		772F31611F7409D400775AA8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F31601F7409D400775AA8 /* Date+.swift */; };
 		772F31631F7505E000775AA8 /* TimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F31621F7505E000775AA8 /* TimeCalculator.swift */; };
@@ -80,7 +79,6 @@
 		6A8FACB739714BCEC9757CA2 /* Pods_OnBoarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnBoarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		772BD9811F695C7B003FEC2B /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		772BD9831F695E2C003FEC2B /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
-		772BD9851F69731F003FEC2B /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		772F315E1F74081B00775AA8 /* Timesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timesheet.swift; sourceTree = "<group>"; };
 		772F31601F7409D400775AA8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		772F31621F7505E000775AA8 /* TimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculator.swift; sourceTree = "<group>"; };
@@ -302,7 +300,6 @@
 			children = (
 				776EDC921F62C76700D0A0AC /* UIColor+.swift */,
 				772BD9831F695E2C003FEC2B /* UIImageView+.swift */,
-				772BD9851F69731F003FEC2B /* UIImage+.swift */,
 				77FB51EC1F73D438006E73AB /* TimeInterval+.swift */,
 				772F31601F7409D400775AA8 /* Date+.swift */,
 			);
@@ -553,7 +550,6 @@
 				77D919191F72591C00BFAB45 /* Feed.swift in Sources */,
 				77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */,
 				7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */,
-				772BD9861F69731F003FEC2B /* UIImage+.swift in Sources */,
 				77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */,
 				7782B1E11F7A530E0024F976 /* TimesheetInfoTableView.swift in Sources */,
 				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,

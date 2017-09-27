@@ -13,7 +13,7 @@ let homeCollectionViewCellPadding: CGFloat = 30.0
 class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols {
     
     //Properties
-    static var staticMetrics = CellMetrics(topAnchor: 8.0, leftAnchor: 8.0, bottomAnchor: 8.0, rightAnchor: 8.0)
+    static var staticMetrics = CellMetrics(topAnchor: 5.0, leftAnchor: 5.0, bottomAnchor: 5.0, rightAnchor: 8.0)
     static let height = HomeCellView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
     var cellView: CellViewProtocol = HomeCellView()
     var data: (title: String?, icon: UIImage?)? {
@@ -25,7 +25,8 @@ class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols 
     //Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .gray
+        self.backgroundColor = UIColor.itemBgColor
+        self.layer.cornerRadius = 5.0
         layout()
     }
     
@@ -64,7 +65,7 @@ class HomeCellView: UIView, CellViewProtocol {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.boldSystemFont(ofSize: 12.0)
         return label
     }()
     
@@ -95,7 +96,7 @@ class HomeCellView: UIView, CellViewProtocol {
         var layoutConstraints: [NSLayoutConstraint] = []
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[title]-(0)-|", options: [], metrics: nil, views: views)
          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title]-(8)-[icon]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title]-(2)-[icon]-(0)-|", options: [], metrics: nil, views: views)
         
         NSLayoutConstraint.activate(layoutConstraints)
     }

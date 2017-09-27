@@ -58,7 +58,7 @@ class PickerView: UIView {
     //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.pickerViewBgColor
+        self.backgroundColor = UIColor.BgColor
         pickerView.delegate = self
         pickerView.dataSource = self
         layout()

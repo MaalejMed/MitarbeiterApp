@@ -56,7 +56,7 @@ class ContextView: UIView {
         ]
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[button(140)]", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[line]-(10)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[line(2)]-(10)-[button(100)]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[line(2)]-(10)-[button(50)]-(10)-|", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
     

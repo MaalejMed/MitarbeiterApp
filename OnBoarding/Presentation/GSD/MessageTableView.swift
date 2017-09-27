@@ -14,6 +14,8 @@ class MessageTableView: UIView {
     //MARK:- Properties
     let tableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = UIColor.BgColor
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -61,6 +63,9 @@ extension MessageTableView: UITableViewDataSource {
         
         let message = dataSource![indexPath.row]
         cell?.data = (title:message.title , description: message.body, details: message.date.simpleDateFormat(), icon: UIImage.init(named: "Mail")!)
+        cell?.backgroundColor = UIColor.BgColor
+        cell?.cellView.view.backgroundColor = UIColor.elementBgColor
+        cell?.selectionStyle = .none
         return cell!
     }
 }

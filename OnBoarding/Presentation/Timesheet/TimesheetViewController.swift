@@ -74,9 +74,10 @@ class TimesheetViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor.BgColor
         self.title = "Time"
-        self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
     }
     
     func presentPickerView(entry: TimesheetEntry) {

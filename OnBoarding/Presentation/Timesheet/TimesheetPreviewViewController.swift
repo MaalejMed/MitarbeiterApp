@@ -27,7 +27,7 @@ class TimesheetPreviewViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         super.viewWillAppear(animated)
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor.BgColor
         self.title = "Preview"
         self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
     }

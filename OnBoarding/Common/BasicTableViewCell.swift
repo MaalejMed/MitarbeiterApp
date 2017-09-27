@@ -11,7 +11,7 @@ import UIKit
 class BasicTableViewCell: UITableViewCell, TableViewCellProtocols {
 
     //MARK:- Properties
-    static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 8.0, leftAnchor: 8.0, bottomAnchor: 8.0, rightAnchor: 8.0)
+    static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 8.0, leftAnchor: 10.0, bottomAnchor: 5.0, rightAnchor: 10.0)
     var cellView: CellViewProtocol = BasicCellContentView()
     static let height: CGFloat = BasicCellContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
     var data: (title: String?,details: String?, icon: UIImage?) {
@@ -80,6 +80,7 @@ class BasicCellContentView: UIView, CellViewProtocol {
     //MARK:- Layout
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.layer.cornerRadius = 5.0
         layout()
     }
     
@@ -97,8 +98,8 @@ class BasicCellContentView: UIView, CellViewProtocol {
         }
         
         var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon(25)]-(10)-[title]-(10)-[details]-(10)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[icon(25)]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[icon(25)]-(10)-[title]-(10)-[details]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[icon(25)]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
             titleLbl.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             detailsLbl.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor)

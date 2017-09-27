@@ -18,7 +18,6 @@ class InfoView: UIView {
         let imageView  = UIImageView()
         imageView.frame.size = CGSize (width: 40.0, height: 40.0)
         imageView.contentMode = .scaleAspectFit
-        imageView.rounded()
         return imageView
     }()
     
@@ -29,8 +28,7 @@ class InfoView: UIView {
     
     var data : (title: String?, icon: UIImage?, action: (()->())?)? {
         didSet {
-            let scaledImage = data?.icon?.scale(size: imageSize)
-            iconImgV.image = scaledImage
+            iconImgV.image = data?.icon
             titleLbl.text = data?.title
             guard let iconAction = data?.action else {
                 return
@@ -45,6 +43,7 @@ class InfoView: UIView {
     //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
         layout()
     }
     

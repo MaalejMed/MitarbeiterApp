@@ -39,9 +39,10 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor.BgColor
         self.title = "Profile"
-        self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
     }
     
     //MARK:- Layout
@@ -58,7 +59,7 @@ class ProfileViewController: UIViewController {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[profileTV]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[profile]-(10)-[profileTV]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
-            profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+            profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,constant: 5.0)
         ]
         
         NSLayoutConstraint.activate(layoutConstraints)
@@ -73,8 +74,6 @@ class ProfileViewController: UIViewController {
             [unowned self] in
             self.changeProfileImage()
         })
-      
-        profileView.backgroundColor = UIColor.bgColor
     }
     
     func setupProfileTableView() {

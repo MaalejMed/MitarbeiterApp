@@ -24,7 +24,8 @@ class CreatePasswordView: UIView {
     private let welcomeLbl: UILabel = {
         let label = UILabel()
         label.text = "Welcome To Cognizant"
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        let font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title2)
+        label.font = font
         label.textAlignment = .center
         label.textColor = .white
         return label
@@ -50,16 +51,18 @@ class CreatePasswordView: UIView {
         textField.layer.borderColor = UIColor.white.cgColor
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(7.0, 0.0, 0.0)
         textField.layer.cornerRadius = 5.0
+        textField.isSecureTextEntry = true
         return textField
     }()
     
     private let repatPassTxtF: UITextField = {
         let textField = UITextField ()
-        textField.placeholder = "Enter a password"
+        textField.placeholder = "Repeat your password"
         textField.layer.borderWidth = 1.0
         textField.layer.borderColor = UIColor.white.cgColor
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(7.0, 0.0, 0.0)
         textField.layer.cornerRadius = 5.0
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -87,7 +90,7 @@ class CreatePasswordView: UIView {
     //MARK:- init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.bgColor
+        self.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
         layout()
     }
     
@@ -112,12 +115,12 @@ class CreatePasswordView: UIView {
         ]
         
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(20)-[close]", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[line(100)]", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[line(150)]", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[pass]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[repeatPass]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(60)-[login]-(60)-|", options: [], metrics: nil, views: views)
 
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(30)-[close]-(25)-[welcome]-(15)-[line(2)]-(15)-[logo]-(30)-[pass(30)]-(10)-[repeatPass(30)]-(40)-[login]", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(30)-[close]-(25)-[welcome]-(15)-[line(2)]-(15)-[logo]-(30)-[pass(35)]-(10)-[repeatPass(35)]-(40)-[login]", options: [], metrics: nil, views: views)
         
         NSLayoutConstraint.activate(layoutConstraints)
     }

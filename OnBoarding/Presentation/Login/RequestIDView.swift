@@ -24,7 +24,8 @@ class RequestIDView: UIView {
     private let welcomeLbl: UILabel = {
         let label = UILabel()
         label.text = "Welcome To Cognizant"
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        let font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title2)
+        label.font = font
         label.textAlignment = .center
         label.textColor = .white
         return label
@@ -66,7 +67,7 @@ class RequestIDView: UIView {
     //Init
     override init(frame:CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.bgColor
+        self.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
         layout()
     }
     
@@ -91,11 +92,11 @@ class RequestIDView: UIView {
         ]
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(20)-[close]", options: [], metrics: nil, views: views)
 
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[line(100)]", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[line(150)]", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[mail]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(60)-[sendRequest]-(60)-|", options: [], metrics: nil, views: views)
         
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(30)-[close]-(25)-[welcome]-(15)-[line(2)]-(15)-[logo]-(30)-[mail(30)]-(40)-[sendRequest]", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(30)-[close]-(25)-[welcome]-(15)-[line(2)]-(15)-[logo]-(30)-[mail(35)]-(40)-[sendRequest]", options: [], metrics: nil, views: views)
         
         NSLayoutConstraint.activate(layoutConstraints)
     }
@@ -107,5 +108,4 @@ class RequestIDView: UIView {
         }
         action()
     }
-    
 }

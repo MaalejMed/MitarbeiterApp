@@ -14,7 +14,6 @@ class AlertView: UIView {
     private let iconImgV: UIImageView = {
         let imageView  = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.rounded()
         return imageView
     }()
     

@@ -18,6 +18,8 @@ class TimesheetInfoTableView: UIView {
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.isScrollEnabled = false
+        tableView.backgroundColor = UIColor.BgColor
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -30,7 +32,7 @@ class TimesheetInfoTableView: UIView {
     static var height: CGFloat {
         let projectKeys = EntryKey.allProjectKeys.count
         let timeKeys = EntryKey.allTimeKeys.count
-        return BasicTableViewCell.height * CGFloat(projectKeys + timeKeys) + 40
+        return BasicTableViewCell.height * CGFloat(projectKeys + timeKeys) + 60
     }
     
     weak var delegate: TimesheetInfoTableViewDelegate?
@@ -96,6 +98,8 @@ extension TimesheetInfoTableView: UITableViewDataSource {
         let entry = Array(dataSource![info]!)[indexPath.row]
         let value = entry.key == .date ? Date().simpleDateFormat() : entry.value
         cell?.data = (title: entry.key.rawValue, details: value,  icon: nil)
+        cell?.backgroundColor = UIColor.BgColor
+        cell?.cellView.view.backgroundColor = UIColor.elementBgColor
         cell?.selectionStyle = .none
         return cell!
     }

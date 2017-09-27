@@ -18,6 +18,8 @@ class FeedTableView: UIView {
     //MARK:- Properties
     let tableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = UIColor.BgColor
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -73,6 +75,9 @@ extension FeedTableView: UITableViewDataSource {
         
         let feed = dataSource![indexPath.row]
         cell?.data = (title:feed.title , description: feed.description, details: feed.date, icon: UIImage.init(named: "Logo")!)
+        cell?.backgroundColor = UIColor.BgColor
+        cell?.cellView.view.backgroundColor = UIColor.elementBgColor
+        cell?.selectionStyle = .none
         return cell!
     }
 }

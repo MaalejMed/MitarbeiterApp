@@ -18,6 +18,7 @@ class MessageView: UIView {
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(7.0, 0.0, 0.0)
         textField.layer.cornerRadius = 5.0
+        textField.backgroundColor = UIColor.elementBgColor
         return textField
     }()
     
@@ -27,8 +28,9 @@ class MessageView: UIView {
         textView.font = UIFont.systemFont(ofSize: 18.0)
         textView.layer.borderWidth = 1.0
         textView.layer.borderColor = UIColor.gray.cgColor
-        textView.layer.sublayerTransform = CATransform3DMakeTranslation(4.0, 0.0, 0.0)
+        textView.layer.sublayerTransform = CATransform3DMakeTranslation(3.0, 0.0, 0.0)
         textView.layer.cornerRadius = 5.0
+        textView.backgroundColor = UIColor.elementBgColor
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapTextView))
         tap.numberOfTapsRequired = 1
         tap.numberOfTouchesRequired = 1
