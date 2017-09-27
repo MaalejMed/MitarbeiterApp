@@ -36,16 +36,6 @@ class MessageView: UIView {
         return textView
     }()
     
-    let sendBtn: UIButton = {
-        let button = UIButton()
-        button.setTitle("Send", for: .normal)
-        button.titleLabel?.textColor = .white
-        button.backgroundColor = UIColor.buttonColor
-        button.layer.cornerRadius = 5.0
-        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        return button
-    }()
-    
     //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,17 +49,16 @@ class MessageView: UIView {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["title": titleTxtF, "message": messageTxtV, "send": sendBtn]
+        let views: [String: UIView] = ["title": titleTxtF, "message": messageTxtV]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
         }
         
         var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[title]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[message]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[send]-(0)-|", options: [], metrics: nil, views: views)
-          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title(30)]-(10)-[message(300)]-(20)-[send]", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[title]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[message]-(10)-|", options: [], metrics: nil, views: views)
+          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title(30)]-(10)-[message(300)]-(10)-|", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
     

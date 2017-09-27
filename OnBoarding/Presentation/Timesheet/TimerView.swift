@@ -17,7 +17,7 @@ class TimerView: UIView {
         return line
     }()
     
-    let timerBtn: TimerButton = {
+    lazy var timerBtn: TimerButton = {
         let button = TimerButton()
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.sizeToFit()
@@ -28,9 +28,7 @@ class TimerView: UIView {
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
-    
-    
-    
+
     var timerBtnAction: (()->())?
     
     //MARK:- Init

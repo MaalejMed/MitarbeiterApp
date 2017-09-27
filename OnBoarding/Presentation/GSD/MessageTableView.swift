@@ -1,21 +1,23 @@
 //
-//  ProfileTableView.swift
+//  MessageTableView.swift
 //  OnBoarding
 //
-//  Created by mmaalej on 15/09/2017.
+//  Created by mmaalej on 26/09/2017.
 //  Copyright © 2017 mmaalej. All rights reserved.
 //
 
 import UIKit
 
-class ProfileTableView: UIView {
+class MessageTableView: UIView {
+    
+    //MARK:- Properties
     //MARK:- Properties
     let tableView: UITableView = {
-       let tableView = UITableView()
+        let tableView = UITableView()
         return tableView
     }()
     
-    var dataSource: [Settings]? {
+    var dataSource: [Message]? {
         didSet {
             tableView.reloadData()
         }
@@ -26,7 +28,7 @@ class ProfileTableView: UIView {
         super.init(frame: frame)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(BasicTableViewCell.self, forCellReuseIdentifier: BasicTableViewCell.cellIdentifier)
+        tableView.register(ExtendedTableViewCell.self, forCellReuseIdentifier: ExtendedTableViewCell.cellIdentifier)
         layout()
     }
     
@@ -45,7 +47,7 @@ class ProfileTableView: UIView {
     }
 }
 
-extension ProfileTableView: UITableViewDataSource {
+extension MessageTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -55,16 +57,17 @@ extension ProfileTableView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.cellIdentifier) as? BasicTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ExtendedTableViewCell.cellIdentifier) as? ExtendedTableViewCell
         
-        let item = dataSource![indexPath.row]
-        cell?.data = (title: item.rawValue, details: nil, icon: item.icon())
+        let message = dataSource![indexPath.row]
+        cell?.data = (title:message.title , description: message.body, details: message.date.simpleDateFormat(), icon: UIImage.init(named: "Logo")!)
         return cell!
     }
 }
 
-extension ProfileTableView: UITableViewDelegate {
+extension MessageTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return BasicTableViewCell.height
+        return ExtendedTableViewCell.height
     }
 }
+

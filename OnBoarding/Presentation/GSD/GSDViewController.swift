@@ -12,12 +12,18 @@ class GSDViewController: UIViewController {
     
     //MARK:- properties
     let contactView = InfoView(frame: .zero)
+    let alertView = AlertView(frame:.zero)
+    let messageTV = MessageTableView(frame: .zero)
+    var messages: [Message] = []
+
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNaviBarButtons()
         setupGSDInfoView()
+        setupNoMessagesView()
+        setupMessageTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,17 +31,15 @@ class GSDViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = "Global Service Desk"
         self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
-        //IF no messages
-        let alertView = AlertView(frame:.zero)
-        alertView.data = (title:"No Messages", description:"You still did not exchange any message with the Global Service Desk", icon: UIImage.init(named:"NoMails"))
-        layout(contentView: alertView)
+        presentContentView()
+        
     }
     
-    //MARK- Setup
+    //MARK- Setup views
     func setupNaviBarButtons() {
         let button = UIButton.init(type: .custom)
         button.setImage(UIImage.init(named: "Add")!, for: .normal)
-        button.addTarget(self, action: #selector(createMsg), for: .touchUpInside)
+        button.addTarget(self, action: #selector(presentMessageViewController), for: .touchUpInside)
         let createMsgBtn = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = createMsgBtn
     }
@@ -45,9 +49,28 @@ class GSDViewController: UIViewController {
         contactView.backgroundColor = UIColor.bgColor
     }
     
+    func setupMessageTableView() {
+        messageTV.dataSource = messages
+    }
+    
+    func setupNoMessagesView() {
+        alertView.data = (title:"No Messages", description:"You still did not exchange any message with the Global Service Desk", icon: UIImage.init(named:"NoMails"))
+        layout(contentView: alertView)
+    }
+    
+    func dismissNoMessagesView() {
+        alertView.removeFromSuperview()
+    }
+    
+    func presentContentView() {
+        let contentView = messages.count > 0 ? messageTV : alertView
+        layout(contentView: contentView)
+    }
+    
     //MARK:- Selectors
-    @objc func createMsg() {
+    @objc func presentMessageViewController() {
         let msgVC = MessageViewController()
+        msgVC.delegate = self
         let msgNC = UINavigationController.init(rootViewController: msgVC)
         self.navigationController?.present(msgNC, animated: true, completion: nil)
     }
@@ -65,5 +88,12 @@ class GSDViewController: UIViewController {
         self.contactView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         contentView.topAnchor.constraint(equalTo: contactView.bottomAnchor, constant: 10.0).isActive = true
         contentView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+}
+
+extension GSDViewController : MessageViewControllerDelegate {
+    func didSendMessage(messageVC: MessageViewController, message: Message) {
+        self.messages.append(message)
+        messageTV.dataSource = self.messages
     }
 }

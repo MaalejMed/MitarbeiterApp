@@ -8,15 +8,22 @@
 
 import UIKit
 
+protocol MessageViewControllerDelegate: class {
+    func didSendMessage(messageVC: MessageViewController, message: Message)
+}
 class MessageViewController: UIViewController {
     
     //MARK:- Properties
     let messageView = MessageView(frame: .zero)
+    let timerView = TimerView(status: .send)
     
+    weak var delegate: MessageViewControllerDelegate?
+        
     //MARK:- Views lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNaviBarButtons()
+        setupTimerView()
         layout()
     }
     
@@ -29,21 +36,23 @@ class MessageViewController: UIViewController {
     
     //MARK:- Layout
     func layout() {
-        messageView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(messageView)
+        let views: [String: UIView] = ["message": messageView, "button": timerView]
+        for (_, view) in views {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(view)
+        }
         
-        self.messageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
-        self.messageView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 8).isActive = true
-        self.messageView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -8).isActive = true
-        self.messageView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+        var layoutConstraints: [NSLayoutConstraint] = []
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[message]-(10)-|", options: [], metrics: nil, views: views)
+          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[button]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += [
+            messageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10)
+        ]
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[message]-(10)-[button]", options: [], metrics: nil, views: views)
+        NSLayoutConstraint.activate(layoutConstraints)
     }
     
-    //MARK:- Selectors
-    @objc func dismissVC() {
-        self.navigationController?.dismiss(animated: true, completion: nil)
-    }
-    
-    //MARK:-
+    //MARK:- setup
     func setupNaviBarButtons() {
         let button = UIButton.init(type: .custom)
         button.setImage(UIImage(named:"Close"), for: .normal)
@@ -51,5 +60,24 @@ class MessageViewController: UIViewController {
         button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         let dismissBtn = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = dismissBtn
+    }
+    
+    func setupTimerView() {
+        timerView.timerBtnAction = { [weak self] in
+            guard self?.messageView.titleTxtF.text != nil, self?.messageView.messageTxtV.text != nil else {
+                return
+            }
+            self?.timerView.timerBtn.status = .idle
+            let message = Message(identifier: "01", associateID: "645438", title: self?.messageView.titleTxtF.text, body: self?.messageView.messageTxtV.text, response: nil, date: Date())
+            self?.delegate?.didSendMessage(messageVC: (self)!, message: message)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                self?.dismissVC()
+            })
+        }
+    }
+    
+    //MARK:- Selectors
+    @objc func dismissVC() {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
 }
