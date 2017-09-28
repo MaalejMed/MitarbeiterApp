@@ -65,10 +65,13 @@ class LoginViewController: UIViewController {
     
     //MARK:- Network calls
     func login(username: String, password: String) {
-        LoginService.login(username: username, password: password, completion: { (response: Bool) in
-            guard response == true else {
+        LoginService.login(username: username, password: password, completion: { (failure: Failure?) in
+            
+            guard failure == nil else {
+                print((failure?.description)!)
                 return
             }
+            
             let homeVC = HomeViewController()
             self.navigationController?.pushViewController(homeVC, animated: true)
         })
