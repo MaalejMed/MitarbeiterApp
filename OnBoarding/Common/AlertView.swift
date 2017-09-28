@@ -66,7 +66,7 @@ class AlertView: UIView {
         ]
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[icon(20)]-(10)-[title]", options:[], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[description]-(10)-|", options:[], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(20)-[title]-(10)-[description]-(10)-|", options:[], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(20)-[title]-(10)-[description]", options:[], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[icon(20)]", options:[], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }

@@ -35,6 +35,10 @@ class LoginViewController: UIViewController {
         view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     //MARK:- Setup views
     func setupLoginView() {
         loginView.createPasswordAction = { [weak self] in
