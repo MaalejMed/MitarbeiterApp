@@ -67,13 +67,14 @@ class LoginViewController: UIViewController {
     }
     
     func presentAlertView(failure: Failure) {
+        let window = UIApplication.shared.keyWindow!
         alertView.data = (title:failure.description,  description: "", icon: UIImage.init(named: "Failure")!)
-        self.view.addSubview(alertView)
+        window.addSubview(alertView)
         alertView.translatesAutoresizingMaskIntoConstraints = false
-        alertView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        alertView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        alertView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        alertView.bottomAnchor.constraint(equalTo: self.view.topAnchor, constant: 50.0).isActive = true
+        alertView.leftAnchor.constraint(equalTo: window.leftAnchor).isActive = true
+        alertView.rightAnchor.constraint(equalTo: window.rightAnchor).isActive = true
+        alertView.topAnchor.constraint(equalTo: window.safeAreaLayoutGuide.topAnchor).isActive = true
+        alertView.bottomAnchor.constraint(equalTo: window.topAnchor, constant: 60.0).isActive = true
         alertView.backgroundColor = UIColor.BgColor
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
             self.alertView.removeFromSuperview()
