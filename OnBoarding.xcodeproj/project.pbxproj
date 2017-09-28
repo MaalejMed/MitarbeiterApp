@@ -256,6 +256,7 @@
 		776EDC591F62BB5400D0A0AC /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
+				77D9D4F21F7D00D70058C9D9 /* Business */,
 				77D919151F7258ED00BFAB45 /* Model */,
 				77FFA86B1F7153D50034B746 /* DummyJsons */,
 				772BD9871F6BAA05003FEC2B /* Service */,
@@ -333,6 +334,13 @@
 				7782B1EC1F7A94E00024F976 /* MessageResponse.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		77D9D4F21F7D00D70058C9D9 /* Business */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Business;
 			sourceTree = "<group>";
 		};
 		77FFA86B1F7153D50034B746 /* DummyJsons */ = {
