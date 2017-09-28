@@ -11,7 +11,7 @@ import UIKit
 class LoginView: UIView {
     
     //MARK:- Properties
-    var loginAction: (()->())?
+    var loginAction: ((String, String)->())?
     var createPasswordAction: (() -> ())?
     var requestIDAction: (() ->())?
     
@@ -38,7 +38,7 @@ class LoginView: UIView {
         return imageView
     }()
     
-    private let idTxtF: UITextField = {
+ let idTxtF: UITextField = {
         let textField = UITextField ()
         textField.placeholder = "Associate ID"
         textField.layer.borderWidth = 1.0
@@ -48,7 +48,7 @@ class LoginView: UIView {
         return textField
     }()
     
-    private let passwordTxtF: UITextField = {
+     let passwordTxtF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Password"
         textField.layer.borderWidth = 1.0
@@ -59,7 +59,7 @@ class LoginView: UIView {
         return textField
     }()
     
-    private let remainConnectedLbl: UILabel = {
+     let remainConnectedLbl: UILabel = {
         let label = UILabel()
         label.text = "Remain connected"
         label.font = UIFont.systemFont(ofSize: 14)
@@ -173,6 +173,9 @@ class LoginView: UIView {
         guard let action = loginAction else {
             return
         }
-        action()
+        guard idTxtF.text != "" , idTxtF.text  != "" else {
+            return
+        }
+        action(self.idTxtF.text!, self.idTxtF.text!)
     }
 }

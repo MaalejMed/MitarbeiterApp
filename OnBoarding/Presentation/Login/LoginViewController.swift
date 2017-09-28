@@ -40,9 +40,8 @@ class LoginViewController: UIViewController {
         loginView.requestIDAction = { [weak self] in
             self?.loadRequestIDView()
         }
-        loginView.loginAction = {
-            let homeVC = HomeViewController()
-            self.navigationController?.pushViewController(homeVC, animated: true)
+        loginView.loginAction = { (username: String, password: String) in
+            self.login(username: username, password: password)
         }
         
         layout(forView: loginView)
@@ -62,5 +61,16 @@ class LoginViewController: UIViewController {
             self?.loadLoginView()
         }
         layout(forView: requestIDView)
+    }
+    
+    //MARK:- Network calls
+    func login(username: String, password: String) {
+        LoginService.login(username: username, password: password, completion: { (response: Bool) in
+            guard response == true else {
+                return
+            }
+            let homeVC = HomeViewController()
+            self.navigationController?.pushViewController(homeVC, animated: true)
+        })
     }
 }
