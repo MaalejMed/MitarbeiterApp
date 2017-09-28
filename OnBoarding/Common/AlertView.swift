@@ -19,7 +19,6 @@ class AlertView: UIView {
     
     private let titleLbl: UILabel = {
         let label = UILabel()
-        label.textColor = .gray
         return label
     }()
     

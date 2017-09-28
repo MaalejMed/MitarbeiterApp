@@ -10,12 +10,16 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    //MARK:- Properties
+    let loginView = LoginView(frame: .zero)
+    let alertView = AlertView(frame: .zero)
+
     //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
-        loadLoginView()
+        setupLoginView()
     }
     
     //MARK:- Layout
@@ -31,14 +35,13 @@ class LoginViewController: UIViewController {
         view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
     
-    //MARK:- Login view
-    func loadLoginView() {
-        let loginView = LoginView(frame: .zero)
+    //MARK:- Setup views
+    func setupLoginView() {
         loginView.createPasswordAction = { [weak self] in
-            self?.loadCreatePasswordView()
+            self?.setupCreatePasswordView()
         }
         loginView.requestIDAction = { [weak self] in
-            self?.loadRequestIDView()
+            self?.setupRequestIDView()
         }
         loginView.loginAction = { (username: String, password: String) in
             self.login(username: username, password: password)
@@ -47,34 +50,48 @@ class LoginViewController: UIViewController {
         layout(forView: loginView)
     }
     
-    func loadCreatePasswordView() {
+    func setupCreatePasswordView() {
         let createPasswordView = CreatePasswordView(frame: .zero)
         createPasswordView.closeButtonAction = { [weak self] in
-            self?.loadLoginView()
+            self?.setupLoginView()
         }
         layout(forView: createPasswordView)
     }
     
-    func loadRequestIDView() {
+    func setupRequestIDView() {
         let requestIDView = RequestIDView(frame: .zero)
         requestIDView.closeButtonAction = { [weak self] in
-            self?.loadLoginView()
+            self?.setupLoginView()
         }
         layout(forView: requestIDView)
     }
     
+    func presentAlertView(failure: Failure) {
+        alertView.data = (title:failure.description,  description: "", icon: UIImage.init(named: "Failure")!)
+        self.view.addSubview(alertView)
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        alertView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        alertView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        alertView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        alertView.bottomAnchor.constraint(equalTo: self.view.topAnchor, constant: 50.0).isActive = true
+        alertView.backgroundColor = UIColor.BgColor
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+            self.alertView.removeFromSuperview()
+        })
+    }
+    
     //MARK:- Network calls
     func login(username: String, password: String) {
+        loginView.loginBtn.status = .loading
         let accountManager = AccountManager()
-        accountManager.login(username: username, password: password, completion: { failure in
+        accountManager.login(username: username, password: password, completion: {[weak self] failure in
+            self?.loginView.loginBtn.status = .idle
             guard failure == nil else {
-                print((failure?.description)!)
+                self?.presentAlertView(failure: failure!)
                 return
             }
-            
             let homeVC = HomeViewController()
-            self.navigationController?.pushViewController(homeVC, animated: true)
-            
+            self?.navigationController?.pushViewController(homeVC, animated: true)
         })
     }
 }

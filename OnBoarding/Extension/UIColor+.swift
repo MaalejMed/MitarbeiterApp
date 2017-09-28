@@ -43,4 +43,8 @@ extension UIColor {
         return UIColor.init(red: 34/255, green: 139/255, blue: 34/255, alpha: 1.0)
     }
     
+    static var alertViewBgColor: UIColor {
+        return UIColor.init(red: 255/255, green: 204/255, blue: 153/255, alpha: 1.0)
+    }
+    
 }

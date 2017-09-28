@@ -75,8 +75,8 @@ class LoginView: UIView {
         return switchButton
     }()
     
-    private let loginBtn: UIButton = {
-        let button = UIButton()
+    let loginBtn: TriggerButton = {
+        let button = TriggerButton(status: .idle)
         button.setTitle("Log in", for: .normal)
         button.titleEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
         button.titleLabel?.textColor = .white
@@ -173,9 +173,9 @@ class LoginView: UIView {
         guard let action = loginAction else {
             return
         }
-        guard idTxtF.text != "" , idTxtF.text  != "" else {
+        guard idTxtF.text != "" , passwordTxtF.text  != "" else {
             return
         }
-        action(self.idTxtF.text!, self.idTxtF.text!)
+        action(self.idTxtF.text!, passwordTxtF.text!)
     }
 }
