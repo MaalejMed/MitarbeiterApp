@@ -12,25 +12,10 @@ import Alamofire
 class LoginService {
     static let basicStringURL = "http://localhost:8080/?"
     
-    static func login(username: String, password: String, completion: @escaping ((Failure?)->())) {
+    static func login(username: String, password: String, completion: @escaping ((Any?)->())) {
         let stringURL = basicStringURL+"username="+username+"&password="+password
         Alamofire.request(stringURL).responseJSON(completionHandler: { response in
-            let failure = parse(responseValue: response.result.value)
-            completion(failure)
+            completion(response.result.value)
         })
-    }
-    
-    static func parse(responseValue: Any?) -> Failure? {
-        guard let value = responseValue as? Bool else {
-            let failure = Failure(code: .networkConnection, description: "Could not connect to the server")
-            return (failure)
-        }
-        
-        guard value == true else {
-            let failure = Failure(code: .wrongCredentials, description: "Wrong credentials")
-            return (failure)
-        }
-        
-        return nil
     }
 }
