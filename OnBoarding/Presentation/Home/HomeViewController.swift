@@ -138,8 +138,7 @@ class HomeViewController: UIViewController {
     
     //MARK:- Views
     func setupProfileView() {
-        let associate = Associate(identifier: "645438", name: "Mohamed Maalej", image: nil)
-        profileView.data = (title: associate.name, icon: associate.profileImage(), action: nil)
+        profileView.data = (title: "associate.name", icon: nil, action: nil)
     }
     
     func setupMainMenuView() {

@@ -88,13 +88,14 @@ class LoginViewController: UIViewController {
     //MARK:- Network calls
     func login(username: String, password: String) {
         loginView.loginBtn.status = .loading
-        let accountManager = AccountManager()
-        accountManager.login(username: username, password: password, completion: {[weak self] failure in
+        let authManager = AuthenticationManager()
+        authManager.login(username: username, password: password, completion: {[weak self] failure, associate in
             self?.loginView.loginBtn.status = .idle
-            guard failure == nil else {
+            guard associate != nil else {
                 self?.presentAlertView(failure: failure!)
                 return
             }
+            print(associate)
             let homeVC = HomeViewController()
             self?.navigationController?.pushViewController(homeVC, animated: true)
         })

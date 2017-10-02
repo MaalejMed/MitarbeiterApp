@@ -1,5 +1,5 @@
 //
-//  LoginService.swift
+//  AuthenticationService.swift
 //  OnBoarding
 //
 //  Created by mmaalej on 28/09/2017.
@@ -9,8 +9,8 @@
 import Foundation
 import Alamofire
 
-class LoginService {
-    static let basicStringURL = "http://localhost:8080/?"
+class AuthenticationService {
+    static let basicStringURL = "http://localhost:8080/Authentication?"
     
     static func login(username: String, password: String, completion: @escaping ((Any?)->())) {
         let stringURL = basicStringURL+"username="+username+"&password="+password

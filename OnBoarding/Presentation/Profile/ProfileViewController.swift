@@ -69,8 +69,7 @@ class ProfileViewController: UIViewController {
     func setupProfileView() {
         // unowned because the profileView lives as long as the VC lives
         // If profileView lives shorter than VC, it could be set as weak
-        let associate = Associate(identifier: "645438", name: "Mohamed Maalej", image: nil)
-        profileView.data = (title: associate.name, icon: associate.profileImage(), action: {
+        profileView.data = (title: "associate.name", icon: nil, action: {
             [unowned self] in
             self.changeProfileImage()
         })
