@@ -12,17 +12,20 @@ class GSDViewController: UIViewController {
     
     //MARK:- properties
     let contactView = InfoView(frame: .zero)
-    let alertView = AlertView(frame:.zero)
+    let triggerView = TriggerView(frame: .zero)
     let messageTV = MessageTableView(frame: .zero)
-    var messages: [Message] = []
+    var messages: [Message] = [] {
+        didSet {
+            presentContentView()
+        }
+    }
 
-    
     //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNaviBarButtons()
         setupGSDInfoView()
-        setupNoMessagesView()
+        setupTriggerView()
         setupMessageTableView()
     }
     
@@ -54,18 +57,34 @@ class GSDViewController: UIViewController {
         messageTV.dataSource = messages
     }
     
-    func setupNoMessagesView() {
-        alertView.data = (title:"No Messages", description:"You still did not exchange any message with the Global Service Desk", icon: UIImage.init(named:"NoMails"))
-        layout(contentView: alertView)
+    func setupTriggerView() {
+        triggerView.data = (title:"No Mail are available", icon: UIImage.init(named:"NoMails"), action: nil)
     }
     
-    func dismissNoMessagesView() {
-        alertView.removeFromSuperview()
-    }
+    
     
     func presentContentView() {
-        let contentView = messages.count > 0 ? messageTV : alertView
-        layout(contentView: contentView)
+        let _ = messages.count > 0 ? presentMessagesTableView() : presentTriggerView()
+    }
+    
+    func presentMessagesTableView() {
+        if triggerView.superview != nil {
+            triggerView.removeFromSuperview()
+        }
+        layout(contentView: messageTV)
+    }
+    
+    func presentTriggerView() {
+        if messageTV.superview != nil {
+            messageTV.removeFromSuperview()
+        }
+        triggerView.status = .loading
+        layout(contentView: triggerView)
+        
+        //TODO: To be removed when service is implemented
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
+            self?.triggerView.status = .idle
+        })
     }
     
     //MARK:- Selectors

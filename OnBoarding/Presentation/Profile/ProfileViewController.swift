@@ -67,6 +67,7 @@ class ProfileViewController: UIViewController {
     
     //MARK:- Setup views
     func setupProfileView() {
+        profileView.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
         // unowned because the profileView lives as long as the VC lives
         // If profileView lives shorter than VC, it could be set as weak
         profileView.data = (title: "associate.name", icon: nil, action: {
@@ -95,5 +96,3 @@ extension ProfileViewController: MediaViewControllerDelegate {
         })
     }
 }
-
-

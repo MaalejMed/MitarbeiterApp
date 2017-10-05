@@ -22,7 +22,7 @@ class TriggerView: UIView {
         }
     }
     
-    let infoView = InfoView(frame:.zero)
+    let infoView = InfoView(frame: .zero)
     var data : (title: String?, icon: UIImage?, action: (()->())?)? {
         didSet {
             infoView.data = data

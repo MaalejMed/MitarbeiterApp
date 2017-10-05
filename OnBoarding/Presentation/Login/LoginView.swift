@@ -75,12 +75,7 @@ class LoginView: UIView {
         return switchButton
     }()
     
-    let loginBtn: TriggerButton = {
-        let button = TriggerButton(status: .idle)
-        button.setTitle("Log in", for: .normal)
-        button.addTarget(self, action: #selector(login), for: .touchUpInside)
-        return button
-    }()
+    let loginBtn = TriggerButton(frame: .zero)
     
     private let line2ImgV: UIImageView = {
         let imageView = UIImageView()
@@ -111,6 +106,7 @@ class LoginView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
+        setupLoginButton()
         self.layout()
     }
     
@@ -150,6 +146,12 @@ class LoginView: UIView {
         NSLayoutConstraint.activate(layoutConstraints)
     }
     
+    //MARK:- Setup buttons
+    func setupLoginButton() {
+        loginBtn.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        loginBtn.status = .idle
+    }
+    
     //MARK:- Selectors
     @objc func createPassowrd() {
         guard let action = createPasswordAction else {
@@ -165,7 +167,7 @@ class LoginView: UIView {
         action()
     }
     
-    @objc func login() {
+    @objc func loginButtonTapped() {
         guard let action = loginAction else {
             return
         }

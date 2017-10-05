@@ -12,24 +12,14 @@ class TimesheetPreviewViewController: UIViewController {
     
     //MARK:- Properties
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
-    
-    lazy var sendBtn: TriggerButton = {
-        let button = TriggerButton(status: .idle)
-        button.setTitle("Send", for: .normal)
-        button.titleEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-        button.titleLabel?.textColor = .white
-        button.backgroundColor = UIColor.buttonColor
-        button.layer.cornerRadius = 5.0
-        button.addTarget(self, action: #selector(send), for: .touchUpInside)
-        return button
-    }()
-    
+    let sendBtn =  TriggerButton(frame: .zero)
     var timesheet: Timesheet?
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTimesheetInfoTV()
+        setupSendButton()
         layout()
     }
     
@@ -98,10 +88,15 @@ class TimesheetPreviewViewController: UIViewController {
         }
         timesheetInfoTV.dataSource = timesheetEntries
     }
+    
+    func setupSendButton() {
+        sendBtn.status = .idle
+        sendBtn.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
+    }
 
     
     //MARK:- Selectors
-    @objc func send() {
+    @objc func sendButtonTapped() {
         sendBtn.status = .loading
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
             for vc in (self?.navigationController?.viewControllers)! {

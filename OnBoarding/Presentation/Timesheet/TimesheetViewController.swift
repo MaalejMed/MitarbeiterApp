@@ -125,32 +125,7 @@ class TimesheetViewController: UIViewController {
 
     func setupTimerButton() {
         timerButton.status = .startWorking
-        timerButton.action = { [weak self] in
-            var key: EntryKey?
-            var value: Any?
-            switch (self?.timerButton.status)! {
-            case .startWorking:
-                self?.timerButton.status = .startLunchBreak
-                key = .startWorking
-                value = Date()
-            case .startLunchBreak: // there is No UI update for this action
-                self?.timesheet.breakFrom = Date()
-                self?.timerButton.status = .stopLunchBreak
-                return
-            case .stopLunchBreak:
-                self?.timerButton.status = .stopWorking
-                key = .lunchBreak
-                value = Date()
-            case .stopWorking:
-                self?.timerButton.status = .submit
-                key = .stopWorking
-                value = Date()
-            case .submit:
-                self?.preview()
-                return
-            }
-            self?.update(key: key!, value: value!)
-        }
+        timerButton.addTarget(self, action: #selector(timeButtonTapped), for: .touchUpInside)
     }
     
     //MARK:- Update data
@@ -186,6 +161,34 @@ class TimesheetViewController: UIViewController {
         }
         
         timesheetInfoTV.dataSource = self.timesheetEntries
+    }
+    
+    //MARK:- Selectors
+    @objc func timeButtonTapped() {
+        var key: EntryKey?
+        var value: Any?
+        switch (timerButton.status)! {
+        case .startWorking:
+            timerButton.status = .startLunchBreak
+            key = .startWorking
+            value = Date()
+        case .startLunchBreak: // there is No UI update for this action
+            timesheet.breakFrom = Date()
+            timerButton.status = .stopLunchBreak
+            return
+        case .stopLunchBreak:
+            timerButton.status = .stopWorking
+            key = .lunchBreak
+            value = Date()
+        case .stopWorking:
+            timerButton.status = .submit
+            key = .stopWorking
+            value = Date()
+        case .submit:
+            preview()
+            return
+        }
+        update(key: key!, value: value!)
     }
     
     //MARK:- Preview

@@ -47,8 +47,9 @@ class LoginViewController: UIViewController {
         loginView.requestIDAction = { [weak self] in
             self?.setupRequestIDView()
         }
-        loginView.loginAction = { (username: String, password: String) in
-            self.login(username: username, password: password)
+        loginView.loginAction = {[weak self] (username: String, password: String) in
+            self?.loginView.loginBtn.status = .loading
+            self?.login(username: username, password: password)
         }
         
         layout(forView: loginView)

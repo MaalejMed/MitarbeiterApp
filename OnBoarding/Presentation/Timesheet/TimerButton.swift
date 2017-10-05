@@ -25,8 +25,6 @@ class TimerButton: UIButton {
         }
     }
     
-    var action: (()->())?
-    
     //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,18 +32,9 @@ class TimerButton: UIButton {
         self.titleLabel?.textColor = .white
         self.backgroundColor = UIColor.buttonColor
         self.layer.cornerRadius = 5.0
-        self.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    //MARK:- Selectors
-    @objc func buttonTapped() {
-        guard let buttonAction = action else {
-            return
-        }
-        buttonAction()
     }
 }

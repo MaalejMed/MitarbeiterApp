@@ -9,8 +9,8 @@
 import UIKit
 
 enum Status: String {
-    case idle
-    case loading
+    case idle = "Send"
+    case loading = ""
 }
 
 class TriggerButton: UIButton {
@@ -27,12 +27,9 @@ class TriggerButton: UIButton {
         }
     }
     
-    var title: String?
-    
     //MARK:- Init
-    init(status: Status) {
-        self.status = status
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.titleEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
         self.titleLabel?.textColor = .white
         self.backgroundColor = UIColor.buttonColor
@@ -53,12 +50,12 @@ class TriggerButton: UIButton {
     
     //MARK:- Context
     func didChangeStatus() {
-        if  status == .loading {
-            title = self.titleLabel?.text
-            self.setTitle("", for: .normal)
+        self.setTitle(status?.rawValue, for: .normal)
+        
+        switch status! {
+        case .loading:
             presentActivityIndicator()
-        } else {
-            self.setTitle(title, for: .normal)
+        case .idle:
             dismissActivityIndicator()
         }
     }
@@ -70,10 +67,9 @@ class TriggerButton: UIButton {
     }
     
     func dismissActivityIndicator() {
-        guard activityIndicator.superview != nil else {
-            return
+        if activityIndicator.superview != nil {
+            activityIndicator.removeFromSuperview()
         }
         activityIndicator.stopAnimating()
-        activityIndicator.removeFromSuperview()
     }
 }

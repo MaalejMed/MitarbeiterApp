@@ -15,7 +15,7 @@ class MessageViewController: UIViewController {
     
     //MARK:- Properties
     let messageView = MessageView(frame: .zero)
-    let sendBtn = TriggerButton(status: .idle)
+    let sendBtn = TriggerButton(frame: .zero)
     
     weak var delegate: MessageViewControllerDelegate?
         
@@ -63,8 +63,8 @@ class MessageViewController: UIViewController {
     }
     
     func setupSendButton() {
-        sendBtn.setTitle("Send", for: .normal)
-        self.sendBtn.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        sendBtn.status = .idle
+        self.sendBtn.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
     }
     
     //MARK:- Selectors
@@ -72,7 +72,7 @@ class MessageViewController: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    @objc func sendMessage() {
+    @objc func sendButtonTapped() {
         sendBtn.status = .loading
         guard messageView.titleTxtF.text != nil, messageView.messageTxtV.text != nil else {
             return
