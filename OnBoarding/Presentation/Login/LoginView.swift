@@ -78,10 +78,6 @@ class LoginView: UIView {
     let loginBtn: TriggerButton = {
         let button = TriggerButton(status: .idle)
         button.setTitle("Log in", for: .normal)
-        button.titleEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-        button.titleLabel?.textColor = .white
-        button.backgroundColor = UIColor.buttonColor
-        button.layer.cornerRadius = 5.0
         button.addTarget(self, action: #selector(login), for: .touchUpInside)
         return button
     }()

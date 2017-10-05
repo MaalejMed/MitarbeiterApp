@@ -15,7 +15,7 @@ class MessageViewController: UIViewController {
     
     //MARK:- Properties
     let messageView = MessageView(frame: .zero)
-    let contextView = ContextView(context: .send)
+    let sendBtn = TriggerButton(status: .idle)
     
     weak var delegate: MessageViewControllerDelegate?
         
@@ -23,7 +23,7 @@ class MessageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNaviBarButtons()
-        setupTimerView()
+        setupSendButton()
         layout()
     }
     
@@ -32,12 +32,11 @@ class MessageViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "New message"
         self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
         self.view.backgroundColor = UIColor.BgColor
-
     }
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["message": messageView, "context": contextView]
+        let views: [String: UIView] = ["message": messageView, "send": sendBtn]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
@@ -45,11 +44,11 @@ class MessageViewController: UIViewController {
         
         var layoutConstraints: [NSLayoutConstraint] = []
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[message]-(10)-|", options: [], metrics: nil, views: views)
-          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[context]-(10)-|", options: [], metrics: nil, views: views)
+          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(70)-[send]-(70)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
             messageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10)
         ]
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[message]-(10)-[context]", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[message]-(10)-[send]", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
     
@@ -63,22 +62,25 @@ class MessageViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = dismissBtn
     }
     
-    func setupTimerView() {
-        contextView.contextBtnAction = { [weak self] in
-            guard self?.messageView.titleTxtF.text != nil, self?.messageView.messageTxtV.text != nil else {
-                return
-            }
-            self?.contextView.contextBtn.context = .idle
-            let message = Message(identifier: "01", associateID: "645438", title: self?.messageView.titleTxtF.text, body: self?.messageView.messageTxtV.text, response: nil, date: Date())
-            self?.delegate?.didSendMessage(messageVC: (self)!, message: message)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-                self?.dismissVC()
-            })
-        }
+    func setupSendButton() {
+        sendBtn.setTitle("Send", for: .normal)
+        self.sendBtn.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
     }
     
     //MARK:- Selectors
     @objc func dismissVC() {
         self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func sendMessage() {
+        sendBtn.status = .loading
+        guard messageView.titleTxtF.text != nil, messageView.messageTxtV.text != nil else {
+            return
+        }
+        let message = Message(identifier: "01", associateID: "645438", title: messageView.titleTxtF.text, body: messageView.messageTxtV.text, response: nil, date: Date())
+        delegate?.didSendMessage(messageVC: self, message: message)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
+            self?.dismissVC()
+        })
     }
 }

@@ -47,6 +47,7 @@ class GSDViewController: UIViewController {
     
     func setupGSDInfoView() {
         contactView.data = (title: "Tel: 0049 283213 12", icon:UIImage(named:"Help"), action: nil)
+        contactView.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
     }
     
     func setupMessageTableView() {

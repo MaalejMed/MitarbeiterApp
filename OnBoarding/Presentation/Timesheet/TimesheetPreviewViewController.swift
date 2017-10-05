@@ -12,7 +12,17 @@ class TimesheetPreviewViewController: UIViewController {
     
     //MARK:- Properties
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
-    let contextView = ContextView(context: .send)
+    
+    lazy var sendBtn: TriggerButton = {
+        let button = TriggerButton(status: .idle)
+        button.setTitle("Send", for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+        button.titleLabel?.textColor = .white
+        button.backgroundColor = UIColor.buttonColor
+        button.layer.cornerRadius = 5.0
+        button.addTarget(self, action: #selector(send), for: .touchUpInside)
+        return button
+    }()
     
     var timesheet: Timesheet?
     
@@ -20,7 +30,6 @@ class TimesheetPreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTimesheetInfoTV()
-        setupTimerView()
         layout()
     }
     
@@ -34,17 +43,20 @@ class TimesheetPreviewViewController: UIViewController {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["tableView": timesheetInfoTV, "context": contextView]
+        let views: [String: UIView] = ["tableView": timesheetInfoTV, "send": sendBtn]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
-            view.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-            view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         }
+        timesheetInfoTV.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        timesheetInfoTV.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        
+        sendBtn.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 70).isActive = true
+        sendBtn.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -70).isActive = true
         
         timesheetInfoTV.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         timesheetInfoTV.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: TimesheetInfoTableView.height).isActive = true
-        contextView.topAnchor.constraint(equalTo: timesheetInfoTV.bottomAnchor, constant: 10).isActive = true
+        sendBtn.topAnchor.constraint(equalTo: timesheetInfoTV.bottomAnchor, constant: 10).isActive = true
     }
     
     //MARK:- Setup views
@@ -86,18 +98,19 @@ class TimesheetPreviewViewController: UIViewController {
         }
         timesheetInfoTV.dataSource = timesheetEntries
     }
+
     
-    func setupTimerView() {
-        contextView.contextBtnAction = { [weak self] in
-            self?.contextView.contextBtn.context = .idle
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-                for vc in (self?.navigationController?.viewControllers)! {
-                    if  vc.isKind(of: HomeViewController.self){
-                        self?.navigationController?.popToViewController(vc, animated: true)
-                        return
-                    }
+    //MARK:- Selectors
+    @objc func send() {
+        sendBtn.status = .loading
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
+            for vc in (self?.navigationController?.viewControllers)! {
+                if  vc.isKind(of: HomeViewController.self){
+                    self?.navigationController?.popToViewController(vc, animated: true)
+                    return
                 }
-            })
-        }
+            }
+            self?.sendBtn.status = .idle
+        })
     }
 }

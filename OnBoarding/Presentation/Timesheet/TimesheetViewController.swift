@@ -8,57 +8,11 @@
 
 import UIKit
 
-struct TimesheetEntry: Equatable {
-    var info: EntryInfo
-    var key: EntryKey
-    var value: String
-    
-    static func ==(lhs: TimesheetEntry, rhs: TimesheetEntry) -> Bool {
-        return lhs.key == rhs.key
-    }
-}
-
-enum EntryInfo: String {
-    case project = "project"
-    case time = "time"
-    static let allValues = [project, time]
-}
-
-enum EntryKey: String {
-    case date = "Date"
-    case identifier = "Project ID"
-    case activity = "Activity"
-    case buillable = "Buillable"
-    case startWorking = "From"
-    case stopWorking = "Until"
-    case lunchBreak = "Lunch break"
-    
-    static let allProjectKeys = [date, identifier, activity, buillable]
-    static let allTimeKeys = [startWorking, stopWorking, lunchBreak]
-    
-    func section() -> EntryInfo {
-        switch self {
-        case .date, .identifier, .activity, .buillable: return EntryInfo.allValues[0]
-        case .startWorking, .stopWorking, .lunchBreak: return EntryInfo.allValues[1]
-        }
-    }
-    
-    func index() -> Int {
-        let section = self.section()
-        switch section {
-        case .project:
-            return EntryKey.allProjectKeys.index(of: self)!
-        case .time:
-            return EntryKey.allTimeKeys.index(of: self)!
-        }
-    }
-}
-
 class TimesheetViewController: UIViewController {
     
     //MARK:- Properties
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
-    let contextView = ContextView(context: .startWorking)
+    let timerButton = TimerButton(frame: .zero)
     let pickerView = PickerView(frame: .zero)
     
     var timesheetEntries: [EntryInfo: [TimesheetEntry]] = [:]
@@ -68,7 +22,7 @@ class TimesheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTimesheetInfoTV()
-        setupContextView()
+        setupTimerButton()
         layout()
     }
     
@@ -91,17 +45,22 @@ class TimesheetViewController: UIViewController {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["tableView": timesheetInfoTV, "context": contextView]
+        let views: [String: UIView] = ["tableView": timesheetInfoTV, "timer": timerButton]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
-            view.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-            view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         }
+        
+        timesheetInfoTV.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        timesheetInfoTV.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        
+        timerButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 70).isActive = true
+        timerButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -70).isActive = true
+        
         
         timesheetInfoTV.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         timesheetInfoTV.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: TimesheetInfoTableView.height).isActive = true
-        contextView.topAnchor.constraint(equalTo: timesheetInfoTV.bottomAnchor, constant: 10).isActive = true
+        timerButton.topAnchor.constraint(equalTo: timesheetInfoTV.bottomAnchor, constant: 10).isActive = true
     }
     
     func layoutPickerView() {
@@ -164,31 +123,30 @@ class TimesheetViewController: UIViewController {
         timesheetInfoTV.delegate = self
     }
 
-    func setupContextView() {
-        contextView.contextBtnAction = { [weak self] in
+    func setupTimerButton() {
+        timerButton.status = .startWorking
+        timerButton.action = { [weak self] in
             var key: EntryKey?
             var value: Any?
-            switch (self?.contextView.contextBtn.context)! {
+            switch (self?.timerButton.status)! {
             case .startWorking:
-                self?.contextView.contextBtn.context = .startLunchBreak
+                self?.timerButton.status = .startLunchBreak
                 key = .startWorking
                 value = Date()
             case .startLunchBreak: // there is No UI update for this action
                 self?.timesheet.breakFrom = Date()
-                self?.contextView.contextBtn.context = .stopLunchBreak
+                self?.timerButton.status = .stopLunchBreak
                 return
             case .stopLunchBreak:
-                self?.contextView.contextBtn.context = .stopWorking
+                self?.timerButton.status = .stopWorking
                 key = .lunchBreak
                 value = Date()
             case .stopWorking:
-                self?.contextView.contextBtn.context = .submit
+                self?.timerButton.status = .submit
                 key = .stopWorking
                 value = Date()
             case .submit:
                 self?.preview()
-                return
-            case .send, .idle:
                 return
             }
             self?.update(key: key!, value: value!)

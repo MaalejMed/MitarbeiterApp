@@ -33,6 +33,10 @@ class TriggerButton: UIButton {
     init(status: Status) {
         self.status = status
         super.init(frame: .zero)
+        self.titleEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+        self.titleLabel?.textColor = .white
+        self.backgroundColor = UIColor.buttonColor
+        self.layer.cornerRadius = 5.0
     }
     
     required init?(coder aDecoder: NSCoder) {
