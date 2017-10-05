@@ -43,7 +43,6 @@ class InfoView: UIView {
     //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
         layout()
     }
     

@@ -34,5 +34,4 @@ struct MenuItem {
         description = item.rawValue
         self.item = item
     }
-    
 }

@@ -32,6 +32,7 @@ class MainMenuView: UIView {
         imageView.backgroundColor = .gray
         return imageView
     }()
+    
     lazy var menuCV: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)

@@ -32,7 +32,6 @@ class TriggerView: UIView {
     //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layout(contentView: activityInd)
     }
     
     required init?(coder aDecoder: NSCoder) {

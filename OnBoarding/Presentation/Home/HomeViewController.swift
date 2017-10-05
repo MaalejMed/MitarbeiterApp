@@ -8,34 +8,6 @@
 
 import UIKit
 
-enum Item: String {
-    case time = "Time"
-    case gsd = "GSD"
-    case travelExp = "Expenses"
-    case profile = "Profile"
-    case benefits = "benefits"
-    case eLearning = "E-Learning"
-    
-    static let allMenuItems = [time, gsd, travelExp,profile, benefits, eLearning]
-    
-    func icon() -> UIImage {
-        switch self {
-        case .time:
-            return UIImage.init(named: "Time")!
-        case .travelExp:
-            return UIImage.init(named: "Expenses")!
-        case .benefits:
-            return UIImage.init(named: "Benefits")!
-        case .eLearning:
-            return UIImage.init(named: "Elearning")!
-        case .gsd:
-            return UIImage.init(named: "Help")!
-        case .profile:
-            return UIImage.init(named: "Profile")!
-        }
-    }
-}
-
 class HomeViewController: UIViewController {
     
     //Properties
@@ -43,9 +15,8 @@ class HomeViewController: UIViewController {
     let mainMenuView = MainMenuView(frame: .zero)
     let feedTableView = FeedTableView(frame: .zero)
     let triggerView = TriggerView(frame:.zero)
-
-    var feeds: [Feed] = []
     
+    var feeds: [Feed] = []
     var mainMenuViewTopAnchor: NSLayoutConstraint?
     
     //MARK:- Views lifecycle
@@ -53,6 +24,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupProfileView()
         setupMainMenuView()
+        setupFeedTableView()
         fetchFeeds()
     }
     
@@ -63,11 +35,6 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "Home"
         self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
         self.navigationItem.setHidesBackButton(true, animated:false);
-        
-        if mainMenuView.currentPostion != .idle {
-            updateMenuViewLayout(newPosition: .idle)
-            mainMenuView.currentPostion = .idle
-        }
     }
     
     //MARK:- Layout
@@ -134,7 +101,8 @@ class HomeViewController: UIViewController {
     
     //MARK:- Views
     func setupProfileView() {
-        profileView.data = (title: "associate.name", icon: nil, action: nil)
+        profileView.data = (title: "Mohamed Maalej", icon: nil, action: nil)
+        profileView.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
     }
     
     func setupMainMenuView() {
@@ -147,8 +115,11 @@ class HomeViewController: UIViewController {
         mainMenuView.delegate = self
     }
     
-    func presentNewsTableView() {
+    func setupFeedTableView() {
         feedTableView.delgate = self
+    }
+    
+    func presentNewsTableView() {
         if triggerView.superview != nil {
             triggerView.removeFromSuperview()
         }
@@ -159,23 +130,22 @@ class HomeViewController: UIViewController {
         if feedTableView.superview != nil {
             feedTableView.removeFromSuperview()
         }
+        triggerView.status = .loading
         layout(contentView: triggerView)
-        triggerView.data = (title:"No Feed", icon: UIImage.init(named:"NoMails"), action: nil)
+        triggerView.data = (title:"No Feed available", icon: UIImage.init(named:"NoMails"), action: nil)
     }
     
     //MARK:- Feeds
     func fetchFeeds () {
-        triggerView.status = .loading
         presentTriggerView()
-        
         let feedManager = FeedManager()
         feedManager.fetchFeed(completion: { [weak self] failure, feed in
-            guard failure == nil else {
+            guard failure == nil, let feedEntries = feed  else {
+                self?.triggerView.status = .idle
                 return
             }
-            self?.feeds = feed!
+            self?.feeds = feedEntries
             self?.feedTableView.dataSource = self?.feeds
-            self?.triggerView.status = .idle
             self?.presentNewsTableView()
         })
     }
