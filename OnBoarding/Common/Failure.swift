@@ -11,6 +11,7 @@ import Foundation
 enum FailureCode: Int {
     case networkConnection = 1
     case wrongCredentials = 2
+    case parsingIssue = 3
 }
 
 struct Failure {

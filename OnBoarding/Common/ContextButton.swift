@@ -27,7 +27,7 @@ class ContextButton: UIButton {
     }()
         
     var context: Context? {
-        didSet {
+            didSet {
             didChangeContext()
         }
     }

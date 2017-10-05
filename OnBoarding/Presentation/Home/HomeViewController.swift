@@ -41,23 +41,19 @@ class HomeViewController: UIViewController {
     //Properties
     let profileView = InfoView(frame: .zero)
     let mainMenuView = MainMenuView(frame: .zero)
-    let newsTableView = FeedTableView(frame: .zero)
-    var feeds: [Feed] = [] {
-        didSet {
-            newsTableView.dataSource = feeds
-        }
-    }
+    let feedTableView = FeedTableView(frame: .zero)
+    let triggerView = TriggerView(frame:.zero)
+
+    var feeds: [Feed] = []
     
     var mainMenuViewTopAnchor: NSLayoutConstraint?
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchFeeds()
         setupProfileView()
-        setupNewsTableView()
         setupMainMenuView()
-        layout()
+        fetchFeeds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +63,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "Home"
         self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
         self.navigationItem.setHidesBackButton(true, animated:false);
+        
         if mainMenuView.currentPostion != .idle {
             updateMenuViewLayout(newPosition: .idle)
             mainMenuView.currentPostion = .idle
@@ -74,8 +71,8 @@ class HomeViewController: UIViewController {
     }
     
     //MARK:- Layout
-    func layout() {
-        let views: [String: UIView] = ["profile": profileView, "menu": mainMenuView, "news": newsTableView]
+    func layout(contentView: UIView) {
+        let views: [String: UIView] = ["profile": profileView, "menu": mainMenuView, "content": contentView]
         for (_, view) in views{
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
@@ -84,11 +81,10 @@ class HomeViewController: UIViewController {
         }
         
         profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5.0).isActive = true
-        newsTableView.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 10.0).isActive = true
-        newsTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: profileView.bottomAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
         mainMenuView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
-        
         mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         mainMenuViewTopAnchor?.isActive = true
     }
@@ -151,16 +147,37 @@ class HomeViewController: UIViewController {
         mainMenuView.delegate = self
     }
     
-    func setupNewsTableView() {
-        newsTableView.delgate = self
+    func presentNewsTableView() {
+        feedTableView.delgate = self
+        if triggerView.superview != nil {
+            triggerView.removeFromSuperview()
+        }
+        layout(contentView: feedTableView)
+    }
+    
+    func presentTriggerView() {
+        if feedTableView.superview != nil {
+            feedTableView.removeFromSuperview()
+        }
+        layout(contentView: triggerView)
+        triggerView.data = (title:"No Feed", icon: UIImage.init(named:"NoMails"), action: nil)
     }
     
     //MARK:- Feeds
     func fetchFeeds () {
-        guard let newFeeds = FeedService.updateFeeds() else {
-            return
-        }
-        feeds = newFeeds
+        triggerView.status = .loading
+        presentTriggerView()
+        
+        let feedManager = FeedManager()
+        feedManager.fetchFeed(completion: { [weak self] failure, feed in
+            guard failure == nil else {
+                return
+            }
+            self?.feeds = feed!
+            self?.feedTableView.dataSource = self?.feeds
+            self?.triggerView.status = .idle
+            self?.presentNewsTableView()
+        })
     }
 }
 

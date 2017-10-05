@@ -14,6 +14,7 @@ enum Status: String {
 }
 
 class TriggerButton: UIButton {
+   
     //MARK:- Properties
     let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
@@ -26,7 +27,7 @@ class TriggerButton: UIButton {
         }
     }
     
-    var buttonTitle: String?
+    var title: String?
     
     //MARK:- Init
     init(status: Status) {
@@ -49,11 +50,11 @@ class TriggerButton: UIButton {
     //MARK:- Context
     func didChangeStatus() {
         if  status == .loading {
-            buttonTitle = self.titleLabel?.text
+            title = self.titleLabel?.text
             self.setTitle("", for: .normal)
             presentActivityIndicator()
         } else {
-            self.setTitle(buttonTitle, for: .normal)
+            self.setTitle(title, for: .normal)
             dismissActivityIndicator()
         }
     }

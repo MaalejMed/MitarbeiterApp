@@ -16,6 +16,13 @@ protocol FeedTableViewDelegate: class {
 class FeedTableView: UIView {
     
     //MARK:- Properties
+    
+    //MARK:- Properties
+    let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        return indicator
+    }()
+    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = UIColor.BgColor
@@ -25,6 +32,12 @@ class FeedTableView: UIView {
     
     var dataSource: [Feed]? {
         didSet {
+            guard dataSource != nil else {
+                return
+            }
+            
+            dismissActivityIndicator()
+            layout()
             tableView.reloadData()
         }
     }
@@ -37,7 +50,7 @@ class FeedTableView: UIView {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(ExtendedTableViewCell.self, forCellReuseIdentifier: ExtendedTableViewCell.cellIdentifier)
-        layout()
+        presentActivityIndicator()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,6 +65,23 @@ class FeedTableView: UIView {
         tableView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+    }
+    
+    //MARK:- Loading indicator
+    func presentActivityIndicator() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        activityIndicator.startAnimating()
+    }
+    
+    func dismissActivityIndicator() {
+        guard activityIndicator.superview != nil else {
+            return
+        }
+        activityIndicator.stopAnimating()
+        activityIndicator.removeFromSuperview()
     }
 }
 
@@ -74,7 +104,7 @@ extension FeedTableView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: ExtendedTableViewCell.cellIdentifier) as? ExtendedTableViewCell
         
         let feed = dataSource![indexPath.row]
-        cell?.data = (title:feed.title , description: feed.description, details: feed.date, icon: UIImage.init(named: "Logo")!)
+        cell?.data = (title:feed.title , description: feed.description, details: feed.date?.simpleDateFormat(), icon: UIImage.init(named: "Logo")!)
         cell?.backgroundColor = UIColor.BgColor
         cell?.cellView.view.backgroundColor = UIColor.elementBgColor
         cell?.selectionStyle = .none

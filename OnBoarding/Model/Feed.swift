@@ -9,8 +9,20 @@
 import Foundation
 
 struct Feed {
-    var identifier: String
-    var title: String
-    var description: String
-    var date: String
+    var identifier: String?
+    var title: String?
+    var description: String?
+    var details: String?
+    var date: Date?
+    
+    init?(json: [String: Any]) {
+        guard let title = json["title"], let description = json["description"], let details = json["details"], let date = json["date"] else {
+            return nil
+        }
+        
+        self.title = title as? String
+        self.description = description as? String
+        self.details = details as? String
+        self.date = date as? Date
+    }
 }
