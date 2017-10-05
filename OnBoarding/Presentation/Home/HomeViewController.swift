@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
         setupProfileView()
         setupMainMenuView()
         setupFeedTableView()
+        setupTriggerView()
         fetchFeeds()
     }
     
@@ -119,6 +120,12 @@ class HomeViewController: UIViewController {
         feedTableView.delgate = self
     }
     
+    func setupTriggerView() {
+        triggerView.data = (title:"No Feed available", icon: UIImage.init(named:"NoMails"), action: { [weak self] in
+            self?.fetchFeeds()
+        })
+    }
+    
     func presentNewsTableView() {
         if triggerView.superview != nil {
             triggerView.removeFromSuperview()
@@ -132,7 +139,6 @@ class HomeViewController: UIViewController {
         }
         triggerView.status = .loading
         layout(contentView: triggerView)
-        triggerView.data = (title:"No Feed available", icon: UIImage.init(named:"NoMails"), action: nil)
     }
     
     //MARK:- Feeds

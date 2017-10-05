@@ -81,6 +81,6 @@ class TriggerView: UIView {
         guard infoView.superview != nil else {
             return
         }
-        activityInd.removeFromSuperview()
+        infoView.removeFromSuperview()
     }
 }
