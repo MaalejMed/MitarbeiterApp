@@ -59,13 +59,13 @@ class TimesheetPreviewViewController: UIViewController {
                 for key in EntryKey.allProjectKeys {
                     switch key {
                     case .date:
-                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (timesheet?.date?.simpleDateFormat())! ))
+                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (timesheet?.day?.simpleDateFormat())! ))
                     case .identifier:
                         entries.append(TimesheetEntry(info: .project, key: key, value: (timesheet?.projectID)! ))
                     case .activity:
                         entries.append(TimesheetEntry(info: .project, key: key, value: (timesheet?.activity)! ))
                     case .buillable:
-                        entries.append(TimesheetEntry(info: .project, key: key, value: (timesheet?.buillable)! ))
+                        entries.append(TimesheetEntry(info: .project, key: key, value: (timesheet?.billable)! ))
                     case .startWorking, .stopWorking, .lunchBreak: break
                     }
                 }
@@ -97,6 +97,10 @@ class TimesheetPreviewViewController: UIViewController {
     
     //MARK:- Selectors
     @objc func sendButtonTapped() {
+        let timeManager = TimeManager()
+        timeManager.submit(timesheet: timesheet!, completion: { response in
+            print(response!)
+        })
         sendBtn.status = .loading
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
             for vc in (self?.navigationController?.viewControllers)! {

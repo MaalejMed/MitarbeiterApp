@@ -16,7 +16,7 @@ class TimesheetViewController: UIViewController {
     let pickerView = PickerView(frame: .zero)
     
     var timesheetEntries: [EntryInfo: [TimesheetEntry]] = [:]
-    var timesheet = Timesheet(date: Date(), projectID: nil, activity: nil, buillable: nil, workFrom: nil, workUntil: nil, workedHours:nil, breakFrom: nil, breakUntil: nil, lunchBreak: nil)
+    var timesheet = Timesheet(day: Date(), projectID: nil, associateID: "645438", activity: nil, billable: nil, workFrom: nil, workUntil: nil, workedHours:nil, breakFrom: nil, breakUntil: nil, lunchBreak: nil)
     
     //MARK:- Views lifecycles
     override func viewDidLoad() {
@@ -136,8 +136,8 @@ class TimesheetViewController: UIViewController {
             timesheet.activity = value as? String ?? nil
             timesheetEntries[section]![key.index()].value = timesheet.activity!
         case .buillable:
-            timesheet.buillable = value as? String ?? nil
-            timesheetEntries[section]![key.index()].value = timesheet.buillable!
+            timesheet.billable = value as? String ?? nil
+            timesheetEntries[section]![key.index()].value = timesheet.billable!
         case .identifier:
             timesheet.projectID = value as? String ?? nil
             timesheetEntries[section]![key.index()].value = timesheet.projectID!
@@ -193,7 +193,7 @@ class TimesheetViewController: UIViewController {
     
     //MARK:- Preview
     func preview() {
-        guard timesheet.date != nil, timesheet.projectID != nil, timesheet.activity != nil, timesheet.buillable != nil, timesheet.workFrom != nil, timesheet.workUntil != nil, timesheet.workedHours != nil, timesheet.breakFrom != nil, timesheet.breakUntil != nil, timesheet.lunchBreak != nil else {
+        guard timesheet.day != nil, timesheet.projectID != nil, timesheet.activity != nil, timesheet.billable != nil, timesheet.workFrom != nil, timesheet.workUntil != nil, timesheet.workedHours != nil, timesheet.breakFrom != nil, timesheet.breakUntil != nil, timesheet.lunchBreak != nil else {
             return
         }
         let timesheetPreviewVC = TimesheetPreviewViewController()
