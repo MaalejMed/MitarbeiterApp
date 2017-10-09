@@ -97,9 +97,15 @@ class LoginViewController: UIViewController {
                 self?.presentAlertView(failure: failure!)
                 return
             }
-            print(associate)
+            self?.setupDataManager(associate: associate!)
             let homeVC = HomeViewController()
             self?.navigationController?.pushViewController(homeVC, animated: true)
         })
+    }
+    
+    //MARK:- Setup data manager
+    func setupDataManager(associate: Associate) {
+        DataManager.sharedInstance.associate = associate
+        DataManager.sharedInstance.timesheet = Timesheet(associate: associate.identifier!)
     }
 }

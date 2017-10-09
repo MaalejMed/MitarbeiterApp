@@ -102,7 +102,10 @@ class HomeViewController: UIViewController {
     
     //MARK:- Views
     func setupProfileView() {
-        profileView.data = (title: "Mohamed Maalej", icon: nil, action: nil)
+        guard let associate = DataManager.sharedInstance.associate else {
+            return
+        }
+        profileView.data = (title: associate.name , icon: nil, action: nil)
         profileView.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
     }
     

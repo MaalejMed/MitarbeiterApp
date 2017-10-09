@@ -14,9 +14,7 @@ class TimesheetViewController: UIViewController {
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
     let timerButton = TimerButton(frame: .zero)
     let pickerView = PickerView(frame: .zero)
-    
     var timesheetEntries: [EntryInfo: [TimesheetEntry]] = [:]
-    var timesheet = Timesheet(day: Date(), projectID: nil, associateID: "645438", activity: nil, billable: nil, workFrom: nil, workUntil: nil, workedHours:nil, breakFrom: nil, breakUntil: nil, lunchBreak: nil)
     
     //MARK:- Views lifecycles
     override func viewDidLoad() {
@@ -130,34 +128,39 @@ class TimesheetViewController: UIViewController {
     
     //MARK:- Update data
     func update(key:EntryKey, value: Any) {
+        let dataManager = DataManager.sharedInstance
+        guard dataManager.timesheet != nil else {
+            return
+        }
+        
         let section = key.section()
         switch (key) {
         case .activity:
-            timesheet.activity = value as? String ?? nil
-            timesheetEntries[section]![key.index()].value = timesheet.activity!
+            dataManager.timesheet!.activity = value as? String ?? nil
+            timesheetEntries[section]![key.index()].value = dataManager.timesheet!.activity!
         case .buillable:
-            timesheet.billable = value as? String ?? nil
-            timesheetEntries[section]![key.index()].value = timesheet.billable!
+            dataManager.timesheet!.billable = value as? String ?? nil
+            timesheetEntries[section]![key.index()].value = dataManager.timesheet!.billable!
         case .identifier:
-            timesheet.projectID = value as? String ?? nil
-            timesheetEntries[section]![key.index()].value = timesheet.projectID!
+            dataManager.timesheet!.projectID = value as? String ?? nil
+            timesheetEntries[section]![key.index()].value = dataManager.timesheet!.projectID!
         case .date:
             break
         case .startWorking:
-            timesheet.workFrom = value as? Date ?? nil
-            timesheetEntries[section]![key.index()].value = (timesheet.workFrom?.simpleHoursFormat())!
+            dataManager.timesheet!.workFrom = value as? Date ?? nil
+            timesheetEntries[section]![key.index()].value = (dataManager.timesheet!.workFrom?.simpleHoursFormat())!
         case .lunchBreak:
-            timesheet.breakUntil = value as? Date ?? nil
-            let lunchBreak = TimeCalculator.lunckBreak(start: (self.timesheet.breakFrom)!, end: (self.timesheet.breakUntil)!)
-            timesheet.lunchBreak = lunchBreak
-            let hours = (timesheet.lunchBreak?.hours)!
-            let minutes = (timesheet.lunchBreak?.minutes)!
+            dataManager.timesheet!.breakUntil = value as? Date ?? nil
+            let lunchBreak = TimeCalculator.lunckBreak(start: (dataManager.timesheet!.breakFrom)!, end: (dataManager.timesheet!.breakUntil)!)
+            dataManager.timesheet!.lunchBreak = lunchBreak
+            let hours = (dataManager.timesheet!.lunchBreak?.hours)!
+            let minutes = (dataManager.timesheet!.lunchBreak?.minutes)!
             timesheetEntries[section]![key.index()].value = "\(hours) : \(minutes)"
 
         case . stopWorking:
-            timesheet.workUntil = value as? Date ?? nil
-            timesheetEntries[section]![key.index()].value = (timesheet.workUntil?.simpleHoursFormat())!
-            self.timesheet.workedHours = TimeCalculator.workedHours(start: (self.timesheet.workFrom)!, end: (self.timesheet.workUntil)!, lunchBreak: timesheet.lunchBreak!)
+            dataManager.timesheet!.workUntil = value as? Date ?? nil
+            timesheetEntries[section]![key.index()].value = (dataManager.timesheet!.workUntil?.simpleHoursFormat())!
+            dataManager.timesheet!.workedHours = TimeCalculator.workedHours(start: (dataManager.timesheet!.workFrom)!, end: (dataManager.timesheet!.workUntil)!, lunchBreak: dataManager.timesheet!.lunchBreak!)
         }
         
         timesheetInfoTV.dataSource = self.timesheetEntries
@@ -165,6 +168,11 @@ class TimesheetViewController: UIViewController {
     
     //MARK:- Selectors
     @objc func timeButtonTapped() {
+        let dataManager = DataManager.sharedInstance
+        guard dataManager.timesheet != nil else {
+            return
+        }
+        
         var key: EntryKey?
         var value: Any?
         switch (timerButton.status)! {
@@ -173,7 +181,7 @@ class TimesheetViewController: UIViewController {
             key = .startWorking
             value = Date()
         case .startLunchBreak: // there is No UI update for this action
-            timesheet.breakFrom = Date()
+            dataManager.timesheet!.breakFrom = Date()
             timerButton.status = .stopLunchBreak
             return
         case .stopLunchBreak:
@@ -193,11 +201,15 @@ class TimesheetViewController: UIViewController {
     
     //MARK:- Preview
     func preview() {
-        guard timesheet.day != nil, timesheet.projectID != nil, timesheet.activity != nil, timesheet.billable != nil, timesheet.workFrom != nil, timesheet.workUntil != nil, timesheet.workedHours != nil, timesheet.breakFrom != nil, timesheet.breakUntil != nil, timesheet.lunchBreak != nil else {
+        let dataManager = DataManager.sharedInstance
+        guard dataManager.timesheet != nil else {
+            return
+        }
+        
+        guard dataManager.timesheet!.day != nil, dataManager.timesheet!.projectID != nil, dataManager.timesheet!.activity != nil, dataManager.timesheet!.billable != nil, dataManager.timesheet!.workFrom != nil, dataManager.timesheet!.workUntil != nil, dataManager.timesheet!.workedHours != nil, dataManager.timesheet!.breakFrom != nil, dataManager.timesheet!.breakUntil != nil, dataManager.timesheet!.lunchBreak != nil else {
             return
         }
         let timesheetPreviewVC = TimesheetPreviewViewController()
-        timesheetPreviewVC.timesheet = timesheet
         self.navigationController?.pushViewController(timesheetPreviewVC, animated: true)
     }
 }

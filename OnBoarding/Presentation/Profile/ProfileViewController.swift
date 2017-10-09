@@ -70,7 +70,10 @@ class ProfileViewController: UIViewController {
         profileView.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
         // unowned because the profileView lives as long as the VC lives
         // If profileView lives shorter than VC, it could be set as weak
-        profileView.data = (title: "associate.name", icon: nil, action: {
+        guard let associate = DataManager.sharedInstance.associate else {
+            return
+        }
+        profileView.data = (title: associate.name, icon: nil, action: {
             [unowned self] in
             self.changeProfileImage()
         })

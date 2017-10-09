@@ -13,7 +13,6 @@ class TimesheetPreviewViewController: UIViewController {
     //MARK:- Properties
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
     let sendBtn =  TriggerButton(frame: .zero)
-    var timesheet: Timesheet?
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
@@ -51,6 +50,11 @@ class TimesheetPreviewViewController: UIViewController {
     
     //MARK:- Setup views
     func setupTimesheetInfoTV() {
+        let dataManager = DataManager.sharedInstance
+        guard let previewTimesheet = dataManager.timesheet else {
+            return
+        }
+        
         var timesheetEntries: [EntryInfo:[TimesheetEntry]] = [:]
         for info in EntryInfo.allValues {
             var entries: [TimesheetEntry] = []
@@ -59,13 +63,13 @@ class TimesheetPreviewViewController: UIViewController {
                 for key in EntryKey.allProjectKeys {
                     switch key {
                     case .date:
-                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (timesheet?.day?.simpleDateFormat())! ))
+                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (previewTimesheet.day?.simpleDateFormat())! ))
                     case .identifier:
-                        entries.append(TimesheetEntry(info: .project, key: key, value: (timesheet?.projectID)! ))
+                        entries.append(TimesheetEntry(info: .project, key: key, value: (previewTimesheet.projectID)! ))
                     case .activity:
-                        entries.append(TimesheetEntry(info: .project, key: key, value: (timesheet?.activity)! ))
+                        entries.append(TimesheetEntry(info: .project, key: key, value: (previewTimesheet.activity)! ))
                     case .buillable:
-                        entries.append(TimesheetEntry(info: .project, key: key, value: (timesheet?.billable)! ))
+                        entries.append(TimesheetEntry(info: .project, key: key, value: (previewTimesheet.billable)! ))
                     case .startWorking, .stopWorking, .lunchBreak: break
                     }
                 }
@@ -74,12 +78,12 @@ class TimesheetPreviewViewController: UIViewController {
                     switch key {
                     case .date, .activity, .identifier, .buillable: break
                     case .startWorking:
-                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (timesheet?.workFrom?.simpleHoursFormat())! ))
+                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (previewTimesheet.workFrom?.simpleHoursFormat())! ))
                     case .stopWorking:
-                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (timesheet?.workUntil?.simpleHoursFormat())! ))
+                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (previewTimesheet.workUntil?.simpleHoursFormat())! ))
                     case .lunchBreak:
-                        let hours = (timesheet?.lunchBreak?.hours)!
-                        let minutes = (timesheet?.lunchBreak?.minutes)!
+                        let hours = (previewTimesheet.lunchBreak?.hours)!
+                        let minutes = (previewTimesheet.lunchBreak?.minutes)!
                         entries.append(TimesheetEntry(info: key.section(), key: key, value: "\(hours) : \(minutes)"))
                     }
                 }
@@ -97,8 +101,14 @@ class TimesheetPreviewViewController: UIViewController {
     
     //MARK:- Selectors
     @objc func sendButtonTapped() {
+        let dataManager = DataManager.sharedInstance
+        guard let submittedTimesheet = dataManager.timesheet else {
+            return
+        }
+        
         let timeManager = TimeManager()
-        timeManager.submit(timesheet: timesheet!, completion: { response in
+        timeManager.submit(timesheet: submittedTimesheet, completion: { response in
+            dataManager.resetTimesheet()
             print(response!)
         })
         sendBtn.status = .loading
