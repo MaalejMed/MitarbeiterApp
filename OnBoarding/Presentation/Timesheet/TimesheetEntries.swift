@@ -11,7 +11,7 @@ import Foundation
 struct TimesheetEntry: Equatable {
     var info: EntryInfo
     var key: EntryKey
-    var value: String
+    var value: String?
     
     static func ==(lhs: TimesheetEntry, rhs: TimesheetEntry) -> Bool {
         return lhs.key == rhs.key

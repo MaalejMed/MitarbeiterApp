@@ -70,8 +70,8 @@ class BasicCellContentView: UIView, CellViewProtocol {
         return imageView
     }()
     
-    let detailsLbl: UILabel = {
-        let label = UILabel()
+    let detailsLbl: TimeTextField = {
+        let label = TimeTextField()
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 11)
         return label
@@ -98,7 +98,7 @@ class BasicCellContentView: UIView, CellViewProtocol {
         }
         
         var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[icon(25)]-(10)-[title]-(10)-[details]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[icon(25)]-(10)-[title]-(10)-[details(>=70)]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[icon(25)]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
             titleLbl.centerYAnchor.constraint(equalTo: self.centerYAnchor),

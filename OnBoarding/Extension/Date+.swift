@@ -23,7 +23,7 @@ extension Date {
     
     func simpleHoursFormat() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss"
+        dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: self)
     }
 }

@@ -104,14 +104,14 @@ class TimesheetViewController: UIViewController {
             case .project:
                 var entries: [TimesheetEntry] = []
                 for key in EntryKey.allProjectKeys {
-                    let timesheetEntry = TimesheetEntry (info: parameter, key: key, value: "-")
+                    let timesheetEntry = TimesheetEntry (info: parameter, key: key, value: nil)
                     entries.append(timesheetEntry)
                     timesheetEntries [.project] = entries
                 }
             case .time:
                 var entries: [TimesheetEntry] = []
                 for key in EntryKey.allTimeKeys {
-                    let timesheetEntry = TimesheetEntry (info: parameter, key: key, value: "-")
+                    let timesheetEntry = TimesheetEntry (info: parameter, key: key, value: nil)
                     entries.append(timesheetEntry)
                     timesheetEntries [.time] = entries
                 }
@@ -151,7 +151,7 @@ class TimesheetViewController: UIViewController {
             timesheetEntries[section]![key.index()].value = (dataManager.timesheet!.workFrom?.simpleHoursFormat())!
         case .lunchBreak:
             dataManager.timesheet!.breakUntil = value as? Date ?? nil
-            let lunchBreak = TimeCalculator.lunckBreak(start: (dataManager.timesheet!.breakFrom)!, end: (dataManager.timesheet!.breakUntil)!)
+            let lunchBreak = TimeHelper.calculateLunckBreak(start: (dataManager.timesheet!.breakFrom)!, end: (dataManager.timesheet!.breakUntil)!)
             dataManager.timesheet!.lunchBreak = lunchBreak
             let hours = (dataManager.timesheet!.lunchBreak?.hours)!
             let minutes = (dataManager.timesheet!.lunchBreak?.minutes)!
@@ -160,7 +160,7 @@ class TimesheetViewController: UIViewController {
         case . stopWorking:
             dataManager.timesheet!.workUntil = value as? Date ?? nil
             timesheetEntries[section]![key.index()].value = (dataManager.timesheet!.workUntil?.simpleHoursFormat())!
-            dataManager.timesheet!.workedHours = TimeCalculator.workedHours(start: (dataManager.timesheet!.workFrom)!, end: (dataManager.timesheet!.workUntil)!, lunchBreak: dataManager.timesheet!.lunchBreak!)
+            dataManager.timesheet!.workedHours = TimeHelper.calculateWorkedHours(start: (dataManager.timesheet!.workFrom)!, end: (dataManager.timesheet!.workUntil)!, lunchBreak: dataManager.timesheet!.lunchBreak!)
         }
         
         timesheetInfoTV.dataSource = self.timesheetEntries
