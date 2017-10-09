@@ -35,6 +35,11 @@ class TimeHelper {
     }
     
     static func shoudlChange(timeString: String, range: NSRange, newString: String) -> Bool {
+        
+        guard newString == "" || newString.isNumber else {
+            return false
+        }
+        
         if let indexOfSeperator = timeString.index(of: ":") {
             let timeComponents = timeString.components(separatedBy: ":")
             // validate hours change

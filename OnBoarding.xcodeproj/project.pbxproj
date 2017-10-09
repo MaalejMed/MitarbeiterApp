@@ -7,12 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		772BD9821F695C7B003FEC2B /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9811F695C7B003FEC2B /* InfoView.swift */; };
 		772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9831F695E2C003FEC2B /* UIImageView+.swift */; };
 		772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F315E1F74081B00775AA8 /* Timesheet.swift */; };
 		772F31611F7409D400775AA8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F31601F7409D400775AA8 /* Date+.swift */; };
-		772F31631F7505E000775AA8 /* TimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F31621F7505E000775AA8 /* TimeHelper.swift */; };
-		7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7749AC781F6BB94100F1939C /* MediaViewController.swift */; };
 		7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA231F66E3D4005197ED /* CreatePasswordView.swift */; };
 		7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA241F66E3D5005197ED /* RequestIDView.swift */; };
 		7754CA281F66E476005197ED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA271F66E476005197ED /* LoginViewController.swift */; };
@@ -21,12 +18,22 @@
 		7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA301F67CC22005197ED /* ProfileViewController.swift */; };
 		7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA321F67CC60005197ED /* GSDViewController.swift */; };
 		7754CA381F67D8D1005197ED /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA371F67D8D1005197ED /* MainMenuView.swift */; };
-		7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA391F67DCBB005197ED /* CellViewProtocols.swift */; };
 		7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA3B1F67E059005197ED /* HomeCollectionViewCell.swift */; };
-		7756907A1F8B61E10049DE5E /* TimeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690791F8B61E10049DE5E /* TimeTextField.swift */; };
 		7756907C1F8B933B0049DE5E /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756907B1F8B933B0049DE5E /* String+.swift */; };
+		7756908F1F8BB8200049DE5E /* Failure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756907F1F8BB8200049DE5E /* Failure.swift */; };
+		775690901F8BB8200049DE5E /* TimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690801F8BB8200049DE5E /* TimeHelper.swift */; };
+		775690911F8BB8200049DE5E /* CellViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690821F8BB8200049DE5E /* CellViewProtocols.swift */; };
+		775690921F8BB8200049DE5E /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690841F8BB8200049DE5E /* BasicTableViewCell.swift */; };
+		775690931F8BB8200049DE5E /* ExtendedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690851F8BB8200049DE5E /* ExtendedTableViewCell.swift */; };
+		775690941F8BB8200049DE5E /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690871F8BB8200049DE5E /* AlertView.swift */; };
+		775690951F8BB8200049DE5E /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690881F8BB8200049DE5E /* InfoView.swift */; };
+		775690961F8BB8200049DE5E /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690891F8BB8200049DE5E /* MediaViewController.swift */; };
+		775690971F8BB8200049DE5E /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756908A1F8BB8200049DE5E /* PickerView.swift */; };
+		775690981F8BB8200049DE5E /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756908B1F8BB8200049DE5E /* TextView.swift */; };
+		775690991F8BB8210049DE5E /* TimeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756908C1F8BB8200049DE5E /* TimeTextField.swift */; };
+		7756909A1F8BB8210049DE5E /* TriggerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756908D1F8BB8200049DE5E /* TriggerButton.swift */; };
+		7756909B1F8BB8210049DE5E /* TriggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756908E1F8BB8200049DE5E /* TriggerView.swift */; };
 		776075AB1F851814009BB974 /* FeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776075AA1F851814009BB974 /* FeedManager.swift */; };
-		776075AD1F860F70009BB974 /* TriggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776075AC1F860F70009BB974 /* TriggerView.swift */; };
 		776075AF1F861957009BB974 /* MainMenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776075AE1F861957009BB974 /* MainMenuItems.swift */; };
 		776075B11F862397009BB974 /* TimesheetEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776075B01F862397009BB974 /* TimesheetEntries.swift */; };
 		776075B31F862663009BB974 /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776075B21F862662009BB974 /* TimerButton.swift */; };
@@ -40,7 +47,6 @@
 		7782B1DD1F7A52D80024F976 /* TimesheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1DC1F7A52D80024F976 /* TimesheetViewController.swift */; };
 		7782B1E11F7A530E0024F976 /* TimesheetInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E01F7A530E0024F976 /* TimesheetInfoTableView.swift */; };
 		7782B1E31F7A53220024F976 /* TimesheetPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E21F7A53220024F976 /* TimesheetPreviewViewController.swift */; };
-		7782B1E91F7A82BD0024F976 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E81F7A82BD0024F976 /* TextView.swift */; };
 		7782B1EB1F7A948C0024F976 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1EA1F7A948C0024F976 /* Message.swift */; };
 		7782B1ED1F7A94E00024F976 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1EC1F7A94E00024F976 /* MessageResponse.swift */; };
 		7782B1EF1F7A9A740024F976 /* MessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1EE1F7A9A740024F976 /* MessageTableView.swift */; };
@@ -48,22 +54,16 @@
 		778C02CE1F86771C0011E01D /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02CD1F86771C0011E01D /* TimeService.swift */; };
 		778C03001F87C05F0011E01D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02FF1F87C05F0011E01D /* DataManager.swift */; };
 		77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601951F6BDB70000BC777 /* ProfileTableView.swift */; };
-		77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */; };
 		77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF631F6FEF610097CF46 /* MessageViewController.swift */; };
 		77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF651F6FEF7F0097CF46 /* MessageView.swift */; };
 		77D919171F7258FF00BFAB45 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919161F7258FF00BFAB45 /* FeedService.swift */; };
 		77D919191F72591C00BFAB45 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919181F72591C00BFAB45 /* Feed.swift */; };
 		77D9191B1F7262B100BFAB45 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191A1F7262B100BFAB45 /* MenuItem.swift */; };
 		77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191C1F72719D00BFAB45 /* Associate.swift */; };
-		77D919241F728C2100BFAB45 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919231F728C2100BFAB45 /* PickerView.swift */; };
 		77D9D4EF1F7CE6A40058C9D9 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4EE1F7CE6A40058C9D9 /* AuthenticationService.swift */; };
-		77D9D4F11F7CF8EE0058C9D9 /* Failure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4F01F7CF8EE0058C9D9 /* Failure.swift */; };
 		77D9D4F41F7D01460058C9D9 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4F31F7D01460058C9D9 /* AuthenticationManager.swift */; };
-		77D9D4F61F7D04410058C9D9 /* TriggerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4F51F7D04410058C9D9 /* TriggerButton.swift */; };
 		77FB51ED1F73D438006E73AB /* TimeInterval+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB51EC1F73D438006E73AB /* TimeInterval+.swift */; };
-		77FFA8661F700D390034B746 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8651F700D390034B746 /* AlertView.swift */; };
 		77FFA8681F7132870034B746 /* FeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8671F7132870034B746 /* FeedTableView.swift */; };
-		77FFA86A1F7135B70034B746 /* ExtendedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */; };
 		FA7672CEFE7EB9ABA6B7067D /* Pods_OnBoarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8FACB739714BCEC9757CA2 /* Pods_OnBoarding.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,12 +88,9 @@
 		06A517FBACF267C9A5F17FEF /* Pods-OnBoarding.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnBoarding.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnBoarding/Pods-OnBoarding.debug.xcconfig"; sourceTree = "<group>"; };
 		36EC0F5F2B0BDD0EA9FEF977 /* Pods-OnBoarding.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnBoarding.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnBoarding/Pods-OnBoarding.release.xcconfig"; sourceTree = "<group>"; };
 		6A8FACB739714BCEC9757CA2 /* Pods_OnBoarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnBoarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		772BD9811F695C7B003FEC2B /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		772BD9831F695E2C003FEC2B /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		772F315E1F74081B00775AA8 /* Timesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timesheet.swift; sourceTree = "<group>"; };
 		772F31601F7409D400775AA8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
-		772F31621F7505E000775AA8 /* TimeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHelper.swift; sourceTree = "<group>"; };
-		7749AC781F6BB94100F1939C /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		7754CA231F66E3D4005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		7754CA241F66E3D5005197ED /* RequestIDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIDView.swift; sourceTree = "<group>"; };
 		7754CA271F66E476005197ED /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -102,12 +99,22 @@
 		7754CA301F67CC22005197ED /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7754CA321F67CC60005197ED /* GSDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDViewController.swift; sourceTree = "<group>"; };
 		7754CA371F67D8D1005197ED /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
-		7754CA391F67DCBB005197ED /* CellViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewProtocols.swift; sourceTree = "<group>"; };
 		7754CA3B1F67E059005197ED /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
-		775690791F8B61E10049DE5E /* TimeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTextField.swift; sourceTree = "<group>"; };
 		7756907B1F8B933B0049DE5E /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		7756907F1F8BB8200049DE5E /* Failure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Failure.swift; sourceTree = "<group>"; };
+		775690801F8BB8200049DE5E /* TimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeHelper.swift; sourceTree = "<group>"; };
+		775690821F8BB8200049DE5E /* CellViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellViewProtocols.swift; sourceTree = "<group>"; };
+		775690841F8BB8200049DE5E /* BasicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
+		775690851F8BB8200049DE5E /* ExtendedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedTableViewCell.swift; sourceTree = "<group>"; };
+		775690871F8BB8200049DE5E /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		775690881F8BB8200049DE5E /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		775690891F8BB8200049DE5E /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
+		7756908A1F8BB8200049DE5E /* PickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		7756908B1F8BB8200049DE5E /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		7756908C1F8BB8200049DE5E /* TimeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTextField.swift; sourceTree = "<group>"; };
+		7756908D1F8BB8200049DE5E /* TriggerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerButton.swift; sourceTree = "<group>"; };
+		7756908E1F8BB8200049DE5E /* TriggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerView.swift; sourceTree = "<group>"; };
 		776075AA1F851814009BB974 /* FeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedManager.swift; sourceTree = "<group>"; };
-		776075AC1F860F70009BB974 /* TriggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerView.swift; sourceTree = "<group>"; };
 		776075AE1F861957009BB974 /* MainMenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuItems.swift; sourceTree = "<group>"; };
 		776075B01F862397009BB974 /* TimesheetEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetEntries.swift; sourceTree = "<group>"; };
 		776075B21F862662009BB974 /* TimerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
@@ -127,7 +134,6 @@
 		7782B1DC1F7A52D80024F976 /* TimesheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetViewController.swift; sourceTree = "<group>"; };
 		7782B1E01F7A530E0024F976 /* TimesheetInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetInfoTableView.swift; sourceTree = "<group>"; };
 		7782B1E21F7A53220024F976 /* TimesheetPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetPreviewViewController.swift; sourceTree = "<group>"; };
-		7782B1E81F7A82BD0024F976 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		7782B1EA1F7A948C0024F976 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7782B1EC1F7A94E00024F976 /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		7782B1EE1F7A9A740024F976 /* MessageTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableView.swift; sourceTree = "<group>"; };
@@ -135,22 +141,16 @@
 		778C02CD1F86771C0011E01D /* TimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		778C02FF1F87C05F0011E01D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		77B601951F6BDB70000BC777 /* ProfileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableView.swift; sourceTree = "<group>"; };
-		77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
 		77BEDF631F6FEF610097CF46 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		77BEDF651F6FEF7F0097CF46 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		77D919161F7258FF00BFAB45 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
 		77D919181F72591C00BFAB45 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		77D9191A1F7262B100BFAB45 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		77D9191C1F72719D00BFAB45 /* Associate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Associate.swift; sourceTree = "<group>"; };
-		77D919231F728C2100BFAB45 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		77D9D4EE1F7CE6A40058C9D9 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
-		77D9D4F01F7CF8EE0058C9D9 /* Failure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Failure.swift; sourceTree = "<group>"; };
 		77D9D4F31F7D01460058C9D9 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
-		77D9D4F51F7D04410058C9D9 /* TriggerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerButton.swift; sourceTree = "<group>"; };
 		77FB51EC1F73D438006E73AB /* TimeInterval+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+.swift"; sourceTree = "<group>"; };
-		77FFA8651F700D390034B746 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		77FFA8671F7132870034B746 /* FeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableView.swift; sourceTree = "<group>"; };
-		77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,24 +232,56 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		7754CA341F67D512005197ED /* Common */ = {
+		7756907D1F8BB8200049DE5E /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				7782B1E81F7A82BD0024F976 /* TextView.swift */,
-				7749AC781F6BB94100F1939C /* MediaViewController.swift */,
-				7754CA391F67DCBB005197ED /* CellViewProtocols.swift */,
-				772BD9811F695C7B003FEC2B /* InfoView.swift */,
-				77B601971F6BEA42000BC777 /* BasicTableViewCell.swift */,
-				77FFA8651F700D390034B746 /* AlertView.swift */,
-				77FFA8691F7135B70034B746 /* ExtendedTableViewCell.swift */,
-				77D919231F728C2100BFAB45 /* PickerView.swift */,
-				772F31621F7505E000775AA8 /* TimeHelper.swift */,
-				77D9D4F01F7CF8EE0058C9D9 /* Failure.swift */,
-				77D9D4F51F7D04410058C9D9 /* TriggerButton.swift */,
-				776075AC1F860F70009BB974 /* TriggerView.swift */,
-				775690791F8B61E10049DE5E /* TimeTextField.swift */,
+				7756907E1F8BB8200049DE5E /* Others */,
+				775690811F8BB8200049DE5E /* Protocols */,
+				775690831F8BB8200049DE5E /* TV-Cells */,
+				775690861F8BB8200049DE5E /* UI-Elements */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		7756907E1F8BB8200049DE5E /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				7756907F1F8BB8200049DE5E /* Failure.swift */,
+				775690801F8BB8200049DE5E /* TimeHelper.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		775690811F8BB8200049DE5E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				775690821F8BB8200049DE5E /* CellViewProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		775690831F8BB8200049DE5E /* TV-Cells */ = {
+			isa = PBXGroup;
+			children = (
+				775690841F8BB8200049DE5E /* BasicTableViewCell.swift */,
+				775690851F8BB8200049DE5E /* ExtendedTableViewCell.swift */,
+			);
+			path = "TV-Cells";
+			sourceTree = "<group>";
+		};
+		775690861F8BB8200049DE5E /* UI-Elements */ = {
+			isa = PBXGroup;
+			children = (
+				775690871F8BB8200049DE5E /* AlertView.swift */,
+				775690881F8BB8200049DE5E /* InfoView.swift */,
+				775690891F8BB8200049DE5E /* MediaViewController.swift */,
+				7756908A1F8BB8200049DE5E /* PickerView.swift */,
+				7756908B1F8BB8200049DE5E /* TextView.swift */,
+				7756908C1F8BB8200049DE5E /* TimeTextField.swift */,
+				7756908D1F8BB8200049DE5E /* TriggerButton.swift */,
+				7756908E1F8BB8200049DE5E /* TriggerView.swift */,
+			);
+			path = "UI-Elements";
 			sourceTree = "<group>";
 		};
 		776EDC4E1F62BB5400D0A0AC = {
@@ -277,10 +309,10 @@
 		776EDC591F62BB5400D0A0AC /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
+				7756907D1F8BB8200049DE5E /* Common */,
 				77D9D4F21F7D00D70058C9D9 /* Business */,
 				77D919151F7258ED00BFAB45 /* Model */,
 				772BD9871F6BAA05003FEC2B /* Service */,
-				7754CA341F67D512005197ED /* Common */,
 				776EDC911F62C75A00D0A0AC /* Extension */,
 				776EDC891F62BC5700D0A0AC /* Presentation */,
 				776EDC5A1F62BB5400D0A0AC /* AppDelegate.swift */,
@@ -578,56 +610,56 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7756908F1F8BB8200049DE5E /* Failure.swift in Sources */,
 				7754CA2A1F66E48C005197ED /* LoginView.swift in Sources */,
 				77D919191F72591C00BFAB45 /* Feed.swift in Sources */,
 				77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */,
 				7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */,
-				77B601981F6BEA42000BC777 /* BasicTableViewCell.swift in Sources */,
+				7756909A1F8BB8210049DE5E /* TriggerButton.swift in Sources */,
 				7782B1E11F7A530E0024F976 /* TimesheetInfoTableView.swift in Sources */,
 				776075AB1F851814009BB974 /* FeedManager.swift in Sources */,
 				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,
 				77D9D4F41F7D01460058C9D9 /* AuthenticationManager.swift in Sources */,
 				7782B1DD1F7A52D80024F976 /* TimesheetViewController.swift in Sources */,
+				775690911F8BB8200049DE5E /* CellViewProtocols.swift in Sources */,
 				7756907C1F8B933B0049DE5E /* String+.swift in Sources */,
 				7782B1EB1F7A948C0024F976 /* Message.swift in Sources */,
 				772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */,
 				77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */,
-				772F31631F7505E000775AA8 /* TimeHelper.swift in Sources */,
-				7756907A1F8B61E10049DE5E /* TimeTextField.swift in Sources */,
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
 				7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */,
 				77D9D4EF1F7CE6A40058C9D9 /* AuthenticationService.swift in Sources */,
-				772BD9821F695C7B003FEC2B /* InfoView.swift in Sources */,
 				776075B11F862397009BB974 /* TimesheetEntries.swift in Sources */,
-				7782B1E91F7A82BD0024F976 /* TextView.swift in Sources */,
+				775690971F8BB8200049DE5E /* PickerView.swift in Sources */,
+				775690941F8BB8200049DE5E /* AlertView.swift in Sources */,
+				775690991F8BB8210049DE5E /* TimeTextField.swift in Sources */,
 				778C03001F87C05F0011E01D /* DataManager.swift in Sources */,
+				775690921F8BB8200049DE5E /* BasicTableViewCell.swift in Sources */,
 				778C02CE1F86771C0011E01D /* TimeService.swift in Sources */,
+				7756909B1F8BB8210049DE5E /* TriggerView.swift in Sources */,
 				7754CA381F67D8D1005197ED /* MainMenuView.swift in Sources */,
 				7782B1ED1F7A94E00024F976 /* MessageResponse.swift in Sources */,
-				7749AC791F6BB94100F1939C /* MediaViewController.swift in Sources */,
-				77D919241F728C2100BFAB45 /* PickerView.swift in Sources */,
 				772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */,
+				775690931F8BB8200049DE5E /* ExtendedTableViewCell.swift in Sources */,
+				775690901F8BB8200049DE5E /* TimeHelper.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
 				77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */,
-				77FFA8661F700D390034B746 /* AlertView.swift in Sources */,
 				77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */,
+				775690961F8BB8200049DE5E /* MediaViewController.swift in Sources */,
 				776075AF1F861957009BB974 /* MainMenuItems.swift in Sources */,
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
-				77FFA86A1F7135B70034B746 /* ExtendedTableViewCell.swift in Sources */,
 				7782B1E31F7A53220024F976 /* TimesheetPreviewViewController.swift in Sources */,
 				77D919171F7258FF00BFAB45 /* FeedService.swift in Sources */,
 				772F31611F7409D400775AA8 /* Date+.swift in Sources */,
-				7754CA3A1F67DCBB005197ED /* CellViewProtocols.swift in Sources */,
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,
+				775690951F8BB8200049DE5E /* InfoView.swift in Sources */,
 				778C02CC1F8674560011E01D /* TimeManager.swift in Sources */,
-				776075AD1F860F70009BB974 /* TriggerView.swift in Sources */,
 				77FFA8681F7132870034B746 /* FeedTableView.swift in Sources */,
 				77D9191B1F7262B100BFAB45 /* MenuItem.swift in Sources */,
 				7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */,
+				775690981F8BB8200049DE5E /* TextView.swift in Sources */,
 				7782B1EF1F7A9A740024F976 /* MessageTableView.swift in Sources */,
-				77D9D4F11F7CF8EE0058C9D9 /* Failure.swift in Sources */,
-				77D9D4F61F7D04410058C9D9 /* TriggerButton.swift in Sources */,
 				776075B31F862663009BB974 /* TimerButton.swift in Sources */,
 				77FB51ED1F73D438006E73AB /* TimeInterval+.swift in Sources */,
 			);
