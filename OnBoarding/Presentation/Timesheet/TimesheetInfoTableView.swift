@@ -17,7 +17,6 @@ class TimesheetInfoTableView: UIView {
     //MARK:- Properties
     let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.isScrollEnabled = false
         tableView.backgroundColor = UIColor.BgColor
         tableView.separatorStyle = .none
         return tableView
@@ -38,7 +37,7 @@ class TimesheetInfoTableView: UIView {
     static var height: CGFloat {
         let projectKeys = EntryKey.allProjectKeys.count
         let timeKeys = EntryKey.allTimeKeys.count
-        return BasicTableViewCell.height * CGFloat(projectKeys + timeKeys) + 60
+        return (BasicTableViewCell.height * CGFloat(projectKeys)) + (TimeTableViewCell.height * CGFloat(timeKeys)) + 60
     }
     
     weak var delegate: TimesheetInfoTableViewDelegate?
@@ -49,6 +48,7 @@ class TimesheetInfoTableView: UIView {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(BasicTableViewCell.self, forCellReuseIdentifier: BasicTableViewCell.cellIdentifier)
+        tableView.register(TimeTableViewCell.self, forCellReuseIdentifier: TimeTableViewCell.cellIdentifier)
         tableView.tableFooterView = UIView()
         layout()
     }
@@ -70,16 +70,24 @@ class TimesheetInfoTableView: UIView {
 
 extension TimesheetInfoTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return BasicTableViewCell.height
+        let info = EntryInfo.allValues[indexPath.section]
+        switch info {
+        case .project:
+            return BasicTableViewCell.height
+        case .time:
+            return TimeTableViewCell.height
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let info = EntryInfo.allValues[indexPath.section]
-        let entry = Array(dataSource![info]!)[indexPath.row]
-        guard entry.info == .project,  entry.key != .date else {
+        switch info {
+        case .project:
+            let entry = Array(dataSource![info]!)[indexPath.row]
+            delegate?.didSelectTimesheetInfo(timesheetInfoTableView: self, entry: entry)
+        case .time:
             return
         }
-        delegate?.didSelectTimesheetInfo(timesheetInfoTableView: self, entry: entry)
     }
 }
 
@@ -99,21 +107,20 @@ extension TimesheetInfoTableView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.cellIdentifier) as? BasicTableViewCell
         let info = EntryInfo.allValues[indexPath.section]
         let entry = Array(dataSource![info]!)[indexPath.row]
-        let value = entry.key == .date ? Date().simpleDateFormat() : entry.value
-        
-        var isEditableCell = false
-        if editMode {
-            isEditableCell = (entry.key == .startWorking ||  entry.key == .stopWorking || entry.key == .lunchBreak) ? true :  false
+        switch info {
+        case .project:
+            let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.cellIdentifier) as? BasicTableViewCell
+            let value = entry.key == .date ? Date().simpleDateFormat() : entry.value
+            cell?.data = (title: entry.key.rawValue, details: value,  icon: nil)
+            return cell!
+        case .time:
+            let cell = tableView.dequeueReusableCell(withIdentifier: TimeTableViewCell.cellIdentifier) as? TimeTableViewCell
+            cell?.data = (entry: entry, editMode: editMode)
+            
+            return cell!
         }
-      
-        cell?.data = (title: entry.key.rawValue, details: value, isEditable: isEditableCell,  icon: nil)
-        cell?.backgroundColor = UIColor.BgColor
-        cell?.cellView.view.backgroundColor = UIColor.elementBgColor
-        cell?.selectionStyle = .none
-        return cell!
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

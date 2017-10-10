@@ -60,7 +60,7 @@ extension ProfileTableView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.cellIdentifier) as? BasicTableViewCell
         
         let item = dataSource![indexPath.row]
-        cell?.data = (title: item.rawValue, details: nil, isEditable: false, icon: item.icon())
+        cell?.data = (title: item.rawValue, details: nil, icon: item.icon())
         cell?.backgroundColor = UIColor.BgColor
         cell?.cellView.view.backgroundColor = UIColor.elementBgColor
         cell?.selectionStyle = .none

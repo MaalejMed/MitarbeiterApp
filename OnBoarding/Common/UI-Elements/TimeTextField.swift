@@ -15,6 +15,7 @@ enum Format {
 
 class TimeTextField: UITextField {
     var format: Format?
+    var key: EntryKey?
     
     //MARK:- Init
     override init(frame: CGRect) {

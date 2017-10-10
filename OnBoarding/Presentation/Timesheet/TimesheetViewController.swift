@@ -219,6 +219,7 @@ class TimesheetViewController: UIViewController {
         editBtn.isSelected = !editBtn.isSelected
         timerButton.isEnabled = !editBtn.isSelected
         timesheetInfoTV.editMode = editBtn.isSelected
+        
     }
     
     //MARK:- Preview
