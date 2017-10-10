@@ -87,8 +87,9 @@ class BasicCellContentView: UIView, CellViewProtocol {
     
     let detailsTextField: TimeTextField = {
         let textfield = TimeTextField()
-        textfield.textColor = .gray
-        textfield.font = UIFont.systemFont(ofSize: 11)
+        textfield.textColor = .black
+        textfield.placeholder = "HH:MM"
+        textfield.font = UIFont.boldSystemFont(ofSize: 13)
         textfield.textAlignment = .right
         textfield.borderStyle = .roundedRect
         textfield.layer.cornerRadius = 5.0
