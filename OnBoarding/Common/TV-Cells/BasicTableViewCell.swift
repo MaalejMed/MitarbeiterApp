@@ -63,8 +63,13 @@ class BasicCellContentView: UIView, CellViewProtocol {
         didSet {
             titleLbl.text = data?.title
             iconImgV.image = data?.icon
-            detailsLbl.text = data?.details
-            let _ = (data?.isEditable == true) ? layout(detailsView: detailsTextField) : layout(detailsView: detailsLbl)
+            if (data?.isEditable == true) {
+                detailsTextField.text = data?.details
+                layout(detailsView: detailsTextField)
+            } else {
+                detailsLbl.text = data?.details
+                layout(detailsView: detailsLbl)
+            }
         }
     }
     

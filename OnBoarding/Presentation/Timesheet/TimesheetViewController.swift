@@ -244,4 +244,3 @@ extension TimesheetViewController: TimesheetInfoTableViewDelegate {
         presentPickerView(entry: entry)
     }
 }
-

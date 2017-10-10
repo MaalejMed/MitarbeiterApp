@@ -79,9 +79,6 @@ extension TimesheetInfoTableView: UITableViewDelegate {
         guard entry.info == .project,  entry.key != .date else {
             return
         }
-        
-        
-        
         delegate?.didSelectTimesheetInfo(timesheetInfoTableView: self, entry: entry)
     }
 }
