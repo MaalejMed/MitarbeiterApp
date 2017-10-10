@@ -217,6 +217,7 @@ class TimesheetViewController: UIViewController {
     
     @objc func editButtonTapped() {
         editBtn.isSelected = !editBtn.isSelected
+        timerButton.isEnabled = !editBtn.isSelected
         timesheetInfoTV.editMode = editBtn.isSelected
     }
     
@@ -237,6 +238,9 @@ class TimesheetViewController: UIViewController {
 
 extension TimesheetViewController: TimesheetInfoTableViewDelegate {
     func didSelectTimesheetInfo(timesheetInfoTableView: TimesheetInfoTableView, entry: TimesheetEntry) {
+        guard editBtn.isSelected == false else {
+            return
+        }
         presentPickerView(entry: entry)
     }
 }
