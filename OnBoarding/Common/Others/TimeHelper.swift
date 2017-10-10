@@ -36,7 +36,7 @@ class TimeHelper {
     
     static func shoudlChange(timeString: String, range: NSRange, newString: String) -> Bool {
         
-        guard newString == "" || newString.isNumber else {
+        guard newString == "" || newString.isNumber() else {
             return false
         }
         

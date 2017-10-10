@@ -41,4 +41,18 @@ extension TimeTextField : UITextFieldDelegate {
 
         return TimeHelper.shoudlChange(timeString: textField.text!, range: range, newString: string)
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else {
+            return
+        }
+        guard !text.validateTimeFormat() else {
+            return
+        }
+        textField.textColor = .red
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.textColor = .black
+    }
 }
