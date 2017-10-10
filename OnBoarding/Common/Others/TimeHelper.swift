@@ -58,9 +58,10 @@ class TimeHelper {
         }
         
         // cannot remove :
-        if timeString.characterAtIndex(index: range.location) == ":", newString == "" {
+        if timeString.characterAtIndex(index: range.location) == ":", newString == "", timeString.characters.count > 1 {
             return false
         }
+        
         return true
     }
 }
