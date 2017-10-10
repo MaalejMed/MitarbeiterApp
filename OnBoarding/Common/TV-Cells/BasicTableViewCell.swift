@@ -14,9 +14,10 @@ class BasicTableViewCell: UITableViewCell, TableViewCellProtocols {
     static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 8.0, leftAnchor: 10.0, bottomAnchor: 5.0, rightAnchor: 10.0)
     var cellView: CellViewProtocol = BasicCellContentView()
     static let height: CGFloat = BasicCellContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
-    var data: (title: String?,details: String?, icon: UIImage?) {
+    
+    var data: (title: String?,details: String?, isEditable: Bool?, icon: UIImage?)? {
         didSet {
-            (cellView as! BasicCellContentView).data = (title: data.title, details:data.details, icon: data.icon)
+            (cellView as! BasicCellContentView).data = (title: data?.title, details:data?.details, isEditable: data?.isEditable, icon: data?.icon)
         }
     }
     
@@ -39,6 +40,14 @@ class BasicTableViewCell: UITableViewCell, TableViewCellProtocols {
         cellView.view.rightAnchor.constraint(equalTo:self.rightAnchor, constant: -metrics.rightAnchor).isActive = true
         cellView.view.bottomAnchor.constraint(equalTo:self.bottomAnchor, constant: -metrics.rightAnchor).isActive = true
     }
+    
+    //MARK:-
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        for view in self.cellView.view.subviews {
+            view.removeFromSuperview()
+        }
+    }
 }
 
 class BasicCellContentView: UIView, CellViewProtocol {
@@ -46,15 +55,16 @@ class BasicCellContentView: UIView, CellViewProtocol {
     //MARK:- Properties
     static var dummy: CellViewProtocol = {
         let view = BasicCellContentView()
-        view.data = (title: "title", details: "details", icon: UIImage.init(named: "Logo"))
+        view.data = (title: "title", details: "details", isEditable: false, icon: UIImage.init(named: "Logo"))
         return view
     }()
     
-    var data: (title: String?, details: String?, icon: UIImage?)? {
+    var data: (title: String?, details: String?, isEditable: Bool?, icon: UIImage?)? {
         didSet {
             titleLbl.text = data?.title
             iconImgV.image = data?.icon
             detailsLbl.text = data?.details
+            let _ = (data?.isEditable == true) ? layout(detailsView: detailsTextField) : layout(detailsView: detailsLbl)
         }
     }
     
@@ -70,9 +80,22 @@ class BasicCellContentView: UIView, CellViewProtocol {
         return imageView
     }()
     
-    let detailsLbl: TimeTextField = {
-        let label = TimeTextField()
+    let detailsTextField: TimeTextField = {
+        let textfield = TimeTextField()
+        textfield.textColor = .gray
+        textfield.font = UIFont.systemFont(ofSize: 11)
+        textfield.textAlignment = .right
+        textfield.borderStyle = .roundedRect
+        textfield.layer.cornerRadius = 5.0
+        textfield.layer.borderWidth = 1.0
+        textfield.layer.borderColor = UIColor.BgColor.cgColor
+        return textfield
+    }()
+    
+    let detailsLbl: UILabel = {
+        let label = UILabel()
         label.textColor = .gray
+        label.textAlignment = .right
         label.font = UIFont.systemFont(ofSize: 11)
         return label
     }()
@@ -81,7 +104,6 @@ class BasicCellContentView: UIView, CellViewProtocol {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = 5.0
-        layout()
     }
     
     //MARK:- Inits
@@ -90,19 +112,30 @@ class BasicCellContentView: UIView, CellViewProtocol {
     }
     
     //MARK:- Layout
-    func layout() {
-        let views: [String: UIView] = ["title": titleLbl, "details": detailsLbl, "icon": iconImgV]
+    func layout(detailsView: UIView) {
+        var views: [String: UIView] = ["title": titleLbl, "details": detailsView]
+        var layoutConstraints: [NSLayoutConstraint] = []
+
+        if  data?.icon != nil {
+            views["icon"] = iconImgV
+        }
+        
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
         }
         
-        var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[icon(25)]-(10)-[title]-(10)-[details(>=70)]-(10)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[icon(25)]-(10)-|", options: [], metrics: nil, views: views)
+        if data?.icon != nil {
+            layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[icon(25)]-(10)-|", options: [], metrics: nil, views: views)
+            layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[icon(25)]-(10)-[title]", options: [], metrics: nil, views: views)
+        } else {
+            layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[title]", options: [], metrics: nil, views: views)
+        }
+        
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[title]-(10)-[details(100)]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
             titleLbl.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            detailsLbl.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor)
+            detailsView.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor)
         ]
         
         NSLayoutConstraint.activate(layoutConstraints)

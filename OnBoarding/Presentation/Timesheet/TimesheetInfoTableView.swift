@@ -29,6 +29,12 @@ class TimesheetInfoTableView: UIView {
         }
     }
     
+    var editMode = false {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     static var height: CGFloat {
         let projectKeys = EntryKey.allProjectKeys.count
         let timeKeys = EntryKey.allTimeKeys.count
@@ -73,6 +79,9 @@ extension TimesheetInfoTableView: UITableViewDelegate {
         guard entry.info == .project,  entry.key != .date else {
             return
         }
+        
+        
+        
         delegate?.didSelectTimesheetInfo(timesheetInfoTableView: self, entry: entry)
     }
 }
@@ -97,7 +106,13 @@ extension TimesheetInfoTableView: UITableViewDataSource {
         let info = EntryInfo.allValues[indexPath.section]
         let entry = Array(dataSource![info]!)[indexPath.row]
         let value = entry.key == .date ? Date().simpleDateFormat() : entry.value
-        cell?.data = (title: entry.key.rawValue, details: value,  icon: nil)
+        
+        var isEditableCell = false
+        if editMode {
+            isEditableCell = (entry.key == .startWorking ||  entry.key == .stopWorking || entry.key == .lunchBreak) ? true :  false
+        }
+      
+        cell?.data = (title: entry.key.rawValue, details: value, isEditable: isEditableCell,  icon: nil)
         cell?.backgroundColor = UIColor.BgColor
         cell?.cellView.view.backgroundColor = UIColor.elementBgColor
         cell?.selectionStyle = .none

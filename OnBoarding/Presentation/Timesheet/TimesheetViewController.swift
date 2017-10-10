@@ -16,9 +16,20 @@ class TimesheetViewController: UIViewController {
     let pickerView = PickerView(frame: .zero)
     var timesheetEntries: [EntryInfo: [TimesheetEntry]] = [:]
     
+    lazy var editBtn: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setTitle("Edit time", for: .normal)
+        button.setTitle("Done", for: .selected)
+        button.titleLabel?.textAlignment = .right
+        button.frame.size = CGSize(width: 70.0, height: 40.0)
+        button.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     //MARK:- Views lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupEditButton()
         setupTimesheetInfoTV()
         setupTimerButton()
         layout()
@@ -71,6 +82,11 @@ class TimesheetViewController: UIViewController {
     }
     
     //MARK:- Setup views
+    func setupEditButton() {
+        let button = UIBarButtonItem(customView: editBtn)
+        self.navigationItem.rightBarButtonItem = button
+
+    }
     func setupPickerView(entry: TimesheetEntry) {
         var dataSource: [String] = []
         switch entry.key {
@@ -197,6 +213,11 @@ class TimesheetViewController: UIViewController {
             return
         }
         update(key: key!, value: value!)
+    }
+    
+    @objc func editButtonTapped() {
+        editBtn.isSelected = !editBtn.isSelected
+        timesheetInfoTV.editMode = editBtn.isSelected
     }
     
     //MARK:- Preview
