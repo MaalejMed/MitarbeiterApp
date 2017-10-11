@@ -9,31 +9,34 @@
 import Foundation
 
 struct Timesheet {
+    
+    //MARK:- Properties
     var day: Date?
-    var projectID: String?
     var associateID: String?
+    var projectID: String?
     var activity: String?
     var billable: String?
-    var workFrom: Date?
-    var workUntil: Date?
+    var from: Date?
+    var until: Date?
     var workedHours: (hours: Int, minutes: Int)?
-    var breakFrom: Date?
-    var breakUntil: Date?
     var lunchBreak: (hours: Int, minutes: Int)?
     
+    //MARK:- Init
     init(associate: String) {
         day = Date()
         projectID = nil
         associateID = associate
         activity = nil
         billable = nil
-        workFrom = nil
-        workUntil = nil
+        from = nil
+        until = nil
         workedHours = nil
-        breakFrom = nil
-        breakUntil = nil
         lunchBreak = nil
     }
+    
+    //MARK:- update
+    
+    //MARK:- JSON
     func convertToJson() -> [String: Any] {
         let dic: [String: Any] = [
             "associateID": associateID!,
@@ -41,11 +44,9 @@ struct Timesheet {
             "projectID": projectID!,
             "activity": activity!,
             "billable": billable!,
-            "startWork": workFrom!.longDateFormat(),
-            "endWork": workUntil!.longDateFormat(),
+            "from": from!.longDateFormat(),
+            "until": until!.longDateFormat(),
             "workedHours": "\(workedHours!.hours) : \(workedHours!.minutes)",
-            "startBreak": breakFrom!.longDateFormat(),
-            "endBreak": breakUntil!.longDateFormat(),
             "lunchBreak": "\(lunchBreak!.hours) : \(lunchBreak!.minutes)",
         ]
         return dic

@@ -10,6 +10,7 @@ import UIKit
 
 protocol TimesheetInfoTableViewDelegate: class {
     func didSelectTimesheetInfo(timesheetInfoTableView: TimesheetInfoTableView, entry: TimesheetEntry)
+    func didEditTime(timesheetInfoTableView: TimesheetInfoTableView, dateTime: Date, key: EntryKey)
 }
 
 class TimesheetInfoTableView: UIView {
@@ -117,8 +118,8 @@ extension TimesheetInfoTableView: UITableViewDataSource {
             return cell!
         case .time:
             let cell = tableView.dequeueReusableCell(withIdentifier: TimeTableViewCell.cellIdentifier) as? TimeTableViewCell
+            (cell?.cellView as! TimesheetContentView).timesheetContentViewDelegate = self
             cell?.data = (entry: entry, editMode: editMode)
-            
             return cell!
         }
     }
@@ -131,6 +132,12 @@ extension TimesheetInfoTableView: UITableViewDataSource {
         case .time:
             return "Time info"
         }
+    }
+}
+
+extension TimesheetInfoTableView: TimesheetContentViewDelegate {
+    func didChangeTime(timesheetContentView: TimesheetContentView, dateTime: Date, key: EntryKey) {
+        delegate?.didEditTime(timesheetInfoTableView: self, dateTime: dateTime, key: key)
     }
 }
 

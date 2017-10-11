@@ -29,6 +29,12 @@ extension String {
         return true
     }
     
+    func dateTime() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.date(from: self)
+    }
+    
     
     
 }

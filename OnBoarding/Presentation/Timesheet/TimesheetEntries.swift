@@ -29,17 +29,17 @@ enum EntryKey: String {
     case identifier = "Project ID"
     case activity = "Activity"
     case buillable = "Buillable"
-    case startWorking = "From"
-    case stopWorking = "Until"
+    case from = "From"
+    case until = "Until"
     case lunchBreak = "Lunch break"
     
     static let allProjectKeys = [date, identifier, activity, buillable]
-    static let allTimeKeys = [startWorking, stopWorking, lunchBreak]
+    static let allTimeKeys = [from, until, lunchBreak]
     
     func section() -> EntryInfo {
         switch self {
         case .date, .identifier, .activity, .buillable: return EntryInfo.allValues[0]
-        case .startWorking, .stopWorking, .lunchBreak: return EntryInfo.allValues[1]
+        case .from, .until, .lunchBreak: return EntryInfo.allValues[1]
         }
     }
     

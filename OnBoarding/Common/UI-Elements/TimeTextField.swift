@@ -13,9 +13,16 @@ enum Format {
     case time
 }
 
+protocol TimeTextFieldDelegate: class {
+    func didChangeValue(dateTime: Date, key: EntryKey)
+}
+
 class TimeTextField: UITextField {
+    
+    //MARK:- Properties
     var format: Format?
     var key: EntryKey?
+    weak var timeTextDelegate: TimeTextFieldDelegate?
     
     //MARK:- Init
     override init(frame: CGRect) {
@@ -47,10 +54,16 @@ extension TimeTextField : UITextFieldDelegate {
         guard let text = textField.text else {
             return
         }
-        guard !text.validateTimeFormat() else {
+        guard text.validateTimeFormat() else {
+            textField.textColor = .red
             return
         }
-        textField.textColor = .red
+        
+        guard let dateTime = self.text?.dateTime() else {
+            textField.textColor = .red
+            return
+        }
+        timeTextDelegate?.didChangeValue(dateTime: dateTime, key: key!)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

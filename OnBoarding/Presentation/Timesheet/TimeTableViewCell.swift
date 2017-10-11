@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TimesheetContentViewDelegate: class {
+    func didChangeTime(timesheetContentView: TimesheetContentView, dateTime: Date, key: EntryKey)
+}
+
 class TimeTableViewCell: UITableViewCell, TableViewCellProtocols {
     
     //MARK:- Properties
@@ -20,7 +24,7 @@ class TimeTableViewCell: UITableViewCell, TableViewCellProtocols {
             (cellView as! TimesheetContentView).data = data
         }
     }
-    
+        
     static let height: CGFloat = TimesheetContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
     
     //MARK:- Init
@@ -55,7 +59,7 @@ class TimeTableViewCell: UITableViewCell, TableViewCellProtocols {
 class TimesheetContentView: UIView, CellViewProtocol {
     static var dummy: CellViewProtocol = {
         let view  = TimesheetContentView()
-        view.data = (entry: TimesheetEntry(info: .time, key: .startWorking, value: " a value"), editMode: true)
+        view.data = (entry: TimesheetEntry(info: .time, key: .from, value: " a value"), editMode: true)
         return view
     }()
     
@@ -68,6 +72,8 @@ class TimesheetContentView: UIView, CellViewProtocol {
             styleTimeTextField()
         }
     }
+    
+    weak var timesheetContentViewDelegate: TimesheetContentViewDelegate?
     
     let titleLbl: UILabel = {
         let label = UILabel()
@@ -85,6 +91,7 @@ class TimesheetContentView: UIView, CellViewProtocol {
     //MARK:- Layout
     override init(frame: CGRect) {
         super.init(frame: frame)
+        timeTextField.timeTextDelegate = self
         layout()
         self.layer.cornerRadius = 5.0
     }
@@ -123,5 +130,11 @@ class TimesheetContentView: UIView, CellViewProtocol {
         timeTextField.layer.cornerRadius = 5.0
         timeTextField.layer.borderWidth = 1.0
         timeTextField.layer.borderColor = UIColor.BgColor.cgColor
+    }
+}
+
+extension TimesheetContentView: TimeTextFieldDelegate {
+    func didChangeValue(dateTime: Date, key: EntryKey) {
+        timesheetContentViewDelegate?.didChangeTime(timesheetContentView: self, dateTime: dateTime, key: key)
     }
 }

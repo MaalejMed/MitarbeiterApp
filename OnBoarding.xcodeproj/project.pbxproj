@@ -63,7 +63,6 @@
 		77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191C1F72719D00BFAB45 /* Associate.swift */; };
 		77D9D4EF1F7CE6A40058C9D9 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4EE1F7CE6A40058C9D9 /* AuthenticationService.swift */; };
 		77D9D4F41F7D01460058C9D9 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4F31F7D01460058C9D9 /* AuthenticationManager.swift */; };
-		77FB51ED1F73D438006E73AB /* TimeInterval+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB51EC1F73D438006E73AB /* TimeInterval+.swift */; };
 		77FFA8681F7132870034B746 /* FeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8671F7132870034B746 /* FeedTableView.swift */; };
 		FA7672CEFE7EB9ABA6B7067D /* Pods_OnBoarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8FACB739714BCEC9757CA2 /* Pods_OnBoarding.framework */; };
 /* End PBXBuildFile section */
@@ -151,7 +150,6 @@
 		77D9191C1F72719D00BFAB45 /* Associate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Associate.swift; sourceTree = "<group>"; };
 		77D9D4EE1F7CE6A40058C9D9 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		77D9D4F31F7D01460058C9D9 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
-		77FB51EC1F73D438006E73AB /* TimeInterval+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+.swift"; sourceTree = "<group>"; };
 		77FFA8671F7132870034B746 /* FeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -361,7 +359,6 @@
 			children = (
 				776EDC921F62C76700D0A0AC /* UIColor+.swift */,
 				772BD9831F695E2C003FEC2B /* UIImageView+.swift */,
-				77FB51EC1F73D438006E73AB /* TimeInterval+.swift */,
 				772F31601F7409D400775AA8 /* Date+.swift */,
 				7756907B1F8B933B0049DE5E /* String+.swift */,
 			);
@@ -665,7 +662,6 @@
 				775690981F8BB8200049DE5E /* TextView.swift in Sources */,
 				7782B1EF1F7A9A740024F976 /* MessageTableView.swift in Sources */,
 				776075B31F862663009BB974 /* TimerButton.swift in Sources */,
-				77FB51ED1F73D438006E73AB /* TimeInterval+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

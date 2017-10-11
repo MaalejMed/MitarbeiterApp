@@ -10,20 +10,12 @@ import Foundation
 
 class TimeHelper {
     
-    static func calculateLunckBreak(start: Date, end: Date) -> (hours: Int, minutes: Int) {
-        let diff = end.timeIntervalSince(start)
-        let hours = diff / 3600
-        let minutes = diff.truncatingRemainder(dividingBy: 3600) / 60
-        return (hours: Int(hours), minutes: Int(minutes))
-    }
-    
     static func calculateWorkedHours(start: Date, end: Date, lunchBreak: (hours: Int, minutes: Int)) -> (hours: Int, minutes: Int) {
         let diff = end.timeIntervalSince(start)
         let totlaHours = Int(diff / 3600)
         let totalMinutes = Int(diff.truncatingRemainder(dividingBy: 3600) / 60)
         
         var workedHours: (hours: Int, minutes: Int) = (0,0)
-        
         if totalMinutes >= lunchBreak.minutes {
             workedHours.minutes = totalMinutes - lunchBreak.minutes
             workedHours.hours = totlaHours - lunchBreak.hours
@@ -35,7 +27,6 @@ class TimeHelper {
     }
     
     static func shoudlChange(timeString: String, range: NSRange, newString: String) -> Bool {
-        
         guard newString == "" || newString.isNumber() else {
             return false
         }
@@ -51,17 +42,14 @@ class TimeHelper {
                 return false
             }
         }
-        
         // cannot exceed 5 character2s including :
         if timeString.characters.count > 5 && newString != "" {
             return false
         }
-        
         // cannot remove :
         if timeString.characterAtIndex(index: range.location) == ":", newString == "", timeString.characters.count > 1 {
             return false
         }
-        
         return true
     }
 }

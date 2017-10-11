@@ -10,8 +10,6 @@ import UIKit
 
 enum TimerStatus: String {
     case startWorking = "Start"
-    case startLunchBreak = "Lunch time"
-    case stopLunchBreak = "Back to work"
     case stopWorking = "Go home!"
     case submit = "Submit"
 }

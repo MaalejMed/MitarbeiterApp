@@ -70,17 +70,17 @@ class TimesheetPreviewViewController: UIViewController {
                         entries.append(TimesheetEntry(info: .project, key: key, value: (previewTimesheet.activity)! ))
                     case .buillable:
                         entries.append(TimesheetEntry(info: .project, key: key, value: (previewTimesheet.billable)! ))
-                    case .startWorking, .stopWorking, .lunchBreak: break
+                    case .from, .until, .lunchBreak: break
                     }
                 }
             case .time:
                 for key in EntryKey.allTimeKeys {
                     switch key {
                     case .date, .activity, .identifier, .buillable: break
-                    case .startWorking:
-                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (previewTimesheet.workFrom?.simpleHoursFormat())! ))
-                    case .stopWorking:
-                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (previewTimesheet.workUntil?.simpleHoursFormat())! ))
+                    case .from:
+                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (previewTimesheet.from?.simpleHoursFormat())! ))
+                    case .until:
+                        entries.append(TimesheetEntry(info: key.section(), key: key, value: (previewTimesheet.until?.simpleHoursFormat())! ))
                     case .lunchBreak:
                         let hours = (previewTimesheet.lunchBreak?.hours)!
                         let minutes = (previewTimesheet.lunchBreak?.minutes)!
