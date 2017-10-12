@@ -11,6 +11,7 @@ import Foundation
 struct Timesheet {
     
     //MARK:- Properties
+    var lastSubmittedDay: Date?
     var day: Date?
     var associateID: String?
     var projectID: String?
@@ -81,5 +82,17 @@ struct Timesheet {
             "lunchBreak": "\(String(describing: lunchBreak!))"
         ]
         return dic
+    }
+    
+    //MARK:- Others
+    func missingDays() -> Int? {
+        guard let lastDay = lastSubmittedDay  else {
+            return nil
+        }
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let lastSubmitted = calendar.startOfDay(for: lastDay)
+        let components = calendar.dateComponents([.day], from: lastSubmitted, to: today)
+        return components.day!
     }
 }

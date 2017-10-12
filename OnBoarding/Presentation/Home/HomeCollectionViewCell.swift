@@ -8,7 +8,7 @@
 
 import UIKit
 
-let homeCollectionViewCellPadding: CGFloat = 30.0
+let homeCollectionViewCellPadding: CGFloat = 10.0
 
 class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols {
     
@@ -16,9 +16,9 @@ class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols 
     static var staticMetrics = CellMetrics(topAnchor: 5.0, leftAnchor: 5.0, bottomAnchor: 5.0, rightAnchor: 8.0)
     static let height = HomeCellView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
     var cellView: CellViewProtocol = HomeCellView()
-    var data: (title: String?, icon: UIImage?)? {
+    var data: (title: String?, icon: UIImage?, notif: Int?)? {
         didSet {
-            (self.cellView as! HomeCellView).data = (title: data?.title, icon: data?.icon)
+            (self.cellView as! HomeCellView).data = (title: data?.title, icon: data?.icon, notif: data?.notif)
         }
     }
     
@@ -50,16 +50,29 @@ class HomeCellView: UIView, CellViewProtocol {
     //MARK:- Properties
     static var dummy: CellViewProtocol = {
         let cell = HomeCellView()
-        cell.data = (title: "title", icon: UIImage.init(named: "Elearning"))
+        cell.data = (title: "title", icon: UIImage.init(named: "Elearning"), notif: 0)
         return cell
     }()
     
-    var data: (title: String?, icon: UIImage?) {
+    var data: (title: String?, icon: UIImage?, notif: Int?) {
         didSet {
             titleLbl.text = data.title
             iconImgV.image = data.icon
+            guard let notification = data.notif else {
+                return
+            }
+            notifLbl.text = " \(notification) "
         }
     }
+    
+    let notifLbl: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = .white
+        label.backgroundColor = .red
+        label.font = UIFont.boldSystemFont(ofSize: 13.0)
+        return label
+    }()
     
     let titleLbl: UILabel = {
         let label = UILabel()
@@ -87,7 +100,7 @@ class HomeCellView: UIView, CellViewProtocol {
     
     //MARK:- Layout
     func layout() {
-        let views:[String: UIView] = ["title": titleLbl, "icon": iconImgV]
+        let views:[String: UIView] = ["title": titleLbl, "icon": iconImgV, "notif": notifLbl]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
@@ -97,6 +110,11 @@ class HomeCellView: UIView, CellViewProtocol {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[title]-(0)-|", options: [], metrics: nil, views: views)
          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title]-(2)-[icon]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += [
+            notifLbl.centerXAnchor.constraint(equalTo: self.rightAnchor, constant: HomeCollectionViewCell.staticMetrics.rightAnchor),
+            notifLbl.rightAnchor.constraint(lessThanOrEqualTo: self.rightAnchor, constant: (homeCollectionViewCellPadding + HomeCollectionViewCell.staticMetrics.rightAnchor) - 2),
+            notifLbl.centerYAnchor.constraint(equalTo: self.topAnchor, constant: -HomeCollectionViewCell.staticMetrics.topAnchor )
+        ]
         
         NSLayoutConstraint.activate(layoutConstraints)
     }

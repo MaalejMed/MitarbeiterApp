@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
     let triggerView = TriggerView(frame:.zero)
     
     var feeds: [Feed] = []
+    var menuItems: [MenuItem] = []
     var mainMenuViewTopAnchor: NSLayoutConstraint?
     
     //MARK:- Views lifecycle
@@ -111,7 +112,6 @@ class HomeViewController: UIViewController {
     }
     
     func setupMainMenuView() {
-        var menuItems: [MenuItem] = []
         for item in Item.allMenuItems {
             let menuItem = MenuItem(item: item)
             menuItems.append(menuItem)
@@ -165,11 +165,12 @@ class HomeViewController: UIViewController {
         let associateID = associate?.identifier
        
         let timeManager = TimeManager()
-        timeManager.lastSubmittedDay(associateID: associateID!, completion: { date, failure in
-            guard let lastDay = date else {
+        timeManager.lastSubmittedDay(associateID: associateID!, completion: {[weak self] date, failure in
+            guard let lastSubmittedDay = date else {
                 return
             }
-            print (lastDay)
+            DataManager.sharedInstance.timesheet?.lastSubmittedDay = lastSubmittedDay
+            self?.mainMenuView.menuCV.reloadData()
         })
     }
 }

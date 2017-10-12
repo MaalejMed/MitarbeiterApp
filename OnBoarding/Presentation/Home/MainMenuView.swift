@@ -83,7 +83,7 @@ class MainMenuView: UIView {
             menuCV.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
             menuCV.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
             menuCV.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            menuCV.topAnchor.constraint(equalTo: lineImgV.bottomAnchor, constant: 10)
+            menuCV.topAnchor.constraint(equalTo: lineImgV.bottomAnchor, constant: 5)
         ]
         NSLayoutConstraint.activate(layoutConstraints)
      }
@@ -114,11 +114,15 @@ class MainMenuView: UIView {
 extension MainMenuView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (self.frame.size.width - homeCollectionViewCellPadding - 40) / 4, height: HomeCollectionViewCell.height)
+        return CGSize(width: (self.frame.size.width - 20 - 40) / 4, height: HomeCollectionViewCell.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return homeCollectionViewCellPadding
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: homeCollectionViewCellPadding, left: homeCollectionViewCellPadding, bottom: homeCollectionViewCellPadding, right: homeCollectionViewCellPadding)
     }
 }
 
@@ -134,7 +138,12 @@ extension MainMenuView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.cellIdentifier, for: indexPath) as! HomeCollectionViewCell
         let item = items?[indexPath.row]
-        cell.data = (title: item?.description, icon:item?.icon)
+        
+        var notif: Int?
+        if item?.item == .time, let missingDays =  DataManager.sharedInstance.timesheet?.missingDays(){
+            notif = missingDays
+        }
+        cell.data = (title: item?.description, icon:item?.icon, notif: notif)
         return cell
     }
     
