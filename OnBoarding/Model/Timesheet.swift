@@ -78,7 +78,7 @@ struct Timesheet {
             "from": from!.longDateFormat(),
             "until": until!.longDateFormat(),
             "workedHours": "\(workedHours!.hours) : \(workedHours!.minutes)",
-            "lunchBreak": lunchBreak ?? "",
+            "lunchBreak": "\(String(describing: lunchBreak!))"
         ]
         return dic
     }

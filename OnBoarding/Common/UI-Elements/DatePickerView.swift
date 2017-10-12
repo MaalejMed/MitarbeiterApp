@@ -28,6 +28,14 @@ class DatePickerView: UIView {
         return button
     }()
     
+    
+    let titleLbl: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textAlignment = .center
+        return label
+    }()
+    
     private let cancelBtn: UIButton = {
         let button = UIButton()
         button.setTitle("Cancel", for: .normal)
@@ -53,7 +61,7 @@ class DatePickerView: UIView {
     //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.BgColor
+        self.backgroundColor = UIColor.white
         layout()
     }
     
@@ -63,7 +71,7 @@ class DatePickerView: UIView {
     
     //MARK:- Layout
     func layout() {
-        let views:[String: UIView] = ["cancel": cancelBtn, "done": doneBtn, "picker": datePicker, "line": lineImgV]
+        let views:[String: UIView] = ["cancel": cancelBtn, "title": titleLbl, "done": doneBtn, "picker": datePicker, "line": lineImgV]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
@@ -71,8 +79,11 @@ class DatePickerView: UIView {
         
         var layoutConstrainsts: [NSLayoutConstraint] = []
         
-        layoutConstrainsts += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[cancel(80)]-(>=100)-[done(80)]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstrainsts += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[cancel(80)]-(10)-[title]-(10)-[done(80)]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstrainsts += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[line]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstrainsts += [
+            titleLbl.centerYAnchor.constraint(equalTo: cancelBtn.centerYAnchor)
+        ]
         layoutConstrainsts += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[done]", options: [], metrics: nil, views: views)
         layoutConstrainsts += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[cancel]", options: [], metrics: nil, views: views)
         layoutConstrainsts += NSLayoutConstraint.constraints(withVisualFormat: "V:[cancel]-(10)-[line(2)]-[picker]-(0)-|", options: [], metrics: nil, views: views)

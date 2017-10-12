@@ -23,7 +23,7 @@ class TimesheetViewController: UIViewController {
         button.frame.size = CGSize(width: 70.0, height: 40.0)
         button.addTarget(self, action: #selector(previewButtonTapped), for: .touchUpInside)
         return button
-        }()
+    }()
     
     //MARK:- Views lifecycles
     override func viewDidLoad() {
@@ -127,6 +127,7 @@ class TimesheetViewController: UIViewController {
     
     private func setupDataPickerView(dataSource: [String], key: EntryKey) {
         dataPickerView.dataSource = dataSource
+        dataPickerView.titleLbl.text = "Select " + key.rawValue
         //Done button
         dataPickerView.doneButtonAction = { [weak self] (newValue: String) in
             self?.update(key: key, value: newValue)
@@ -140,6 +141,7 @@ class TimesheetViewController: UIViewController {
     }
     
     func setupDatePickerView(key: EntryKey) {
+        datePickerView.titleLbl.text = "Select " + key.rawValue
         //Done button
         datePickerView.doneButtonAction = { [weak self] (newValue: Date) in
             self?.update(key: key, value: newValue)

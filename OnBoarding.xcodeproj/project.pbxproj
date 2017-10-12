@@ -52,7 +52,6 @@
 		778C02CE1F86771C0011E01D /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02CD1F86771C0011E01D /* TimeService.swift */; };
 		778C03001F87C05F0011E01D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02FF1F87C05F0011E01D /* DataManager.swift */; };
 		77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601951F6BDB70000BC777 /* ProfileTableView.swift */; };
-		77B622A41F8CE10A0001EFE7 /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B622A31F8CE10A0001EFE7 /* TimeTableViewCell.swift */; };
 		77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF631F6FEF610097CF46 /* MessageViewController.swift */; };
 		77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF651F6FEF7F0097CF46 /* MessageView.swift */; };
 		77D919171F7258FF00BFAB45 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919161F7258FF00BFAB45 /* FeedService.swift */; };
@@ -137,7 +136,6 @@
 		778C02CD1F86771C0011E01D /* TimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		778C02FF1F87C05F0011E01D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		77B601951F6BDB70000BC777 /* ProfileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableView.swift; sourceTree = "<group>"; };
-		77B622A31F8CE10A0001EFE7 /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
 		77BEDF631F6FEF610097CF46 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		77BEDF651F6FEF7F0097CF46 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		77D919161F7258FF00BFAB45 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
@@ -367,7 +365,6 @@
 				7782B1E01F7A530E0024F976 /* TimesheetInfoTableView.swift */,
 				7782B1E21F7A53220024F976 /* TimesheetPreviewViewController.swift */,
 				776075B01F862397009BB974 /* TimesheetEntries.swift */,
-				77B622A31F8CE10A0001EFE7 /* TimeTableViewCell.swift */,
 			);
 			path = Timesheet;
 			sourceTree = "<group>";
@@ -647,7 +644,6 @@
 				772F31611F7409D400775AA8 /* Date+.swift in Sources */,
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,
 				775690951F8BB8200049DE5E /* InfoView.swift in Sources */,
-				77B622A41F8CE10A0001EFE7 /* TimeTableViewCell.swift in Sources */,
 				778C02CC1F8674560011E01D /* TimeManager.swift in Sources */,
 				77FFA8681F7132870034B746 /* FeedTableView.swift in Sources */,
 				77D9191B1F7262B100BFAB45 /* MenuItem.swift in Sources */,

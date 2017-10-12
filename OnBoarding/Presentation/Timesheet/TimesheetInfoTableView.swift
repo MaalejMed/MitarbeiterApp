@@ -31,7 +31,7 @@ class TimesheetInfoTableView: UIView {
     static var height: CGFloat {
         let projectKeys = EntryKey.allProjectKeys.count
         let timeKeys = EntryKey.allTimeKeys.count
-        return (BasicTableViewCell.height * CGFloat(projectKeys)) + (TimeTableViewCell.height * CGFloat(timeKeys)) + 60
+        return (BasicTableViewCell.height * CGFloat(projectKeys)) + (BasicTableViewCell.height * CGFloat(timeKeys)) + 60
     }
     
     weak var timesheetInfoTableViewDelegate: TimesheetInfoTableViewDelegate?
