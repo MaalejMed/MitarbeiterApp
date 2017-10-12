@@ -15,10 +15,7 @@ class AuthenticationService {
     static func login(username: String, password: String, completion: @escaping ((Any?)->())) {
         let stringURL = basicStringURL+"username="+username+"&password="+password
         Alamofire.request(stringURL).responseJSON(completionHandler: { response in
-            //TODO: To be removed, just to simulate connection time
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
                 completion(response.result.value)
-            })
         })
     }
 }

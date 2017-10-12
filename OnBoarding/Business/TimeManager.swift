@@ -31,4 +31,20 @@ class TimeManager {
             completion(nil)
         })
     }
+    
+    func lastSubmittedDay(associateID: String, completion: @escaping ((Date?, Failure?)->()) ) {
+        TimeService.lastSubmittedDay(associateID: associateID, completion: { response in
+            guard response != nil else {
+                let failure = Failure(code: .networkConnection, description: "Could not connect to the server")
+                completion(nil,failure)
+                return
+            }
+            guard let payload = response as? String, let day = payload.date() else {
+                let failure = Failure(code: .parsingIssue, description: "Could not get last submitted day")
+                completion(nil, failure)
+                return
+            }
+            completion(day, nil)
+        })
+    }
 }

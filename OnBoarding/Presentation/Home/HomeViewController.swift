@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
         setupFeedTableView()
         setupTriggerView()
         fetchFeeds()
+        fetchLastSubmittedDay()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +36,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.topItem?.title = "Home"
         self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
-        self.navigationItem.setHidesBackButton(true, animated:false);
+        self.navigationItem.setHidesBackButton(true, animated:false)
     }
     
     //MARK:- Layout
@@ -144,7 +145,7 @@ class HomeViewController: UIViewController {
         layout(contentView: triggerView)
     }
     
-    //MARK:- Feeds
+    //MARK:- Reuqests
     func fetchFeeds () {
         presentTriggerView()
         let feedManager = FeedManager()
@@ -156,6 +157,19 @@ class HomeViewController: UIViewController {
             self?.feeds = feedEntries
             self?.feedTableView.dataSource = self?.feeds
             self?.presentNewsTableView()
+        })
+    }
+    
+    func fetchLastSubmittedDay() {
+        let associate = DataManager.sharedInstance.associate
+        let associateID = associate?.identifier
+       
+        let timeManager = TimeManager()
+        timeManager.lastSubmittedDay(associateID: associateID!, completion: { date, failure in
+            guard let lastDay = date else {
+                return
+            }
+            print (lastDay)
         })
     }
 }
