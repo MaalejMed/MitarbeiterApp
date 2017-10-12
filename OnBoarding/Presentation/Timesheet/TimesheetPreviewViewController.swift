@@ -13,6 +13,7 @@ class TimesheetPreviewViewController: UIViewController {
     //MARK:- Properties
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
     let sendBtn =  TriggerButton(frame: .zero)
+    let alertView = AlertView(frame: .zero)
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
@@ -104,12 +105,15 @@ class TimesheetPreviewViewController: UIViewController {
             return
         }
         
-        let timeManager = TimeManager()
-        timeManager.submit(timesheet: submittedTimesheet, completion: { response in
-            dataManager.resetTimesheet()
-            print(response!)
-        })
         sendBtn.status = .loading
+        let timeManager = TimeManager()
+        timeManager.submit(timesheet: submittedTimesheet, completion: {[weak self] failure in
+            guard failure == nil else {
+                self?.alertView.present(failure: failure!)
+                return
+            }
+            dataManager.resetTimesheet()
+        })
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
             for vc in (self?.navigationController?.viewControllers)! {
                 if  vc.isKind(of: HomeViewController.self){

@@ -70,4 +70,20 @@ class AlertView: UIView {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[icon(20)]", options:[], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
+    
+    //MARK:-
+    func present(failure: Failure) {
+        let window = UIApplication.shared.keyWindow!
+        self.data = (title:failure.description,  description: "", icon: UIImage.init(named: "Failure")!)
+        window.addSubview(self)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.leftAnchor.constraint(equalTo: window.leftAnchor).isActive = true
+        self.rightAnchor.constraint(equalTo: window.rightAnchor).isActive = true
+        self.topAnchor.constraint(equalTo: window.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.bottomAnchor.constraint(equalTo: window.topAnchor, constant: 60.0).isActive = true
+        self.backgroundColor = UIColor.BgColor
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+            self.removeFromSuperview()
+        })
+    }
 }

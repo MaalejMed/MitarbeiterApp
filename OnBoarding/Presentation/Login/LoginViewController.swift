@@ -70,21 +70,6 @@ class LoginViewController: UIViewController {
         }
         layout(forView: requestIDView)
     }
-    
-    func presentAlertView(failure: Failure) {
-        let window = UIApplication.shared.keyWindow!
-        alertView.data = (title:failure.description,  description: "", icon: UIImage.init(named: "Failure")!)
-        window.addSubview(alertView)
-        alertView.translatesAutoresizingMaskIntoConstraints = false
-        alertView.leftAnchor.constraint(equalTo: window.leftAnchor).isActive = true
-        alertView.rightAnchor.constraint(equalTo: window.rightAnchor).isActive = true
-        alertView.topAnchor.constraint(equalTo: window.safeAreaLayoutGuide.topAnchor).isActive = true
-        alertView.bottomAnchor.constraint(equalTo: window.topAnchor, constant: 60.0).isActive = true
-        alertView.backgroundColor = UIColor.BgColor
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-            self.alertView.removeFromSuperview()
-        })
-    }
 
     
     //MARK:- Network calls
@@ -94,7 +79,7 @@ class LoginViewController: UIViewController {
         authManager.login(username: username, password: password, completion: {[weak self] failure, associate in
             self?.loginView.loginBtn.status = .idle
             guard associate != nil else {
-                self?.presentAlertView(failure: failure!)
+                self?.alertView.present(failure: failure!)
                 return
             }
             self?.setupDataManager(associate: associate!)

@@ -14,7 +14,7 @@ class TimeService {
     
     static func submit(dic: [String: Any], completion: @escaping ((Any?)->())) {
         Alamofire.request(basicStringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
-            completion(response.result)
+            completion(response.result.value)
         })
     }
 }
