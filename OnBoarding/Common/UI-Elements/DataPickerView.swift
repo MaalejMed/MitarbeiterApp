@@ -1,5 +1,5 @@
 //
-//  PickerView.swift
+//  DataPickerView.swift
 //  OnBoarding
 //
 //  Created by mmaalej on 20/09/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PickerView: UIView {
+class DataPickerView: UIView {
     //MARK:- Properties
     let pickerView: UIPickerView = {
         let picker = UIPickerView()
@@ -108,7 +108,7 @@ class PickerView: UIView {
     }
 }
 
-extension PickerView: UIPickerViewDataSource {
+extension DataPickerView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -118,7 +118,7 @@ extension PickerView: UIPickerViewDataSource {
     }
 }
 
-extension PickerView: UIPickerViewDelegate {
+extension DataPickerView: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return dataSource?[row]
     }

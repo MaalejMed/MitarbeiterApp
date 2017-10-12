@@ -8,29 +8,25 @@
 
 import UIKit
 
-protocol TimesheetContentViewDelegate: class {
-    func didChangeTime(timesheetContentView: TimesheetContentView, dateTime: Date, key: EntryKey)
-}
-
 class TimeTableViewCell: UITableViewCell, TableViewCellProtocols {
     
     //MARK:- Properties
     static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 8.0, leftAnchor: 10.0, bottomAnchor: 5.0, rightAnchor: 10.0)
     
+    static let height: CGFloat = TimesheetContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
+    
     var cellView: CellViewProtocol = TimesheetContentView()
     
-    var data: (entry: TimesheetEntry?, editMode: Bool?)? {
+    var entry: TimesheetEntry? {
         didSet {
-            (cellView as! TimesheetContentView).data = data
+            (cellView as! TimesheetContentView).entry = entry
         }
     }
-        
-    static let height: CGFloat = TimesheetContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
     
     //MARK:- Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        styling()
+        design()
         layout()
     }
     
@@ -49,7 +45,7 @@ class TimeTableViewCell: UITableViewCell, TableViewCellProtocols {
     }
     
     //MARK:- Style
-    func styling() {
+    func design() {
         self.backgroundColor = UIColor.BgColor
         self.cellView.view.backgroundColor = UIColor.elementBgColor
         self.selectionStyle = .none
@@ -57,23 +53,20 @@ class TimeTableViewCell: UITableViewCell, TableViewCellProtocols {
 }
 
 class TimesheetContentView: UIView, CellViewProtocol {
+    
+    //MARK:- Properties
     static var dummy: CellViewProtocol = {
         let view  = TimesheetContentView()
-        view.data = (entry: TimesheetEntry(info: .time, key: .from, value: " a value"), editMode: true)
+        view.entry = TimesheetEntry(info: .time, key: .from, value: " a value")
         return view
     }()
     
-    var data:(entry:TimesheetEntry?, editMode: Bool?)? {
+    var entry:TimesheetEntry? {
         didSet {
-            titleLbl.text = data?.entry?.key.rawValue
-            timeTextField.text = data?.entry?.value
-            timeTextField.isEnabled = (data?.editMode)!
-            timeTextField.key = data?.entry?.key
-            styleTimeTextField()
+            titleLbl.text = entry?.key.rawValue
+            timeLbl.text = entry?.value
         }
     }
-    
-    weak var timesheetContentViewDelegate: TimesheetContentViewDelegate?
     
     let titleLbl: UILabel = {
         let label = UILabel()
@@ -81,29 +74,26 @@ class TimesheetContentView: UIView, CellViewProtocol {
         return label
     }()
     
-    let timeTextField: TimeTextField = {
-        let textfield = TimeTextField()
-        textfield.textColor = .black
-        textfield.font = UIFont.boldSystemFont(ofSize: 13)
-        return textfield
+    let timeLbl: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        return label
     }()
     
-    //MARK:- Layout
+    //MARK:- Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
-        timeTextField.timeTextDelegate = self
         layout()
         self.layer.cornerRadius = 5.0
     }
     
-    //MARK:- Inits
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["title": titleLbl, "time": timeTextField]
+        let views: [String: UIView] = ["title": titleLbl, "time": timeLbl]
         
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -111,30 +101,10 @@ class TimesheetContentView: UIView, CellViewProtocol {
         }
         
         var layoutConstraints: [NSLayoutConstraint] = []
-        
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[title]-(10)-[time(100)]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[time]-(10)-|", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
     
-    func styleTimeTextField() {
-        guard data?.editMode == true else {
-            timeTextField.placeholder = ""
-            timeTextField.borderStyle = .none
-            timeTextField.layer.borderColor = UIColor.clear.cgColor
-            return
-        }
-        timeTextField.placeholder = "HH:MM"
-        timeTextField.borderStyle = .roundedRect
-        timeTextField.layer.cornerRadius = 5.0
-        timeTextField.layer.borderWidth = 1.0
-        timeTextField.layer.borderColor = UIColor.BgColor.cgColor
-    }
-}
-
-extension TimesheetContentView: TimeTextFieldDelegate {
-    func didChangeValue(dateTime: Date, key: EntryKey) {
-        timesheetContentViewDelegate?.didChangeTime(timesheetContentView: self, dateTime: dateTime, key: key)
-    }
 }

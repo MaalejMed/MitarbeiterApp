@@ -12,26 +12,24 @@ class TimesheetViewController: UIViewController {
     
     //MARK:- Properties
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
-    let timerButton = TimerButton(frame: .zero)
-    let pickerView = PickerView(frame: .zero)
+    let dataPickerView = DataPickerView(frame: .zero)
+    let datePickerView = DatePickerView(frame: .zero)
     var timesheetEntries: [EntryInfo: [TimesheetEntry]] = [:]
     
-    lazy var editBtn: UIButton = {
+    lazy var previewBtn: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setTitle("Edit time", for: .normal)
-        button.setTitle("Done", for: .selected)
+        button.setTitle("Preview", for: .normal)
         button.titleLabel?.textAlignment = .right
         button.frame.size = CGSize(width: 70.0, height: 40.0)
-        button.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(previewButtonTapped), for: .touchUpInside)
         return button
-    }()
+        }()
     
     //MARK:- Views lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupEditButton()
         setupTimesheetInfoTV()
-        setupTimerButton()
+        setupPreviewButton()
         layout()
     }
     
@@ -43,18 +41,9 @@ class TimesheetViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
     }
     
-    func presentPickerView(entry: TimesheetEntry) {
-        setupPickerView(entry: entry)
-        self.layoutPickerView()
-    }
-    
-    func dismissPickerView() {
-        self.pickerView.removeFromSuperview()
-    }
-    
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["tableView": timesheetInfoTV, "timer": timerButton]
+        let views: [String: UIView] = ["tableView": timesheetInfoTV]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
@@ -62,55 +51,104 @@ class TimesheetViewController: UIViewController {
         
         timesheetInfoTV.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         timesheetInfoTV.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        
-        timerButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 70).isActive = true
-        timerButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -70).isActive = true
-        
-        
         timesheetInfoTV.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         timesheetInfoTV.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: TimesheetInfoTableView.height).isActive = true
-        timerButton.topAnchor.constraint(equalTo: timesheetInfoTV.bottomAnchor, constant: 10).isActive = true
     }
     
-    func layoutPickerView() {
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(pickerView)
-        pickerView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        pickerView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        pickerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        pickerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -200).isActive = true
+    func layout(picker: UIView) {
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(picker)
+        picker.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        picker.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        picker.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        picker.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -200).isActive = true
     }
     
     //MARK:- Setup views
-    func setupEditButton() {
-        let button = UIBarButtonItem(customView: editBtn)
+    func setupPreviewButton() {
+        let button = UIBarButtonItem(customView: previewBtn)
         self.navigationItem.rightBarButtonItem = button
-
     }
-    func setupPickerView(entry: TimesheetEntry) {
+    
+    //MARK:- Selectors
+    @objc func previewButtonTapped() {
+        let dataManager = DataManager.sharedInstance
+        guard dataManager.timesheet != nil else {
+            return
+        }
+        
+        guard dataManager.timesheet!.day != nil, dataManager.timesheet!.projectID != nil, dataManager.timesheet!.activity != nil, dataManager.timesheet!.billable != nil, dataManager.timesheet!.from != nil, dataManager.timesheet!.until != nil, dataManager.timesheet!.workedHours != nil, dataManager.timesheet!.lunchBreak != nil else {
+            return
+        }
+        let timesheetPreviewVC = TimesheetPreviewViewController()
+        self.navigationController?.pushViewController(timesheetPreviewVC, animated: true)
+    }
+    
+    func presentPickerFor(entryKey: EntryKey) {
+        setupPicker(entryKey: entryKey)
+        switch entryKey {
+        case .activity, .buillable, .identifier, .lunchBreak :
+            layout(picker: dataPickerView)
+        case .date, .from, .until:
+            layout(picker: datePickerView)
+        }
+    }
+    
+    func dismiss(picker: UIView?) {
+        guard let aPicker = picker else {
+            return
+        }
+        aPicker.removeFromSuperview()
+    }
+
+    //MARK:- Setup views
+    func setupPicker(entryKey: EntryKey) {
         var dataSource: [String] = []
-        switch entry.key {
-        case .date:
-            break
+        switch entryKey {
         case .identifier:
             dataSource = ["000001", "000002", "000003", "000004"]
+            setupDataPickerView(dataSource: dataSource, key: entryKey)
         case .activity:
             dataSource = ["Activity 1", "Activity 2", "Activity 3", "Activity 4"]
+            setupDataPickerView(dataSource: dataSource, key: entryKey)
         case .buillable:
             dataSource = ["Yes", "No"]
-        case .lunchBreak, .from, .until: break
+            setupDataPickerView(dataSource: dataSource, key: entryKey)
+        case .lunchBreak:
+            dataSource = ["1", "2", "3", "4","5", "6", "7", "8", "9", "10",
+                          "11", "12", "13", "14","15", "16", "17", "18", "19", "20",
+                          "21", "22", "23", "24","25", "26", "27", "28", "29", "30"
+                        ]
+            setupDataPickerView(dataSource: dataSource, key: entryKey)
+        case  .date,.from, .until:
+            setupDatePickerView(key: entryKey)
         }
-        pickerView.dataSource = dataSource
-        
+    }
+    
+    private func setupDataPickerView(dataSource: [String], key: EntryKey) {
+        dataPickerView.dataSource = dataSource
         //Done button
-        pickerView.doneButtonAction = { [weak self] (newValue: String) in
-            self?.update(key: entry.key, value: newValue)
-            self?.dismissPickerView()
+        dataPickerView.doneButtonAction = { [weak self] (newValue: String) in
+            self?.update(key: key, value: newValue)
+            self?.dismiss(picker: self?.dataPickerView)
         }
         
         //Cancel
-        pickerView.cancelButtonAction = { [weak self] in
-            self?.dismissPickerView()
+        dataPickerView.cancelButtonAction = { [weak self] in
+            self?.dismiss(picker: self?.dataPickerView)
+        }
+    }
+    
+    func setupDatePickerView(key: EntryKey) {
+        //Done button
+        datePickerView.doneButtonAction = { [weak self] (newValue: Date) in
+            self?.update(key: key, value: newValue)
+            self?.dismiss(picker: self?.datePickerView)
+        }
+        
+        //Cancel
+        datePickerView.cancelButtonAction = { [weak self] in
+            self?.dismiss(picker: self?.datePickerView)
         }
     }
     
@@ -134,14 +172,9 @@ class TimesheetViewController: UIViewController {
             }
         }
         timesheetInfoTV.dataSource = timesheetEntries
-        timesheetInfoTV.delegate = self
+        timesheetInfoTV.timesheetInfoTableViewDelegate = self
     }
 
-    func setupTimerButton() {
-        timerButton.status = .startWorking
-        timerButton.addTarget(self, action: #selector(timeButtonTapped), for: .touchUpInside)
-    }
-    
     //MARK:- Update data
     func update(key:EntryKey, value: Any) {
         let dataManager = DataManager.sharedInstance
@@ -165,75 +198,22 @@ class TimesheetViewController: UIViewController {
         case .from:
             dataManager.timesheet!.from = value as? Date ?? nil
             timesheetEntries[section]![key.index()].value = (dataManager.timesheet!.from?.simpleHoursFormat())!
+            dataManager.timesheet?.setWorkedHours()
         case . until:
             dataManager.timesheet!.until = value as? Date ?? nil
             timesheetEntries[section]![key.index()].value = (dataManager.timesheet!.until?.simpleHoursFormat())!
+            dataManager.timesheet?.setWorkedHours()
         case .lunchBreak:
-            let hours = (dataManager.timesheet!.lunchBreak?.hours)!
-            let minutes = (dataManager.timesheet!.lunchBreak?.minutes)!
-            dataManager.timesheet!.lunchBreak = (hours: hours, minutes: minutes)
-            timesheetEntries[section]![key.index()].value = "\(hours) : \(minutes)"
+            timesheetEntries[section]![key.index()].value = value as? String ?? nil
+            dataManager.timesheet?.lunchBreak =  Int(timesheetEntries[section]![key.index()].value!)
+            dataManager.timesheet?.setWorkedHours()
         }
-        
         timesheetInfoTV.dataSource = self.timesheetEntries
-    }
-    
-    //MARK:- Selectors
-    @objc func timeButtonTapped() {
-        let dataManager = DataManager.sharedInstance
-        guard dataManager.timesheet != nil else {
-            return
-        }
-        
-        var key: EntryKey?
-        var value: Any?
-        switch (timerButton.status)! {
-        case .startWorking:
-            timerButton.status = .stopWorking
-            key = .from
-            value = Date()
-        case .stopWorking:
-            timerButton.status = .submit
-            key = .until
-            value = Date()
-        case .submit:
-            preview()
-            return
-        }
-        update(key: key!, value: value!)
-    }
-    
-    @objc func editButtonTapped() {
-        editBtn.isSelected = !editBtn.isSelected
-        timerButton.isEnabled = !editBtn.isSelected
-        timesheetInfoTV.editMode = editBtn.isSelected
-        
-    }
-    
-    //MARK:- Preview
-    func preview() {
-        let dataManager = DataManager.sharedInstance
-        guard dataManager.timesheet != nil else {
-            return
-        }
-        
-        guard dataManager.timesheet!.day != nil, dataManager.timesheet!.projectID != nil, dataManager.timesheet!.activity != nil, dataManager.timesheet!.billable != nil, dataManager.timesheet!.from != nil, dataManager.timesheet!.until != nil, dataManager.timesheet!.workedHours != nil, dataManager.timesheet!.lunchBreak != nil else {
-            return
-        }
-        let timesheetPreviewVC = TimesheetPreviewViewController()
-        self.navigationController?.pushViewController(timesheetPreviewVC, animated: true)
     }
 }
 
 extension TimesheetViewController: TimesheetInfoTableViewDelegate {
     func didSelectTimesheetInfo(timesheetInfoTableView: TimesheetInfoTableView, entry: TimesheetEntry) {
-        guard editBtn.isSelected == false else {
-            return
-        }
-        presentPickerView(entry: entry)
-    }
-    
-    func didEditTime(timesheetInfoTableView: TimesheetInfoTableView, dateTime: Date, key: EntryKey) {
-        update(key: key, value: dateTime)
+        presentPickerFor(entryKey: entry.key)
     }
 }

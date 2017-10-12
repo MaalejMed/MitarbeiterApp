@@ -82,9 +82,7 @@ class TimesheetPreviewViewController: UIViewController {
                     case .until:
                         entries.append(TimesheetEntry(info: key.section(), key: key, value: (previewTimesheet.until?.simpleHoursFormat())! ))
                     case .lunchBreak:
-                        let hours = (previewTimesheet.lunchBreak?.hours)!
-                        let minutes = (previewTimesheet.lunchBreak?.minutes)!
-                        entries.append(TimesheetEntry(info: key.section(), key: key, value: "\(hours) : \(minutes)"))
+                        entries.append(TimesheetEntry(info: key.section(), key: key, value: String(previewTimesheet.lunchBreak!)))
                     }
                 }
             }

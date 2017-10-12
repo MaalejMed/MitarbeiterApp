@@ -19,7 +19,7 @@ struct Timesheet {
     var from: Date?
     var until: Date?
     var workedHours: (hours: Int, minutes: Int)?
-    var lunchBreak: (hours: Int, minutes: Int)?
+    var lunchBreak: Int?
     
     //MARK:- Init
     init(associate: String) {
@@ -35,6 +35,37 @@ struct Timesheet {
     }
     
     //MARK:- update
+    mutating func setWorkedHours() {
+        workedHours = nil
+        guard let start = from, let end = until, let lunch = lunchBreak else {
+            return
+        }
+        
+        let diff = end.timeIntervalSince(start)
+        guard diff > 0 else {
+            return
+        }
+        let workTotlaHours = Int(diff / 3600)
+        let workTotalMinutes = Int(diff.truncatingRemainder(dividingBy: 3600) / 60)
+        
+        let breakTotalHours = lunch / 60
+        let breakTotalMinutes = lunch % 60
+        
+        
+        var work: (hours: Int, minutes: Int) = (0,0)
+        if workTotalMinutes >= breakTotalMinutes {
+            work.minutes = workTotalMinutes - breakTotalMinutes
+            work.hours = workTotlaHours - breakTotalHours
+        } else {
+            work.hours = workTotlaHours - 1
+            work.minutes =  60 - (breakTotalMinutes - workTotalMinutes)
+        }
+        
+        guard work.hours >= 0 && work.minutes >= 0 else {
+            return
+        }
+        workedHours = work
+    }
     
     //MARK:- JSON
     func convertToJson() -> [String: Any] {
@@ -47,7 +78,7 @@ struct Timesheet {
             "from": from!.longDateFormat(),
             "until": until!.longDateFormat(),
             "workedHours": "\(workedHours!.hours) : \(workedHours!.minutes)",
-            "lunchBreak": "\(lunchBreak!.hours) : \(lunchBreak!.minutes)",
+            "lunchBreak": lunchBreak ?? "",
         ]
         return dic
     }
