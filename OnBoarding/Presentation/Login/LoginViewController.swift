@@ -91,6 +91,6 @@ class LoginViewController: UIViewController {
     //MARK:- Setup data manager
     func setupDataManager(associate: Associate) {
         DataManager.sharedInstance.associate = associate
-        DataManager.sharedInstance.timesheet = Timesheet(associate: associate.identifier!)
+        DataManager.sharedInstance.timesheet = Timesheet(associateIdentifier: associate.identifier!)
     }
 }

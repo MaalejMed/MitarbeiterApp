@@ -23,10 +23,10 @@ struct Timesheet {
     var lunchBreak: Int?
     
     //MARK:- Init
-    init(associate: String) {
+    init(associateIdentifier: String) {
         day = Date()
         projectID = nil
-        associateID = associate
+        associateID = associateIdentifier
         activity = nil
         billable = nil
         from = nil
@@ -69,7 +69,10 @@ struct Timesheet {
     }
     
     //MARK:- JSON
-    func convertToJson() -> [String: Any] {
+    func convertToJson() -> [String: Any]? {
+        guard associateID != nil, day != nil, projectID != nil, activity != nil, billable != nil, from != nil, until != nil, workedHours != nil, lunchBreak != nil else {
+            return nil
+        }
         let dic: [String: Any] = [
             "associateID": associateID!,
             "day": day!.simpleDateFormat(),

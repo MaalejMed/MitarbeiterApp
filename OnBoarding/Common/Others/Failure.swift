@@ -15,6 +15,8 @@ enum FailureCode: Int {
 }
 
 struct Failure {
+    
+    //MARK:- Properties
     let code: FailureCode
     let description: String
 }

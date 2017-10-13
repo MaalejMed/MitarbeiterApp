@@ -9,6 +9,8 @@
 import UIKit
 
 class ExtendedTableViewCell: UITableViewCell, TableViewCellProtocols {
+    
+    //MARK:- Properties
     static var staticMetrics: CellMetrics = CellMetrics(topAnchor: 5.0, leftAnchor: 10.0, bottomAnchor: 5.0, rightAnchor: 10.0)
     static let height: CGFloat =  ExtendedCellContentView.dummy.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + staticMetrics.topAnchor + staticMetrics.bottomAnchor
     
@@ -39,7 +41,6 @@ class ExtendedTableViewCell: UITableViewCell, TableViewCellProtocols {
         cellView.view.rightAnchor.constraint(equalTo:self.rightAnchor, constant: -metrics.rightAnchor).isActive = true
         cellView.view.bottomAnchor.constraint(equalTo:self.bottomAnchor, constant: -metrics.rightAnchor).isActive = true
     }
-    
 }
 
 class ExtendedCellContentView: UIView, CellViewProtocol {

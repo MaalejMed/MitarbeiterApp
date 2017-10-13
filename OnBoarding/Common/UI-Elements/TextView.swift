@@ -8,6 +8,8 @@
 import UIKit
 
 class TextView: UITextView {
+    
+    //MARK:- Properites
     var placeholder: String? {
         didSet {
             guard placeholder != "" else {

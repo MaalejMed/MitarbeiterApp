@@ -48,10 +48,9 @@ class TriggerButton: UIButton {
         activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
     
-    //MARK:- Context
+    //MARK:- Status
     func didChangeStatus() {
         self.setTitle(status?.rawValue, for: .normal)
-        
         switch status! {
         case .loading:
             presentActivityIndicator()
@@ -67,9 +66,10 @@ class TriggerButton: UIButton {
     }
     
     func dismissActivityIndicator() {
-        if activityIndicator.superview != nil {
-            activityIndicator.removeFromSuperview()
+        guard activityIndicator.superview != nil else {
+            return
         }
+        activityIndicator.removeFromSuperview()
         activityIndicator.stopAnimating()
     }
 }

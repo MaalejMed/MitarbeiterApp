@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MediaViewControllerDelegate: class {
-    func didSelectProfileImage(image: UIImage?)
+    func didSelectProfileImage(mediaViewController:MediaViewController, image: UIImage?)
 }
 class MediaViewController: UIViewController {
     
@@ -17,6 +17,7 @@ class MediaViewController: UIViewController {
     private var selectedImage: UIImage?
     var delegate:MediaViewControllerDelegate?
     
+    //MARK:- Views Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -37,7 +38,7 @@ extension MediaViewController: UIImagePickerControllerDelegate, UINavigationCont
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         picker.dismiss(animated: true, completion:{
-            self.delegate?.didSelectProfileImage(image: image)
+            self.delegate?.didSelectProfileImage(mediaViewController:self, image: image)
         })
     }
 }

@@ -9,8 +9,11 @@ import Foundation
 import Alamofire
 
 class FeedService {
+    
+    //MARK:- Properties
     static let basicStringURL = "http://localhost:8080/Feed?"
     
+    //MARK:- Fetch
     static func fetch(completion: @escaping ((Any?)->())) {
         Alamofire.request(basicStringURL).responseJSON(completionHandler: { response in
             //TODO: To be removed, just to simulate connection time

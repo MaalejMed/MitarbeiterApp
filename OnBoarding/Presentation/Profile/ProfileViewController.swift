@@ -93,7 +93,7 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: MediaViewControllerDelegate {
-    func didSelectProfileImage(image: UIImage?) {
+    func didSelectProfileImage(mediaViewController: MediaViewController, image: UIImage?) {
         profileView.data = (title: "Mohamed Maalej (645438)", icon: image!, action: { [unowned self] in
             self.changeProfileImage()
         })

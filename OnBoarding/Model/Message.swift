@@ -9,6 +9,8 @@
 import Foundation
 
 struct Message {
+    
+    //MARK:- Properties
     var identifier: String?
     var associateID: String?
     var title: String?

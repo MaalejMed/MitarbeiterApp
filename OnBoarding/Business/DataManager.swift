@@ -10,6 +10,7 @@ import Foundation
 
 class DataManager {
     
+    //MARK:- Properties
     var associate: Associate?
     var timesheet: Timesheet?
     
@@ -19,6 +20,9 @@ class DataManager {
     }()
     
     func resetTimesheet() {
-        self.timesheet = Timesheet(associate: (associate?.identifier)!)
+        guard let identifier = associate?.identifier else {
+            return
+        }
+        self.timesheet = Timesheet(associateIdentifier: identifier)
     }
 }

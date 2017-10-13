@@ -8,12 +8,9 @@
 
 import UIKit
 
-let imageSize = CGSize(width: 40.0, height: 40.0)
-
 class InfoView: UIView {
     
-    var action: (()->())?
-    
+    //MARK:- Properties
     private let iconImgV: UIImageView = {
         let imageView  = UIImageView()
         imageView.frame.size = CGSize (width: 40.0, height: 40.0)
@@ -25,6 +22,8 @@ class InfoView: UIView {
         let label = UILabel()
         return label
     }()
+    
+    var action: (()->())?
     
     var data : (title: String?, icon: UIImage?, action: (()->())?)? {
         didSet {

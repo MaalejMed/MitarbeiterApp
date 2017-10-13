@@ -48,7 +48,6 @@ class BasicTableViewCell: UITableViewCell, TableViewCellProtocols {
         self.cellView.view.backgroundColor = UIColor.elementBgColor
         self.selectionStyle = .none
     }
-
 }
 
 class BasicCellContentView: UIView, CellViewProtocol {

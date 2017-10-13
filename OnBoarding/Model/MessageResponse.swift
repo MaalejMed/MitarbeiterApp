@@ -9,6 +9,8 @@
 import Foundation
 
 struct MessageResponse {
+    
+    //MARK:- Properties
     var identifier: String?
     var body: String?
     var MessageIdentifier: String?

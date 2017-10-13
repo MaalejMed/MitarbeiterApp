@@ -23,7 +23,11 @@ class AuthenticationManager {
                 completion(failure, nil)
                 return
             }
-            let associate = Associate(json: payload)
+            guard let associate = Associate(json: payload) else {
+                let failure = Failure(code: .parsingIssue, description: "Data could not be parsed")
+                completion(failure, nil)
+                return
+            }
             return completion(nil, associate)
         })
     }

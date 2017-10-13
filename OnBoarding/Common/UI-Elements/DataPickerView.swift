@@ -9,6 +9,7 @@
 import UIKit
 
 class DataPickerView: UIView {
+    
     //MARK:- Properties
     let pickerView: UIPickerView = {
         let picker = UIPickerView()

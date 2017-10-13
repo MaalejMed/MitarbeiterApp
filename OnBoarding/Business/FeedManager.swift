@@ -22,13 +22,22 @@ class FeedManager {
             }
             
             guard let payload = response as? [[String: Any]] else {
-                let failure = Failure(code: .parsingIssue, description: "Result could not be parsed")
+                let failure = Failure(code: .parsingIssue, description: "Data could not be parsed")
                 completion(failure, nil)
                 return
             }
             
             for jsonItem in payload {
-                feed.append(Feed(json: jsonItem)!)
+                guard let aFeed = Feed(json: jsonItem) else {
+                    continue
+                }
+                feed.append(aFeed)
+            }
+            
+            guard feed.count > 0 else {
+                let failure = Failure(code: .parsingIssue, description: "Data could not be parsed")
+                completion(failure, nil)
+                return
             }
 
             return completion(nil, feed)
