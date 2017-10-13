@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnBoarding/Presentation/Login/LoginViewController.swift"
-            timestampString = "529507520.893284"
+            timestampString = "529598841.178738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnBoarding/Service/AuthenticationService.swift"
-            timestampString = "529595500.087483"
+            timestampString = "529598841.178966"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "AuthenticationService"
             landmarkType = "3">
             <Locations>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnBoarding/Service/TimeService.swift"
-            timestampString = "529592456.741052"
+            timestampString = "529598841.179084"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
             landmarkName = "TimeService"
             landmarkType = "3">
             <Locations>
@@ -122,11 +122,11 @@
                   moduleName = "OnBoarding"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mmaalej/Dev/OnBoarding/OnBoarding/Service/TimeService.swift"
-                  timestampString = "529593946.736846"
+                  timestampString = "529598841.316579"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
                   offsetFromSymbolStart = "29">
                </Location>
                <Location
@@ -137,11 +137,11 @@
                   moduleName = "OnBoarding"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mmaalej/Dev/OnBoarding/OnBoarding/Service/TimeService.swift"
-                  timestampString = "529593946.738631"
+                  timestampString = "529598841.319964"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
                   offsetFromSymbolStart = "227">
                </Location>
             </Locations>
@@ -153,13 +153,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OnBoarding/Extension/String+.swift"
-            timestampString = "529590720.751305"
+            filePath = "OnBoarding/Common/TV-Cells/BasicTableViewCell.swift"
+            timestampString = "529598841.179168"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "dateTime()"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "layout()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OnBoarding/Presentation/Profile/ProfileTableView.swift"
+            timestampString = "529598417.450209"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

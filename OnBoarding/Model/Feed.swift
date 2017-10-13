@@ -23,6 +23,9 @@ struct Feed {
         self.title = title as? String
         self.description = description as? String
         self.details = details as? String
-        self.date = date as? Date
+        
+        if let dateString = date as? String {
+            self.date = dateString.date()
+        }
     }
 }

@@ -112,7 +112,7 @@ class ExtendedCellContentView: UIView, CellViewProtocol {
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:[description]-(10)-|", options: [], metrics: nil, views: views)
        
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title]-(5)-[description]-(10)-|", options: [], metrics: nil, views: views)
-        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:[icon(30)]", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(15)-[icon(30)]-(15)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
             descriptionLbl.leftAnchor.constraint(equalTo: titleLbl.leftAnchor),
             detailsLbl.topAnchor.constraint(equalTo: titleLbl.topAnchor),

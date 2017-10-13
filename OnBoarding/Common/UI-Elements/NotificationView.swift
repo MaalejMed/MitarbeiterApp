@@ -25,6 +25,7 @@ class NotificationView: UIView {
                 return
             }
             notifLbl.text = "\(aValue)"
+            layout()
         }
     }
     
@@ -33,7 +34,6 @@ class NotificationView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .red
         self.rounded()
-        layout()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,5 +53,6 @@ class NotificationView: UIView {
     //MARK:- Reset
     func reset() {
         value = nil
+        notifLbl.removeFromSuperview()
     }
 }

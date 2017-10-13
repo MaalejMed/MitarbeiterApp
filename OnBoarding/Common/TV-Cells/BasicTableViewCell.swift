@@ -64,6 +64,7 @@ class BasicCellContentView: UIView, CellViewProtocol {
             titleLbl.text = data?.title
             iconImgV.image = data?.icon
             detailsLbl.text = data?.details
+            layout()
         }
     }
     
@@ -90,7 +91,6 @@ class BasicCellContentView: UIView, CellViewProtocol {
     //MARK:- Layout
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layout()
         self.layer.cornerRadius = 5.0
     }
     
