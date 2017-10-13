@@ -76,8 +76,8 @@ struct Timesheet {
             "projectID": projectID!,
             "activity": activity!,
             "billable": billable!,
-            "from": from!.longDateFormat(),
-            "until": until!.longDateFormat(),
+            "workFrom": from!.longDateFormat(),
+            "workUntil": until!.longDateFormat(),
             "workedHours": "\(workedHours!.hours) : \(workedHours!.minutes)",
             "lunchBreak": "\(String(describing: lunchBreak!))"
         ]
