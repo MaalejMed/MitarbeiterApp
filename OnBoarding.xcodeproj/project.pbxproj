@@ -10,6 +10,7 @@
 		772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9831F695E2C003FEC2B /* UIImageView+.swift */; };
 		772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F315E1F74081B00775AA8 /* Timesheet.swift */; };
 		772F31611F7409D400775AA8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F31601F7409D400775AA8 /* Date+.swift */; };
+		774BC7561F90F7FE00D1CCF6 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774BC7551F90F7FE00D1CCF6 /* NotificationView.swift */; };
 		7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA231F66E3D4005197ED /* CreatePasswordView.swift */; };
 		7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA241F66E3D5005197ED /* RequestIDView.swift */; };
 		7754CA281F66E476005197ED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA271F66E476005197ED /* LoginViewController.swift */; };
@@ -88,6 +89,7 @@
 		772BD9831F695E2C003FEC2B /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		772F315E1F74081B00775AA8 /* Timesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timesheet.swift; sourceTree = "<group>"; };
 		772F31601F7409D400775AA8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		774BC7551F90F7FE00D1CCF6 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		7754CA231F66E3D4005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		7754CA241F66E3D5005197ED /* RequestIDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIDView.swift; sourceTree = "<group>"; };
 		7754CA271F66E476005197ED /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				7756908B1F8BB8200049DE5E /* TextView.swift */,
 				7756908D1F8BB8200049DE5E /* TriggerButton.swift */,
 				7756908E1F8BB8200049DE5E /* TriggerView.swift */,
+				774BC7551F90F7FE00D1CCF6 /* NotificationView.swift */,
 			);
 			path = "UI-Elements";
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				7782B1E11F7A530E0024F976 /* TimesheetInfoTableView.swift in Sources */,
 				776075AB1F851814009BB974 /* FeedManager.swift in Sources */,
 				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,
+				774BC7561F90F7FE00D1CCF6 /* NotificationView.swift in Sources */,
 				77D9D4F41F7D01460058C9D9 /* AuthenticationManager.swift in Sources */,
 				7782B1DD1F7A52D80024F976 /* TimesheetViewController.swift in Sources */,
 				775690911F8BB8200049DE5E /* CellViewProtocols.swift in Sources */,

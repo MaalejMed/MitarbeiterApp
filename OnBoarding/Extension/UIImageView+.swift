@@ -8,12 +8,12 @@
 
 import UIKit
 
-extension UIImageView {
+extension UIView {
     func rounded() {
         let radius = self.frame.size.width / 2
         self.layer.cornerRadius = radius
         self.layer.masksToBounds = true
-        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderColor = UIColor.clear.cgColor
         self.layer.borderWidth = 1.0
     }
 }

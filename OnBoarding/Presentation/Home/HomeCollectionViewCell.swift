@@ -56,23 +56,17 @@ class HomeCellView: UIView, CellViewProtocol {
     
     var data: (title: String?, icon: UIImage?, notif: Int?) {
         didSet {
+            notifView.reset()
             titleLbl.text = data.title
             iconImgV.image = data.icon
             guard let notification = data.notif else {
                 return
             }
-            notifLbl.text = " \(notification) "
+            notifView.value = notification
         }
     }
     
-    let notifLbl: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.textColor = .white
-        label.backgroundColor = .red
-        label.font = UIFont.boldSystemFont(ofSize: 13.0)
-        return label
-    }()
+    let notifView = NotificationView(frame: .zero)
     
     let titleLbl: UILabel = {
         let label = UILabel()
@@ -100,7 +94,7 @@ class HomeCellView: UIView, CellViewProtocol {
     
     //MARK:- Layout
     func layout() {
-        let views:[String: UIView] = ["title": titleLbl, "icon": iconImgV, "notif": notifLbl]
+        let views:[String: UIView] = ["title": titleLbl, "icon": iconImgV, "notif": notifView]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
@@ -111,9 +105,9 @@ class HomeCellView: UIView, CellViewProtocol {
          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title]-(2)-[icon]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
-            notifLbl.centerXAnchor.constraint(equalTo: self.rightAnchor, constant: HomeCollectionViewCell.staticMetrics.rightAnchor),
-            notifLbl.rightAnchor.constraint(lessThanOrEqualTo: self.rightAnchor, constant: (homeCollectionViewCellPadding + HomeCollectionViewCell.staticMetrics.rightAnchor) - 2),
-            notifLbl.centerYAnchor.constraint(equalTo: self.topAnchor, constant: -HomeCollectionViewCell.staticMetrics.topAnchor )
+            notifView.centerXAnchor.constraint(equalTo: self.rightAnchor, constant: HomeCollectionViewCell.staticMetrics.rightAnchor),
+            notifView.rightAnchor.constraint(lessThanOrEqualTo: self.rightAnchor, constant: (homeCollectionViewCellPadding + HomeCollectionViewCell.staticMetrics.rightAnchor) - 2),
+            notifView.centerYAnchor.constraint(equalTo: self.topAnchor, constant: -HomeCollectionViewCell.staticMetrics.topAnchor )
         ]
         
         NSLayoutConstraint.activate(layoutConstraints)
