@@ -28,7 +28,6 @@ class HomeViewController: UIViewController {
         setupFeedTableView()
         setupTriggerView()
         fetchFeeds()
-        fetchLastSubmittedDay()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +37,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "Home"
         self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
         self.navigationItem.setHidesBackButton(true, animated:false)
+        fetchLastSubmittedDay()
     }
     
     //MARK:- Layout

@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 class AuthenticationService {
-    static let basicStringURL = "http://localhost:8080/Authentication?"
+    static let basicStringURL = "http://localhost:8080/Login?"
     
     static func login(username: String, password: String, completion: @escaping ((Any?)->())) {
         let stringURL = basicStringURL+"username="+username+"&password="+password
