@@ -23,7 +23,6 @@ class HomeViewController: UIViewController {
     //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupProfileView()
         setupMainMenuView()
         setupFeedTableView()
         setupTriggerView()
@@ -37,6 +36,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "Home"
         self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
         self.navigationItem.setHidesBackButton(true, animated:false)
+        setupProfileView()
         fetchLastSubmittedDay()
     }
     
@@ -107,7 +107,9 @@ class HomeViewController: UIViewController {
         guard let associate = DataManager.sharedInstance.associate else {
             return
         }
-        profileView.data = (title: associate.name , icon: nil, action: nil)
+        
+        
+        profileView.data = (title: associate.name , icon: associate.image, action: nil)
         profileView.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
     }
     

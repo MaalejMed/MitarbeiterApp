@@ -171,9 +171,9 @@ class LoginView: UIView {
         guard let action = loginAction else {
             return
         }
-        guard idTxtF.text != "" , passwordTxtF.text  != "" else {
-            return
-        }
+//        guard idTxtF.text != "" , passwordTxtF.text  != "" else {
+//            return
+//        }
         action(self.idTxtF.text!, passwordTxtF.text!)
     }
 }

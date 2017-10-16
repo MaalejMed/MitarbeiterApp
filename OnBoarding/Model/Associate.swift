@@ -24,12 +24,17 @@ struct Associate {
         self.password = password as? String
         self.email = email as? String
         self.name = name as? String
+        
+        guard  let imageString = json["photo"] as? String,  let ProfilePhoto = imageString.image() else {
+            image = UIImage(named: "Profile")!
+            return
+        }
+        
+        image = ProfilePhoto
     }
     
-    func profileImage() -> UIImage {
-        guard let profileImage = self.image else {
-            return UIImage.init(named: "Profile")!
-        }
-        return profileImage
+    mutating func update(ProfilePhoto: UIImage) {
+        image = ProfilePhoto
     }
+
 }

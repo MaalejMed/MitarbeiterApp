@@ -6,7 +6,7 @@
 //  Copyright © 2017 mmaalej. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     func characterAtIndex(index: Int)-> Character? {
@@ -39,5 +39,9 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.date(from: self)
+    }
+    
+    func image() -> UIImage? {
+        return UIImage()
     }
 }

@@ -33,7 +33,6 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
-        setupProfileView()
         setupProfileTableView()
     }
     
@@ -43,6 +42,7 @@ class ProfileViewController: UIViewController {
         self.title = "Profile"
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
+        setupProfileView()
     }
     
     //MARK:- Layout
@@ -73,7 +73,7 @@ class ProfileViewController: UIViewController {
         guard let associate = DataManager.sharedInstance.associate else {
             return
         }
-        profileView.data = (title: associate.name, icon: nil, action: {
+        profileView.data = (title: associate.name, icon: associate.image, action: {
             [unowned self] in
             self.changeProfileImage()
         })
@@ -94,7 +94,11 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: MediaViewControllerDelegate {
     func didSelectProfileImage(mediaViewController: MediaViewController, image: UIImage?) {
-        profileView.data = (title: "Mohamed Maalej (645438)", icon: image!, action: { [unowned self] in
+        guard let associate = DataManager.sharedInstance.associate else {
+            return
+        }
+        DataManager.sharedInstance.associate?.update(ProfilePhoto: image!)
+        profileView.data = (title: associate.name, icon: image, action: { [unowned self] in
             self.changeProfileImage()
         })
     }

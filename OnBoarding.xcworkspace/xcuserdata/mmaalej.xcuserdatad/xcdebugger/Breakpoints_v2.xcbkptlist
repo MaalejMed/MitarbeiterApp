@@ -122,7 +122,7 @@
                   moduleName = "OnBoarding"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mmaalej/Dev/OnBoarding/OnBoarding/Service/TimeService.swift"
-                  timestampString = "529598841.316579"
+                  timestampString = "529836315.281541"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "19"
@@ -137,7 +137,7 @@
                   moduleName = "OnBoarding"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mmaalej/Dev/OnBoarding/OnBoarding/Service/TimeService.swift"
-                  timestampString = "529598841.319964"
+                  timestampString = "529836315.283981"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -145,38 +145,6 @@
                   offsetFromSymbolStart = "227">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OnBoarding/Common/TV-Cells/BasicTableViewCell.swift"
-            timestampString = "529598841.179168"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "layout()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OnBoarding/Presentation/Profile/ProfileTableView.swift"
-            timestampString = "529598417.450209"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
