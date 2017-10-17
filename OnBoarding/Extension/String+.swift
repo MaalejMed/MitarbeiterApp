@@ -9,6 +9,7 @@
 import UIKit
 
 extension String {
+    
     func characterAtIndex(index: Int)-> Character? {
         for (ind, character) in self.characters.enumerated() {
             if ind == index {
@@ -42,6 +43,9 @@ extension String {
     }
     
     func image() -> UIImage? {
-        return UIImage()
+        guard let data = Data.init(base64Encoded: self) else {
+            return nil
+        }
+        return UIImage.init(data: data)
     }
 }

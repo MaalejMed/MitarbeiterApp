@@ -75,8 +75,8 @@ class LoginViewController: UIViewController {
     //MARK:- Network calls
     func login(username: String, password: String) {
         loginView.loginBtn.status = .loading
-        let authManager = AuthenticationManager()
-        authManager.login(username: username, password: password, completion: {[weak self] failure, associate in
+        let assoManager = AssociateManager()
+        assoManager.login(username: username, password: password, completion: {[weak self] failure, associate in
             self?.loginView.loginBtn.status = .idle
             guard associate != nil else {
                 self?.alertView.present(failure: failure!)

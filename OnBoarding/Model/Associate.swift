@@ -25,12 +25,12 @@ struct Associate {
         self.email = email as? String
         self.name = name as? String
         
-        guard  let imageString = json["photo"] as? String,  let ProfilePhoto = imageString.image() else {
+        guard  let imageString = json["photo"] as? String,  let profilePhoto = imageString.image() else {
             image = UIImage(named: "Profile")!
             return
         }
         
-        image = ProfilePhoto
+        image = profilePhoto
     }
     
     mutating func update(ProfilePhoto: UIImage) {

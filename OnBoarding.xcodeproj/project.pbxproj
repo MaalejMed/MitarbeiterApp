@@ -11,6 +11,7 @@
 		772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F315E1F74081B00775AA8 /* Timesheet.swift */; };
 		772F31611F7409D400775AA8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F31601F7409D400775AA8 /* Date+.swift */; };
 		774BC7561F90F7FE00D1CCF6 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774BC7551F90F7FE00D1CCF6 /* NotificationView.swift */; };
+		774BC7581F94A9B100D1CCF6 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774BC7571F94A9B100D1CCF6 /* UIImage+.swift */; };
 		7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA231F66E3D4005197ED /* CreatePasswordView.swift */; };
 		7754CA261F66E3D5005197ED /* RequestIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA241F66E3D5005197ED /* RequestIDView.swift */; };
 		7754CA281F66E476005197ED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA271F66E476005197ED /* LoginViewController.swift */; };
@@ -59,8 +60,8 @@
 		77D919191F72591C00BFAB45 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D919181F72591C00BFAB45 /* Feed.swift */; };
 		77D9191B1F7262B100BFAB45 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191A1F7262B100BFAB45 /* MenuItem.swift */; };
 		77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191C1F72719D00BFAB45 /* Associate.swift */; };
-		77D9D4EF1F7CE6A40058C9D9 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4EE1F7CE6A40058C9D9 /* AuthenticationService.swift */; };
-		77D9D4F41F7D01460058C9D9 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4F31F7D01460058C9D9 /* AuthenticationManager.swift */; };
+		77D9D4EF1F7CE6A40058C9D9 /* AssociateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4EE1F7CE6A40058C9D9 /* AssociateService.swift */; };
+		77D9D4F41F7D01460058C9D9 /* AssociateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4F31F7D01460058C9D9 /* AssociateManager.swift */; };
 		77FFA8681F7132870034B746 /* FeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8671F7132870034B746 /* FeedTableView.swift */; };
 		FA7672CEFE7EB9ABA6B7067D /* Pods_OnBoarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8FACB739714BCEC9757CA2 /* Pods_OnBoarding.framework */; };
 /* End PBXBuildFile section */
@@ -90,6 +91,7 @@
 		772F315E1F74081B00775AA8 /* Timesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timesheet.swift; sourceTree = "<group>"; };
 		772F31601F7409D400775AA8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		774BC7551F90F7FE00D1CCF6 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		774BC7571F94A9B100D1CCF6 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		7754CA231F66E3D4005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		7754CA241F66E3D5005197ED /* RequestIDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestIDView.swift; sourceTree = "<group>"; };
 		7754CA271F66E476005197ED /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -144,8 +146,8 @@
 		77D919181F72591C00BFAB45 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		77D9191A1F7262B100BFAB45 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		77D9191C1F72719D00BFAB45 /* Associate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Associate.swift; sourceTree = "<group>"; };
-		77D9D4EE1F7CE6A40058C9D9 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
-		77D9D4F31F7D01460058C9D9 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		77D9D4EE1F7CE6A40058C9D9 /* AssociateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociateService.swift; sourceTree = "<group>"; };
+		77D9D4F31F7D01460058C9D9 /* AssociateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociateManager.swift; sourceTree = "<group>"; };
 		77FFA8671F7132870034B746 /* FeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				77D919161F7258FF00BFAB45 /* FeedService.swift */,
-				77D9D4EE1F7CE6A40058C9D9 /* AuthenticationService.swift */,
+				77D9D4EE1F7CE6A40058C9D9 /* AssociateService.swift */,
 				778C02CD1F86771C0011E01D /* TimeService.swift */,
 			);
 			path = Service;
@@ -357,6 +359,7 @@
 				772BD9831F695E2C003FEC2B /* UIImageView+.swift */,
 				772F31601F7409D400775AA8 /* Date+.swift */,
 				7756907B1F8B933B0049DE5E /* String+.swift */,
+				774BC7571F94A9B100D1CCF6 /* UIImage+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -388,7 +391,7 @@
 		77D9D4F21F7D00D70058C9D9 /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				77D9D4F31F7D01460058C9D9 /* AuthenticationManager.swift */,
+				77D9D4F31F7D01460058C9D9 /* AssociateManager.swift */,
 				776075AA1F851814009BB974 /* FeedManager.swift */,
 				778C02CB1F8674560011E01D /* TimeManager.swift */,
 				778C02FF1F87C05F0011E01D /* DataManager.swift */,
@@ -610,11 +613,12 @@
 				77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */,
 				7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */,
 				7756909A1F8BB8210049DE5E /* TriggerButton.swift in Sources */,
+				774BC7581F94A9B100D1CCF6 /* UIImage+.swift in Sources */,
 				7782B1E11F7A530E0024F976 /* TimesheetInfoTableView.swift in Sources */,
 				776075AB1F851814009BB974 /* FeedManager.swift in Sources */,
 				7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */,
 				774BC7561F90F7FE00D1CCF6 /* NotificationView.swift in Sources */,
-				77D9D4F41F7D01460058C9D9 /* AuthenticationManager.swift in Sources */,
+				77D9D4F41F7D01460058C9D9 /* AssociateManager.swift in Sources */,
 				7782B1DD1F7A52D80024F976 /* TimesheetViewController.swift in Sources */,
 				775690911F8BB8200049DE5E /* CellViewProtocols.swift in Sources */,
 				7756907C1F8B933B0049DE5E /* String+.swift in Sources */,
@@ -624,7 +628,7 @@
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
 				7754CA3C1F67E059005197ED /* HomeCollectionViewCell.swift in Sources */,
-				77D9D4EF1F7CE6A40058C9D9 /* AuthenticationService.swift in Sources */,
+				77D9D4EF1F7CE6A40058C9D9 /* AssociateService.swift in Sources */,
 				776075B11F862397009BB974 /* TimesheetEntries.swift in Sources */,
 				775690971F8BB8200049DE5E /* DataPickerView.swift in Sources */,
 				775B298E1F8F576900F455D8 /* DatePickerView.swift in Sources */,

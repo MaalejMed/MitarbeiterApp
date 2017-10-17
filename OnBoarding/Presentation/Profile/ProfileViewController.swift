@@ -75,7 +75,7 @@ class ProfileViewController: UIViewController {
         }
         profileView.data = (title: associate.name, icon: associate.image, action: {
             [unowned self] in
-            self.changeProfileImage()
+            self.presentMediaController()
         })
     }
     
@@ -83,23 +83,48 @@ class ProfileViewController: UIViewController {
         profileTableView.dataSource = Settings.allValues
     }
     
-    //MARK:- Others
-    func changeProfileImage() {
+    //MARK:- Actions
+    func presentMediaController() {
         let mediaController = MediaViewController()
         mediaController.setupImagePickerController()
         mediaController.delegate = self
         self.present(mediaController, animated: true, completion: nil)
     }
+    
+    func change(profileImage: UIImage) {
+        guard let associate = DataManager.sharedInstance.associate else {
+            return
+        }
+        
+        guard let profileImageString = profileImage.toString() else {
+            return
+        }
+        
+        //update Data Manager
+        DataManager.sharedInstance.associate?.update(ProfilePhoto: profileImage)
+        profileView.data = (title: associate.name, icon: profileImage, action: { [unowned self] in
+            self.presentMediaController()
+        })
+        
+        //save image in the server
+        let dic: [String: Any] = [
+            "associateID": associate.identifier!,
+            "photo": profileImageString
+        ]
+        
+        let associateManager = AssociateManager()
+        associateManager.updatePhoto(dic: dic, completion:{ response in
+                print(String(describing: response))
+        })
+    }
 }
 
 extension ProfileViewController: MediaViewControllerDelegate {
     func didSelectProfileImage(mediaViewController: MediaViewController, image: UIImage?) {
-        guard let associate = DataManager.sharedInstance.associate else {
+        guard let profileImage = image else {
             return
         }
-        DataManager.sharedInstance.associate?.update(ProfilePhoto: image!)
-        profileView.data = (title: associate.name, icon: image, action: { [unowned self] in
-            self.changeProfileImage()
-        })
+        
+        change(profileImage: profileImage)
     }
 }
