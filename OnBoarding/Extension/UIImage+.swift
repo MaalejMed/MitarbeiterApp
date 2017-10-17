@@ -12,7 +12,7 @@ extension UIImage {
     
     func toString() -> String? {
         let imageData = UIImagePNGRepresentation(self)
-        return imageData?.base64EncodedString(options: .lineLength64Characters)
+        return imageData?.base64EncodedString()
 
     }
 }
