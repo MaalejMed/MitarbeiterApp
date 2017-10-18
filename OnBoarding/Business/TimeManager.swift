@@ -8,17 +8,12 @@
 
 import Foundation
 
-enum HTTPResponse: String {
-    case ok = "200"
-    case notAcceptable = "406"
-}
-
 class TimeManager {
     
     //MARK:- Submit timesheet
     func submit(timesheet: Timesheet, completion: @escaping ((ServerResponse?)->()) ) {
         guard let dic = timesheet.convertToJson() else {
-            let failure = ServerResponse(code: .badRequest, description: "Missing data")
+            let failure = ServerResponse(code: .badRequest, description: "Data could not be sent")
             completion(failure)
             return
         }
@@ -29,12 +24,14 @@ class TimeManager {
                 return
             }
             
-            guard let res = response as? String, res == HTTPResponse.ok.rawValue else {
-                let failure = ServerResponse(code: .badRequest, description: "Could not submit timesheet")
-                completion(failure)
+            guard let serverStatus = Int(response!) else {
+                let unkonwnResponse = ServerResponse(code: .unknown, description: "Unknown server failure")
+                completion(unkonwnResponse)
                 return
             }
-            completion(nil)
+            let serverResponse = ServerStatus.parse(status: serverStatus)
+            completion(serverResponse)
+            return
         })
     }
     

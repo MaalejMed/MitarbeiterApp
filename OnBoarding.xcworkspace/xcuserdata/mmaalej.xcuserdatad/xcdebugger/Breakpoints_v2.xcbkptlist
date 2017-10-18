@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnBoarding/Presentation/Login/LoginViewController.swift"
-            timestampString = "530022760.268866"
+            timestampString = "530030233.743611"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
@@ -54,75 +54,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OnBoarding/Service/TimeService.swift"
-            timestampString = "529598841.179084"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "submit(dic:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static OnBoarding.TimeService.submit(dic: Swift.Dictionary&lt;Swift.String, Any&gt;, completion: (Swift.Optional&lt;Any&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "OnBoarding"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mmaalej/Dev/OnBoarding/OnBoarding/Service/TimeService.swift"
-                  timestampString = "530025479.447749"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "29">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; () in static OnBoarding.TimeService.submit(dic: Swift.Dictionary&lt;Swift.String, Any&gt;, completion: (Swift.Optional&lt;Any&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "OnBoarding"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mmaalej/Dev/OnBoarding/OnBoarding/Service/TimeService.swift"
-                  timestampString = "530025479.450067"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "227">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OnBoarding/Business/AssociateManager.swift"
-            timestampString = "530026445.646739"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "updatePhoto(dic:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnBoarding/Service/AssociateService.swift"
-            timestampString = "530026445.646813"
+            timestampString = "530030233.743716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"

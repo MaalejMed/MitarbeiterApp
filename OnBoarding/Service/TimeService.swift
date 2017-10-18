@@ -15,7 +15,7 @@ class TimeService {
     static let basicStringURL = "http://localhost:8080/Time"
     
     //MARK:- Submit timesheet
-    static func submit(dic: [String: Any], completion: @escaping ((Any?)->())) {
+    static func submit(dic: [String: Any], completion: @escaping ((String?)->())) {
         Alamofire.request(basicStringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
             completion(response.result.value)
         })
