@@ -1,5 +1,5 @@
 //
-//  AlertView.swift
+//  ServerResponseView.swift
 //  OnBoarding
 //
 //  Created by mmaalej on 18/09/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlertView: UIView {
+class ServerResponseView: UIView {
     
     //MARK:- Properties
     private let iconImgV: UIImageView = {

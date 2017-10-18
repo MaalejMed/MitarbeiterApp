@@ -13,7 +13,7 @@ class TimesheetPreviewViewController: UIViewController {
     //MARK:- Properties
     let timesheetInfoTV = TimesheetInfoTableView(frame: .zero)
     let sendBtn =  TriggerButton(frame: .zero)
-    let alertView = AlertView(frame: .zero)
+    let serverResponseView = ServerResponseView(frame: .zero)
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
@@ -109,7 +109,7 @@ class TimesheetPreviewViewController: UIViewController {
         let timeManager = TimeManager()
         timeManager.submit(timesheet: submittedTimesheet, completion: {[weak self] serverResponse in
             guard serverResponse == nil else {
-                self?.alertView.present(serverResponse: serverResponse!)
+                self?.serverResponseView.present(serverResponse: serverResponse!)
                 return
             }
             dataManager.resetTimesheet()

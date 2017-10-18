@@ -12,7 +12,7 @@ class LoginViewController: UIViewController {
     
     //MARK:- Properties
     let loginView = LoginView(frame: .zero)
-    let alertView = AlertView(frame: .zero)
+    let serverResponseView = ServerResponseView(frame: .zero)
 
     //MARK:- Views lifecycle
     override func viewDidLoad() {
@@ -79,7 +79,7 @@ class LoginViewController: UIViewController {
         assoManager.login(username: username, password: password, completion: {[weak self] serverResponse, associate in
             self?.loginView.loginBtn.status = .idle
             guard associate != nil else {
-                self?.alertView.present(serverResponse: serverResponse!)
+                self?.serverResponseView.present(serverResponse: serverResponse!)
                 return
             }
             self?.setupDataManager(associate: associate!)

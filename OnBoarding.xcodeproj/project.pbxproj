@@ -26,7 +26,7 @@
 		775690911F8BB8200049DE5E /* CellViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690821F8BB8200049DE5E /* CellViewProtocols.swift */; };
 		775690921F8BB8200049DE5E /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690841F8BB8200049DE5E /* BasicTableViewCell.swift */; };
 		775690931F8BB8200049DE5E /* ExtendedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690851F8BB8200049DE5E /* ExtendedTableViewCell.swift */; };
-		775690941F8BB8200049DE5E /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690871F8BB8200049DE5E /* AlertView.swift */; };
+		775690941F8BB8200049DE5E /* ServerResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690871F8BB8200049DE5E /* ServerResponseView.swift */; };
 		775690951F8BB8200049DE5E /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690881F8BB8200049DE5E /* InfoView.swift */; };
 		775690961F8BB8200049DE5E /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775690891F8BB8200049DE5E /* MediaViewController.swift */; };
 		775690971F8BB8200049DE5E /* DataPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756908A1F8BB8200049DE5E /* DataPickerView.swift */; };
@@ -106,7 +106,7 @@
 		775690821F8BB8200049DE5E /* CellViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellViewProtocols.swift; sourceTree = "<group>"; };
 		775690841F8BB8200049DE5E /* BasicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
 		775690851F8BB8200049DE5E /* ExtendedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedTableViewCell.swift; sourceTree = "<group>"; };
-		775690871F8BB8200049DE5E /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		775690871F8BB8200049DE5E /* ServerResponseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerResponseView.swift; sourceTree = "<group>"; };
 		775690881F8BB8200049DE5E /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		775690891F8BB8200049DE5E /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		7756908A1F8BB8200049DE5E /* DataPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataPickerView.swift; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 		775690861F8BB8200049DE5E /* UI-Elements */ = {
 			isa = PBXGroup;
 			children = (
-				775690871F8BB8200049DE5E /* AlertView.swift */,
+				775690871F8BB8200049DE5E /* ServerResponseView.swift */,
 				775690881F8BB8200049DE5E /* InfoView.swift */,
 				775690891F8BB8200049DE5E /* MediaViewController.swift */,
 				7756908A1F8BB8200049DE5E /* DataPickerView.swift */,
@@ -632,7 +632,7 @@
 				776075B11F862397009BB974 /* TimesheetEntries.swift in Sources */,
 				775690971F8BB8200049DE5E /* DataPickerView.swift in Sources */,
 				775B298E1F8F576900F455D8 /* DatePickerView.swift in Sources */,
-				775690941F8BB8200049DE5E /* AlertView.swift in Sources */,
+				775690941F8BB8200049DE5E /* ServerResponseView.swift in Sources */,
 				778C03001F87C05F0011E01D /* DataManager.swift in Sources */,
 				775690921F8BB8200049DE5E /* BasicTableViewCell.swift in Sources */,
 				778C02CE1F86771C0011E01D /* TimeService.swift in Sources */,
