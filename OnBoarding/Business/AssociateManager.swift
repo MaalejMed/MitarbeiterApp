@@ -21,8 +21,8 @@ class AssociateManager {
   
             guard let payload = result as? [String: Any] else {
                 guard let serverStatus = result as? Int else {
-                    let failure = ServerResponse(code: .unknown, description: "Unknown server failure")
-                    completion(failure, nil)
+                    let unknownResponse = ServerResponse(code: .unknown, description: "Unknown server failure")
+                    completion(unknownResponse, nil)
                     return
                 }
                 let failure = ServerStatus.parse(status: serverStatus)
@@ -48,9 +48,9 @@ class AssociateManager {
                 return
             }
             
-            guard let serverStatus = response as? Int else {
-                let failure = ServerResponse(code: .unknown, description: "Unknown server failure")
-                completion(failure)
+            guard let serverStatus = Int(response!) else {
+                let unkonwnResponse = ServerResponse(code: .unknown, description: "Unknown server failure")
+                completion(unkonwnResponse)
                 return
             }
             let serverResponse = ServerStatus.parse(status: serverStatus)

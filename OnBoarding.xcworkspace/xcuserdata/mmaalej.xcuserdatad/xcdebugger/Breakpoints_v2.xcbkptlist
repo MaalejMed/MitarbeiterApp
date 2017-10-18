@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnBoarding/Presentation/Login/LoginViewController.swift"
-            timestampString = "530013130.341244"
+            timestampString = "530022760.268866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
@@ -74,7 +74,7 @@
                   moduleName = "OnBoarding"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mmaalej/Dev/OnBoarding/OnBoarding/Service/TimeService.swift"
-                  timestampString = "530009426.739336"
+                  timestampString = "530025479.447749"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "19"
@@ -89,7 +89,7 @@
                   moduleName = "OnBoarding"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mmaalej/Dev/OnBoarding/OnBoarding/Service/TimeService.swift"
-                  timestampString = "530009426.741852"
+                  timestampString = "530025479.450067"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -97,6 +97,38 @@
                   offsetFromSymbolStart = "227">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OnBoarding/Business/AssociateManager.swift"
+            timestampString = "530025568.554892"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "updatePhoto(dic:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OnBoarding/Service/AssociateService.swift"
+            timestampString = "530025568.555181"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "login(username:password:completion:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

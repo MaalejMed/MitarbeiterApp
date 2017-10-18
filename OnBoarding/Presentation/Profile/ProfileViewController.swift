@@ -28,6 +28,7 @@ class ProfileViewController: UIViewController {
     //Properties
     let profileView = InfoView(frame: .zero)
     let profileTableView = ProfileTableView(frame: .zero)
+    let alertView = AlertView(frame: .zero)
     
     //Views lifecycle
     override func viewDidLoad() {
@@ -113,8 +114,8 @@ class ProfileViewController: UIViewController {
         ]
         
         let associateManager = AssociateManager()
-        associateManager.updatePhoto(dic: dic, completion:{ response in
-                print(String(describing: response))
+        associateManager.updatePhoto(dic: dic, completion:{[weak self] response in
+            self?.alertView.present(serverResponse: response!)
         })
     }
 }

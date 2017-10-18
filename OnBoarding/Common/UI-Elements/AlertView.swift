@@ -17,27 +17,15 @@ class AlertView: UIView {
         return imageView
     }()
     
-    private let titleLbl: UILabel = {
-        let label = UILabel()
-        return label
-    }()
-    
     private let descriptionLbl: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
-        label.textColor = .gray
+        label.textColor = .black
+        label.sizeToFit()
         return label
     }()
-    
-    var data : (title: String?, description: String?, icon: UIImage?)? {
-        didSet {
-            iconImgV.image = data?.icon
-            titleLbl.text = data?.title
-            descriptionLbl.text = data?.description
-        }
-    }
     
     //MARK:- Init
     override init(frame: CGRect) {
@@ -51,7 +39,7 @@ class AlertView: UIView {
     
     //MARK:- Layout
     func layout() {
-        let views :[String : UIView] = ["title": titleLbl, "description": descriptionLbl, "icon": iconImgV]
+        let views :[String : UIView] = ["description": descriptionLbl, "icon": iconImgV]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
@@ -59,22 +47,19 @@ class AlertView: UIView {
         
         var layoutConstraints: [NSLayoutConstraint] = []
         layoutConstraints += [
-            titleLbl.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             descriptionLbl.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            titleLbl.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            iconImgV.centerYAnchor.constraint(equalTo: titleLbl.centerYAnchor)
+            descriptionLbl.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            iconImgV.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ]
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[icon(20)]-(10)-[title]", options:[], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[description]-(10)-|", options:[], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(20)-[title]-(10)-[description]", options:[], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[icon(20)]", options:[], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[icon(20)]-(10)-[description]", options:[], metrics: nil, views: views)
+       
         NSLayoutConstraint.activate(layoutConstraints)
     }
     
     //MARK:-
     func present(serverResponse: ServerResponse) {
+        setup(serverResponse: serverResponse)
         let window = UIApplication.shared.keyWindow!
-        self.data = (title:serverResponse.description,  description: "", icon: UIImage.init(named: "Failure")!)
         window.addSubview(self)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.leftAnchor.constraint(equalTo: window.leftAnchor).isActive = true
@@ -85,5 +70,15 @@ class AlertView: UIView {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
             self.removeFromSuperview()
         })
+    }
+    
+    func setup(serverResponse: ServerResponse) {
+        switch serverResponse.code {
+        case .success:
+            self.iconImgV.image = UIImage.init(named: "Done")!
+        case .badRequest, .unauthorizedAccess, .unknown, .unreachableServer:
+            self.iconImgV.image = UIImage.init(named: "Failure")!
+        }
+        descriptionLbl.text = serverResponse.description
     }
 }

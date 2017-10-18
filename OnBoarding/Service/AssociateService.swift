@@ -23,7 +23,7 @@ class AssociateService {
     }
     
     //MARK:- Update Profile photo
-    static func changeProfilePhoto(dic: [String: Any], completion: @escaping ((Any?)->())) {
+    static func changeProfilePhoto(dic: [String: Any], completion: @escaping ((String?)->())) {
         let stringURL = basicStringURL+"/ProfilePhoto"
         Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
             completion(response.result.value)
