@@ -16,15 +16,15 @@ class AssociateService {
     
     //MARK:- Login
     static func login(username: String, password: String, completion: @escaping ((Any?)->())) {
-        let stringURL = basicStringURL+"/AssociateLogin?username="+username+"&password="+password
+        let stringURL = basicStringURL+"/Login?username="+username+"&password="+password
         Alamofire.request(stringURL).responseJSON(completionHandler: { response in
                 completion(response.result.value)
         })
     }
     
     //MARK:- Update Profile photo
-    static func update(dic: [String: Any], completion: @escaping ((Any?)->())) {
-        let stringURL = basicStringURL+"/AssociatePhoto"
+    static func changeProfilePhoto(dic: [String: Any], completion: @escaping ((Any?)->())) {
+        let stringURL = basicStringURL+"/ProfilePhoto"
         Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
             completion(response.result.value)
         })

@@ -16,13 +16,13 @@ class FeedManager {
         var feed: [Feed] = []
         FeedService.fetch(completion: { response in
             guard response != nil else {
-                let failure = Failure(code: .networkConnection, description: "Could not connect to the server")
+                let failure = Failure(code: .unreachableServer, description: "Could not connect to the server")
                 completion(failure, nil)
                 return
             }
             
             guard let payload = response as? [[String: Any]] else {
-                let failure = Failure(code: .parsingIssue, description: "Data could not be parsed")
+                let failure = Failure(code: .badRequest, description: "Data could not be parsed")
                 completion(failure, nil)
                 return
             }
@@ -35,7 +35,7 @@ class FeedManager {
             }
             
             guard feed.count > 0 else {
-                let failure = Failure(code: .parsingIssue, description: "Data could not be parsed")
+                let failure = Failure(code: .badRequest, description: "Data could not be parsed")
                 completion(failure, nil)
                 return
             }
