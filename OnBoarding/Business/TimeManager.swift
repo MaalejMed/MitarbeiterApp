@@ -16,21 +16,21 @@ enum HTTPResponse: String {
 class TimeManager {
     
     //MARK:- Submit timesheet
-    func submit(timesheet: Timesheet, completion: @escaping ((Failure?)->()) ) {
+    func submit(timesheet: Timesheet, completion: @escaping ((ServerResponse?)->()) ) {
         guard let dic = timesheet.convertToJson() else {
-            let failure = Failure(code: .badRequest, description: "Missing data")
+            let failure = ServerResponse(code: .badRequest, description: "Missing data")
             completion(failure)
             return
         }
         TimeService.submit(dic: dic, completion: { response in
             guard response != nil else {
-                let failure = Failure(code: .unreachableServer, description: "Could not connect to the server")
+                let failure = ServerResponse(code: .unreachableServer, description: "Could not connect to the server")
                 completion(failure)
                 return
             }
             
             guard let res = response as? String, res == HTTPResponse.ok.rawValue else {
-                let failure = Failure(code: .badRequest, description: "Could not submit timesheet")
+                let failure = ServerResponse(code: .badRequest, description: "Could not submit timesheet")
                 completion(failure)
                 return
             }
@@ -39,15 +39,15 @@ class TimeManager {
     }
     
     //MARK:- Last submitted day
-    func lastSubmittedDay(associateID: String, completion: @escaping ((Date?, Failure?)->()) ) {
+    func lastSubmittedDay(associateID: String, completion: @escaping ((Date?, ServerResponse?)->()) ) {
         TimeService.lastSubmittedDay(associateID: associateID, completion: { response in
             guard response != nil else {
-                let failure = Failure(code: .unreachableServer, description: "Could not connect to the server")
+                let failure = ServerResponse(code: .unreachableServer, description: "Could not connect to the server")
                 completion(nil,failure)
                 return
             }
             guard let payload = response as? String, let day = payload.date() else {
-                let failure = Failure(code: .badRequest, description: "Data could not be parsed")
+                let failure = ServerResponse(code: .badRequest, description: "Data could not be parsed")
                 completion(nil, failure)
                 return
             }

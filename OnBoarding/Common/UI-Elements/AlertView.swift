@@ -72,9 +72,9 @@ class AlertView: UIView {
     }
     
     //MARK:-
-    func present(failure: Failure) {
+    func present(serverResponse: ServerResponse) {
         let window = UIApplication.shared.keyWindow!
-        self.data = (title:failure.description,  description: "", icon: UIImage.init(named: "Failure")!)
+        self.data = (title:serverResponse.description,  description: "", icon: UIImage.init(named: "Failure")!)
         window.addSubview(self)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.leftAnchor.constraint(equalTo: window.leftAnchor).isActive = true
