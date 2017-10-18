@@ -16,7 +16,7 @@ class FeedManager {
         var feed: [Feed] = []
         FeedService.fetch(completion: { response in
             guard response != nil else {
-                let failure = ServerResponse(code: .unreachableServer, description: "Could not connect to the server")
+                let failure = ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")
                 completion(failure, nil)
                 return
             }

@@ -19,7 +19,7 @@ class TimeManager {
         }
         TimeService.submit(dic: dic, completion: { response in
             guard response != nil else {
-                let failure = ServerResponse(code: .unreachableServer, description: "Could not connect to the server")
+                let failure = ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")
                 completion(failure)
                 return
             }
@@ -39,7 +39,7 @@ class TimeManager {
     func lastSubmittedDay(associateID: String, completion: @escaping ((Date?, ServerResponse?)->()) ) {
         TimeService.lastSubmittedDay(associateID: associateID, completion: { response in
             guard response != nil else {
-                let failure = ServerResponse(code: .unreachableServer, description: "Could not connect to the server")
+                let failure = ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")
                 completion(nil,failure)
                 return
             }

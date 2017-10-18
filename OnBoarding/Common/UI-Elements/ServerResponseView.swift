@@ -76,7 +76,7 @@ class ServerResponseView: UIView {
         switch serverResponse.code {
         case .success:
             self.iconImgV.image = UIImage.init(named: "Done")!
-        case .badRequest, .unauthorizedAccess, .unknown, .unreachableServer:
+        case .badRequest, .unauthorizedAccess, .unknown, .serviceUnavailable, .notFound:
             self.iconImgV.image = UIImage.init(named: "Failure")!
         }
         descriptionLbl.text = serverResponse.description
