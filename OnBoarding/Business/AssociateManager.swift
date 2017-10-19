@@ -10,8 +10,8 @@ import Foundation
 
 class AssociateManager {
     
-    //MARK:- Login
-    func login(username: String, password: String, completion: @escaping ((ServerResponse?, Associate?)->())) {
+    //MARK:-
+    func selectAssociate(username: String, password: String, completion: @escaping ((ServerResponse?, Associate?)->())) {
         AssociateService.login(username: username, password: password, completion: { response in
             guard let result = response else {
                 let failure = ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")
@@ -39,8 +39,8 @@ class AssociateManager {
         })
     }
     
-    //MARK:- Update photo
-    func updatePhoto(dic: [String: Any], completion: @escaping ((ServerResponse?)->()) ) {
+    //MARK:-
+    func updateAssociatePhoto(dic: [String: Any], completion: @escaping ((ServerResponse?)->()) ) {
         AssociateService.changeProfilePhoto(dic: dic, completion: { response in
             guard response != nil else {
                 let failure = ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")

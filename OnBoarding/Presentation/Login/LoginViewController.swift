@@ -76,7 +76,7 @@ class LoginViewController: UIViewController {
     func login(username: String, password: String) {
         loginView.loginBtn.status = .loading
         let assoManager = AssociateManager()
-        assoManager.login(username: username, password: password, completion: {[weak self] serverResponse, associate in
+        assoManager.selectAssociate(username: username, password: password, completion: {[weak self] serverResponse, associate in
             self?.loginView.loginBtn.status = .idle
             guard associate != nil else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)

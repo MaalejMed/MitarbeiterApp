@@ -14,7 +14,7 @@ class AssociateService {
     //MARK:- Properties
     static let basicStringURL = "http://localhost:8080"
     
-    //MARK:- Login
+    //MARK:-
     static func login(username: String, password: String, completion: @escaping ((Any?)->())) {
         let stringURL = basicStringURL+"/Login?username="+username+"&password="+password
         Alamofire.request(stringURL).responseJSON(completionHandler: { response in
@@ -22,7 +22,7 @@ class AssociateService {
         })
     }
     
-    //MARK:- Update Profile photo
+    //MARK:-
     static func changeProfilePhoto(dic: [String: Any], completion: @escaping ((String?)->())) {
         let stringURL = basicStringURL+"/ProfilePhoto"
         Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
