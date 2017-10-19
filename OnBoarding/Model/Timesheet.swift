@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 struct Timesheet {
     
     //MARK:- Properties
@@ -93,6 +91,14 @@ struct Timesheet {
     }
     
     //MARK:- Others
+    func canSubmit() -> Bool {
+        guard let currentDay = self.day, currentDay < Date() else {
+            return false
+        }
+        let canSubmitDay = (currentDay <= Date()) ?  true :  false
+        return canSubmitDay
+    }
+    
     func missingTimesheets() -> Int? {
         guard var lastDay = lastSubmittedDay  else {
             return nil

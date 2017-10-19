@@ -217,6 +217,9 @@ class TimesheetViewController: UIViewController {
 
 extension TimesheetViewController: TimesheetInfoTableViewDelegate {
     func didSelectTimesheetInfo(timesheetInfoTableView: TimesheetInfoTableView, entry: TimesheetEntry) {
+        guard  DataManager.sharedInstance.timesheet?.canSubmit() == true else {
+            return
+        }
         presentPickerFor(entryKey: entry.key)
     }
 }

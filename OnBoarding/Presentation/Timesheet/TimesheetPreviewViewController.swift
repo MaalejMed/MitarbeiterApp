@@ -110,22 +110,23 @@ class TimesheetPreviewViewController: UIViewController {
         timeManager.insert(timesheet: submittedTimesheet, completion: {[weak self] serverResponse in
             guard serverResponse?.code == .success else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
+                self?.sendBtn.status = .idle
                 return
             }
             dataManager.resetTimesheet(completion: { serverResponse in
-                guard serverResponse == .success else {
+                guard serverResponse?.code == .success else {
+                    self?.serverResponseView.present(serverResponse: serverResponse!)
+                    self?.sendBtn.status = .idle
                     return
                 }
             })
-        })
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
+            self?.serverResponseView.present(serverResponse: serverResponse!)
             for vc in (self?.navigationController?.viewControllers)! {
                 if  vc.isKind(of: HomeViewController.self){
                     self?.navigationController?.popToViewController(vc, animated: true)
                     return
                 }
             }
-            self?.sendBtn.status = .idle
         })
     }
 }

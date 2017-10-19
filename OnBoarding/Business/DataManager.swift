@@ -37,21 +37,24 @@ class DataManager {
     }
     
     //MARK:- Timesheet
-    func updateLastSubmissionDay( completion: @escaping ((ServerStatus?)->()) ) {
+    func updateLastSubmissionDay( completion: @escaping ((ServerResponse?)->()) ) {
         let timeManager = TimeManager()
         timeManager.SelectLastSubmittedDay(associateID: (self.associate?.identifier!)!, completion: {date, failure in
             guard let lastSubmittedDay = date else {
-                completion(ServerStatus.unknown)
+                let failure = ServerResponse.init(code: .badRequest, description: "Operation could not be completed")
+                completion(failure)
                 return
             }
             DataManager.sharedInstance.timesheet?.lastSubmittedDay = lastSubmittedDay
-            completion(ServerStatus.success)
+            let success = ServerResponse.init(code: .success, description: "Done !")
+            completion(success)
         })
     }
     
-    func resetTimesheet(completion: @escaping ((ServerStatus?)->()) ) {
+    func resetTimesheet(completion: @escaping ((ServerResponse?)->()) ) {
         guard let identifier = associate?.identifier else {
-            completion(ServerStatus.unknown)
+            let failure = ServerResponse.init(code: .badRequest, description: "Operation could not be completed")
+            completion(failure)
             return
         }
         self.timesheet = Timesheet(associateIdentifier: identifier)
