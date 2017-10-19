@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+
 struct Timesheet {
     
     //MARK:- Properties
@@ -88,14 +90,18 @@ struct Timesheet {
     }
     
     //MARK:- Others
-    func missingDays() -> Int? {
+    func missingTimesheets() -> Int? {
         guard let lastDay = lastSubmittedDay  else {
             return nil
         }
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        let lastSubmitted = calendar.startOfDay(for: lastDay)
-        let components = calendar.dateComponents([.day], from: lastSubmitted, to: today)
-        return components.day!
+        var missingDays: Int = 0
+        var currentDay = lastDay.tomorrow
+        
+        repeat {
+            missingDays = !currentDay.isDateWeekend ?  missingDays + 1 : missingDays + 0
+            currentDay = currentDay.tomorrow
+            
+        } while currentDay < Date().yesterday
+        return missingDays
     }
 }

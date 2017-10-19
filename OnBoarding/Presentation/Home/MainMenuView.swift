@@ -140,7 +140,7 @@ extension MainMenuView: UICollectionViewDataSource {
         let item = items?[indexPath.row]
         
         var notif: Int?
-        if item?.item == .time, let missingDays =  DataManager.sharedInstance.timesheet?.missingDays(){
+        if item?.item == .time, let missingDays =  DataManager.sharedInstance.timesheet?.missingTimesheets(){
             notif = missingDays > 0 ?  missingDays : nil
         }
         cell.data = (title: item?.description, icon:item?.icon, notif: notif)
