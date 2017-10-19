@@ -37,7 +37,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
         self.navigationItem.setHidesBackButton(true, animated:false)
         setupProfileView()
-        fetchLastSubmittedDay()
+        self.mainMenuView.menuCV.reloadData()
     }
     
     //MARK:- Layout
@@ -162,19 +162,19 @@ class HomeViewController: UIViewController {
         })
     }
     
-    func fetchLastSubmittedDay() {
-        let associate = DataManager.sharedInstance.associate
-        let associateID = associate?.identifier
-       
-        let timeManager = TimeManager()
-        timeManager.SelectLastSubmittedDay(associateID: associateID!, completion: {[weak self] date, failure in
-            guard let lastSubmittedDay = date else {
-                return
-            }
-            DataManager.sharedInstance.timesheet?.lastSubmittedDay = lastSubmittedDay
-            self?.mainMenuView.menuCV.reloadData()
-        })
-    }
+//    func fetchLastSubmittedDay() {
+//        let associate = DataManager.sharedInstance.associate
+//        let associateID = associate?.identifier
+//
+//        let timeManager = TimeManager()
+//        timeManager.SelectLastSubmittedDay(associateID: associateID!, completion: {[weak self] date, failure in
+//            guard let lastSubmittedDay = date else {
+//                return
+//            }
+//            DataManager.sharedInstance.timesheet?.lastSubmittedDay = lastSubmittedDay
+//            self?.mainMenuView.menuCV.reloadData()
+//        })
+//    }
 }
 
 extension HomeViewController: FeedTableViewDelegate {

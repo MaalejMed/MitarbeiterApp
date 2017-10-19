@@ -77,20 +77,22 @@ class LoginViewController: UIViewController {
         loginView.loginBtn.status = .loading
         let assoManager = AssociateManager()
         assoManager.selectAssociate(username: username, password: password, completion: {[weak self] serverResponse, associate in
-            self?.loginView.loginBtn.status = .idle
             guard associate != nil else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
+                self?.loginView.loginBtn.status = .idle
                 return
             }
-            self?.setupDataManager(associate: associate!)
-            let homeVC = HomeViewController()
-            self?.navigationController?.pushViewController(homeVC, animated: true)
+            DataManager.sharedInstance.setup(associate: associate!, completion: { failure in
+                guard failure == nil else {
+                    self?.serverResponseView.present(serverResponse: failure!)
+                    self?.loginView.loginBtn.status = .idle
+                    return
+                }
+                let homeVC = HomeViewController()
+                self?.navigationController?.pushViewController(homeVC, animated: true)
+                self?.loginView.loginBtn.status = .idle
+            })
         })
     }
-    
-    //MARK:- Setup data manager
-    func setupDataManager(associate: Associate) {
-        DataManager.sharedInstance.associate = associate
-        DataManager.sharedInstance.timesheet = Timesheet(associateIdentifier: associate.identifier!)
-    }
+
 }

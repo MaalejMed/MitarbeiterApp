@@ -160,7 +160,8 @@ class TimesheetViewController: UIViewController {
             case .project:
                 var entries: [TimesheetEntry] = []
                 for key in EntryKey.allProjectKeys {
-                    let timesheetEntry = TimesheetEntry (info: parameter, key: key, value: nil)
+                    let value = (key == .date) ? DataManager.sharedInstance.timesheet?.nextDayToSubmit() : nil
+                    let timesheetEntry = TimesheetEntry (info: parameter, key: key, value: value?.simpleDateFormat())
                     entries.append(timesheetEntry)
                     timesheetEntries [.project] = entries
                 }

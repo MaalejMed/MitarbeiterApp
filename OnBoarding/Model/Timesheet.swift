@@ -13,8 +13,6 @@ import Foundation
 struct Timesheet {
     
     //MARK:- Properties
-    var lastSubmittedDay: Date?
-    var day: Date?
     var associateID: String?
     var projectID: String?
     var activity: String?
@@ -23,10 +21,15 @@ struct Timesheet {
     var until: Date?
     var workedHours: (hours: Int, minutes: Int)?
     var lunchBreak: Int?
+    var day: Date?
+    var lastSubmittedDay: Date? {
+        didSet {
+            day = nextDayToSubmit()
+        }
+    }
     
     //MARK:- Init
     init(associateIdentifier: String) {
-        day = Date()
         projectID = nil
         associateID = associateIdentifier
         activity = nil
@@ -91,17 +94,27 @@ struct Timesheet {
     
     //MARK:- Others
     func missingTimesheets() -> Int? {
+        guard var lastDay = lastSubmittedDay  else {
+            return nil
+        }
+        var missingDays = 0
+        lastDay = lastDay.tomorrow
+        
+        while lastDay < Date().yesterday {
+            missingDays = !lastDay.isDateWeekend ?  missingDays + 1 : missingDays + 0
+            lastDay = lastDay.tomorrow
+        }
+        return missingDays
+    }
+    
+    func nextDayToSubmit() -> Date? {
         guard let lastDay = lastSubmittedDay  else {
             return nil
         }
-        var missingDays: Int = 0
-        var currentDay = lastDay.tomorrow
-        
+        var nextDay = lastDay
         repeat {
-            missingDays = !currentDay.isDateWeekend ?  missingDays + 1 : missingDays + 0
-            currentDay = currentDay.tomorrow
-            
-        } while currentDay < Date().yesterday
-        return missingDays
+            nextDay = nextDay.tomorrow
+        }while nextDay.isDateWeekend == true
+        return nextDay
     }
 }

@@ -108,11 +108,15 @@ class TimesheetPreviewViewController: UIViewController {
         sendBtn.status = .loading
         let timeManager = TimeManager()
         timeManager.insert(timesheet: submittedTimesheet, completion: {[weak self] serverResponse in
-            guard serverResponse == nil else {
+            guard serverResponse?.code == .success else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
                 return
             }
-            dataManager.resetTimesheet()
+            dataManager.resetTimesheet(completion: { serverResponse in
+                guard serverResponse == .success else {
+                    return
+                }
+            })
         })
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
             for vc in (self?.navigationController?.viewControllers)! {

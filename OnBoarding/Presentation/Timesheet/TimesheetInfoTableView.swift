@@ -69,6 +69,9 @@ extension TimesheetInfoTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let info = EntryInfo.allValues[indexPath.section]
         let entry = Array(dataSource![info]!)[indexPath.row]
+        guard entry.key != .date else {
+            return
+        }
         timesheetInfoTableViewDelegate?.didSelectTimesheetInfo(timesheetInfoTableView: self, entry: entry)
     }
 }
@@ -93,9 +96,7 @@ extension TimesheetInfoTableView: UITableViewDataSource {
         
         let info = EntryInfo.allValues[indexPath.section]
         let entry = Array(dataSource![info]!)[indexPath.row]
-        
-        let value = entry.key == .date ? Date().simpleDateFormat() : entry.value
-        cell?.data = (title: entry.key.rawValue, details: value,  icon: nil)
+        cell?.data = (title: entry.key.rawValue, details: entry.value,  icon: nil)
         return cell!
         
     }
