@@ -10,14 +10,14 @@ import Foundation
 
 class TimeManager {
     
-    //MARK:- Submit timesheet
-    func submit(timesheet: Timesheet, completion: @escaping ((ServerResponse?)->()) ) {
+    //MARK:-
+    func insert(timesheet: Timesheet, completion: @escaping ((ServerResponse?)->()) ) {
         guard let dic = timesheet.convertToJson() else {
             let failure = ServerResponse(code: .badRequest, description: "Data could not be sent")
             completion(failure)
             return
         }
-        TimeService.submit(dic: dic, completion: { response in
+        TimeService.submitTimesheet(dic: dic, completion: { response in
             guard response != nil else {
                 let failure = ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")
                 completion(failure)
@@ -35,8 +35,8 @@ class TimeManager {
         })
     }
     
-    //MARK:- Last submitted day
-    func lastSubmittedDay(associateID: String, completion: @escaping ((Date?, ServerResponse?)->()) ) {
+    //MARK:-
+    func SelectLastSubmittedDay(associateID: String, completion: @escaping ((Date?, ServerResponse?)->()) ) {
         TimeService.lastSubmittedDay(associateID: associateID, completion: { response in
             guard response != nil else {
                 let failure = ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")

@@ -167,7 +167,7 @@ class HomeViewController: UIViewController {
         let associateID = associate?.identifier
        
         let timeManager = TimeManager()
-        timeManager.lastSubmittedDay(associateID: associateID!, completion: {[weak self] date, failure in
+        timeManager.SelectLastSubmittedDay(associateID: associateID!, completion: {[weak self] date, failure in
             guard let lastSubmittedDay = date else {
                 return
             }

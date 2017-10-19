@@ -12,18 +12,19 @@ import Alamofire
 class TimeService {
     
     //MARK:- Fetch
-    static let basicStringURL = "http://localhost:8080/Time"
+    static let basicStringURL = "http://localhost:8080"
     
-    //MARK:- Submit timesheet
-    static func submit(dic: [String: Any], completion: @escaping ((String?)->())) {
-        Alamofire.request(basicStringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
+    //MARK:-
+    static func submitTimesheet(dic: [String: Any], completion: @escaping ((String?)->())) {
+        let stringURL = basicStringURL + "/SubmitTimesheet"
+        Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
             completion(response.result.value)
         })
     }
     
-    //MARK:- Fetch lastSubmitted day
+    //MARK:-
     static func lastSubmittedDay(associateID: String, completion: @escaping ((Any?)->())) {
-        let stringURL = basicStringURL+"?associateID="+associateID
+        let stringURL = basicStringURL+"/LastSubmittedDay?associateID="+associateID
         Alamofire.request(stringURL).responseString(completionHandler: { response in
                 completion(response.result.value)
         })
