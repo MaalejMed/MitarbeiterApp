@@ -13,6 +13,7 @@ class DataManager {
     //MARK:- Properties
     var associate: Associate?
     var timesheet: Timesheet?
+    var feeds: [Feed]?
     
     static let sharedInstance: DataManager = {
         let instance = DataManager()
@@ -27,12 +28,21 @@ class DataManager {
         let timeManager = TimeManager()
         timeManager.SelectLastSubmittedDay(associateID: associate.identifier!, completion: {date, failure in
             guard let lastSubmittedDay = date else {
-                completion(failure)
+                completion(failure) // Failure stops login
                 return
             }
             DataManager.sharedInstance.timesheet = Timesheet(associateIdentifier: associate.identifier!)
             DataManager.sharedInstance.timesheet?.lastSubmittedDay = lastSubmittedDay
-            completion(nil)
+            
+        })
+        //feed
+        let feedManager = FeedManager()
+        feedManager.fetchFeed(completion: { failure, feed in
+            guard failure == nil, let feedEntries = feed  else {
+                return completion(nil) // Failure does not stop login
+            }
+            DataManager.sharedInstance.feeds = feedEntries
+            return completion(nil)
         })
     }
     
@@ -60,6 +70,18 @@ class DataManager {
         self.timesheet = Timesheet(associateIdentifier: identifier)
         self.updateLastSubmissionDay(completion: { serverResponse in
             completion(serverResponse)
+        })
+    }
+    
+    //MARK:- Feed
+    func selectFeeds(completion: @escaping ((ServerResponse?)->()) ) {
+        let feedManager = FeedManager()
+        feedManager.fetchFeed(completion: { failure, feed in
+            guard failure == nil, let feedEntries = feed  else {
+                return completion(nil) // Failure does not stop login
+            }
+            DataManager.sharedInstance.feeds = feedEntries
+            return completion(nil)
         })
     }
 }

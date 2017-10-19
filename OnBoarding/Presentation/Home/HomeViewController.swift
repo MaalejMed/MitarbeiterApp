@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
         setupMainMenuView()
         setupFeedTableView()
         setupTriggerView()
-        fetchFeeds()
+        setupFeedDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,7 +128,16 @@ class HomeViewController: UIViewController {
     
     func setupTriggerView() {
         triggerView.data = (title:"No Feed available", icon: UIImage.init(named:"NoMails"), action: { [weak self] in
-            self?.fetchFeeds()
+            self?.triggerView.status = .loading
+            DataManager.sharedInstance.selectFeeds(completion: {[weak self] response in
+                guard response == nil else {
+                    self?.triggerView.status = .idle
+                    return
+                }
+                self?.feedTableView.dataSource = DataManager.sharedInstance.feeds
+                self?.presentNewsTableView()
+                self?.triggerView.status = .idle
+            })
         })
     }
     
@@ -143,38 +152,20 @@ class HomeViewController: UIViewController {
         if feedTableView.superview != nil {
             feedTableView.removeFromSuperview()
         }
-        triggerView.status = .loading
+        triggerView.status = .idle
         layout(contentView: triggerView)
     }
     
-    //MARK:- Reuqests
-    func fetchFeeds () {
-        presentTriggerView()
-        let feedManager = FeedManager()
-        feedManager.fetchFeed(completion: { [weak self] failure, feed in
-            guard failure == nil, let feedEntries = feed  else {
-                self?.triggerView.status = .idle
-                return
-            }
-            self?.feeds = feedEntries
-            self?.feedTableView.dataSource = self?.feeds
-            self?.presentNewsTableView()
-        })
+    //MARK:-
+    func setupFeedDataSource() {
+        guard let existingFeed = DataManager.sharedInstance.feeds else {
+            presentTriggerView()
+            return
+        }
+        self.feeds = existingFeed
+        feedTableView.dataSource = self.feeds
+        presentNewsTableView()
     }
-    
-//    func fetchLastSubmittedDay() {
-//        let associate = DataManager.sharedInstance.associate
-//        let associateID = associate?.identifier
-//
-//        let timeManager = TimeManager()
-//        timeManager.SelectLastSubmittedDay(associateID: associateID!, completion: {[weak self] date, failure in
-//            guard let lastSubmittedDay = date else {
-//                return
-//            }
-//            DataManager.sharedInstance.timesheet?.lastSubmittedDay = lastSubmittedDay
-//            self?.mainMenuView.menuCV.reloadData()
-//        })
-//    }
 }
 
 extension HomeViewController: FeedTableViewDelegate {
