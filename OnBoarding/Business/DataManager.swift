@@ -53,7 +53,12 @@ class DataManager {
                 completion(nil)
                 return
             }
-            let _ = (response != nil && response?.code == .notFound) ? completion(nil) : completion(response)
+            if date == nil && response?.code == .notFound {
+                DataManager.sharedInstance.timesheet?.day = Date()
+                completion(nil)
+                return
+            }
+            completion(response)
         })
     }
     

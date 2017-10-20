@@ -134,9 +134,6 @@ struct Timesheet {
     }
     
     //MARK:- Others
-    func canSelectDay() -> Bool {
-        return (self.lastSubmittedDay != nil) ? false : true
-    }
     
     func canSubmit() -> Bool {
         guard lastSubmittedDay != nil else {

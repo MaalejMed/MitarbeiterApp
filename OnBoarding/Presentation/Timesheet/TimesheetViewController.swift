@@ -88,8 +88,10 @@ class TimesheetViewController: UIViewController {
                           "21", "22", "23", "24","25", "26", "27", "28", "29", "30"
                          ]
             setupDataPickerView(dataSource: dataSource, key: entryKey)
-        case  .date,.from, .until:
+        case .from, .until:
             setupDatePickerView(key: entryKey)
+        case .date:
+            break
         }
     }
     
@@ -110,12 +112,7 @@ class TimesheetViewController: UIViewController {
     
     func setupDatePickerView(key: EntryKey) {
         datePickerView.titleLbl.text = "Select " + key.rawValue
-        if  key == .date {
-            datePickerView.datePicker.datePickerMode = .date
-            datePickerView.datePicker.minimumDate = Date()
-        } else {
-            datePickerView.datePicker.datePickerMode = .time
-        }
+        datePickerView.datePicker.datePickerMode = .time
         
         //Done button
         datePickerView.doneButtonAction = { [weak self] (newValue: Date) in
@@ -135,7 +132,7 @@ class TimesheetViewController: UIViewController {
             case .project:
                 var entries: [TimesheetEntry] = []
                 for key in EntryKey.allProjectKeys {
-                    let value = (key == .date) ? DataManager.sharedInstance.timesheet?.nextDayToSubmit() : nil
+                    let value = (key == .date) ? DataManager.sharedInstance.timesheet?.day: nil
                     let timesheetEntry = TimesheetEntry (info: parameter, key: key, value: value?.simpleDateFormat())
                     entries.append(timesheetEntry)
                     timesheetEntries [.project] = entries
@@ -218,11 +215,12 @@ class TimesheetViewController: UIViewController {
 
 extension TimesheetViewController: TimesheetInfoTableViewDelegate {
     func didSelectTimesheetInfo(timesheetInfoTableView: TimesheetInfoTableView, entry: TimesheetEntry) {
-        guard  DataManager.sharedInstance.timesheet?.canSubmit() == true else {
+        
+        guard entry.key != .date else {
             return
         }
         
-        if DataManager.sharedInstance.timesheet?.canSelectDay() == false &&  entry.key == .date {
+        guard DataManager.sharedInstance.timesheet?.canSubmit() == true else {
             return
         }
     
