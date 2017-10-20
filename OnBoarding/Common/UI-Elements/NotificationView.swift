@@ -33,7 +33,6 @@ class NotificationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .red
-        self.rounded()
     }
     
     required init?(coder aDecoder: NSCoder) {

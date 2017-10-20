@@ -12,13 +12,17 @@ class TextView: UITextView {
     //MARK:- Properites
     var placeholder: String? {
         didSet {
-            guard placeholder != "" else {
-                self.textColor = .black
-                self.text = ""
-                return
-            }
-            self.textColor = UIColor.placehoderTextColor
-            self.text = placeholder
+            setPlaceHolder()
         }
+    }
+    
+    func setPlaceHolder() {
+        guard placeholder != "" else {
+            self.textColor = .black
+            self.text = ""
+            return
+        }
+        self.textColor = UIColor.placehoderTextColor
+        self.text = placeholder
     }
 }

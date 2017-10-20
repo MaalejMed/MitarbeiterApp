@@ -9,11 +9,14 @@
 import UIKit
 
 struct MenuItem {
+    
+    //MARK:- Properties
     var identifier: String
     var item: Item
     var description: String
     var icon: UIImage
     
+    //MARK:- Init
     init(item: Item) {
         switch item {
         case .time:

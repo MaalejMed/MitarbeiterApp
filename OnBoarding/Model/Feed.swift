@@ -9,12 +9,15 @@
 import Foundation
 
 struct Feed {
+    
+    //MARK:- Properties
     var identifier: String?
     var title: String?
     var description: String?
     var details: String?
     var date: Date?
     
+    //MARK:- Init
     init?(json: [String: Any]) {
         guard let title = json["title"], let description = json["description"], let details = json["details"], let date = json["date"] else {
             return nil

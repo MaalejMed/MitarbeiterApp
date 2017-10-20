@@ -10,6 +10,8 @@ import UIKit
 
 //MARK:- Properties
 struct CellMetrics {
+    
+    //MARK:- Properties
     let topAnchor: CGFloat
     let leftAnchor: CGFloat
     let bottomAnchor: CGFloat

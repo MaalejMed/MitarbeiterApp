@@ -8,21 +8,20 @@
 
 import Foundation
 
-
 class FeedManager {
     
-    //MARK:- Feed
-    func fetchFeed(completion: @escaping ((ServerResponse?, [Feed]?)->())) {
+    //MARK:-
+    func selectFeeds(completion: @escaping ((ServerResponse?, [Feed]?)->())) {
         var feed: [Feed] = []
         FeedService.fetch(completion: { response in
             guard response != nil else {
-                let failure = ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")
+                let failure = ServerStatus.parse(status: .serviceUnavailable)
                 completion(failure, nil)
                 return
             }
             
             guard let payload = response as? [[String: Any]] else {
-                let failure = ServerResponse(code: .badRequest, description: "Data could not be parsed")
+                let failure = ServerStatus.parse(status: .badRequest)
                 completion(failure, nil)
                 return
             }
@@ -35,7 +34,7 @@ class FeedManager {
             }
             
             guard feed.count > 0 else {
-                let failure = ServerResponse(code: .badRequest, description: "Data could not be parsed")
+                let failure = ServerStatus.parse(status: .badRequest)
                 completion(failure, nil)
                 return
             }

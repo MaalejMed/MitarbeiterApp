@@ -13,23 +13,23 @@ class TimeManager {
     //MARK:-
     func insert(timesheet: Timesheet, completion: @escaping ((ServerResponse?)->()) ) {
         guard let dic = timesheet.convertToJson() else {
-            let failure = ServerResponse(code: .badRequest, description: "Data could not be sent")
+            let failure = ServerStatus.parse(status: .badRequest)
             completion(failure)
             return
         }
         TimeService.submitTimesheet(dic: dic, completion: { response in
             guard response != nil else {
-                let failure = ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")
+                let failure = ServerStatus.parse(status: .serviceUnavailable)
                 completion(failure)
                 return
             }
             
             guard let serverStatus = Int(response!) else {
-                let unkonwnResponse = ServerResponse(code: .unknown, description: "Unknown server failure")
-                completion(unkonwnResponse)
+                let failure = ServerStatus.parse(status: .unknown)
+                completion(failure)
                 return
             }
-            let serverResponse = ServerStatus.parse(status: serverStatus)
+            let serverResponse = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
             completion(serverResponse)
             return
         })
@@ -43,9 +43,14 @@ class TimeManager {
                 completion(nil,failure)
                 return
             }
-            guard let payload = response as? String, let day = payload.date() else {
-                let failure = ServerResponse(code: .badRequest, description: "Data could not be parsed")
-                completion(nil, failure)
+            guard let day = response?.date() else {
+                guard let serverStatus = Int(response!) else {
+                    let unkonwnResponse = ServerResponse(code: .unknown, description: "Unknown server failure")
+                    completion(nil, unkonwnResponse)
+                    return
+                }
+                let response = ServerStatus.parse(status: ServerStatus(rawValue: Int(serverStatus))!)
+                completion(nil, response)
                 return
             }
             completion(day, nil)

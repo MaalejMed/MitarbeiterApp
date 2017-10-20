@@ -9,7 +9,6 @@
 import UIKit
 
 extension String {
-    
     func characterAtIndex(index: Int)-> Character? {
         for (ind, character) in self.characters.enumerated() {
             if ind == index {

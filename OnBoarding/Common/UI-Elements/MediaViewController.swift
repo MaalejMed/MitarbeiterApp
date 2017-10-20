@@ -23,7 +23,7 @@ class MediaViewController: UIViewController {
         self.view.backgroundColor = .white
     }
     
-    //MARK:- Read image
+    //MARK:-
     func setupImagePickerController() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .photoLibrary

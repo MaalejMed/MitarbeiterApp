@@ -142,6 +142,13 @@ class TimesheetViewController: UIViewController {
     
     func setupDatePickerView(key: EntryKey) {
         datePickerView.titleLbl.text = "Select " + key.rawValue
+        if  key == .date {
+            datePickerView.datePicker.datePickerMode = .date
+            datePickerView.datePicker.minimumDate = Date()
+        } else {
+            datePickerView.datePicker.datePickerMode = .time
+        }
+        
         //Done button
         datePickerView.doneButtonAction = { [weak self] (newValue: Date) in
             self?.update(key: key, value: newValue)
@@ -197,7 +204,8 @@ class TimesheetViewController: UIViewController {
             dataManager.timesheet!.projectID = value as? String ?? nil
             timesheetEntries[section]![key.index()].value = dataManager.timesheet!.projectID!
         case .date:
-            break
+            dataManager.timesheet!.day = value as? Date ?? nil
+            timesheetEntries[section]![key.index()].value = (dataManager.timesheet!.day?.simpleDateFormat())!
         case .from:
             dataManager.timesheet!.from = value as? Date ?? nil
             timesheetEntries[section]![key.index()].value = (dataManager.timesheet!.from?.simpleHoursFormat())!
@@ -220,6 +228,11 @@ extension TimesheetViewController: TimesheetInfoTableViewDelegate {
         guard  DataManager.sharedInstance.timesheet?.canSubmit() == true else {
             return
         }
+        
+        if DataManager.sharedInstance.timesheet?.canSelectDay() == false &&  entry.key == .date {
+            return
+        }
+    
         presentPickerFor(entryKey: entry.key)
     }
 }

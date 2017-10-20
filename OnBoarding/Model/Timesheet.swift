@@ -38,7 +38,7 @@ struct Timesheet {
         lunchBreak = nil
     }
     
-    //MARK:- update
+    //MARK:- Update
     mutating func setWorkedHours() {
         workedHours = nil
         guard let start = from, let end = until, let lunch = lunchBreak else {
@@ -91,7 +91,14 @@ struct Timesheet {
     }
     
     //MARK:- Others
+    func canSelectDay() -> Bool {
+        return (self.lastSubmittedDay != nil) ? false : true
+    }
+    
     func canSubmit() -> Bool {
+        guard lastSubmittedDay != nil else {
+            return true
+        }
         guard let currentDay = self.day, currentDay < Date() else {
             return false
         }

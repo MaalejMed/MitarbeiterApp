@@ -9,12 +9,15 @@
 import UIKit
 
 struct Associate {
+    
+    //MARK:- Properties
     var identifier: String?
     var password: String?
     var email: String?
     var name: String?
     var image: UIImage?
     
+    //MARK:- Init
     init?(json: [String: Any]) {
         guard let name = json["name"], let email = json["email"], let identifier = json["identifier"], let password = json["password"] else {
             return nil
@@ -33,6 +36,7 @@ struct Associate {
         image = profilePhoto
     }
     
+    //MARK:- 
     mutating func update(ProfilePhoto: UIImage) {
         image = ProfilePhoto
     }

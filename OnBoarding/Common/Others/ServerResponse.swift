@@ -8,6 +8,13 @@
 
 import Foundation
 
+struct ServerResponse {
+    
+    //MARK:- Properties
+    let code: ServerStatus
+    let description: String
+}
+
 enum ServerStatus: Int {
     case success = 200
     case notFound = 404
@@ -16,27 +23,20 @@ enum ServerStatus: Int {
     case serviceUnavailable = 503
     case unknown = -1
     
-    static func parse(status: Int) -> ServerResponse {
+    static func parse(status: ServerStatus) -> ServerResponse {
         switch status {
-        case 200:
+        case .success:
             return ServerResponse(code: .success, description: "Done !")
-        case 503:
+        case .serviceUnavailable:
             return ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")
-        case 401:
+        case .unauthorizedAccess:
             return ServerResponse(code: .unauthorizedAccess, description: "Unauthorized access")
-        case 404:
+        case .notFound:
             return ServerResponse(code: .notFound, description: "No Data found")
-        case 404:
+        case .badRequest:
             return ServerResponse(code: .badRequest, description: "Data could not be parsed")
         default:
             return ServerResponse(code: .unknown, description: "Unkown server response")
         }
     }
-}
-
-struct ServerResponse {
-    
-    //MARK:- Properties
-    let code: ServerStatus
-    let description: String
 }

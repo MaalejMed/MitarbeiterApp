@@ -24,22 +24,26 @@ class DataManager {
     func setup(associate: Associate, completion: @escaping ((ServerResponse?)->()) ) {
         //associate
         DataManager.sharedInstance.associate = associate
-        //timesheet submission
-        let timeManager = TimeManager()
-        timeManager.SelectLastSubmittedDay(associateID: associate.identifier!, completion: {date, failure in
-            guard let lastSubmittedDay = date else {
-                completion(failure) // Failure stops login
-                return
-            }
-            DataManager.sharedInstance.timesheet = Timesheet(associateIdentifier: associate.identifier!)
-            DataManager.sharedInstance.timesheet?.lastSubmittedDay = lastSubmittedDay
+        
+        //timesheet
+        DataManager.sharedInstance.timesheet = Timesheet(associateIdentifier: associate.identifier!)
+        self.updateLastSubmittedDay(associateID: associate.identifier!, completion: { response in
             
         })
+
         //feed
+        self.updateFeeds(completion: { response in
+            
+        })
+    }
+
+    
+    //MARK:- Feed
+    func updateFeeds(completion: @escaping ((ServerResponse?)->()) ) {
         let feedManager = FeedManager()
-        feedManager.fetchFeed(completion: { failure, feed in
+        feedManager.selectFeeds(completion: { failure, feed in
             guard failure == nil, let feedEntries = feed  else {
-                return completion(nil) // Failure does not stop login
+                return completion(nil)
             }
             DataManager.sharedInstance.feeds = feedEntries
             return completion(nil)
@@ -47,41 +51,27 @@ class DataManager {
     }
     
     //MARK:- Timesheet
-    func updateLastSubmissionDay( completion: @escaping ((ServerResponse?)->()) ) {
+    func updateLastSubmittedDay(associateID: String, completion: @escaping ((ServerResponse?)->()) ) {
         let timeManager = TimeManager()
-        timeManager.SelectLastSubmittedDay(associateID: (self.associate?.identifier!)!, completion: {date, failure in
-            guard let lastSubmittedDay = date else {
-                let failure = ServerResponse.init(code: .badRequest, description: "Operation could not be completed")
-                completion(failure)
+        timeManager.SelectLastSubmittedDay(associateID: associateID, completion: { date, response in
+            guard response == nil, date != nil else {
+                completion(response)
                 return
             }
-            DataManager.sharedInstance.timesheet?.lastSubmittedDay = lastSubmittedDay
-            let success = ServerResponse.init(code: .success, description: "Done !")
-            completion(success)
+            DataManager.sharedInstance.timesheet?.lastSubmittedDay = date
+            completion(nil)
         })
     }
     
     func resetTimesheet(completion: @escaping ((ServerResponse?)->()) ) {
-        guard let identifier = associate?.identifier else {
-            let failure = ServerResponse.init(code: .badRequest, description: "Operation could not be completed")
+        guard let identifier = DataManager.sharedInstance.associate?.identifier else {
+            let failure = ServerStatus.parse(status: .unknown)
             completion(failure)
             return
         }
         self.timesheet = Timesheet(associateIdentifier: identifier)
-        self.updateLastSubmissionDay(completion: { serverResponse in
-            completion(serverResponse)
-        })
-    }
-    
-    //MARK:- Feed
-    func selectFeeds(completion: @escaping ((ServerResponse?)->()) ) {
-        let feedManager = FeedManager()
-        feedManager.fetchFeed(completion: { failure, feed in
-            guard failure == nil, let feedEntries = feed  else {
-                return completion(nil) // Failure does not stop login
-            }
-            DataManager.sharedInstance.feeds = feedEntries
-            return completion(nil)
+        self.updateLastSubmittedDay(associateID: identifier, completion: { response in
+            
         })
     }
 }

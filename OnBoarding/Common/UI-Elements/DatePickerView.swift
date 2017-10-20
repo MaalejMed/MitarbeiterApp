@@ -13,7 +13,6 @@ class DatePickerView: UIView {
     //MARK:- Properties
     let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .time
         return datePicker
     }()
     

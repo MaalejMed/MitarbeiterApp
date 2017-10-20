@@ -58,7 +58,7 @@ class ServerResponseView: UIView {
     
     //MARK:-
     func present(serverResponse: ServerResponse) {
-        setup(serverResponse: serverResponse)
+        solve(serverResponse: serverResponse)
         let window = UIApplication.shared.keyWindow!
         window.addSubview(self)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +72,7 @@ class ServerResponseView: UIView {
         })
     }
     
-    func setup(serverResponse: ServerResponse) {
+    func solve(serverResponse: ServerResponse) {
         switch serverResponse.code {
         case .success:
             self.iconImgV.image = UIImage.init(named: "Done")!
