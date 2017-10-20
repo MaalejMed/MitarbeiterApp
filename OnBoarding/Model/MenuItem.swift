@@ -28,9 +28,9 @@ struct MenuItem {
         case .eLearning:
             identifier = "04"
         case .gsd:
-            identifier = "01"
+            identifier = "05"
         case .profile:
-            identifier = "01"
+            identifier = "06"
         }
         let itemIcon = item.icon()
         icon = itemIcon

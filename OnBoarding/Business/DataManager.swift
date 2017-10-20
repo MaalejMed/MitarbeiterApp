@@ -28,16 +28,10 @@ class DataManager {
         //timesheet
         DataManager.sharedInstance.timesheet = Timesheet(associateIdentifier: associate.identifier!)
         self.updateLastSubmittedDay(associateID: associate.identifier!, completion: { response in
-            
-        })
-
-        //feed
-        self.updateFeeds(completion: { response in
-            
+            completion(response)
         })
     }
 
-    
     //MARK:- Feed
     func updateFeeds(completion: @escaping ((ServerResponse?)->()) ) {
         let feedManager = FeedManager()
@@ -54,24 +48,20 @@ class DataManager {
     func updateLastSubmittedDay(associateID: String, completion: @escaping ((ServerResponse?)->()) ) {
         let timeManager = TimeManager()
         timeManager.SelectLastSubmittedDay(associateID: associateID, completion: { date, response in
-            guard response == nil, date != nil else {
-                completion(response)
+            if date != nil {
+                DataManager.sharedInstance.timesheet?.lastSubmittedDay = date
+                completion(nil)
                 return
             }
-            DataManager.sharedInstance.timesheet?.lastSubmittedDay = date
-            completion(nil)
+            let _ = (response != nil && response?.code == .notFound) ? completion(nil) : completion(response)
         })
     }
     
-    func resetTimesheet(completion: @escaping ((ServerResponse?)->()) ) {
+    func resetTimesheet(lastSubmittedDay: Date) {
         guard let identifier = DataManager.sharedInstance.associate?.identifier else {
-            let failure = ServerStatus.parse(status: .unknown)
-            completion(failure)
             return
         }
         self.timesheet = Timesheet(associateIdentifier: identifier)
-        self.updateLastSubmittedDay(associateID: identifier, completion: { response in
-            
-        })
+        self.timesheet?.lastSubmittedDay = lastSubmittedDay
     }
 }

@@ -28,14 +28,7 @@ struct Timesheet {
     
     //MARK:- Init
     init(associateIdentifier: String) {
-        projectID = nil
         associateID = associateIdentifier
-        activity = nil
-        billable = nil
-        from = nil
-        until = nil
-        workedHours = nil
-        lunchBreak = nil
     }
     
     //MARK:- Update
@@ -69,6 +62,56 @@ struct Timesheet {
             return
         }
         workedHours = work
+    }
+    
+    mutating func update(attribute: EntryKey, value: Any) -> Bool {
+        switch attribute {
+        case .activity:
+            guard let act = value as? String else {
+                return false
+            }
+            activity =  act
+            return true
+        case .buillable:
+            guard let bill = value as? String else {
+                return false
+            }
+            billable = bill
+            return true
+        case .identifier:
+            guard let proID = value as? String else {
+                return false
+            }
+            projectID = proID
+            return true
+        case .date:
+            guard let aDay = value as? Date else {
+                return false
+            }
+            day = aDay
+            return true
+        case .from:
+            guard let fromTime = value as? Date else {
+                return false
+            }
+            from = fromTime
+            self.setWorkedHours()
+            return true
+        case . until:
+            guard let toTime = value as? Date else {
+                return false
+            }
+            until = toTime
+            self.setWorkedHours()
+            return true
+        case .lunchBreak:
+            guard let breakTimeString = value as? String, let breakTime = Int(breakTimeString) else {
+                return false
+            }
+            lunchBreak = breakTime
+            self.setWorkedHours()
+            return true
+        }
     }
     
     //MARK:- JSON

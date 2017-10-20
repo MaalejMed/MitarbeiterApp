@@ -113,13 +113,8 @@ class TimesheetPreviewViewController: UIViewController {
                 self?.sendBtn.status = .idle
                 return
             }
-            dataManager.resetTimesheet(completion: { serverResponse in
-                guard serverResponse?.code == .success else {
-                    self?.serverResponseView.present(serverResponse: serverResponse!)
-                    self?.sendBtn.status = .idle
-                    return
-                }
-            })
+            dataManager.resetTimesheet(lastSubmittedDay: submittedTimesheet.day!)
+
             self?.serverResponseView.present(serverResponse: serverResponse!)
             for vc in (self?.navigationController?.viewControllers)! {
                 if  vc.isKind(of: HomeViewController.self){

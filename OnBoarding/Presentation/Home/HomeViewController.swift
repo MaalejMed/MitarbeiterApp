@@ -128,16 +128,7 @@ class HomeViewController: UIViewController {
     
     func setupTriggerView() {
         triggerView.data = (title:"No Feed available", icon: UIImage.init(named:"NoMails"), action: { [weak self] in
-            self?.triggerView.status = .loading
-            DataManager.sharedInstance.selectFeeds(completion: {[weak self] response in
-                guard response == nil else {
-                    self?.triggerView.status = .idle
-                    return
-                }
-                self?.feedTableView.dataSource = DataManager.sharedInstance.feeds
-                self?.presentNewsTableView()
-                self?.triggerView.status = .idle
-            })
+            self?.setupFeedDataSource()
         })
     }
     
@@ -152,19 +143,23 @@ class HomeViewController: UIViewController {
         if feedTableView.superview != nil {
             feedTableView.removeFromSuperview()
         }
-        triggerView.status = .idle
         layout(contentView: triggerView)
     }
     
     //MARK:-
     func setupFeedDataSource() {
-        guard let existingFeed = DataManager.sharedInstance.feeds else {
-            presentTriggerView()
-            return
-        }
-        self.feeds = existingFeed
-        feedTableView.dataSource = self.feeds
-        presentNewsTableView()
+        triggerView.status = .loading
+        self.presentTriggerView()
+        DataManager.sharedInstance.updateFeeds(completion: {[weak self] response in
+            guard response == nil else {
+                self?.triggerView.status = .idle
+                self?.presentTriggerView()
+                return
+            }
+            self?.feeds = DataManager.sharedInstance.feeds!
+            self?.feedTableView.dataSource = self?.feeds
+            self?.presentNewsTableView()
+        })
     }
 }
 

@@ -70,38 +70,6 @@ class TimesheetViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = button
     }
     
-    //MARK:- Selectors
-    @objc func previewButtonTapped() {
-        let dataManager = DataManager.sharedInstance
-        guard dataManager.timesheet != nil else {
-            return
-        }
-        
-        guard dataManager.timesheet!.day != nil, dataManager.timesheet!.projectID != nil, dataManager.timesheet!.activity != nil, dataManager.timesheet!.billable != nil, dataManager.timesheet!.from != nil, dataManager.timesheet!.until != nil, dataManager.timesheet!.workedHours != nil, dataManager.timesheet!.lunchBreak != nil else {
-            return
-        }
-        let timesheetPreviewVC = TimesheetPreviewViewController()
-        self.navigationController?.pushViewController(timesheetPreviewVC, animated: true)
-    }
-    
-    func presentPickerFor(entryKey: EntryKey) {
-        setupPicker(entryKey: entryKey)
-        switch entryKey {
-        case .activity, .buillable, .identifier, .lunchBreak :
-            layout(picker: dataPickerView)
-        case .date, .from, .until:
-            layout(picker: datePickerView)
-        }
-    }
-    
-    func dismiss(picker: UIView?) {
-        guard let aPicker = picker else {
-            return
-        }
-        aPicker.removeFromSuperview()
-    }
-
-    //MARK:- Setup views
     func setupPicker(entryKey: EntryKey) {
         var dataSource: [String] = []
         switch entryKey {
@@ -118,7 +86,7 @@ class TimesheetViewController: UIViewController {
             dataSource = ["1", "2", "3", "4","5", "6", "7", "8", "9", "10",
                           "11", "12", "13", "14","15", "16", "17", "18", "19", "20",
                           "21", "22", "23", "24","25", "26", "27", "28", "29", "30"
-                        ]
+                         ]
             setupDataPickerView(dataSource: dataSource, key: entryKey)
         case  .date,.from, .until:
             setupDatePickerView(key: entryKey)
@@ -184,40 +152,65 @@ class TimesheetViewController: UIViewController {
         timesheetInfoTV.dataSource = timesheetEntries
         timesheetInfoTV.timesheetInfoTableViewDelegate = self
     }
-
-    //MARK:- Update data
-    func update(key:EntryKey, value: Any) {
+    
+    //MARK:- Selectors
+    @objc func previewButtonTapped() {
         let dataManager = DataManager.sharedInstance
         guard dataManager.timesheet != nil else {
+            return
+        }
+        
+        guard dataManager.timesheet!.day != nil, dataManager.timesheet!.projectID != nil, dataManager.timesheet!.activity != nil, dataManager.timesheet!.billable != nil, dataManager.timesheet!.from != nil, dataManager.timesheet!.until != nil, dataManager.timesheet!.workedHours != nil, dataManager.timesheet!.lunchBreak != nil else {
+            return
+        }
+        let timesheetPreviewVC = TimesheetPreviewViewController()
+        self.navigationController?.pushViewController(timesheetPreviewVC, animated: true)
+    }
+    
+    //MARK:- Picker
+    func presentPickerFor(entryKey: EntryKey) {
+        setupPicker(entryKey: entryKey)
+        switch entryKey {
+        case .activity, .buillable, .identifier, .lunchBreak :
+            layout(picker: dataPickerView)
+        case .date, .from, .until:
+            layout(picker: datePickerView)
+        }
+    }
+    
+    func dismiss(picker: UIView?) {
+        guard let aPicker = picker else {
+            return
+        }
+        aPicker.removeFromSuperview()
+    }
+
+    //MARK:- Update timesheetEntries (view)
+    func update(key:EntryKey, value: Any) {
+        guard DataManager.sharedInstance.timesheet != nil else {
+            return
+        }
+        
+        guard  DataManager.sharedInstance.timesheet!.update(attribute: key, value: value) == true else {
             return
         }
         
         let section = key.section()
         switch (key) {
         case .activity:
-            dataManager.timesheet!.activity = value as? String ?? nil
-            timesheetEntries[section]![key.index()].value = dataManager.timesheet!.activity!
+            timesheetEntries[section]![key.index()].value = DataManager.sharedInstance.timesheet!.activity!
         case .buillable:
-            dataManager.timesheet!.billable = value as? String ?? nil
-            timesheetEntries[section]![key.index()].value = dataManager.timesheet!.billable!
+            timesheetEntries[section]![key.index()].value = DataManager.sharedInstance.timesheet!.billable!
         case .identifier:
-            dataManager.timesheet!.projectID = value as? String ?? nil
-            timesheetEntries[section]![key.index()].value = dataManager.timesheet!.projectID!
+            timesheetEntries[section]![key.index()].value = DataManager.sharedInstance.timesheet!.projectID!
         case .date:
-            dataManager.timesheet!.day = value as? Date ?? nil
-            timesheetEntries[section]![key.index()].value = (dataManager.timesheet!.day?.simpleDateFormat())!
+            timesheetEntries[section]![key.index()].value = (DataManager.sharedInstance.timesheet!.day?.simpleDateFormat())!
         case .from:
-            dataManager.timesheet!.from = value as? Date ?? nil
-            timesheetEntries[section]![key.index()].value = (dataManager.timesheet!.from?.simpleHoursFormat())!
-            dataManager.timesheet?.setWorkedHours()
+            timesheetEntries[section]![key.index()].value = (DataManager.sharedInstance.timesheet!.from?.simpleHoursFormat())!
         case . until:
-            dataManager.timesheet!.until = value as? Date ?? nil
-            timesheetEntries[section]![key.index()].value = (dataManager.timesheet!.until?.simpleHoursFormat())!
-            dataManager.timesheet?.setWorkedHours()
+            timesheetEntries[section]![key.index()].value = (DataManager.sharedInstance.timesheet!.until?.simpleHoursFormat())!
         case .lunchBreak:
-            timesheetEntries[section]![key.index()].value = value as? String ?? nil
-            dataManager.timesheet?.lunchBreak =  Int(timesheetEntries[section]![key.index()].value!)
-            dataManager.timesheet?.setWorkedHours()
+            timesheetEntries[section]![key.index()].value = String(describing: DataManager.sharedInstance.timesheet!.lunchBreak!)
         }
         timesheetInfoTV.dataSource = self.timesheetEntries
     }
