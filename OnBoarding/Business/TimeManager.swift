@@ -18,13 +18,13 @@ class TimeManager {
             return
         }
         TimeService.submitTimesheet(dic: dic, completion: { response in
-            guard response != nil else {
+            guard response.result.isSuccess == true else {
                 let failure = ServerStatus.parse(status: .serviceUnavailable)
                 completion(failure)
                 return
             }
             
-            guard let serverStatus = Int(response!) else {
+            guard let serverStatus = response.result.value as? Int else {
                 let failure = ServerStatus.parse(status: .unknown)
                 completion(failure)
                 return
@@ -38,13 +38,13 @@ class TimeManager {
     //MARK:-
     func SelectLastSubmittedDay(associateID: String, completion: @escaping ((Date?, ServerResponse?)->()) ) {
         TimeService.lastSubmittedDay(associateID: associateID, completion: { response in
-            guard response != nil else {
+            guard response.result.isSuccess == true else {
                 let failure = ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")
                 completion(nil,failure)
                 return
             }
-            guard let day = response?.date() else {
-                guard let serverStatus = Int(response!) else {
+            guard let dayString = response.result.value as? String, let day = dayString.date() else {
+                guard let serverStatus = response.result.value as? Int else {
                     let unkonwnResponse = ServerResponse(code: .unknown, description: "Unknown server failure")
                     completion(nil, unkonwnResponse)
                     return

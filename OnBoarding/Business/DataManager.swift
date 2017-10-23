@@ -37,7 +37,7 @@ class DataManager {
         let feedManager = FeedManager()
         feedManager.selectFeeds(completion: { failure, feed in
             guard failure == nil, let feedEntries = feed  else {
-                return completion(nil)
+                return completion(failure)
             }
             DataManager.sharedInstance.feeds = feedEntries
             return completion(nil)

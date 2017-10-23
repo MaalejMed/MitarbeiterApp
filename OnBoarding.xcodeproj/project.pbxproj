@@ -180,8 +180,8 @@
 		772BD9871F6BAA05003FEC2B /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				77D919161F7258FF00BFAB45 /* FeedService.swift */,
 				77D9D4EE1F7CE6A40058C9D9 /* AssociateService.swift */,
+				77D919161F7258FF00BFAB45 /* FeedService.swift */,
 				778C02CD1F86771C0011E01D /* TimeService.swift */,
 			);
 			path = Service;

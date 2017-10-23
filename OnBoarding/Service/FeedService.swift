@@ -14,11 +14,11 @@ class FeedService {
     static let basicStringURL = "http://localhost:8080/Feed?"
     
     //MARK:- Fetch
-    static func fetch(completion: @escaping ((Any?)->())) {
+    static func fetch(completion: @escaping ((DataResponse<Any>)->())) {
         Alamofire.request(basicStringURL).responseJSON(completionHandler: { response in
             //TODO: To be removed, just to simulate connection time
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-                completion(response.result.value)
+                completion(response)
             })
         })
     }

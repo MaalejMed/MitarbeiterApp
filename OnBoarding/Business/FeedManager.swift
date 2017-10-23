@@ -14,14 +14,19 @@ class FeedManager {
     func selectFeeds(completion: @escaping ((ServerResponse?, [Feed]?)->())) {
         var feed: [Feed] = []
         FeedService.fetch(completion: { response in
-            guard response != nil else {
+            guard response.result.isSuccess == true else {
                 let failure = ServerStatus.parse(status: .serviceUnavailable)
                 completion(failure, nil)
                 return
             }
             
-            guard let payload = response as? [[String: Any]] else {
-                let failure = ServerStatus.parse(status: .badRequest)
+            guard let payload = response.result.value as? [[String: Any]] else {
+                guard let serverStatus = response.result.value as? Int else {
+                    let failure = ServerStatus.parse(status: .unknown)
+                    completion(failure, nil)
+                    return
+                }
+                let failure = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
                 completion(failure, nil)
                 return
             }
@@ -38,7 +43,6 @@ class FeedManager {
                 completion(failure, nil)
                 return
             }
-
             return completion(nil, feed)
         })
     }
