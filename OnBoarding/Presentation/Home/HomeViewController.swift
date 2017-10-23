@@ -179,6 +179,8 @@ extension HomeViewController: MainMenuViewDelegate {
     }
     
     func didSelect(mainMenuView: MainMenuView, menuItem: MenuItem) {
+        mainMenuView.currentPostion = .idle
+        updateMenuViewLayout(newPosition: .idle)
         switch menuItem.item {
         case .time:
             let timeVC = TimesheetViewController()
