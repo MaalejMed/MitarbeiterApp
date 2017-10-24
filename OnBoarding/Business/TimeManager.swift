@@ -43,8 +43,8 @@ class TimeManager {
                 completion(nil,failure)
                 return
             }
-            guard let dayString = response.result.value as? String, let day = dayString.date() else {
-                guard let serverStatus = response.result.value as? Int else {
+            guard let day = response.result.value?.date() else {
+                guard let serverStatus = Int(response.result.value!) else {
                     let unkonwnResponse = ServerResponse(code: .unknown, description: "Unknown server failure")
                     completion(nil, unkonwnResponse)
                     return

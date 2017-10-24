@@ -23,9 +23,9 @@ class TimeService {
     }
     
     //MARK:-
-    static func lastSubmittedDay(associateID: String, completion: @escaping ((DataResponse<Any>)->())) {
+    static func lastSubmittedDay(associateID: String, completion: @escaping ((DataResponse<String>)->())) {
         let stringURL = basicStringURL+"/LastSubmittedDay?associateID="+associateID
-        Alamofire.request(stringURL).responseJSON(completionHandler: { response in
+        Alamofire.request(stringURL).responseString(completionHandler: { response in
                 completion(response)
         })
     }
