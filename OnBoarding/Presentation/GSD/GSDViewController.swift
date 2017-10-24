@@ -59,7 +59,9 @@ class GSDViewController: UIViewController {
     }
     
     func setupTriggerView() {
-        triggerView.data = (title:"No Mail are available", icon: UIImage.init(named:"NoMails"), action: nil)
+        triggerView.data = (title:"No Mail are available", icon: UIImage.init(named:"NoMails"), action: { [weak self] in
+            self?.setupMessagesDataSource()
+        })
     }
 
     func presentContentView() {
