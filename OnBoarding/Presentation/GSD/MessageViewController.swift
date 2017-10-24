@@ -43,10 +43,10 @@ class MessageViewController: UIViewController {
         }
         
         var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[message]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[message]-(0)-|", options: [], metrics: nil, views: views)
           layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(70)-[send]-(70)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
-            messageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10)
+            messageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0)
         ]
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[message]-(10)-[send]", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)

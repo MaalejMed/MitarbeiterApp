@@ -14,22 +14,22 @@ class MessageView: UIView {
     let titleTxtF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Subject"
-        textField.layer.borderWidth = 1.0
-        textField.layer.borderColor = UIColor.gray.cgColor
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(7.0, 0.0, 0.0)
-        textField.layer.cornerRadius = 5.0
         textField.backgroundColor = UIColor.elementBgColor
         return textField
+    }()
+    
+    private let lineImgV: UIImageView = {
+        let line = UIImageView()
+        line.backgroundColor =  .gray
+        return line
     }()
     
     lazy var messageTxtV: TextView = {
         let textView = TextView()
         textView.placeholder = "Message"
         textView.font = UIFont.systemFont(ofSize: 18.0)
-        textView.layer.borderWidth = 1.0
-        textView.layer.borderColor = UIColor.gray.cgColor
         textView.layer.sublayerTransform = CATransform3DMakeTranslation(3.0, 0.0, 0.0)
-        textView.layer.cornerRadius = 5.0
         textView.backgroundColor = UIColor.elementBgColor
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapTextView))
         tap.numberOfTapsRequired = 1
@@ -51,16 +51,17 @@ class MessageView: UIView {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["title": titleTxtF, "message": messageTxtV]
+        let views: [String: UIView] = ["title": titleTxtF, "line": lineImgV, "message": messageTxtV]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
         }
         
         var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[title]-(10)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[message]-(10)-|", options: [], metrics: nil, views: views)
-          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title(30)]-(10)-[message(300)]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[title]-(0)-|", options: [], metrics: nil, views: views)
+         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[line]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[message]-(0)-|", options: [], metrics: nil, views: views)
+          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title(40)]-(0)-[line(1)]-(0)-[message(300)]-(10)-|", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
     
