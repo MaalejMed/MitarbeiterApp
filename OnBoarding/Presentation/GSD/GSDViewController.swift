@@ -27,6 +27,7 @@ class GSDViewController: UIViewController {
         setupGSDInfoView()
         setupTriggerView()
         setupMessageTableView()
+        setupMessagesDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,9 +61,7 @@ class GSDViewController: UIViewController {
     func setupTriggerView() {
         triggerView.data = (title:"No Mail are available", icon: UIImage.init(named:"NoMails"), action: nil)
     }
-    
-    
-    
+
     func presentContentView() {
         let _ = messages.count > 0 ? presentMessagesTableView() : presentTriggerView()
     }
@@ -108,6 +107,25 @@ class GSDViewController: UIViewController {
         self.contactView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5.0).isActive = true
         contentView.topAnchor.constraint(equalTo: contactView.bottomAnchor, constant: 10.0).isActive = true
         contentView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    //MARK:-
+    func setupMessagesDataSource() {
+        guard let associate = DataManager.sharedInstance.associate else {
+            return
+        }
+        triggerView.status = .loading
+        self.presentTriggerView()
+        DataManager.sharedInstance.updateMessages(associateID: associate.identifier!, completion: {[weak self] response in
+            guard response == nil else {
+                self?.triggerView.status = .idle
+                self?.presentTriggerView()
+                return
+            }
+            self?.messages = DataManager.sharedInstance.messages!
+            self?.messageTV.dataSource = self?.messages
+            self?.presentMessagesTableView()
+        })
     }
 }
 

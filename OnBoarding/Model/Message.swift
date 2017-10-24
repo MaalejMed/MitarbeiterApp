@@ -32,4 +32,29 @@ struct Message {
         ]
         return dic
     }
+    
+    //MARK:- Init
+    init?(json: [String: Any]) {
+        guard let ident = json["identifier"], let assoID = json["associateID"], let titl = json["title"], let bod = json["body"], let date = json["date"] else {
+            return nil
+        }
+        
+        self.identifier = ident as? String
+        self.associateID = assoID as? String
+        self.title = titl as? String
+        self.body = bod as? String
+        
+        if let dateString = date as? String {
+            self.date = dateString.date()
+        }
+    }
+    
+    init(identifier: String, associateID: String, title: String, body: String, response: [MessageResponse]?, date: Date) {
+        self.identifier = identifier
+        self.associateID = associateID
+        self.title = title
+        self.body = body
+        self.date = date
+        self.response = response
+    }
 }

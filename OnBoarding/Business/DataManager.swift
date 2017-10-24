@@ -14,6 +14,7 @@ class DataManager {
     var associate: Associate?
     var timesheet: Timesheet?
     var feeds: [Feed]?
+    var messages: [Message]?
     
     static let sharedInstance: DataManager = {
         let instance = DataManager()
@@ -68,5 +69,17 @@ class DataManager {
         }
         self.timesheet = Timesheet(associateIdentifier: identifier)
         self.timesheet?.lastSubmittedDay = lastSubmittedDay
+    }
+    
+    //MARK:- Messages
+    func updateMessages(associateID: String, completion: @escaping ((ServerResponse?)->()) ) {
+        let messageManager = MessageManager()
+        messageManager.selectMessagesFor(associateID: associateID ,completion: { failure, messages in
+            guard failure == nil, let existingMessages = messages  else {
+                return completion(failure)
+            }
+            DataManager.sharedInstance.messages = existingMessages
+            return completion(nil)
+        })
     }
 }

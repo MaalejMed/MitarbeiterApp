@@ -82,7 +82,7 @@ class MessageViewController: UIViewController {
             return
         }
 
-        let message = Message(identifier: String.random(), associateID: associate.identifier, title: messageView.titleTxtF.text, body: messageView.messageTxtV.text, response: nil, date: Date())
+        let message = Message(identifier: String.random(), associateID: associate.identifier!, title: messageView.titleTxtF.text!, body: messageView.messageTxtV.text, response: nil, date: Date())
         
         let messageManager = MessageManager()
         messageManager.insert(message: message, completion: {[weak self] serverResponse in

@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OnBoarding/Business/TimeManager.swift"
-            timestampString = "530526246.741586"
+            filePath = "OnBoarding/Business/MessageManager.swift"
+            timestampString = "530533814.940415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "insert(timesheet:completion:)"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "selectMessagesFor(associateID:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
