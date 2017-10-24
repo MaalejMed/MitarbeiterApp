@@ -38,23 +38,25 @@ class LoginView: UIView {
         return imageView
     }()
     
- let idTxtF: UITextField = {
+    let idTxtF: UITextField = {
         let textField = UITextField ()
         textField.placeholder = "Associate ID"
-        textField.layer.borderWidth = 1.0
-        textField.layer.borderColor = UIColor.white.cgColor
+        textField.backgroundColor = .white
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(7.0, 0.0, 0.0)
-        textField.layer.cornerRadius = 5.0
         return textField
+    }()
+    
+    private let seperator: UIImageView = {
+        let line = UIImageView()
+        line.backgroundColor =  .gray
+        return line
     }()
     
      let passwordTxtF: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Password"
-        textField.layer.borderWidth = 1.0
-        textField.layer.borderColor = UIColor.white.cgColor
+        textField.backgroundColor = .white
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(7.0, 0.0, 0.0)
-        textField.layer.cornerRadius = 5.0
         textField.isSecureTextEntry = true
         return textField
     }()
@@ -116,7 +118,7 @@ class LoginView: UIView {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["welcome": welcomeLbl, "line": line1ImgV, "icon": iconImgV, "id": idTxtF, "password": passwordTxtF, "remainConntectedLabel": remainConnectedLbl, "reaminConnectedButton": remainConnectedSwt, "login": loginBtn, "line2": line2ImgV, "createPassword": createPasswordBtn, "requestID": requestIdBtn]
+        let views: [String: UIView] = ["welcome": welcomeLbl, "line": line1ImgV, "icon": iconImgV, "id": idTxtF, "seperator": seperator, "password": passwordTxtF, "remainConntectedLabel": remainConnectedLbl, "reaminConnectedButton": remainConnectedSwt, "login": loginBtn, "line2": line2ImgV, "createPassword": createPasswordBtn, "requestID": requestIdBtn]
         
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -134,6 +136,7 @@ class LoginView: UIView {
         
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[line(150)]", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[id]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[seperator]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[password]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[remainConntectedLabel]-(>=10)-[reaminConnectedButton]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(60)-[login]-(60)-|", options: [], metrics: nil, views: views)
@@ -141,7 +144,7 @@ class LoginView: UIView {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[createPassword]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[requestID]-(10)-|", options: [], metrics: nil, views: views)
         
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(79)-[welcome]-(15)-[line(2)]-(15)-[icon]-(30)-[id(35)]-(10)-[password(35)]-(15)-[remainConntectedLabel]-(40)-[login]-(>=15)-[line2(2)]-(20)-[createPassword]-(15)-[requestID]-(>=20)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(79)-[welcome]-(15)-[line(2)]-(15)-[icon]-(30)-[id(35)]-(0)-[seperator(1)]-(0)-[password(35)]-(15)-[remainConntectedLabel]-(40)-[login]-(>=15)-[line2(2)]-(20)-[createPassword]-(15)-[requestID]-(>=20)-|", options: [], metrics: nil, views: views)
         
         NSLayoutConstraint.activate(layoutConstraints)
     }
@@ -171,9 +174,9 @@ class LoginView: UIView {
         guard let action = loginAction else {
             return
         }
-//        guard idTxtF.text != "" , passwordTxtF.text  != "" else {
-//            return
-//        }
+        guard idTxtF.text != "" , passwordTxtF.text  != "" else {
+            return
+        }
         action(self.idTxtF.text!, passwordTxtF.text!)
     }
 }
