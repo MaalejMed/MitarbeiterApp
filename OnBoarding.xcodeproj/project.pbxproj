@@ -10,6 +10,8 @@
 		772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9831F695E2C003FEC2B /* UIImageView+.swift */; };
 		772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F315E1F74081B00775AA8 /* Timesheet.swift */; };
 		772F31611F7409D400775AA8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F31601F7409D400775AA8 /* Date+.swift */; };
+		7747DF031F9F21DA002D6A96 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7747DF021F9F21DA002D6A96 /* MessageService.swift */; };
+		7747DF051F9F2229002D6A96 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7747DF041F9F2229002D6A96 /* MessageManager.swift */; };
 		774BC7561F90F7FE00D1CCF6 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774BC7551F90F7FE00D1CCF6 /* NotificationView.swift */; };
 		774BC7581F94A9B100D1CCF6 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774BC7571F94A9B100D1CCF6 /* UIImage+.swift */; };
 		7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA231F66E3D4005197ED /* CreatePasswordView.swift */; };
@@ -90,6 +92,8 @@
 		772BD9831F695E2C003FEC2B /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		772F315E1F74081B00775AA8 /* Timesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timesheet.swift; sourceTree = "<group>"; };
 		772F31601F7409D400775AA8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		7747DF021F9F21DA002D6A96 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		7747DF041F9F2229002D6A96 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		774BC7551F90F7FE00D1CCF6 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		774BC7571F94A9B100D1CCF6 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		7754CA231F66E3D4005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				77D9D4EE1F7CE6A40058C9D9 /* AssociateService.swift */,
 				77D919161F7258FF00BFAB45 /* FeedService.swift */,
 				778C02CD1F86771C0011E01D /* TimeService.swift */,
+				7747DF021F9F21DA002D6A96 /* MessageService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -395,6 +400,7 @@
 				776075AA1F851814009BB974 /* FeedManager.swift */,
 				778C02CB1F8674560011E01D /* TimeManager.swift */,
 				778C02FF1F87C05F0011E01D /* DataManager.swift */,
+				7747DF041F9F2229002D6A96 /* MessageManager.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -608,6 +614,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7756908F1F8BB8200049DE5E /* ServerResponse.swift in Sources */,
+				7747DF051F9F2229002D6A96 /* MessageManager.swift in Sources */,
+				7747DF031F9F21DA002D6A96 /* MessageService.swift in Sources */,
 				7754CA2A1F66E48C005197ED /* LoginView.swift in Sources */,
 				77D919191F72591C00BFAB45 /* Feed.swift in Sources */,
 				77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */,

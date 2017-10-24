@@ -16,6 +16,7 @@ class MessageViewController: UIViewController {
     //MARK:- Properties
     let messageView = MessageView(frame: .zero)
     let sendBtn = TriggerButton(frame: .zero)
+    let serverResponseView = ServerResponseView(frame: .zero)
     
     weak var delegate: MessageViewControllerDelegate?
         
@@ -46,7 +47,7 @@ class MessageViewController: UIViewController {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[message]-(0)-|", options: [], metrics: nil, views: views)
           layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(70)-[send]-(70)-|", options: [], metrics: nil, views: views)
         layoutConstraints += [
-            messageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0)
+            messageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
         ]
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[message]-(10)-[send]", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
@@ -73,14 +74,28 @@ class MessageViewController: UIViewController {
     }
     
     @objc func sendButtonTapped() {
+        guard let associate = DataManager.sharedInstance.associate else {
+            return
+        }
         sendBtn.status = .loading
         guard messageView.titleTxtF.text != nil, messageView.messageTxtV.text != nil else {
             return
         }
-        let message = Message(identifier: "01", associateID: "645438", title: messageView.titleTxtF.text, body: messageView.messageTxtV.text, response: nil, date: Date())
-        delegate?.didSendMessage(messageVC: self, message: message)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
-            self?.dismissVC()
+
+        let message = Message(identifier: String.random(), associateID: associate.identifier, title: messageView.titleTxtF.text, body: messageView.messageTxtV.text, response: nil, date: Date())
+        
+        let messageManager = MessageManager()
+        messageManager.insert(message: message, completion: {[weak self] serverResponse in
+            guard serverResponse?.code == .success else {
+                self?.serverResponseView.present(serverResponse: serverResponse!)
+                self?.sendBtn.status = .idle
+                return
+            }
+            self?.serverResponseView.present(serverResponse: serverResponse!)
+            self?.delegate?.didSendMessage(messageVC: self!, message: message)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
+                self?.dismissVC()
+            })
         })
     }
 }

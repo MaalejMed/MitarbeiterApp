@@ -62,7 +62,7 @@ extension MessageTableView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: ExtendedTableViewCell.cellIdentifier) as? ExtendedTableViewCell
         
         let message = dataSource![indexPath.row]
-        cell?.data = (title:message.title , description: message.body, details: message.date.simpleDateFormat(), icon: UIImage.init(named: "Mail")!)
+        cell?.data = (title:message.title , description: message.body, details: message.date?.simpleDateFormat(), icon: UIImage.init(named: "Mail")!)
         cell?.backgroundColor = UIColor.BgColor
         cell?.cellView.view.backgroundColor = UIColor.elementBgColor
         cell?.selectionStyle = .none

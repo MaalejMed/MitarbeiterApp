@@ -61,7 +61,7 @@ class MessageView: UIView {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[title]-(0)-|", options: [], metrics: nil, views: views)
          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[line]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[message]-(0)-|", options: [], metrics: nil, views: views)
-          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title(40)]-(0)-[line(1)]-(0)-[message(300)]-(10)-|", options: [], metrics: nil, views: views)
+          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title(40)]-(0)-[line(1)]-(0)-[message(300)]-(10)-|", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
     

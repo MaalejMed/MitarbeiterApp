@@ -11,7 +11,6 @@ import Alamofire
 
 class TimeService {
     
-    //MARK:- Fetch
     static let basicStringURL = "http://localhost:8080"
     
     //MARK:-

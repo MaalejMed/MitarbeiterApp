@@ -16,5 +16,20 @@ struct Message {
     var title: String?
     var body: String?
     var response: [MessageResponse]?
-    var date: Date
+    var date: Date?
+    
+    //MARK:- JSON
+    func convertToJson()-> [String: Any]? {
+        guard let assoID = associateID, let ident = identifier, let tit = title, let bod = body , let dat = date else {
+            return nil
+        }
+        let dic: [String: Any] = [
+            "associateID": assoID,
+            "identifier": ident,
+            "title": tit,
+            "body": bod,
+            "date": dat.simpleDateFormat()
+        ]
+        return dic
+    }
 }
