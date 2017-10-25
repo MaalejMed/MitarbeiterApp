@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77285A651FA0B23900500627 /* SubMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77285A641FA0B23900500627 /* SubMessageView.swift */; };
 		772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BD9831F695E2C003FEC2B /* UIImageView+.swift */; };
 		772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F315E1F74081B00775AA8 /* Timesheet.swift */; };
 		772F31611F7409D400775AA8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772F31601F7409D400775AA8 /* Date+.swift */; };
 		7747DF031F9F21DA002D6A96 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7747DF021F9F21DA002D6A96 /* MessageService.swift */; };
 		7747DF051F9F2229002D6A96 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7747DF041F9F2229002D6A96 /* MessageManager.swift */; };
+		7747DF4F1FA079C2002D6A96 /* MessageDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7747DF4E1FA079C2002D6A96 /* MessageDetailsViewController.swift */; };
 		774BC7561F90F7FE00D1CCF6 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774BC7551F90F7FE00D1CCF6 /* NotificationView.swift */; };
 		774BC7581F94A9B100D1CCF6 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774BC7571F94A9B100D1CCF6 /* UIImage+.swift */; };
 		7754CA251F66E3D5005197ED /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754CA231F66E3D4005197ED /* CreatePasswordView.swift */; };
@@ -50,7 +52,7 @@
 		7782B1E11F7A530E0024F976 /* TimesheetInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E01F7A530E0024F976 /* TimesheetInfoTableView.swift */; };
 		7782B1E31F7A53220024F976 /* TimesheetPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1E21F7A53220024F976 /* TimesheetPreviewViewController.swift */; };
 		7782B1EB1F7A948C0024F976 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1EA1F7A948C0024F976 /* Message.swift */; };
-		7782B1ED1F7A94E00024F976 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1EC1F7A94E00024F976 /* MessageResponse.swift */; };
+		7782B1ED1F7A94E00024F976 /* SubMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1EC1F7A94E00024F976 /* SubMessage.swift */; };
 		7782B1EF1F7A9A740024F976 /* MessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7782B1EE1F7A9A740024F976 /* MessageTableView.swift */; };
 		778C02CC1F8674560011E01D /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02CB1F8674560011E01D /* TimeManager.swift */; };
 		778C02CE1F86771C0011E01D /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02CD1F86771C0011E01D /* TimeService.swift */; };
@@ -89,11 +91,13 @@
 		06A517FBACF267C9A5F17FEF /* Pods-OnBoarding.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnBoarding.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnBoarding/Pods-OnBoarding.debug.xcconfig"; sourceTree = "<group>"; };
 		36EC0F5F2B0BDD0EA9FEF977 /* Pods-OnBoarding.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnBoarding.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnBoarding/Pods-OnBoarding.release.xcconfig"; sourceTree = "<group>"; };
 		6A8FACB739714BCEC9757CA2 /* Pods_OnBoarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnBoarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77285A641FA0B23900500627 /* SubMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubMessageView.swift; sourceTree = "<group>"; };
 		772BD9831F695E2C003FEC2B /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		772F315E1F74081B00775AA8 /* Timesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timesheet.swift; sourceTree = "<group>"; };
 		772F31601F7409D400775AA8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		7747DF021F9F21DA002D6A96 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		7747DF041F9F2229002D6A96 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		7747DF4E1FA079C2002D6A96 /* MessageDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailsViewController.swift; sourceTree = "<group>"; };
 		774BC7551F90F7FE00D1CCF6 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		774BC7571F94A9B100D1CCF6 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		7754CA231F66E3D4005197ED /* CreatePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
@@ -138,7 +142,7 @@
 		7782B1E01F7A530E0024F976 /* TimesheetInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetInfoTableView.swift; sourceTree = "<group>"; };
 		7782B1E21F7A53220024F976 /* TimesheetPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetPreviewViewController.swift; sourceTree = "<group>"; };
 		7782B1EA1F7A948C0024F976 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		7782B1EC1F7A94E00024F976 /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
+		7782B1EC1F7A94E00024F976 /* SubMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubMessage.swift; sourceTree = "<group>"; };
 		7782B1EE1F7A9A740024F976 /* MessageTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableView.swift; sourceTree = "<group>"; };
 		778C02CB1F8674560011E01D /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		778C02CD1F86771C0011E01D /* TimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
@@ -222,6 +226,8 @@
 				77BEDF631F6FEF610097CF46 /* MessageViewController.swift */,
 				77BEDF651F6FEF7F0097CF46 /* MessageView.swift */,
 				7782B1EE1F7A9A740024F976 /* MessageTableView.swift */,
+				7747DF4E1FA079C2002D6A96 /* MessageDetailsViewController.swift */,
+				77285A641FA0B23900500627 /* SubMessageView.swift */,
 			);
 			path = GSD;
 			sourceTree = "<group>";
@@ -388,7 +394,7 @@
 				77D9191C1F72719D00BFAB45 /* Associate.swift */,
 				772F315E1F74081B00775AA8 /* Timesheet.swift */,
 				7782B1EA1F7A948C0024F976 /* Message.swift */,
-				7782B1EC1F7A94E00024F976 /* MessageResponse.swift */,
+				7782B1EC1F7A94E00024F976 /* SubMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -632,6 +638,7 @@
 				7756907C1F8B933B0049DE5E /* String+.swift in Sources */,
 				7782B1EB1F7A948C0024F976 /* Message.swift in Sources */,
 				772BD9841F695E2C003FEC2B /* UIImageView+.swift in Sources */,
+				7747DF4F1FA079C2002D6A96 /* MessageDetailsViewController.swift in Sources */,
 				77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */,
 				776EDC5B1F62BB5400D0A0AC /* AppDelegate.swift in Sources */,
 				776EDC931F62C76700D0A0AC /* UIColor+.swift in Sources */,
@@ -646,7 +653,7 @@
 				778C02CE1F86771C0011E01D /* TimeService.swift in Sources */,
 				7756909B1F8BB8210049DE5E /* TriggerView.swift in Sources */,
 				7754CA381F67D8D1005197ED /* MainMenuView.swift in Sources */,
-				7782B1ED1F7A94E00024F976 /* MessageResponse.swift in Sources */,
+				7782B1ED1F7A94E00024F976 /* SubMessage.swift in Sources */,
 				772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */,
 				775690931F8BB8200049DE5E /* ExtendedTableViewCell.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
@@ -656,6 +663,7 @@
 				776075AF1F861957009BB974 /* MainMenuItems.swift in Sources */,
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
 				7782B1E31F7A53220024F976 /* TimesheetPreviewViewController.swift in Sources */,
+				77285A651FA0B23900500627 /* SubMessageView.swift in Sources */,
 				77D919171F7258FF00BFAB45 /* FeedService.swift in Sources */,
 				772F31611F7409D400775AA8 /* Date+.swift in Sources */,
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,

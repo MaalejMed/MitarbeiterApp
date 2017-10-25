@@ -82,4 +82,30 @@ class DataManager {
             return completion(nil)
         })
     }
+    
+    func updateSubMessages(messageID: String, completion: @escaping (([SubMessage]? ,ServerResponse?)->()) ) {
+        let messageManager = MessageManager()
+        messageManager.selectSubMessage(messageID: messageID ,completion: {[weak self] failure, subMessages in
+            guard failure == nil, let existingSubMessages = subMessages  else {
+                return completion(nil, failure)
+            }
+            
+            guard var messageTuple: (message: Message?, index: Int?) = self?.getMessage(messageID: messageID) else {
+                return
+            }
+            messageTuple.message?.subMessages = existingSubMessages
+            
+            DataManager.sharedInstance.messages![messageTuple.index!] =  messageTuple.message!
+            return completion(existingSubMessages, nil)
+        })
+    }
+    
+    func getMessage(messageID: String) -> (Message?, Int?)? {
+        for (index, message) in (self.messages?.enumerated())! {
+            if message.identifier == messageID {
+                return (message, index)
+            }
+        }
+        return nil
+    }
 }

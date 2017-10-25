@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol MessageTableViewDelegate:class {
+    func didSelectMessage(messageTableView:MessageTableView, message: Message)
+}
+
 class MessageTableView: UIView {
     
     //MARK:- Properties
@@ -24,6 +28,8 @@ class MessageTableView: UIView {
             tableView.reloadData()
         }
     }
+    
+    weak var delegate: MessageTableViewDelegate?
     
     //MARK:- Init
     override init(frame: CGRect) {
@@ -73,5 +79,10 @@ extension MessageTableView: UITableViewDataSource {
 extension MessageTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ExtendedTableViewCell.height
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = dataSource![indexPath.row]
+        delegate?.didSelectMessage(messageTableView: self, message: message)
     }
 }

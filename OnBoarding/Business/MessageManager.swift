@@ -65,4 +65,35 @@ class MessageManager {
             return completion(nil, messages)
         })
     }
+    
+    func selectSubMessage(messageID: String, completion: @escaping ((ServerResponse?, [SubMessage]?)->())) {
+        var messages: [SubMessage] = []
+        MessageService.fetchSubMessage(messageID: messageID, completion: { response in
+            guard response.result.isSuccess == true else {
+                let failure = ServerStatus.parse(status: .serviceUnavailable)
+                completion(failure, nil)
+                return
+            }
+            
+            guard let payload = response.result.value as? [[String: Any]] else {
+                guard let serverStatus = response.result.value as? Int else {
+                    let failure = ServerStatus.parse(status: .unknown)
+                    completion(failure, nil)
+                    return
+                }
+                let failure = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
+                completion(failure, nil)
+                return
+            }
+            
+            for jsonItem in payload {
+                guard let aSubMessage = SubMessage(json: jsonItem) else {
+                    continue
+                }
+                messages.append(aSubMessage)
+            }
+            
+            return completion(nil, messages)
+        })
+    }
 }

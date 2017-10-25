@@ -69,7 +69,6 @@ class ExtendedCellContentView: UIView, CellViewProtocol {
     let descriptionLbl: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
-        label.sizeToFit()
         return label
     }()
     
@@ -108,7 +107,7 @@ class ExtendedCellContentView: UIView, CellViewProtocol {
         
         var layoutConstraints: [NSLayoutConstraint] = []
         
-        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[icon(30)]-(10)-[title]-(10)-[details]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[icon(30)]-(10)-[title]-(10)-[details(>=50@1000)]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:[description]-(10)-|", options: [], metrics: nil, views: views)
        
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title]-(5)-[description]-(10)-|", options: [], metrics: nil, views: views)

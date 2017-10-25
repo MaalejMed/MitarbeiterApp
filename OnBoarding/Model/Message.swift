@@ -15,7 +15,7 @@ struct Message {
     var associateID: String?
     var title: String?
     var body: String?
-    var response: [MessageResponse]?
+    var subMessages: [SubMessage]?
     var date: Date?
     
     //MARK:- JSON
@@ -49,12 +49,12 @@ struct Message {
         }
     }
     
-    init(identifier: String, associateID: String, title: String, body: String, response: [MessageResponse]?, date: Date) {
+    init(identifier: String, associateID: String, title: String, body: String, subMessages: [SubMessage]?, date: Date) {
         self.identifier = identifier
         self.associateID = associateID
         self.title = title
         self.body = body
         self.date = date
-        self.response = response
+        self.subMessages = subMessages
     }
 }

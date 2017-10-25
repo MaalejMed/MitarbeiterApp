@@ -56,6 +56,7 @@ class GSDViewController: UIViewController {
     
     func setupMessageTableView() {
         messageTV.dataSource = messages
+        messageTV.delegate = self
     }
     
     func setupTriggerView() {
@@ -118,8 +119,8 @@ class GSDViewController: UIViewController {
         }
         triggerView.status = .loading
         self.presentTriggerView()
-        DataManager.sharedInstance.updateMessages(associateID: associate.identifier!, completion: {[weak self] response in
-            guard response != nil else {
+        DataManager.sharedInstance.updateMessages(associateID: associate.identifier!, completion: {[weak self] serverResponse in
+            guard serverResponse == nil else {
                 self?.triggerView.status = .idle
                 self?.presentTriggerView()
                 return
@@ -135,5 +136,13 @@ extension GSDViewController : MessageViewControllerDelegate {
     func didSendMessage(messageVC: MessageViewController, message: Message) {
         self.messages.append(message)
         messageTV.dataSource = self.messages
+    }
+}
+
+extension GSDViewController: MessageTableViewDelegate {
+    func didSelectMessage(messageTableView: MessageTableView, message: Message) {
+        let messageDetailsVC = MessageDetailsViewController()
+        messageDetailsVC.message = message
+        self.navigationController?.pushViewController(messageDetailsVC, animated: true)
     }
 }
