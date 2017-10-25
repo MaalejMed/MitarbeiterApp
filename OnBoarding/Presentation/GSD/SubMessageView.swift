@@ -18,9 +18,10 @@ class SubMessageView: UIView {
         return label
     }()
     
-    var data: (String?)? {
+    var data: (body:String?, isOwner: Bool?)? {
         didSet {
-            bodyLbl.text = data!
+            bodyLbl.text = data?.body
+            bodyLbl.backgroundColor = ( data?.isOwner == true) ? .blue : .lightGray
             layout()
         }
     }

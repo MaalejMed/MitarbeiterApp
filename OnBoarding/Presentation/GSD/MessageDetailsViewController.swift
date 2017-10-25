@@ -74,7 +74,8 @@ class MessageDetailsViewController: UIViewController {
         var subMessageViews: [SubMessageView] = []
         for submessage in (message?.subMessages)! {
             let subMessageView = SubMessageView(frame: .zero)
-            subMessageView.data = submessage.body
+            subMessageView.data = (body: submessage.body, isOwner: submessage.owner)
+            
             subMessageViews.append(subMessageView)
         }
         return subMessageViews
