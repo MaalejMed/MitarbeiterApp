@@ -22,11 +22,22 @@ class MessageViewController: UIViewController {
     let messageView = MessageView(frame: .zero)
     let sendBtn = TriggerButton(frame: .zero)
     let serverResponseView = ServerResponseView(frame: .zero)
-    var messageType: MessageType?
+    var messageType: MessageType
     var mainMessageID: String?
     
     weak var delegate: MessageViewControllerDelegate?
-        
+    
+    //MARK:- Init
+    init(type: MessageType, mainMessageID: String?) {
+        self.messageType = type
+        self.mainMessageID = mainMessageID
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK:- Views lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +99,7 @@ class MessageViewController: UIViewController {
         guard messageView.titleTxtF.text != nil, messageView.messageTxtV.text != nil else {
             return
         }
-        let _ = messageType! == . main ? sendMessage(associate: associate) : sendSubMessage(messageID: mainMessageID)
+        let _ = messageType == . main ? sendMessage(associate: associate) : sendSubMessage(messageID: mainMessageID)
     }
     
     //MARK:- Message

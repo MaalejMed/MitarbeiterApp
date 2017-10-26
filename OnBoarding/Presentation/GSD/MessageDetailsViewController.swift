@@ -112,9 +112,7 @@ class MessageDetailsViewController: UIViewController {
     //MARK:- Selector
     
     @objc func respondBtnTapped() {
-        let msgVC = MessageViewController()
-        msgVC.mainMessageID = message?.identifier
-        msgVC.messageType = .sub
+        let msgVC = MessageViewController.init(type: .sub, mainMessageID: message?.identifier)
         let msgNC = UINavigationController.init(rootViewController: msgVC)
         self.navigationController?.present(msgNC, animated: true, completion: nil)
     }
