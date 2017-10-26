@@ -35,6 +35,30 @@ class MessageManager {
         })
     }
     
+    func insert(subMessage: SubMessage, completion: @escaping ((ServerResponse?)->()) ) {
+        guard let dic = subMessage.convertToJson() else {
+            let failure = ServerStatus.parse(status: .badRequest)
+            completion(failure)
+            return
+        }
+        MessageService.submitSubMessage(dic: dic, completion: { response in
+            guard response.result.isSuccess == true else {
+                let failure = ServerStatus.parse(status: .serviceUnavailable)
+                completion(failure)
+                return
+            }
+            
+            guard let serverStatus = response.result.value as? Int else {
+                let failure = ServerStatus.parse(status: .unknown)
+                completion(failure)
+                return
+            }
+            let serverResponse = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
+            completion(serverResponse)
+            return
+        })
+    }
+    
     func selectMessagesFor(associateID: String, completion: @escaping ((ServerResponse?, [Message]?)->())) {
         var messages: [Message] = []
         MessageService.fetch(associateID: associateID, completion: { response in

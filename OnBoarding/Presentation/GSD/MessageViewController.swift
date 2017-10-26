@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum MessageType {
+    case main
+    case sub
+}
+
 protocol MessageViewControllerDelegate: class {
     func didSendMessage(messageVC: MessageViewController, message: Message)
 }
@@ -17,6 +22,8 @@ class MessageViewController: UIViewController {
     let messageView = MessageView(frame: .zero)
     let sendBtn = TriggerButton(frame: .zero)
     let serverResponseView = ServerResponseView(frame: .zero)
+    var messageType: MessageType?
+    var mainMessageID: String?
     
     weak var delegate: MessageViewControllerDelegate?
         
@@ -81,7 +88,11 @@ class MessageViewController: UIViewController {
         guard messageView.titleTxtF.text != nil, messageView.messageTxtV.text != nil else {
             return
         }
-
+        let _ = messageType! == . main ? sendMessage(associate: associate) : sendSubMessage(messageID: mainMessageID)
+    }
+    
+    //MARK:- Message
+    func sendMessage(associate: Associate) {
         let message = Message(identifier: String.random(), associateID: associate.identifier!, title: messageView.titleTxtF.text!, body: messageView.messageTxtV.text, subMessages: nil, date: Date())
         
         let messageManager = MessageManager()
@@ -93,6 +104,27 @@ class MessageViewController: UIViewController {
             }
             self?.serverResponseView.present(serverResponse: serverResponse!)
             self?.delegate?.didSendMessage(messageVC: self!, message: message)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
+                self?.dismissVC()
+            })
+        })
+    }
+    
+    //MARK:-
+    func sendSubMessage(messageID: String?) {
+        guard let msgID = messageID, let body = messageView.messageTxtV.text else {
+            return
+        }
+        let subMessage = SubMessage.init(identifier: String.random(), body: body, messageID: msgID, date: Date(), owner: true)
+        let messageManager = MessageManager()
+        messageManager.insert(subMessage: subMessage, completion: { [weak self] serverResponse in
+            guard serverResponse?.code == .success else {
+                self?.serverResponseView.present(serverResponse: serverResponse!)
+                self?.sendBtn.status = .idle
+                return
+            }
+            self?.serverResponseView.present(serverResponse: serverResponse!)
+            //self?.delegate?.didSendMessage(messageVC: self!, message: subMessage)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
                 self?.dismissVC()
             })

@@ -54,16 +54,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OnBoarding/Presentation/GSD/MessageViewController.swift"
-            timestampString = "530716315.752321"
+            filePath = "OnBoarding/Service/MessageService.swift"
+            timestampString = "530719862.223209"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "sendButtonTapped()"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "submitSubMessage(dic:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

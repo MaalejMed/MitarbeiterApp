@@ -92,6 +92,7 @@ class GSDViewController: UIViewController {
     //MARK:- Selectors
     @objc func presentMessageViewController() {
         let msgVC = MessageViewController()
+        msgVC.messageType = .main
         msgVC.delegate = self
         let msgNC = UINavigationController.init(rootViewController: msgVC)
         self.navigationController?.present(msgNC, animated: true, completion: nil)

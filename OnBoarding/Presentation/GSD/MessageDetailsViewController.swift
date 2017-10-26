@@ -54,8 +54,8 @@ class MessageDetailsViewController: UIViewController {
             self.view.addSubview(subMessageView)
             subMessageView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
             subMessageView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
-            subMessageView.topAnchor.constraint(equalTo: upperView.bottomAnchor).isActive = true
-            subMessageView.bottomAnchor.constraint(equalTo: upperView.bottomAnchor, constant: subMessageView.height!).isActive = true
+            subMessageView.topAnchor.constraint(equalTo: upperView.bottomAnchor, constant: 10).isActive = true
+            subMessageView.bottomAnchor.constraint(equalTo: upperView.bottomAnchor, constant: subMessageView.height! + 10).isActive = true
             upperView = subMessageView
         }
     }
@@ -113,6 +113,8 @@ class MessageDetailsViewController: UIViewController {
     
     @objc func respondBtnTapped() {
         let msgVC = MessageViewController()
+        msgVC.mainMessageID = message?.identifier
+        msgVC.messageType = .sub
         let msgNC = UINavigationController.init(rootViewController: msgVC)
         self.navigationController?.present(msgNC, animated: true, completion: nil)
     }

@@ -21,6 +21,13 @@ class MessageService {
         })
     }
     
+    static func submitSubMessage(dic: [String: Any], completion: @escaping ((DataResponse<Any>)->())) {
+        let stringURL = basicStringURL + "/SubmitSubMessage"
+        Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseJSON(completionHandler: { response in
+            completion(response)
+        })
+    }
+    
     //MARK:-
     static func fetch(associateID: String, completion: @escaping ((DataResponse<Any>)->())) {
         let stringURL = basicStringURL + "/Message?associateID="+associateID
