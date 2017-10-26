@@ -22,9 +22,9 @@ class MessageViewController: UIViewController {
     let messageView = MessageView(frame: .zero)
     let sendBtn = TriggerButton(frame: .zero)
     let serverResponseView = ServerResponseView(frame: .zero)
+    
     var messageType: MessageType
     var mainMessageID: String?
-    
     weak var delegate: MessageViewControllerDelegate?
     
     //MARK:- Init
@@ -43,6 +43,7 @@ class MessageViewController: UIViewController {
         super.viewDidLoad()
         setupNaviBarButtons()
         setupSendButton()
+        setupMessageView()
         layout()
     }
     
@@ -84,6 +85,10 @@ class MessageViewController: UIViewController {
     func setupSendButton() {
         sendBtn.status = .idle
         self.sendBtn.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
+    }
+    
+    func setupMessageView() {
+        messageView.type = messageType
     }
     
     //MARK:- Selectors

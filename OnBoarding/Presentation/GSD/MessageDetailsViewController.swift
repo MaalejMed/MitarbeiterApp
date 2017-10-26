@@ -64,6 +64,7 @@ class MessageDetailsViewController: UIViewController {
     func setupMessageView() {
         messageView.titleTxtF.isEnabled = false
         messageView.messageTxtV.isEditable = false
+        messageView.type = .main
     }
     
     func setupTriggerView() {

@@ -42,7 +42,7 @@ class MessageView: UIView {
     }()
     
     var height: CGFloat? {
-        return titleTxtFHeight + messageTxtVHeight + 1
+        return type == .main ?  titleTxtFHeight + messageTxtVHeight + 1 : messageTxtVHeight
     }
     
     var data: (subject: String?, body: String?)? {
@@ -53,11 +53,16 @@ class MessageView: UIView {
         }
     }
     
+    var type: MessageType? {
+        didSet {
+            layout()
+        }
+    }
+    
     //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.messageTxtV.delegate = self
-        layout()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,17 +71,30 @@ class MessageView: UIView {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["title": titleTxtF, "line": lineImgV, "message": messageTxtV]
+        var views: [String: UIView] = ["message": messageTxtV]
+        if type == .main {
+            views["title"] = titleTxtF
+            views["line"] = lineImgV
+        }
+        
+        var layoutConstraints: [NSLayoutConstraint] = []
+
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
         }
         
-        var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[title]-(0)-|", options: [], metrics: nil, views: views)
-         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[line]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[message]-(0)-|", options: [], metrics: nil, views: views)
-          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title(\(titleTxtFHeight))]-(0)-[line(1)]-(0)-[message(\(messageTxtVHeight))]-(0)-|", options: [], metrics: nil, views: views)
+        if  type == .main {
+            layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[title]-(0)-|", options: [], metrics: nil, views: views)
+            layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[line]-(0)-|", options: [], metrics: nil, views: views)
+            layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[message]-(0)-|", options: [], metrics: nil, views: views)
+
+            layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title(\(titleTxtFHeight))]-(0)-[line(1)]-(0)-[message(\(messageTxtVHeight))]-(0)-|", options: [], metrics: nil, views: views)
+        } else {
+             layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[message(\(messageTxtVHeight))]-(0)-|", options: [], metrics: nil, views: views)
+            layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[message]-(0)-|", options: [], metrics: nil, views: views)
+        }
+        
         NSLayoutConstraint.activate(layoutConstraints)
     }
     
