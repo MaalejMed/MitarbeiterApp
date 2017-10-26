@@ -11,28 +11,37 @@ import UIKit
 class SubMessageView: UIView {
     
     //MARK:- Properties
-    let padding: CGFloat = 10
+    static let topPadding: CGFloat = 10
+    static let bottomPadding: CGFloat = 10
+    static let bodyFont = UIFont.systemFont(ofSize: 14)
 
     let bodyLbl: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = SubMessageView.bodyFont
         return label
     }()
     
     var data: (body:String?, isOwner: Bool?)? {
         didSet {
             bodyLbl.text = data?.body
-            bodyLbl.backgroundColor = ( data?.isOwner == true) ? .blue : .lightGray
+            self.backgroundColor = ( data?.isOwner == true) ? UIColor.myMessageBgColor : UIColor.BgColor
             layout()
         }
     }
     
     var height: CGFloat? {
-        return (bodyLbl.text?.height(constraintedWidth: self.frame.width, font: UIFont.systemFont(ofSize: 13)))! + padding
+        //TODO: 380 to be replaced with the width of the view
+        return (bodyLbl.text?.height(constraintedWidth: 380, font: SubMessageView.bodyFont))! + SubMessageView.topPadding + SubMessageView.bottomPadding
     }
     
     //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.cornerRadius = 10.0
+        self.layer.borderWidth = 0.0
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,8 +57,8 @@ class SubMessageView: UIView {
         }
         
         var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(5)-[body]-(5)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[body(\(height!))]-(0)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[body]-(5)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(\(SubMessageView.topPadding))-[body]-(\(SubMessageView.bottomPadding))-|", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
 }

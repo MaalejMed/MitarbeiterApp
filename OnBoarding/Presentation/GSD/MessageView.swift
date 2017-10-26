@@ -42,7 +42,7 @@ class MessageView: UIView {
     }()
     
     var height: CGFloat? {
-        return titleTxtFHeight + messageTxtVHeight
+        return titleTxtFHeight + messageTxtVHeight + 1
     }
     
     var data: (subject: String?, body: String?)? {
@@ -76,7 +76,7 @@ class MessageView: UIView {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[title]-(0)-|", options: [], metrics: nil, views: views)
          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[line]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[message]-(0)-|", options: [], metrics: nil, views: views)
-          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title(\(titleTxtFHeight))]-(0)-[line(1)]-(0)-[message(\(messageTxtVHeight))]-(10)-|", options: [], metrics: nil, views: views)
+          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title(\(titleTxtFHeight))]-(0)-[line(1)]-(0)-[message(\(messageTxtVHeight))]-(0)-|", options: [], metrics: nil, views: views)
         NSLayoutConstraint.activate(layoutConstraints)
     }
     

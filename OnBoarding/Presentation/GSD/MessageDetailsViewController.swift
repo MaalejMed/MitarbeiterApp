@@ -50,8 +50,8 @@ class MessageDetailsViewController: UIViewController {
         for  subMessageView in subMessagesViews {
             subMessageView.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(subMessageView)
-            subMessageView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-            subMessageView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+            subMessageView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
+            subMessageView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
             subMessageView.topAnchor.constraint(equalTo: upperView.bottomAnchor).isActive = true
             subMessageView.bottomAnchor.constraint(equalTo: upperView.bottomAnchor, constant: subMessageView.height!).isActive = true
             upperView = subMessageView

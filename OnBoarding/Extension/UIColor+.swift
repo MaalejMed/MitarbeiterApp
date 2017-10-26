@@ -47,4 +47,10 @@ extension UIColor {
         return UIColor.init(red: 255/255, green: 204/255, blue: 153/255, alpha: 1.0)
     }
     
+    static var myMessageBgColor: UIColor {
+        return UIColor(red: 86/255, green: 186/355, blue: 239/255, alpha: 1.0)
+
+    }
+    
+    
 }

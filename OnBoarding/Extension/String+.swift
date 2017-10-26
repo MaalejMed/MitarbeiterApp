@@ -59,13 +59,14 @@ extension String {
         return randomString
     }
     
-    func height(constraintedWidth width: CGFloat, font: UIFont) -> CGFloat {
-        let label =  UILabel(frame: CGRect(x: 0, y: 0, width: width, height: .greatestFiniteMagnitude))
-        label.numberOfLines = 0
+    func height(constraintedWidth width: CGFloat, font: UIFont) -> CGFloat? {
+        let label = UILabel()
         label.text = self
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.font = font
-        label.sizeToFit()
-        
-        return label.frame.height
+        let textSize = label.textRect(forBounds: CGRect.init(x: 0, y: 0, width: width, height: .greatestFiniteMagnitude), limitedToNumberOfLines: 0)
+        label.frame = CGRect.init(x: 0, y: 0, width: textSize.width, height: textSize.height)
+        return textSize.height
     }
 }
