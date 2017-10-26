@@ -50,7 +50,6 @@ class MessageView: UIView {
             titleTxtF.text = data?.subject
             messageTxtV.placeholder = ""
             messageTxtV.text = data?.body
-            layout()
         }
     }
     
@@ -58,6 +57,7 @@ class MessageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.messageTxtV.delegate = self
+        layout()
     }
     
     required init?(coder aDecoder: NSCoder) {

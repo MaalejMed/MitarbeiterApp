@@ -23,6 +23,8 @@ class MessageDetailsViewController: UIViewController {
     //MARK:- Init
     override func viewDidLoad() {
         self.view.backgroundColor = .white
+        let respondBtn = UIBarButtonItem.init(title: "Answer", style: .done, target: self, action: #selector(respondBtnTapped))
+        self.navigationItem.rightBarButtonItem = respondBtn
         setupSubMessagesDataSource()
         setupTriggerView()
         setupMessageView()
@@ -105,5 +107,13 @@ class MessageDetailsViewController: UIViewController {
             return
         }
         layout(subMessagesViews: subMessageViews!)
+    }
+    
+    //MARK:- Selector
+    
+    @objc func respondBtnTapped() {
+        let msgVC = MessageViewController()
+        let msgNC = UINavigationController.init(rootViewController: msgVC)
+        self.navigationController?.present(msgNC, animated: true, completion: nil)
     }
 }
