@@ -134,7 +134,7 @@ class GSDViewController: UIViewController {
 
 extension GSDViewController : MessageViewControllerDelegate {
     func didSendMessage(messageVC: MessageViewController, message: Message) {
-        self.messages.append(message)
+        self.messages.insert(message, at: 0)
         messageTV.dataSource = self.messages
     }
 }
