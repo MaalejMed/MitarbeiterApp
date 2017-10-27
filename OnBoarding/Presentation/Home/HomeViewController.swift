@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
     var feeds: [Feed] = []
     var menuItems: [MenuItem] = []
     var mainMenuViewTopAnchor: NSLayoutConstraint?
+    var layoutConstraints: [NSLayoutConstraint] = []
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
@@ -42,21 +43,34 @@ class HomeViewController: UIViewController {
     
     //MARK:- Layout
     func layout(contentView: UIView) {
+        resetLayout()
+        
         let views: [String: UIView] = ["profile": profileView, "menu": mainMenuView, "content": contentView]
         for (_, view) in views{
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
-            view.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-            view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+            layoutConstraints += [
+                view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+                view.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+            ]
         }
         
-        profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5.0).isActive = true
-        contentView.topAnchor.constraint(equalTo: profileView.bottomAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        layoutConstraints += [
+            profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5.0),
+            contentView.topAnchor.constraint(equalTo: profileView.bottomAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            mainMenuView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+        ]
         
-        mainMenuView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
-        mainMenuViewTopAnchor?.isActive = true
+        
+        layoutConstraints.append(mainMenuViewTopAnchor!)
+        NSLayoutConstraint.activate(layoutConstraints)
+    }
+    
+    func resetLayout() {
+        self.view.removeConstraints(layoutConstraints)
+        layoutConstraints.removeAll()
     }
     
     //MARK: Layout MainMenu
@@ -66,7 +80,7 @@ class HomeViewController: UIViewController {
         case .idle:
            mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         case .middle:
-            mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.centerYAnchor)
+            mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -(self.view.frame.height / 2) )
         case .top:
             mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: profileView.bottomAnchor)
         }
@@ -133,16 +147,10 @@ class HomeViewController: UIViewController {
     }
     
     func presentNewsTableView() {
-        if triggerView.superview != nil {
-            triggerView.removeFromSuperview()
-        }
         layout(contentView: feedTableView)
     }
     
     func presentTriggerView() {
-        if feedTableView.superview != nil {
-            feedTableView.removeFromSuperview()
-        }
         layout(contentView: triggerView)
     }
     
@@ -153,7 +161,6 @@ class HomeViewController: UIViewController {
         DataManager.sharedInstance.updateFeeds(completion: {[weak self] response in
             guard response == nil else {
                 self?.triggerView.status = .idle
-                self?.presentTriggerView()
                 return
             }
             self?.feeds = DataManager.sharedInstance.feeds!
