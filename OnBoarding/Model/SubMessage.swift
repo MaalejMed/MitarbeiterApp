@@ -38,7 +38,7 @@ struct SubMessage {
         self.owner = owner as? Bool
         
         if let dateString = date as? String {
-            self.date = dateString.date()
+            self.date = dateString.dateTime()
         }
     }
     
@@ -50,7 +50,7 @@ struct SubMessage {
         let dic: [String: Any] = [
             "identifier": ident,
             "body": bod,
-            "date": dat.simpleDateFormat(),
+            "date": dat.longDateFormat(),
             "messageID": mainMsgID,
             "owner": owner
         ]

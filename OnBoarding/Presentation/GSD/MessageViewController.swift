@@ -14,7 +14,11 @@ enum MessageType {
 }
 
 protocol MessageViewControllerDelegate: class {
-    func didSendMessage(messageVC: MessageViewController, message: Message)
+    func didSendMessage(messageVC: MessageViewController?, message: Message)
+}
+
+protocol SubMessageViewControllerDelegate: class {
+    func didSendSubMessage(messageVC: MessageViewController, subMessage: SubMessage, message: Message)
 }
 class MessageViewController: UIViewController {
     
@@ -24,13 +28,15 @@ class MessageViewController: UIViewController {
     let serverResponseView = ServerResponseView(frame: .zero)
     
     var messageType: MessageType
-    var mainMessageID: String?
-    weak var delegate: MessageViewControllerDelegate?
+    var mainMessage: Message?
+    
+    weak var messageDelegate: MessageViewControllerDelegate?
+    weak var subMessageDelegate: SubMessageViewControllerDelegate?
     
     //MARK:- Init
-    init(type: MessageType, mainMessageID: String?) {
+    init(type: MessageType, mainMessage: Message?) {
         self.messageType = type
-        self.mainMessageID = mainMessageID
+        self.mainMessage = mainMessage
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -104,12 +110,12 @@ class MessageViewController: UIViewController {
         guard messageView.titleTxtF.text != nil, messageView.messageTxtV.text != nil else {
             return
         }
-        let _ = messageType == . main ? sendMessage(associate: associate) : sendSubMessage(messageID: mainMessageID)
+        let _ = messageType == . main ? sendMessage(associate: associate) : sendSubMessage(message: mainMessage!)
     }
     
     //MARK:- Message
     func sendMessage(associate: Associate) {
-        let message = Message(identifier: String.random(), associateID: associate.identifier!, title: messageView.titleTxtF.text!, body: messageView.messageTxtV.text, subMessages: nil, date: Date())
+        let message = Message(identifier: String.random(), associateID: associate.identifier!, title: messageView.titleTxtF.text!, body: messageView.messageTxtV.text, subMessages: [], date: Date())
         
         let messageManager = MessageManager()
         messageManager.insert(message: message, completion: {[weak self] serverResponse in
@@ -119,19 +125,18 @@ class MessageViewController: UIViewController {
                 return
             }
             self?.serverResponseView.present(serverResponse: serverResponse!)
-            self?.delegate?.didSendMessage(messageVC: self!, message: message)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
-                self?.dismissVC()
-            })
+            self?.messageDelegate?.didSendMessage(messageVC: self, message: message)
+            self?.dismissVC()
         })
     }
     
     //MARK:-
-    func sendSubMessage(messageID: String?) {
-        guard let msgID = messageID, let body = messageView.messageTxtV.text else {
+    func sendSubMessage(message: Message) {
+        guard let msgID = message.identifier, let body = messageView.messageTxtV.text else {
             return
         }
         let subMessage = SubMessage.init(identifier: String.random(), body: body, messageID: msgID, date: Date(), owner: true)
+        
         let messageManager = MessageManager()
         messageManager.insert(subMessage: subMessage, completion: { [weak self] serverResponse in
             guard serverResponse?.code == .success else {
@@ -140,7 +145,7 @@ class MessageViewController: UIViewController {
                 return
             }
             self?.serverResponseView.present(serverResponse: serverResponse!)
-            //self?.delegate?.didSendMessage(messageVC: self!, message: subMessage)
+            self?.subMessageDelegate?.didSendSubMessage(messageVC: self!, subMessage: subMessage, message: message)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
                 self?.dismissVC()
             })

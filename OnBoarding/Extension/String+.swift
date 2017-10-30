@@ -29,15 +29,15 @@ extension String {
         return true
     }
     
-    func dateTime() -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        return dateFormatter.date(from: self)
-    }
-    
     func date() -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: self)
+    }
+    
+    func dateTime() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return dateFormatter.date(from: self)
     }
     

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol MessageDetailsViewControllerDelegate: class {
+    func didSendSubMessage(MessageDetailsVC: MessageDetailsViewController, subMessage: SubMessage, message: Message)
+}
+
 class MessageDetailsViewController: UIViewController {
     
     //MARK:- Properties
@@ -17,13 +21,16 @@ class MessageDetailsViewController: UIViewController {
     var message: Message? {
         didSet {
             messageView.data = (subject: message?.title, body: message?.body)
+            self.presentSubMessageViews()
         }
     }
     
+    weak var delegate: MessageDetailsViewControllerDelegate?
+            
     //MARK:- Init
     override func viewDidLoad() {
         self.view.backgroundColor = .white
-        let respondBtn = UIBarButtonItem.init(title: "Answer", style: .done, target: self, action: #selector(respondBtnTapped))
+        let respondBtn = UIBarButtonItem.init(title: "Answer", style: .done, target: self, action: #selector(answerBtnTapped))
         self.navigationItem.rightBarButtonItem = respondBtn
         setupSubMessagesDataSource()
         setupTriggerView()
@@ -92,8 +99,7 @@ class MessageDetailsViewController: UIViewController {
                 self?.triggerView.status = .idle
                 return
             }
-            self?.message?.subMessages = subMessages
-            self?.presentSubMessageViews()
+            self?.message?.subMessages = subMessages!
         })
     }
     
@@ -111,10 +117,17 @@ class MessageDetailsViewController: UIViewController {
     }
     
     //MARK:- Selector
-    
-    @objc func respondBtnTapped() {
-        let msgVC = MessageViewController.init(type: .sub, mainMessageID: message?.identifier)
+    @objc func answerBtnTapped() {
+        let msgVC = MessageViewController.init(type: .sub, mainMessage: message)
+        msgVC.subMessageDelegate = self
         let msgNC = UINavigationController.init(rootViewController: msgVC)
         self.navigationController?.present(msgNC, animated: true, completion: nil)
+    }
+}
+extension MessageDetailsViewController:  SubMessageViewControllerDelegate {
+    func didSendSubMessage(messageVC: MessageViewController, subMessage: SubMessage, message: Message) {
+        self.message?.subMessages.append(subMessage)
+        presentSubMessageViews()
+        delegate?.didSendSubMessage(MessageDetailsVC: self, subMessage: subMessage, message: message)
     }
 }

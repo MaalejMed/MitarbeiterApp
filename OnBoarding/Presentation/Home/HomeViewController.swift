@@ -163,7 +163,7 @@ class HomeViewController: UIViewController {
                 self?.triggerView.status = .idle
                 return
             }
-            self?.feeds = DataManager.sharedInstance.feeds!
+            self?.feeds = DataManager.sharedInstance.feeds
             self?.feedTableView.dataSource = self?.feeds
             self?.presentNewsTableView()
         })

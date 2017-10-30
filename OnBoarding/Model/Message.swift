@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct Message {
+struct Message: Equatable {
     
     //MARK:- Properties
     var identifier: String?
     var associateID: String?
     var title: String?
     var body: String?
-    var subMessages: [SubMessage]?
+    var subMessages: [SubMessage] = []
     var date: Date?
     
     //MARK:- JSON
@@ -28,7 +28,7 @@ struct Message {
             "identifier": ident,
             "title": tit,
             "body": bod,
-            "date": dat.simpleDateFormat()
+            "date": dat.longDateFormat()
         ]
         return dic
     }
@@ -45,16 +45,20 @@ struct Message {
         self.body = bod as? String
         
         if let dateString = date as? String {
-            self.date = dateString.date()
+            self.date = dateString.dateTime()
         }
     }
     
-    init(identifier: String, associateID: String, title: String, body: String, subMessages: [SubMessage]?, date: Date) {
+    init(identifier: String, associateID: String, title: String, body: String, subMessages: [SubMessage], date: Date) {
         self.identifier = identifier
         self.associateID = associateID
         self.title = title
         self.body = body
         self.date = date
         self.subMessages = subMessages
+    }
+    
+    static func ==(lhs: Message, rhs: Message) -> Bool {
+        return lhs.identifier == rhs.identifier
     }
 }

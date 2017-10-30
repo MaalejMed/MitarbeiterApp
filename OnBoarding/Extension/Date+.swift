@@ -33,7 +33,7 @@ extension Date {
     
     func longDateFormat() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         return dateFormatter.string(from: self)
     }
     

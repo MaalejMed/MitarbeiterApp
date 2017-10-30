@@ -30,6 +30,7 @@ class MessageManager {
                 return
             }
             let serverResponse = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
+            DataManager.sharedInstance.messages.insert(message, at: 0)
             completion(serverResponse)
             return
         })

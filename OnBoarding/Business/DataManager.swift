@@ -13,8 +13,8 @@ class DataManager {
     //MARK:- Properties
     var associate: Associate?
     var timesheet: Timesheet?
-    var feeds: [Feed]?
-    var messages: [Message]?
+    var feeds: [Feed] = []
+    var messages: [Message] = []
     
     static let sharedInstance: DataManager = {
         let instance = DataManager()
@@ -95,13 +95,13 @@ class DataManager {
             }
             messageTuple.message?.subMessages = existingSubMessages
             
-            DataManager.sharedInstance.messages![messageTuple.index!] =  messageTuple.message!
+            DataManager.sharedInstance.messages[messageTuple.index!] =  messageTuple.message!
             return completion(existingSubMessages, nil)
         })
     }
     
     func getMessage(messageID: String) -> (Message?, Int?)? {
-        for (index, message) in (self.messages?.enumerated())! {
+        for (index, message) in self.messages.enumerated() {
             if message.identifier == messageID {
                 return (message, index)
             }
