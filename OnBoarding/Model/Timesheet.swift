@@ -27,8 +27,11 @@ struct Timesheet {
     }
     
     //MARK:- Init
-    init(associateIdentifier: String) {
-        associateID = associateIdentifier
+    init? () {
+        guard let assIdentifer = DataManager.sharedInstance.associate?.identifier else {
+            return nil
+        }
+        associateID = assIdentifer
     }
     
     //MARK:- Update

@@ -30,30 +30,12 @@ class DataManager {
         FeedManager.selectFeeds()
         
         //timesheet
-        DataManager.sharedInstance.timesheet = Timesheet(associateIdentifier: associate.identifier!)
-        self.updateLastSubmittedDay(associateID: associate.identifier!)
-    }
-    
-    //MARK:- Timesheet
-    func updateLastSubmittedDay(associateID: String) {
-        let timeManager = TimeManager()
-        timeManager.SelectLastSubmittedDay(associateID: associateID, completion: { date, response in
-            if date != nil {
-                DataManager.sharedInstance.timesheet?.lastSubmittedDay = date
-                return
-            }
-            if date == nil && response?.code == .notFound {
-                DataManager.sharedInstance.timesheet?.day = Date()
-                return
-            }
-        })
+        DataManager.sharedInstance.timesheet = Timesheet()
+        TimeManager.SelectLastSubmittedDay()
     }
     
     func resetTimesheet(lastSubmittedDay: Date) {
-        guard let identifier = DataManager.sharedInstance.associate?.identifier else {
-            return
-        }
-        self.timesheet = Timesheet(associateIdentifier: identifier)
+        self.timesheet = Timesheet()
         self.timesheet?.lastSubmittedDay = lastSubmittedDay
     }
     

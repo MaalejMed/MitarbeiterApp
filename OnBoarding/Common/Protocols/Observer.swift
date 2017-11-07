@@ -10,5 +10,5 @@ import UIKit
 
 protocol Observer {
     var identifier: Int {get}
-    func update()
+    func update<T>(subject: T.Type)
 }

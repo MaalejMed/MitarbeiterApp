@@ -58,6 +58,7 @@
 		778C02CE1F86771C0011E01D /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02CD1F86771C0011E01D /* TimeService.swift */; };
 		778C03001F87C05F0011E01D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02FF1F87C05F0011E01D /* DataManager.swift */; };
 		77A3751B1FACAE750041837C /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3751A1FACAE750041837C /* Observer.swift */; };
+		77AB9C0E1FB1E75800F52FA2 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB9C0D1FB1E75800F52FA2 /* Subject.swift */; };
 		77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601951F6BDB70000BC777 /* ProfileTableView.swift */; };
 		77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF631F6FEF610097CF46 /* MessageViewController.swift */; };
 		77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF651F6FEF7F0097CF46 /* MessageView.swift */; };
@@ -149,6 +150,7 @@
 		778C02CD1F86771C0011E01D /* TimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		778C02FF1F87C05F0011E01D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		77A3751A1FACAE750041837C /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		77AB9C0D1FB1E75800F52FA2 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		77B601951F6BDB70000BC777 /* ProfileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableView.swift; sourceTree = "<group>"; };
 		77BEDF631F6FEF610097CF46 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		77BEDF651F6FEF7F0097CF46 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			children = (
 				77A3751A1FACAE750041837C /* Observer.swift */,
 				775690821F8BB8200049DE5E /* CellViewProtocols.swift */,
+				77AB9C0D1FB1E75800F52FA2 /* Subject.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				7754CA2D1F66E638005197ED /* HomeViewController.swift in Sources */,
 				7782B1E31F7A53220024F976 /* TimesheetPreviewViewController.swift in Sources */,
 				77285A651FA0B23900500627 /* SubMessageView.swift in Sources */,
+				77AB9C0E1FB1E75800F52FA2 /* Subject.swift in Sources */,
 				77D919171F7258FF00BFAB45 /* FeedService.swift in Sources */,
 				772F31611F7409D400775AA8 /* Date+.swift in Sources */,
 				7754CA311F67CC22005197ED /* ProfileViewController.swift in Sources */,

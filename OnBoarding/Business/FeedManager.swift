@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FeedManager {
+class FeedManager: Subject {
     
     // MARK:- Properties
     static var observers: [Observer] = []
@@ -28,7 +28,7 @@ class FeedManager {
     
     static func notify() {
         for observer in observers {
-            observer.update()
+            observer.update(subject: self)
         }
     }
     

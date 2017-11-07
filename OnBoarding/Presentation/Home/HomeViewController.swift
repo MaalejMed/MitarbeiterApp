@@ -23,10 +23,14 @@ class HomeViewController: UIViewController, Observer {
     var mainMenuViewTopAnchor: NSLayoutConstraint?
     var layoutConstraints: [NSLayoutConstraint] = []
     
+    var feedSubject: FeedManager?
+    var timeSubject: TimeManager?
+    
     //MARK:- Inits
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         FeedManager.register(observer: self)
+        TimeManager.register(observer: self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -160,7 +164,11 @@ class HomeViewController: UIViewController, Observer {
         self.presentTriggerView()
     }
     
-    func setupContentView() {
+    //MARK:- Update view appearance
+    func reloadMainMenu() {
+        mainMenuView.menuCV.reloadData()
+    }
+    func presentContentView() {
         guard DataManager.sharedInstance.feeds.count > 0 else {
             self.triggerView.status = .idle
             self.presentTriggerView()
@@ -179,8 +187,15 @@ class HomeViewController: UIViewController, Observer {
     }
     
     //MARK:- Observer
-    func update (){
-        setupContentView()
+    func update<T>(subject: T.Type) {
+        switch subject {
+        case is FeedManager.Type:
+            presentContentView()
+        case is TimeManager.Type:
+            reloadMainMenu()
+        default:
+            return
+        }
     }
 }
 

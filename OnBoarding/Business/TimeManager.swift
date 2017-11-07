@@ -8,7 +8,29 @@
 
 import Foundation
 
-class TimeManager {
+class TimeManager: Subject {
+    
+    // MARK:- Properties
+    static var observers: [Observer] = []
+    
+    //MARK:- Subject
+    static func register(observer: Observer) {
+        observers.append(observer)
+    }
+    
+    static func deregister(observer: Observer) {
+        for (index, ob) in observers.enumerated() {
+            if ob.identifier == observer.identifier {
+                observers.remove(at: index)
+            }
+        }
+    }
+    
+    static func notify() {
+        for observer in observers {
+            observer.update(subject: self)
+        }
+    }
     
     //MARK:-
     func insert(timesheet: Timesheet, completion: @escaping ((ServerResponse?)->()) ) {
@@ -36,24 +58,20 @@ class TimeManager {
     }
     
     //MARK:-
-    func SelectLastSubmittedDay(associateID: String, completion: @escaping ((Date?, ServerResponse?)->()) ) {
-        TimeService.lastSubmittedDay(associateID: associateID, completion: { response in
+    static func SelectLastSubmittedDay() {
+        guard let assIdentifier = DataManager.sharedInstance.associate?.identifier else {
+            return
+        }
+        TimeService.lastSubmittedDay(associateID: assIdentifier, completion: { response in
             guard response.result.isSuccess == true else {
-                let failure = ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")
-                completion(nil,failure)
                 return
             }
             guard let day = response.result.value?.date() else {
-                guard let serverStatus = Int(response.result.value!) else {
-                    let unkonwnResponse = ServerResponse(code: .unknown, description: "Unknown server failure")
-                    completion(nil, unkonwnResponse)
-                    return
-                }
-                let response = ServerStatus.parse(status: ServerStatus(rawValue: Int(serverStatus))!)
-                completion(nil, response)
+                DataManager.sharedInstance.timesheet?.lastSubmittedDay = Date() // timesheet is never submitted
                 return
             }
-            completion(day, nil)
+            DataManager.sharedInstance.timesheet?.lastSubmittedDay = day
+            notify()
         })
     }
 }
