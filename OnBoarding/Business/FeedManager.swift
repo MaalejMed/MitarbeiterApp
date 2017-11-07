@@ -10,24 +10,39 @@ import Foundation
 
 class FeedManager {
     
-    //MARK:-
-    func selectFeeds(completion: @escaping ((ServerResponse?, [Feed]?)->())) {
-        var feed: [Feed] = []
+    // MARK:- Properties
+    static var observers: [Observer] = []
+    
+    //MARK:- Subject
+    static func register(observer: Observer) {
+        observers.append(observer)
+    }
+    
+    static func deregister(observer: Observer) {
+        for (index, ob) in observers.enumerated() {
+            if ob.identifier == observer.identifier {
+                observers.remove(at: index)
+            }
+        }
+    }
+    
+    static func notify() {
+        for observer in observers {
+            observer.update()
+        }
+    }
+    
+    //MARK:- Operations
+    static func selectFeeds() {
+        var feeds: [Feed] = []
         FeedService.fetch(completion: { response in
             guard response.result.isSuccess == true else {
-                let failure = ServerStatus.parse(status: .serviceUnavailable)
-                completion(failure, nil)
+                FeedManager.notify()
                 return
             }
             
             guard let payload = response.result.value as? [[String: Any]] else {
-                guard let serverStatus = response.result.value as? Int else {
-                    let failure = ServerStatus.parse(status: .unknown)
-                    completion(failure, nil)
-                    return
-                }
-                let failure = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
-                completion(failure, nil)
+                FeedManager.notify()
                 return
             }
             
@@ -35,15 +50,10 @@ class FeedManager {
                 guard let aFeed = Feed(json: jsonItem) else {
                     continue
                 }
-                feed.append(aFeed)
+                feeds.append(aFeed)
             }
-            
-            guard feed.count > 0 else {
-                let failure = ServerStatus.parse(status: .badRequest)
-                completion(failure, nil)
-                return
-            }
-            return completion(nil, feed)
+            DataManager.sharedInstance.feeds = feeds
+            FeedManager.notify()
         })
     }
 }

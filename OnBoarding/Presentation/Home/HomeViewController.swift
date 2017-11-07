@@ -8,18 +8,30 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, Observer {
     
     //Properties
+    var identifier = 01
+
     let profileView = InfoView(frame: .zero)
     let mainMenuView = MainMenuView(frame: .zero)
     let feedTableView = FeedTableView(frame: .zero)
     let triggerView = TriggerView(frame:.zero)
     
-    var feeds: [Feed] = []
     var menuItems: [MenuItem] = []
+    
     var mainMenuViewTopAnchor: NSLayoutConstraint?
     var layoutConstraints: [NSLayoutConstraint] = []
+    
+    //MARK:- Inits
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        FeedManager.register(observer: self)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK:- Views lifecycle
     override func viewDidLoad() {
@@ -27,7 +39,6 @@ class HomeViewController: UIViewController {
         setupMainMenuView()
         setupFeedTableView()
         setupTriggerView()
-        setupFeedDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,7 +49,6 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
         self.navigationItem.setHidesBackButton(true, animated:false)
         setupProfileView()
-        self.mainMenuView.menuCV.reloadData()
     }
     
     //MARK:- Layout
@@ -70,15 +80,17 @@ class HomeViewController: UIViewController {
     
     func resetLayout() {
         self.view.removeConstraints(layoutConstraints)
+        for subview in self.view.subviews {
+            subview.removeFromSuperview()
+        }
         layoutConstraints.removeAll()
     }
     
-    //MARK: Layout MainMenu
     func updateMenuViewLayout(newPosition: Position) {
         self.view.removeConstraint(mainMenuViewTopAnchor!)
         switch newPosition {
         case .idle:
-           mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
+            mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         case .middle:
             mainMenuViewTopAnchor = mainMenuView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -(self.view.frame.height / 2) )
         case .top:
@@ -90,6 +102,7 @@ class HomeViewController: UIViewController {
         }
     }
     
+    //MARK:- MainMenu animation
     func moveMenuFrom(currentPosition: Position, direction: Direction) {
         switch currentPosition {
         case .idle:
@@ -116,13 +129,11 @@ class HomeViewController: UIViewController {
         }
     }
     
-    //MARK:- Views
+    //MARK:- Setup views
     func setupProfileView() {
         guard let associate = DataManager.sharedInstance.associate else {
             return
         }
-        
-        
         profileView.data = (title: associate.name , icon: associate.image, action: nil)
         profileView.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
     }
@@ -141,9 +152,22 @@ class HomeViewController: UIViewController {
     }
     
     func setupTriggerView() {
-        triggerView.data = (title:"No Feed available", icon: UIImage.init(named:"NoMails"), action: { [weak self] in
-            self?.setupFeedDataSource()
+        triggerView.data = (title:"No Feed available", icon: UIImage.init(named:"NoMails"), action: {
+            self.triggerView.status = .loading
+            FeedManager.selectFeeds()
         })
+        self.triggerView.status = .loading
+        self.presentTriggerView()
+    }
+    
+    func setupContentView() {
+        guard DataManager.sharedInstance.feeds.count > 0 else {
+            self.triggerView.status = .idle
+            self.presentTriggerView()
+            return
+        }
+        self.feedTableView.dataSource = DataManager.sharedInstance.feeds
+        self.presentNewsTableView()
     }
     
     func presentNewsTableView() {
@@ -154,19 +178,9 @@ class HomeViewController: UIViewController {
         layout(contentView: triggerView)
     }
     
-    //MARK:-
-    func setupFeedDataSource() {
-        triggerView.status = .loading
-        self.presentTriggerView()
-        DataManager.sharedInstance.updateFeeds(completion: {[weak self] response in
-            guard response == nil else {
-                self?.triggerView.status = .idle
-                return
-            }
-            self?.feeds = DataManager.sharedInstance.feeds
-            self?.feedTableView.dataSource = self?.feeds
-            self?.presentNewsTableView()
-        })
+    //MARK:- Observer
+    func update (){
+        setupContentView()
     }
 }
 

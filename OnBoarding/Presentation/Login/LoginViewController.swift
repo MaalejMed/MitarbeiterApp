@@ -77,21 +77,15 @@ class LoginViewController: UIViewController {
         loginView.loginBtn.status = .loading
         let assoManager = AssociateManager()
         assoManager.selectAssociate(username: username, password: password, completion: {[weak self] serverResponse, associate in
-            guard associate != nil else {
+            guard let existingAssociate = associate else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
                 self?.loginView.loginBtn.status = .idle
                 return
             }
-            DataManager.sharedInstance.setup(associate: associate!, completion: { failure in
-                guard failure == nil else {
-                    self?.serverResponseView.present(serverResponse: failure!)
-                    self?.loginView.loginBtn.status = .idle
-                    return
-                }
-                let homeVC = HomeViewController()
-                self?.navigationController?.pushViewController(homeVC, animated: true)
-                self?.loginView.loginBtn.status = .idle
-            })
+            DataManager.sharedInstance.setupFor(associate: existingAssociate)
+            let homeVC = HomeViewController()
+            self?.navigationController?.pushViewController(homeVC, animated: true)
+            self?.loginView.loginBtn.status = .idle
         })
     }
 

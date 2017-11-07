@@ -57,6 +57,7 @@
 		778C02CC1F8674560011E01D /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02CB1F8674560011E01D /* TimeManager.swift */; };
 		778C02CE1F86771C0011E01D /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02CD1F86771C0011E01D /* TimeService.swift */; };
 		778C03001F87C05F0011E01D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02FF1F87C05F0011E01D /* DataManager.swift */; };
+		77A3751B1FACAE750041837C /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3751A1FACAE750041837C /* Observer.swift */; };
 		77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601951F6BDB70000BC777 /* ProfileTableView.swift */; };
 		77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF631F6FEF610097CF46 /* MessageViewController.swift */; };
 		77BEDF661F6FEF7F0097CF46 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BEDF651F6FEF7F0097CF46 /* MessageView.swift */; };
@@ -147,6 +148,7 @@
 		778C02CB1F8674560011E01D /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		778C02CD1F86771C0011E01D /* TimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		778C02FF1F87C05F0011E01D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		77A3751A1FACAE750041837C /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		77B601951F6BDB70000BC777 /* ProfileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableView.swift; sourceTree = "<group>"; };
 		77BEDF631F6FEF610097CF46 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		77BEDF651F6FEF7F0097CF46 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		775690811F8BB8200049DE5E /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				77A3751A1FACAE750041837C /* Observer.swift */,
 				775690821F8BB8200049DE5E /* CellViewProtocols.swift */,
 			);
 			path = Protocols;
@@ -652,6 +655,7 @@
 				775690921F8BB8200049DE5E /* BasicTableViewCell.swift in Sources */,
 				778C02CE1F86771C0011E01D /* TimeService.swift in Sources */,
 				7756909B1F8BB8210049DE5E /* TriggerView.swift in Sources */,
+				77A3751B1FACAE750041837C /* Observer.swift in Sources */,
 				7754CA381F67D8D1005197ED /* MainMenuView.swift in Sources */,
 				7782B1ED1F7A94E00024F976 /* SubMessage.swift in Sources */,
 				772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */,
