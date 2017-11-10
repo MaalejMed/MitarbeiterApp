@@ -29,7 +29,13 @@ class MessageManager {
                 completion(failure)
                 return
             }
-            let serverResponse = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
+            guard let status = ServerStatus(rawValue: serverStatus) else {
+                let failure = ServerStatus.parse(status: .unknown)
+                completion(failure)
+                return
+            }
+            
+            let serverResponse = ServerStatus.parse(status: status)
             DataManager.sharedInstance.messages.insert(message, at: 0)
             completion(serverResponse)
             return
@@ -54,7 +60,14 @@ class MessageManager {
                 completion(failure)
                 return
             }
-            let serverResponse = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
+            
+            guard let status = ServerStatus(rawValue: serverStatus) else {
+                let failure = ServerStatus.parse(status: .unknown)
+                completion(failure)
+                return
+            }
+            
+            let serverResponse = ServerStatus.parse(status: status)
             completion(serverResponse)
             return
         })
@@ -75,7 +88,14 @@ class MessageManager {
                     completion(failure, nil)
                     return
                 }
-                let failure = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
+                
+                guard let status = ServerStatus(rawValue: serverStatus) else {
+                    let failure = ServerStatus.parse(status: .unknown)
+                    completion(failure, nil)
+                    return
+                }
+                
+                let failure = ServerStatus.parse(status: status)
                 completion(failure, nil)
                 return
             }
@@ -106,7 +126,12 @@ class MessageManager {
                     completion(failure, nil)
                     return
                 }
-                let failure = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
+                guard let status = ServerStatus(rawValue: serverStatus) else {
+                    let failure = ServerStatus.parse(status: .unknown)
+                    completion(failure, nil)
+                    return
+                }
+                let failure = ServerStatus.parse(status: status)
                 completion(failure, nil)
                 return
             }

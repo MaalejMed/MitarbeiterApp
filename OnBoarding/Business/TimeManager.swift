@@ -33,7 +33,7 @@ class TimeManager: Subject {
     }
     
     //MARK:-
-    func insert(timesheet: Timesheet, completion: @escaping ((ServerResponse?)->()) ) {
+    static func insert(timesheet: Timesheet, completion: @escaping ((ServerResponse?)->()) ) {
         guard let dic = timesheet.convertToJson() else {
             let failure = ServerStatus.parse(status: .badRequest)
             completion(failure)
@@ -51,8 +51,15 @@ class TimeManager: Subject {
                 completion(failure)
                 return
             }
-            let serverResponse = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
+            
+            guard let status = ServerStatus(rawValue: serverStatus) else {
+                let failure = ServerStatus.parse(status: .unknown)
+                completion(failure)
+                return
+            }
+            let serverResponse = ServerStatus.parse(status: status)
             completion(serverResponse)
+            notify()
             return
         })
     }

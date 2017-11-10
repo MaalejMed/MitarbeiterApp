@@ -26,7 +26,12 @@ class AssociateManager {
                     completion(failure, nil)
                     return
                 }
-                let response = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
+                guard let status = ServerStatus(rawValue: serverStatus) else {
+                    let failure = ServerStatus.parse(status: .unknown)
+                    completion(failure, nil)
+                    return
+                }
+                let response = ServerStatus.parse(status: status)
                 completion(response, nil)
                 return
             }
@@ -55,7 +60,12 @@ class AssociateManager {
                 return
             }
             
-            let response = ServerStatus.parse(status: ServerStatus(rawValue: serverStatus)!)
+            guard let status = ServerStatus(rawValue: serverStatus) else {
+                let failure = ServerStatus.parse(status: .unknown)
+                completion(failure)
+                return
+            }
+            let response = ServerStatus.parse(status: status)
             completion(response)
         })
     }
