@@ -4,6 +4,7 @@
 target 'OnBoarding' do
 
   use_frameworks!
-	pod 'Alamofire', '~> 4.2.0'	
+	pod 'Alamofire', '~> 4.2.0'
+    pod 'SwiftKeychainWrapper'
 end
 
