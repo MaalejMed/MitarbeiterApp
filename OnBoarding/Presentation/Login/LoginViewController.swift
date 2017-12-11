@@ -22,6 +22,10 @@ class LoginViewController: UIViewController {
         setupLoginView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+       loginView.reset()
+    }
+    
     //MARK:- Layout
     func layout(forView view: UIView) {
         for view in self.view.subviews {

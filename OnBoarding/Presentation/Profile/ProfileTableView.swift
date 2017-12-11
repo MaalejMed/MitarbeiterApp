@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ProfileTableViewProtocol: class {
+    func profileTableView (_ profileTableView: ProfileTableView, didSelect setting: Setting)
+}
+
 class ProfileTableView: UIView {
     //MARK:- Properties
     let tableView: UITableView = {
@@ -17,11 +21,13 @@ class ProfileTableView: UIView {
         return tableView
     }()
     
-    var dataSource: [Settings]? {
+    var dataSource: [Setting]? {
         didSet {
             tableView.reloadData()
         }
     }
+    
+    weak var profileTableViewDelegate: ProfileTableViewProtocol?
     
     //MARK:- Init
     override init(frame: CGRect) {
@@ -71,5 +77,10 @@ extension ProfileTableView: UITableViewDataSource {
 extension ProfileTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BasicTableViewCell.height
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedSetting = dataSource![indexPath.row]
+        profileTableViewDelegate?.profileTableView(self, didSelect: selectedSetting)
     }
 }

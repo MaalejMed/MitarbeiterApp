@@ -48,4 +48,12 @@ class KeyChainHelper: NSObject {
         
         return String(data: data, encoding: String.Encoding.utf8)
     }
+    
+    static func delete(associate: Associate) {
+        let query: [String: Any] = [
+            kSecClass as String : kSecClassGenericPassword as String,
+            kSecAttrAccount as String : kcAccounts.associate.rawValue,
+        ]
+        SecItemDelete(query as CFDictionary)
+    }
 }

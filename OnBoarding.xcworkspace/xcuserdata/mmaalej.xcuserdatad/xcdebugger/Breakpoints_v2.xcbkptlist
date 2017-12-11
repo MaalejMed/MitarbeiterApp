@@ -121,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OnBoarding/Presentation/Home/MainMenuView.swift"
-            timestampString = "534697524.094848"
+            filePath = "OnBoarding/Presentation/Login/LoginView.swift"
+            timestampString = "534700900.961195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "collectionView(_:cellForItemAt:)"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "reset()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

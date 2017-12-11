@@ -15,17 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        let loginVC = LoginViewController()
+        let loginNC = UINavigationController.init(rootViewController: loginVC)
+        self.window?.rootViewController = loginNC
+        
         guard let associate = AssociateManager.kcRetrieveAssociate() else {
-            let loginVC = LoginViewController()
-            let loginNC = UINavigationController.init(rootViewController: loginVC)
-            self.window?.rootViewController = loginNC
             return true
         }
         
         DataManager.sharedInstance.setupFor(associate: associate)
         let homeVC = HomeViewController()
-        let homeNC = UINavigationController.init(rootViewController: homeVC)
-        self.window?.rootViewController = homeNC
+        loginNC.pushViewController(homeVC, animated: false)
         return true
     }
     

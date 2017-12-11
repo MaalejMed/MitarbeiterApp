@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum Settings: String {
+enum Setting: String {
     case changePass = "Change password"
     case logout = "Logout"
     static let allValues = [changePass, logout]
@@ -81,10 +81,11 @@ class ProfileViewController: UIViewController {
     }
     
     func setupProfileTableView() {
-        profileTableView.dataSource = Settings.allValues
+        profileTableView.dataSource = Setting.allValues
+        profileTableView.profileTableViewDelegate = self
     }
     
-    //MARK:- Actions
+    //MARK:- Change photo
     func presentMediaController() {
         let mediaController = MediaViewController()
         mediaController.setupImagePickerController()
@@ -118,6 +119,22 @@ class ProfileViewController: UIViewController {
             self?.serverResponseView.present(serverResponse: response!)
         })
     }
+    
+    //MARK:- Settings
+    func didSelect(setting: Setting) {
+        switch setting {
+        case .changePass:
+            print("not yet implemented")
+        case .logout:
+            guard let ass = DataManager.sharedInstance.associate else {
+                print ("Associate not found. cannot logout")
+                return
+            }
+            let _ = KeyChainHelper.delete(associate: ass)
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
 }
 
 extension ProfileViewController: MediaViewControllerDelegate {
@@ -127,5 +144,11 @@ extension ProfileViewController: MediaViewControllerDelegate {
         }
         
         change(profileImage: profileImage)
+    }
+}
+
+extension ProfileViewController: ProfileTableViewProtocol {
+    func profileTableView(_ profileTableView: ProfileTableView, didSelect setting: Setting) {
+        didSelect(setting: setting)
     }
 }

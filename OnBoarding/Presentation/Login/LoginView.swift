@@ -179,4 +179,12 @@ class LoginView: UIView {
         }
         action(self.idTxtF.text!, passwordTxtF.text!)
     }
+    
+    //MARK:- Others
+    func reset() {
+        idTxtF.text = ""
+        passwordTxtF.text = ""
+        idTxtF.resignFirstResponder()
+        passwordTxtF.resignFirstResponder()
+    }
 }
