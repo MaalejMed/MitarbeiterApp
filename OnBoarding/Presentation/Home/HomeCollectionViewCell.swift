@@ -9,6 +9,8 @@
 import UIKit
 
 let homeCollectionViewCellPadding: CGFloat = 10.0
+let spaceBetweenCells: CGFloat = 20.0
+
 
 class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols {
     
@@ -18,9 +20,13 @@ class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols 
     var cellView: CellViewProtocol = HomeCellView()
     var data: (title: String?, icon: UIImage?, notif: Int?)? {
         didSet {
-            (self.cellView as! HomeCellView).data = (title: data?.title, icon: data?.icon, notif: data?.notif)
+            notifView.reset()
+            notifView.value = data?.notif
+            (self.cellView as! HomeCellView).data = (title: data?.title, icon: data?.icon)
         }
     }
+    
+    let notifView = NotificationView(frame: .zero)
     
     //Init
     override init(frame: CGRect) {
@@ -36,9 +42,15 @@ class HomeCollectionViewCell: UICollectionViewCell, CollectionViewCellProtocols 
     
     //MARK:-Layout
     func layout() {
+        //notif view
+        self.contentView.addSubview(notifView)
+        notifView.translatesAutoresizingMaskIntoConstraints = false
+        notifView.centerYAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        notifView.rightAnchor.constraint(lessThanOrEqualTo: self.rightAnchor, constant: (spaceBetweenCells / 4)).isActive = true
+        //content view
         self.contentView.addSubview(cellView.view)
         cellView.view.translatesAutoresizingMaskIntoConstraints = false
-        cellView.view.topAnchor.constraint(equalTo:self.topAnchor, constant: metrics.topAnchor).isActive = true
+        cellView.view.topAnchor.constraint(equalTo:notifView.bottomAnchor, constant: metrics.topAnchor).isActive = true
         cellView.view.leftAnchor.constraint(equalTo:self.leftAnchor, constant: metrics.leftAnchor).isActive = true
         cellView.view.rightAnchor.constraint(equalTo:self.rightAnchor, constant: -metrics.rightAnchor).isActive = true
         cellView.view.bottomAnchor.constraint(equalTo:self.bottomAnchor, constant: -metrics.rightAnchor).isActive = true
@@ -50,23 +62,16 @@ class HomeCellView: UIView, CellViewProtocol {
     //MARK:- Properties
     static var dummy: CellViewProtocol = {
         let cell = HomeCellView()
-        cell.data = (title: "title", icon: UIImage.init(named: "Elearning"), notif: 0)
+        cell.data = (title: "title", icon: UIImage.init(named: "Elearning"))
         return cell
     }()
     
-    var data: (title: String?, icon: UIImage?, notif: Int?) {
+    var data: (title: String?, icon: UIImage?) {
         didSet {
-            notifView.reset()
             titleLbl.text = data.title
             iconImgV.image = data.icon
-            guard let notification = data.notif else {
-                return
-            }
-            notifView.value = notification
         }
     }
-    
-    let notifView = NotificationView(frame: .zero)
     
     let titleLbl: UILabel = {
         let label = UILabel()
@@ -94,7 +99,7 @@ class HomeCellView: UIView, CellViewProtocol {
     
     //MARK:- Layout
     func layout() {
-        let views:[String: UIView] = ["title": titleLbl, "icon": iconImgV, "notif": notifView]
+        let views:[String: UIView] = ["title": titleLbl, "icon": iconImgV]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
@@ -104,11 +109,6 @@ class HomeCellView: UIView, CellViewProtocol {
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[title]-(0)-|", options: [], metrics: nil, views: views)
          layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[icon]-(0)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title]-(2)-[icon]-(0)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += [
-            notifView.centerXAnchor.constraint(equalTo: self.rightAnchor, constant: HomeCollectionViewCell.staticMetrics.rightAnchor),
-            notifView.rightAnchor.constraint(lessThanOrEqualTo: self.rightAnchor, constant: (homeCollectionViewCellPadding + HomeCollectionViewCell.staticMetrics.rightAnchor) - 2),
-            notifView.centerYAnchor.constraint(equalTo: self.topAnchor, constant: -HomeCollectionViewCell.staticMetrics.topAnchor )
-        ]
         
         NSLayoutConstraint.activate(layoutConstraints)
     }

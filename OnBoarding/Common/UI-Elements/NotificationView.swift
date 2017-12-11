@@ -13,6 +13,7 @@ class NotificationView: UIView {
     //MARK:- Properties
     let notifLbl: UILabel = {
         let label = UILabel()
+        label.sizeToFit()
         label.textAlignment = .center
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 12.0)
