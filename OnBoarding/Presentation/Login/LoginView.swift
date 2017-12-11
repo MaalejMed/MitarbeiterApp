@@ -69,7 +69,7 @@ class LoginView: UIView {
         return label
     }()
     
-    private let remainConnectedSwt: UISwitch = {
+    let remainConnectedSwt: UISwitch = {
         let switchButton = UISwitch ()
         switchButton.isOn = true
         switchButton.onTintColor = UIColor.buttonColor

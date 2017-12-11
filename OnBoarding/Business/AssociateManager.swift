@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 
 class AssociateManager {
     
@@ -68,5 +67,18 @@ class AssociateManager {
             let response = ServerStatus.parse(status: status)
             completion(response)
         })
+    }
+    
+    //MARK: Keychain
+    static func kcSave(associate: Associate) {
+        KeyChainHelper.save(associateID: associate.identifier)
+    }
+    
+    static func kcRetrieveAssociate() -> Associate? {
+        guard let assoID = KeyChainHelper.getAssociateID() else {
+            return nil
+        }
+        let associate = Associate(identifier: assoID)
+        return associate
     }
 }

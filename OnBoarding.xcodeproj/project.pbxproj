@@ -57,6 +57,7 @@
 		778C02CC1F8674560011E01D /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02CB1F8674560011E01D /* TimeManager.swift */; };
 		778C02CE1F86771C0011E01D /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02CD1F86771C0011E01D /* TimeService.swift */; };
 		778C03001F87C05F0011E01D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778C02FF1F87C05F0011E01D /* DataManager.swift */; };
+		77A193B91FC40EB700C653ED /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A193B81FC40EB700C653ED /* KeychainHelper.swift */; };
 		77A3751B1FACAE750041837C /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3751A1FACAE750041837C /* Observer.swift */; };
 		77AB9C0E1FB1E75800F52FA2 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB9C0D1FB1E75800F52FA2 /* Subject.swift */; };
 		77B601961F6BDB70000BC777 /* ProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B601951F6BDB70000BC777 /* ProfileTableView.swift */; };
@@ -149,6 +150,7 @@
 		778C02CB1F8674560011E01D /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		778C02CD1F86771C0011E01D /* TimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		778C02FF1F87C05F0011E01D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		77A193B81FC40EB700C653ED /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		77A3751A1FACAE750041837C /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		77AB9C0D1FB1E75800F52FA2 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		77B601951F6BDB70000BC777 /* ProfileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableView.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				778C02CB1F8674560011E01D /* TimeManager.swift */,
 				778C02FF1F87C05F0011E01D /* DataManager.swift */,
 				7747DF041F9F2229002D6A96 /* MessageManager.swift */,
+				77A193B81FC40EB700C653ED /* KeychainHelper.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				775690941F8BB8200049DE5E /* ServerResponseView.swift in Sources */,
 				778C03001F87C05F0011E01D /* DataManager.swift in Sources */,
 				775690921F8BB8200049DE5E /* BasicTableViewCell.swift in Sources */,
+				77A193B91FC40EB700C653ED /* KeychainHelper.swift in Sources */,
 				778C02CE1F86771C0011E01D /* TimeService.swift in Sources */,
 				7756909B1F8BB8210049DE5E /* TriggerView.swift in Sources */,
 				77A3751B1FACAE750041837C /* Observer.swift in Sources */,

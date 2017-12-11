@@ -70,7 +70,7 @@ class TimeManager: Subject {
             return
         }
         TimeService.lastSubmittedDay(associateID: assIdentifier, completion: { response in
-            guard response.result.isSuccess == true else {
+             guard response.result.isSuccess == true else {
                 return
             }
             guard let day = response.result.value?.date() else {

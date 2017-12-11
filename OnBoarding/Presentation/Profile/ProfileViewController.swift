@@ -109,7 +109,7 @@ class ProfileViewController: UIViewController {
         
         //save image in the server
         let dic: [String: Any] = [
-            "associateID": associate.identifier!,
+            "associateID": associate.identifier,
             "photo": profileImageString
         ]
         

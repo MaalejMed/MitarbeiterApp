@@ -115,7 +115,7 @@ class MessageViewController: UIViewController {
     
     //MARK:- Message
     func sendMessage(associate: Associate) {
-        let message = Message(identifier: String.random(), associateID: associate.identifier!, title: messageView.titleTxtF.text!, body: messageView.messageTxtV.text, subMessages: [], date: Date())
+        let message = Message(identifier: String.random(), associateID: associate.identifier, title: messageView.titleTxtF.text!, body: messageView.messageTxtV.text, subMessages: [], date: Date())
         
         let messageManager = MessageManager()
         messageManager.insert(message: message, completion: {[weak self] serverResponse in
