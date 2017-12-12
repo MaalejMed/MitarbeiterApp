@@ -80,7 +80,7 @@ class LoginViewController: UIViewController {
     func login(username: String, password: String) {
         loginView.loginBtn.status = .loading
         let assoManager = AssociateManager()
-        assoManager.selectAssociate(username: "645438", password: "12345", completion: {[weak self] serverResponse, associate in
+        assoManager.selectAssociate(username: username, password: password, completion: {[weak self] serverResponse, associate in
             guard let existingAssociate = associate else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
                 self?.loginView.loginBtn.status = .idle
