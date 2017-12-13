@@ -73,54 +73,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OnBoarding/Service/TimeService.swift"
-            timestampString = "534856579.107711"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "lastSubmittedDay(associateID:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static OnBoarding.TimeService.lastSubmittedDay(associateID: Swift.String, completion: (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "OnBoarding"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mmaalej/Dev/OnBoarding/OnBoarding/Service/TimeService.swift"
-                  timestampString = "532966799.844414"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "295">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; () in static OnBoarding.TimeService.lastSubmittedDay(associateID: Swift.String, completion: (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "OnBoarding"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mmaalej/Dev/OnBoarding/OnBoarding/Service/TimeService.swift"
-                  timestampString = "532966799.847019"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "51">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "OnBoarding/Service/AuthenticationService.swift"
             timestampString = "534855132.460013"
             startingColumnNumber = "9223372036854775807"
@@ -170,28 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnBoarding/Service/AssociateService.swift"
-            timestampString = "534857179.391288"
+            timestampString = "534865505.612159"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
             endingLineNumber = "21"
             landmarkName = "fetchProfileData(associateID:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OnBoarding/Business/DataManager.swift"
-            timestampString = "534857179.391362"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "setupFor(associateID:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

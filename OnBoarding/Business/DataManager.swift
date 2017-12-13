@@ -23,7 +23,7 @@ class DataManager {
     
     //MARK:- Setup
     func setupFor(associateID: String) {
-        //associate
+        //profile data
         AssociateManager.fetchProfileData(associateID: associateID, completion: nil)
         
         //feeds

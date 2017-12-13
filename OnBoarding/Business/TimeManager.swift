@@ -41,7 +41,7 @@ class TimeManager: Subject {
             guard response.result.isSuccess == true else {
                 return completion(ServerResponse(serverStatus: .serviceUnavailable))
             }
-            completion(ServerResponse.init(serverStatus: response.result.value as! String))
+            completion(ServerResponse.init(serverStatus: response.result.value!))
             notify()
             return
         })
@@ -54,7 +54,7 @@ class TimeManager: Subject {
                 return
             }
             guard let day = response.result.value?.date() else {
-                DataManager.sharedInstance.timesheet?.lastSubmittedDay = Date() // timesheet is never submitted
+                DataManager.sharedInstance.timesheet?.lastSubmittedDay = Date().yesterday // timesheet is never submitted
                 return
             }
             DataManager.sharedInstance.timesheet?.lastSubmittedDay = day

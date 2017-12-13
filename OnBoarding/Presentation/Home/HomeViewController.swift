@@ -31,6 +31,7 @@ class HomeViewController: UIViewController, Observer {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         FeedManager.register(observer: self)
         TimeManager.register(observer: self)
+        AssociateManager.register(observer: self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -168,6 +169,7 @@ class HomeViewController: UIViewController, Observer {
     func reloadMainMenu() {
         mainMenuView.menuCV.reloadData()
     }
+    
     func presentContentView() {
         guard DataManager.sharedInstance.feeds.count > 0 else {
             self.triggerView.status = .idle
@@ -186,6 +188,15 @@ class HomeViewController: UIViewController, Observer {
         layout(contentView: triggerView)
     }
     
+    func reloadProfileView() {
+        guard let associate = DataManager.sharedInstance.associate else {
+            return
+        }
+        profileView.backgroundColor = UIColor(patternImage: UIImage(named: "Background.png")!)
+        profileView.data = (title: associate.name , icon: associate.image, action: nil)
+
+    }
+    
     //MARK:- Observer
     func update<T>(subject: T.Type) {
         switch subject {
@@ -193,6 +204,8 @@ class HomeViewController: UIViewController, Observer {
             presentContentView()
         case is TimeManager.Type:
             reloadMainMenu()
+        case is AssociateManager.Type:
+            reloadProfileView()
         default:
             return
         }
