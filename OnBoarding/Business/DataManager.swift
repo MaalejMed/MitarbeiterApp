@@ -22,20 +22,20 @@ class DataManager {
     }()
     
     //MARK:- Setup
-    func setupFor(associate: Associate) {
+    func setupFor(associateID: String) {
         //associate
-        DataManager.sharedInstance.associate = associate
+        AssociateManager.fetchProfileData(associateID: associateID, completion: nil)
         
         //feeds
         FeedManager.selectFeeds()
         
         //timesheet
-        DataManager.sharedInstance.timesheet = Timesheet()
-        TimeManager.SelectLastSubmittedDay()
+        DataManager.sharedInstance.timesheet = Timesheet(associateID: associateID)
+        TimeManager.SelectLastSubmittedDay(associateID: associateID)
     }
     
     func resetTimesheet(lastSubmittedDay: Date) {
-        self.timesheet = Timesheet()
+        self.timesheet = Timesheet.init(associateID: (DataManager.sharedInstance.associate?.identifier)!)
         self.timesheet?.lastSubmittedDay = lastSubmittedDay
     }
     

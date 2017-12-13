@@ -117,7 +117,7 @@ class GSDViewController: UIViewController {
         triggerView.status = .loading
         self.presentTriggerView()
         
-        DataManager.sharedInstance.updateMessages(associateID: associate.identifier, completion: {[weak self] serverResponse in
+        DataManager.sharedInstance.updateMessages(associateID: associate.identifier!, completion: {[weak self] serverResponse in
             guard serverResponse == nil else {
                 self?.triggerView.status = .idle
                 self?.presentTriggerView()

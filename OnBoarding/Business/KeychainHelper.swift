@@ -9,51 +9,94 @@
 import Foundation
 import Security
 
-enum kcAccounts: String {
-    case associate
+enum kckeys: String {
+    case associateID
+    case associatePassword
 }
 
 class KeyChainHelper: NSObject {
     
     //MARK: Associate
-    static func save(associateID: String) {
-        guard let data = associateID.data(using: String.Encoding.utf8, allowLossyConversion: false) else {
+    static func save(associateID: String, associatePassword: String) {
+        guard let assID = associateID.data(using: String.Encoding.utf8, allowLossyConversion: false) else {
+            return
+        }
+        
+        guard let assPass = associatePassword.data(using: String.Encoding.utf8, allowLossyConversion: false) else {
             return
         }
 
-        let query: [String: Any] = [
+        //save ID
+        let queryAssID: [String: Any] = [
             kSecClass as String : kSecClassGenericPassword as String,
-            kSecAttrAccount as String : kcAccounts.associate.rawValue,
-            kSecValueData as String   : data
+            kSecAttrAccount as String : kckeys.associateID.rawValue,
+            kSecValueData as String   : assID
         ]
         
-        let status = SecItemAdd(query as CFDictionary, nil)
-        print(status)
+        let _ = SecItemAdd(queryAssID as CFDictionary, nil)
+        
+        //save Password
+        let queryAssPass: [String: Any] = [
+            kSecClass as String : kSecClassGenericPassword as String,
+            kSecAttrAccount as String : kckeys.associatePassword.rawValue,
+            kSecValueData as String   : assPass
+        ]
+        
+        let _ = SecItemAdd(queryAssPass as CFDictionary, nil)
+
     }
     
-    static func getAssociateID() -> String? {
+    static func getAssociateCredentials() -> (String?, String?) {
         
-        let query = [
+        //read associateID
+        let queryAssID = [
             kSecClass as String       : kSecClassGenericPassword,
-            kSecAttrAccount as String : kcAccounts.associate.rawValue,
+            kSecAttrAccount as String : kckeys.associateID.rawValue,
             kSecReturnData as String  : kCFBooleanTrue,
             kSecMatchLimit as String  : kSecMatchLimitOne ] as [String : Any]
         
-        var dataTypeRef: AnyObject? = nil
-        SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
-        
-        guard let  data = dataTypeRef as? Data else {
-            return nil
+        var dataTypeRefAssID: AnyObject? = nil
+        SecItemCopyMatching(queryAssID as CFDictionary, &dataTypeRefAssID)
+    
+        guard let  dataAssID = dataTypeRefAssID as? Data else {
+            return (nil, nil)
         }
         
-        return String(data: data, encoding: String.Encoding.utf8)
+        let associateID = String(data: dataAssID, encoding: String.Encoding.utf8)
+        
+        //read associatePassword
+        
+        let queryAssPass = [
+            kSecClass as String       : kSecClassGenericPassword,
+            kSecAttrAccount as String : kckeys.associatePassword.rawValue,
+            kSecReturnData as String  : kCFBooleanTrue,
+            kSecMatchLimit as String  : kSecMatchLimitOne ] as [String : Any]
+        
+        var dataTypeRefAssPass: AnyObject? = nil
+        SecItemCopyMatching(queryAssPass as CFDictionary, &dataTypeRefAssPass)
+        
+        guard let  dataAssPass = dataTypeRefAssPass as? Data else {
+            return (nil, nil)
+        }
+        
+        let associatePass = String(data: dataAssPass, encoding: String.Encoding.utf8)
+        
+        return (associateID, associatePass)
     }
     
-    static func delete(associate: Associate) {
-        let query: [String: Any] = [
+    static func deleteAssociateCredentials() {
+        //delete associateID
+        let queryAssID: [String: Any] = [
             kSecClass as String : kSecClassGenericPassword as String,
-            kSecAttrAccount as String : kcAccounts.associate.rawValue,
+            kSecAttrAccount as String : kckeys.associateID.rawValue,
         ]
-        SecItemDelete(query as CFDictionary)
+        SecItemDelete(queryAssID as CFDictionary)
+        
+        //delete associatePass
+        let queryAssPass: [String: Any] = [
+            kSecClass as String : kSecClassGenericPassword as String,
+            kSecAttrAccount as String : kckeys.associatePassword.rawValue,
+            ]
+        SecItemDelete(queryAssPass as CFDictionary)
     }
 }

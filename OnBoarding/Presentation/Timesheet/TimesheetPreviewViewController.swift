@@ -107,7 +107,7 @@ class TimesheetPreviewViewController: UIViewController {
         
         sendBtn.status = .loading
         TimeManager.insert(timesheet: submittedTimesheet, completion: {[weak self] serverResponse in
-            guard serverResponse?.code == .success else {
+            guard serverResponse?.status == .success else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
                 self?.sendBtn.status = .idle
                 return

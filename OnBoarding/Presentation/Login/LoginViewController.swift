@@ -79,18 +79,20 @@ class LoginViewController: UIViewController {
     //MARK:- Network calls
     func login(username: String, password: String) {
         loginView.loginBtn.status = .loading
-        let assoManager = AssociateManager()
-        assoManager.selectAssociate(username: username, password: password, completion: {[weak self] serverResponse, associate in
-            guard let existingAssociate = associate else {
+        let authManager = AuthenticationManager()
+        authManager.login(username: username, password: password, completion: {[weak self] serverResponse in
+            guard serverResponse?.status == .success else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
                 self?.loginView.loginBtn.status = .idle
                 return
             }
-            DataManager.sharedInstance.setupFor(associate: existingAssociate)
+            
+            DataManager.sharedInstance.setupFor(associateID: username)
+            
             let homeVC = HomeViewController()
             self?.navigationController?.pushViewController(homeVC, animated: true)
             self?.loginView.loginBtn.status = .idle
-            let _ = self?.loginView.remainConnectedSwt.isOn == true ? AssociateManager.kcSave(associate: existingAssociate) : nil
+            let _ = self?.loginView.remainConnectedSwt.isOn == true ? AuthenticationManager.kcSave(assID: username, assPass: password): nil
         })
     }
 }

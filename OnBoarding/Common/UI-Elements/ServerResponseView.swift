@@ -73,7 +73,7 @@ class ServerResponseView: UIView {
     }
     
     func solve(serverResponse: ServerResponse) {
-        switch serverResponse.code {
+        switch serverResponse.status {
         case .success:
             self.iconImgV.image = UIImage.init(named: "Done")!
         case .badRequest, .unauthorizedAccess, .unknown, .serviceUnavailable, .notFound:

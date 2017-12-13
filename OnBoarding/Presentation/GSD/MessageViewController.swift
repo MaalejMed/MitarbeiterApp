@@ -115,11 +115,11 @@ class MessageViewController: UIViewController {
     
     //MARK:- Message
     func sendMessage(associate: Associate) {
-        let message = Message(identifier: String.random(), associateID: associate.identifier, title: messageView.titleTxtF.text!, body: messageView.messageTxtV.text, subMessages: [], date: Date())
+        let message = Message(identifier: String.random(), associateID: associate.identifier!, title: messageView.titleTxtF.text!, body: messageView.messageTxtV.text, subMessages: [], date: Date())
         
         let messageManager = MessageManager()
         messageManager.insert(message: message, completion: {[weak self] serverResponse in
-            guard serverResponse?.code == .success else {
+            guard serverResponse?.status == .success else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
                 self?.sendBtn.status = .idle
                 return
@@ -139,7 +139,7 @@ class MessageViewController: UIViewController {
         
         let messageManager = MessageManager()
         messageManager.insert(subMessage: subMessage, completion: { [weak self] serverResponse in
-            guard serverResponse?.code == .success else {
+            guard serverResponse?.status == .success else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
                 self?.sendBtn.status = .idle
                 return

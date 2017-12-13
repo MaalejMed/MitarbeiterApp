@@ -11,8 +11,35 @@ import Foundation
 struct ServerResponse {
     
     //MARK:- Properties
-    let code: ServerStatus
-    let description: String
+    let status: ServerStatus
+    var description: String = ""
+    
+    init(serverStatus: String) {
+        status = ServerStatus.getStatusFrom(code: Int(serverStatus)!)
+        description = descriptionFor(Status: status)
+    }
+    
+    init(serverStatus: ServerStatus) {
+        status = serverStatus
+        description = descriptionFor(Status: status)
+    }
+    
+    private func descriptionFor(Status: ServerStatus) -> String {
+        switch status {
+        case .success:
+            return "Done !"
+        case .badRequest:
+            return "Data could not be parsed"
+        case .unauthorizedAccess:
+            return "Unauthorized access"
+        case .notFound:
+            return "No Data found"
+        case .serviceUnavailable:
+            return "Could not connect to the server"
+        case .unknown:
+            return "Unkown server response"
+        }
+    }
 }
 
 enum ServerStatus: Int {
@@ -23,20 +50,20 @@ enum ServerStatus: Int {
     case serviceUnavailable = 503
     case unknown = -1
     
-    static func parse(status: ServerStatus) -> ServerResponse {
-        switch status {
-        case .success:
-            return ServerResponse(code: .success, description: "Done !")
-        case .serviceUnavailable:
-            return ServerResponse(code: .serviceUnavailable, description: "Could not connect to the server")
-        case .unauthorizedAccess:
-            return ServerResponse(code: .unauthorizedAccess, description: "Unauthorized access")
-        case .notFound:
-            return ServerResponse(code: .notFound, description: "No Data found")
-        case .badRequest:
-            return ServerResponse(code: .badRequest, description: "Data could not be parsed")
+    static func getStatusFrom(code: Int) ->ServerStatus {
+        switch code {
+        case 200:
+            return .success
+        case 400:
+            return .badRequest
+        case 401:
+            return .unauthorizedAccess
+        case 404:
+            return .notFound
+        case 503:
+            return .serviceUnavailable
         default:
-            return ServerResponse(code: .unknown, description: "Unkown server response")
+            return .unknown
         }
     }
 }

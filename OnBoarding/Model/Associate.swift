@@ -11,7 +11,7 @@ import UIKit
 struct Associate {
     
     //MARK:- Properties
-    var identifier: String
+    var identifier: String?
     var password: String?
     var email: String?
     var name: String?
@@ -40,8 +40,9 @@ struct Associate {
         image = profilePhoto
     }
     
-    init(identifier: String) {
+    init(identifier: String, password: String) {
         self.identifier = identifier
+        self.password = password
     }
     
     //MARK:- 

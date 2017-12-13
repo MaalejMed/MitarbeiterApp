@@ -126,11 +126,7 @@ class ProfileViewController: UIViewController {
         case .changePass:
             print("not yet implemented")
         case .logout:
-            guard let ass = DataManager.sharedInstance.associate else {
-                print ("Associate not found. cannot logout")
-                return
-            }
-            let _ = KeyChainHelper.delete(associate: ass)
+            let _ = KeyChainHelper.deleteAssociateCredentials()
             self.navigationController?.popToRootViewController(animated: true)
         }
     }

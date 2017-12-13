@@ -13,63 +13,29 @@ class MessageManager {
     //MARK:-
     func insert(message: Message, completion: @escaping ((ServerResponse?)->()) ) {
         guard let dic = message.convertToJson() else {
-            let failure = ServerStatus.parse(status: .badRequest)
-            completion(failure)
-            return
+            return completion(ServerResponse.init(serverStatus: .badRequest))
         }
+        
         MessageService.submitMessage(dic: dic, completion: { response in
             guard response.result.isSuccess == true else {
-                let failure = ServerStatus.parse(status: .serviceUnavailable)
-                completion(failure)
-                return
+                return completion(ServerResponse.init(serverStatus: .serviceUnavailable))
             }
             
-            guard let serverStatus = response.result.value as? Int else {
-                let failure = ServerStatus.parse(status: .unknown)
-                completion(failure)
-                return
-            }
-            guard let status = ServerStatus(rawValue: serverStatus) else {
-                let failure = ServerStatus.parse(status: .unknown)
-                completion(failure)
-                return
-            }
-            
-            let serverResponse = ServerStatus.parse(status: status)
-            DataManager.sharedInstance.messages.insert(message, at: 0)
-            completion(serverResponse)
-            return
+            let serverResponse = ServerResponse.init(serverStatus: response.result.value as! String)
+            let _ = serverResponse.status == .success ? DataManager.sharedInstance.messages.insert(message, at: 0) : nil
+            return completion(serverResponse)
         })
     }
     
     func insert(subMessage: SubMessage, completion: @escaping ((ServerResponse?)->()) ) {
         guard let dic = subMessage.convertToJson() else {
-            let failure = ServerStatus.parse(status: .badRequest)
-            completion(failure)
-            return
+            return completion(ServerResponse.init(serverStatus: .badRequest))
         }
         MessageService.submitSubMessage(dic: dic, completion: { response in
             guard response.result.isSuccess == true else {
-                let failure = ServerStatus.parse(status: .serviceUnavailable)
-                completion(failure)
-                return
+                return completion(ServerResponse.init(serverStatus: .serviceUnavailable))
             }
-            
-            guard let serverStatus = response.result.value as? Int else {
-                let failure = ServerStatus.parse(status: .unknown)
-                completion(failure)
-                return
-            }
-            
-            guard let status = ServerStatus(rawValue: serverStatus) else {
-                let failure = ServerStatus.parse(status: .unknown)
-                completion(failure)
-                return
-            }
-            
-            let serverResponse = ServerStatus.parse(status: status)
-            completion(serverResponse)
-            return
+            return completion(ServerResponse.init(serverStatus: response.result.value as! String))
         })
     }
     
@@ -77,27 +43,11 @@ class MessageManager {
         var messages: [Message] = []
         MessageService.fetch(associateID: associateID, completion: { response in
             guard response.result.isSuccess == true else {
-                let failure = ServerStatus.parse(status: .serviceUnavailable)
-                completion(failure, nil)
-                return
+                return completion(ServerResponse.init(serverStatus: .serviceUnavailable), nil)
             }
             
             guard let payload = response.result.value as? [[String: Any]] else {
-                guard let serverStatus = response.result.value as? Int else {
-                    let failure = ServerStatus.parse(status: .unknown)
-                    completion(failure, nil)
-                    return
-                }
-                
-                guard let status = ServerStatus(rawValue: serverStatus) else {
-                    let failure = ServerStatus.parse(status: .unknown)
-                    completion(failure, nil)
-                    return
-                }
-                
-                let failure = ServerStatus.parse(status: status)
-                completion(failure, nil)
-                return
+                return completion(ServerResponse.init(serverStatus: .badRequest), nil)
             }
             
             for jsonItem in payload {
@@ -115,25 +65,11 @@ class MessageManager {
         var messages: [SubMessage] = []
         MessageService.fetchSubMessage(messageID: messageID, completion: { response in
             guard response.result.isSuccess == true else {
-                let failure = ServerStatus.parse(status: .serviceUnavailable)
-                completion(failure, nil)
-                return
+                return completion(ServerResponse.init(serverStatus: .serviceUnavailable), nil)
             }
             
             guard let payload = response.result.value as? [[String: Any]] else {
-                guard let serverStatus = response.result.value as? Int else {
-                    let failure = ServerStatus.parse(status: .unknown)
-                    completion(failure, nil)
-                    return
-                }
-                guard let status = ServerStatus(rawValue: serverStatus) else {
-                    let failure = ServerStatus.parse(status: .unknown)
-                    completion(failure, nil)
-                    return
-                }
-                let failure = ServerStatus.parse(status: status)
-                completion(failure, nil)
-                return
+                return completion(ServerResponse.init(serverStatus: .unknown), nil)
             }
             
             for jsonItem in payload {

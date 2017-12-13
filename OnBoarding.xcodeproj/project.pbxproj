@@ -69,6 +69,8 @@
 		77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9191C1F72719D00BFAB45 /* Associate.swift */; };
 		77D9D4EF1F7CE6A40058C9D9 /* AssociateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4EE1F7CE6A40058C9D9 /* AssociateService.swift */; };
 		77D9D4F41F7D01460058C9D9 /* AssociateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D9D4F31F7D01460058C9D9 /* AssociateManager.swift */; };
+		77EAE0E11FE0220500CF7282 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE0E01FE0220500CF7282 /* AuthenticationManager.swift */; };
+		77EAE0E31FE0225900CF7282 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE0E21FE0225900CF7282 /* AuthenticationService.swift */; };
 		77FFA8681F7132870034B746 /* FeedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFA8671F7132870034B746 /* FeedTableView.swift */; };
 		FA7672CEFE7EB9ABA6B7067D /* Pods_OnBoarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8FACB739714BCEC9757CA2 /* Pods_OnBoarding.framework */; };
 /* End PBXBuildFile section */
@@ -162,6 +164,8 @@
 		77D9191C1F72719D00BFAB45 /* Associate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Associate.swift; sourceTree = "<group>"; };
 		77D9D4EE1F7CE6A40058C9D9 /* AssociateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociateService.swift; sourceTree = "<group>"; };
 		77D9D4F31F7D01460058C9D9 /* AssociateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociateManager.swift; sourceTree = "<group>"; };
+		77EAE0E01FE0220500CF7282 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		77EAE0E21FE0225900CF7282 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		77FFA8671F7132870034B746 /* FeedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -198,6 +202,7 @@
 				77D919161F7258FF00BFAB45 /* FeedService.swift */,
 				778C02CD1F86771C0011E01D /* TimeService.swift */,
 				7747DF021F9F21DA002D6A96 /* MessageService.swift */,
+				77EAE0E21FE0225900CF7282 /* AuthenticationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -416,6 +421,7 @@
 				778C02FF1F87C05F0011E01D /* DataManager.swift */,
 				7747DF041F9F2229002D6A96 /* MessageManager.swift */,
 				77A193B81FC40EB700C653ED /* KeychainHelper.swift */,
+				77EAE0E01FE0220500CF7282 /* AuthenticationManager.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -636,6 +642,7 @@
 				77D9191D1F72719D00BFAB45 /* Associate.swift in Sources */,
 				7754CA331F67CC60005197ED /* GSDViewController.swift in Sources */,
 				7756909A1F8BB8210049DE5E /* TriggerButton.swift in Sources */,
+				77EAE0E11FE0220500CF7282 /* AuthenticationManager.swift in Sources */,
 				774BC7581F94A9B100D1CCF6 /* UIImage+.swift in Sources */,
 				7782B1E11F7A530E0024F976 /* TimesheetInfoTableView.swift in Sources */,
 				776075AB1F851814009BB974 /* FeedManager.swift in Sources */,
@@ -666,6 +673,7 @@
 				7754CA381F67D8D1005197ED /* MainMenuView.swift in Sources */,
 				7782B1ED1F7A94E00024F976 /* SubMessage.swift in Sources */,
 				772F315F1F74081B00775AA8 /* Timesheet.swift in Sources */,
+				77EAE0E31FE0225900CF7282 /* AuthenticationService.swift in Sources */,
 				775690931F8BB8200049DE5E /* ExtendedTableViewCell.swift in Sources */,
 				7754CA281F66E476005197ED /* LoginViewController.swift in Sources */,
 				77BEDF641F6FEF610097CF46 /* MessageViewController.swift in Sources */,

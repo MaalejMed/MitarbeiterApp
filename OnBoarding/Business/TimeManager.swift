@@ -35,41 +35,21 @@ class TimeManager: Subject {
     //MARK:-
     static func insert(timesheet: Timesheet, completion: @escaping ((ServerResponse?)->()) ) {
         guard let dic = timesheet.convertToJson() else {
-            let failure = ServerStatus.parse(status: .badRequest)
-            completion(failure)
-            return
+            return completion(ServerResponse(serverStatus: .badRequest))
         }
         TimeService.submitTimesheet(dic: dic, completion: { response in
             guard response.result.isSuccess == true else {
-                let failure = ServerStatus.parse(status: .serviceUnavailable)
-                completion(failure)
-                return
+                return completion(ServerResponse(serverStatus: .serviceUnavailable))
             }
-            
-            guard let serverStatus = response.result.value as? Int else {
-                let failure = ServerStatus.parse(status: .unknown)
-                completion(failure)
-                return
-            }
-            
-            guard let status = ServerStatus(rawValue: serverStatus) else {
-                let failure = ServerStatus.parse(status: .unknown)
-                completion(failure)
-                return
-            }
-            let serverResponse = ServerStatus.parse(status: status)
-            completion(serverResponse)
+            completion(ServerResponse.init(serverStatus: response.result.value as! String))
             notify()
             return
         })
     }
     
     //MARK:-
-    static func SelectLastSubmittedDay() {
-        guard let assIdentifier = DataManager.sharedInstance.associate?.identifier else {
-            return
-        }
-        TimeService.lastSubmittedDay(associateID: assIdentifier, completion: { response in
+    static func SelectLastSubmittedDay(associateID: String) {
+        TimeService.lastSubmittedDay(associateID: associateID, completion: { response in
              guard response.result.isSuccess == true else {
                 return
             }

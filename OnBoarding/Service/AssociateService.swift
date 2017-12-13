@@ -15,8 +15,8 @@ class AssociateService {
     static let basicStringURL = "http://localhost:8080"
     
     //MARK:-
-    static func login(username: String, password: String, completion: @escaping ((DataResponse<Any>)->())) {
-        let stringURL = basicStringURL+"/Login?username="+username+"&password="+password
+    static func fetchProfileData(associateID: String, completion: @escaping ((DataResponse<Any>)->())) {
+        let stringURL = basicStringURL+"/profile?associateID="+associateID
         Alamofire.request(stringURL).responseJSON(completionHandler: { response in
                 completion(response)
         })

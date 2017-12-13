@@ -19,11 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let loginNC = UINavigationController.init(rootViewController: loginVC)
         self.window?.rootViewController = loginNC
         
-        guard let associate = AssociateManager.kcRetrieveAssociate() else {
+        // check keychain
+        let associateCredentials = AuthenticationManager.kcRetrieveAssociateCredentials()
+        guard associateCredentials.0 != nil, associateCredentials.1 != nil  else {
             return true
         }
-        
-        DataManager.sharedInstance.setupFor(associate: associate)
+        DataManager.sharedInstance.setupFor(associateID: associateCredentials.0!)
         let homeVC = HomeViewController()
         loginNC.pushViewController(homeVC, animated: false)
         return true

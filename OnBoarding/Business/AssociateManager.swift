@@ -11,36 +11,24 @@ import Foundation
 class AssociateManager {
     
     //MARK:-
-    func selectAssociate(username: String, password: String, completion: @escaping ((ServerResponse?, Associate?)->())) {
-        AssociateService.login(username: username, password: password, completion: { response in
+    static func fetchProfileData(associateID: String, completion: ((ServerResponse?) -> ())?) {
+        AssociateService.fetchProfileData(associateID: associateID, completion: { response in
             guard response.result.isSuccess == true else {
-                let failure = ServerStatus.parse(status: .serviceUnavailable)
-                completion(failure, nil)
+                completion?(ServerResponse(serverStatus: .serviceUnavailable))
                 return
             }
   
             guard let payload = response.result.value as? [String: Any] else {
-                guard let serverStatus = response.result.value as? Int else {
-                    let failure = ServerStatus.parse(status: .unknown)
-                    completion(failure, nil)
-                    return
-                }
-                guard let status = ServerStatus(rawValue: serverStatus) else {
-                    let failure = ServerStatus.parse(status: .unknown)
-                    completion(failure, nil)
-                    return
-                }
-                let response = ServerStatus.parse(status: status)
-                completion(response, nil)
+                completion?(ServerResponse.init(serverStatus: .badRequest))
                 return
             }
             
             guard let associate = Associate(json: payload) else {
-                let failure = ServerStatus.parse(status: .badRequest)
-                completion(failure, nil)
+                completion?(ServerResponse.init(serverStatus: .badRequest))
                 return
             }
-            return completion(nil, associate)
+            DataManager.sharedInstance.associate = associate
+            completion?(ServerResponse.init(serverStatus: .success))
         })
     }
     
@@ -48,37 +36,9 @@ class AssociateManager {
     func updateAssociatePhoto(dic: [String: Any], completion: @escaping ((ServerResponse?)->()) ) {
         AssociateService.changeProfilePhoto(dic: dic, completion: { response in
             guard response.result.isSuccess == true else {
-                let failure = ServerStatus.parse(status: .serviceUnavailable)
-                completion(failure)
-                return
+                return completion(ServerResponse(serverStatus: .serviceUnavailable))
             }
-            
-            guard let serverStatus = response.result.value as? Int else {
-                let failure = ServerStatus.parse(status: .unknown)
-                completion(failure)
-                return
-            }
-            
-            guard let status = ServerStatus(rawValue: serverStatus) else {
-                let failure = ServerStatus.parse(status: .unknown)
-                completion(failure)
-                return
-            }
-            let response = ServerStatus.parse(status: status)
-            completion(response)
+            completion(ServerResponse.init(serverStatus: response.result.value as! String))
         })
-    }
-    
-    //MARK: Keychain
-    static func kcSave(associate: Associate) {
-        KeyChainHelper.save(associateID: associate.identifier)
-    }
-    
-    static func kcRetrieveAssociate() -> Associate? {
-        guard let assoID = KeyChainHelper.getAssociateID() else {
-            return nil
-        }
-        let associate = Associate(identifier: assoID)
-        return associate
     }
 }
