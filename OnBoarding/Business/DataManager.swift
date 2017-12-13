@@ -24,7 +24,7 @@ class DataManager {
     //MARK:- Setup
     func setupFor(associateID: String) {
         //profile data
-        AssociateManager.fetchProfileData(associateID: associateID, completion: nil)
+        AssociateManager.fetchProfileData(associateID: associateID)
         
         //feeds
         FeedManager.selectFeeds()

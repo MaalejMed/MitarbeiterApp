@@ -33,28 +33,24 @@ class AssociateManager: Subject {
     }
     
     //MARK:-
-    static func fetchProfileData(associateID: String, completion: ((ServerResponse?) -> ())?) {
+    static func fetchProfileData(associateID: String) {
         AssociateService.fetchProfileData(associateID: associateID, completion: { response in
             guard response.result.isSuccess == true else {
-                completion?(ServerResponse(serverStatus: .serviceUnavailable))
                 notify()
                 return
             }
   
             guard let payload = response.result.value as? [String: Any] else {
-                completion?(ServerResponse.init(serverStatus: .badRequest))
                 notify()
                 return
             }
             
             guard let associate = Associate(json: payload) else {
-                completion?(ServerResponse.init(serverStatus: .badRequest))
                 notify()
                 return
             }
             DataManager.sharedInstance.associate = associate
             notify()
-            completion?(ServerResponse.init(serverStatus: .success))
         })
     }
     
@@ -64,7 +60,7 @@ class AssociateManager: Subject {
             guard response.result.isSuccess == true else {
                 return completion(ServerResponse(serverStatus: .serviceUnavailable))
             }
-            completion(ServerResponse.init(serverStatus: response.result.value as! String))
+            completion(ServerResponse.init(serverStatus: response.result.value!))
         })
     }
 }
