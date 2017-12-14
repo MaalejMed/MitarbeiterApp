@@ -14,16 +14,16 @@ class MessageService {
     static let basicStringURL = "http://localhost:8080"
 
     //MARK:-
-    static func submitMessage(dic: [String: Any], completion: @escaping ((DataResponse<Any>)->())) {
+    static func submitMessage(dic: [String: Any], completion: @escaping ((DataResponse<String>)->())) {
         let stringURL = basicStringURL + "/SubmitMessage"
-        Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseJSON(completionHandler: { response in
+        Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
             completion(response)
         })
     }
     
-    static func submitSubMessage(dic: [String: Any], completion: @escaping ((DataResponse<Any>)->())) {
+    static func submitSubMessage(dic: [String: Any], completion: @escaping ((DataResponse<String>)->())) {
         let stringURL = basicStringURL + "/SubmitSubMessage"
-        Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseJSON(completionHandler: { response in
+        Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
             completion(response)
         })
     }

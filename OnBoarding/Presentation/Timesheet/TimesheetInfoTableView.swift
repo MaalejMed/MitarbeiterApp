@@ -93,9 +93,8 @@ extension TimesheetInfoTableView: UITableViewDataSource {
         
         let info = EntryInfo.allValues[indexPath.section]
         let entry = Array(dataSource![info]!)[indexPath.row]
-        cell?.data = (title: entry.key.rawValue, details: entry.value,  icon: nil)
+        cell?.data = (title: entry.key.rawValue, details: entry.value,  icon: UIImage.init(named: "Time-black"))
         return cell!
-        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

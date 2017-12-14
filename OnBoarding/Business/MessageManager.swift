@@ -21,7 +21,7 @@ class MessageManager {
                 return completion(ServerResponse.init(serverStatus: .serviceUnavailable))
             }
             
-            let serverResponse = ServerResponse.init(serverStatus: response.result.value as! String)
+            let serverResponse = ServerResponse.init(serverStatus: response.result.value!)
             let _ = serverResponse.status == .success ? DataManager.sharedInstance.messages.insert(message, at: 0) : nil
             return completion(serverResponse)
         })
@@ -35,7 +35,7 @@ class MessageManager {
             guard response.result.isSuccess == true else {
                 return completion(ServerResponse.init(serverStatus: .serviceUnavailable))
             }
-            return completion(ServerResponse.init(serverStatus: response.result.value as! String))
+            return completion(ServerResponse.init(serverStatus: response.result.value!))
         })
     }
     

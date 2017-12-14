@@ -39,7 +39,7 @@ class BasicTableViewCell: UITableViewCell, TableViewCellProtocols {
         cellView.view.topAnchor.constraint(equalTo:self.topAnchor, constant: metrics.topAnchor).isActive = true
         cellView.view.leftAnchor.constraint(equalTo:self.leftAnchor, constant: metrics.leftAnchor).isActive = true
         cellView.view.rightAnchor.constraint(equalTo:self.rightAnchor, constant: -metrics.rightAnchor).isActive = true
-        cellView.view.bottomAnchor.constraint(equalTo:self.bottomAnchor, constant: -metrics.rightAnchor).isActive = true
+        cellView.view.bottomAnchor.constraint(equalTo:self.bottomAnchor, constant: -metrics.bottomAnchor).isActive = true
     }
     
     //MARK:- Style
@@ -55,7 +55,7 @@ class BasicCellContentView: UIView, CellViewProtocol {
     //MARK:- Properties
     static var dummy: CellViewProtocol = {
         let view = BasicCellContentView()
-        view.data = (title: "title", details: "details", icon: UIImage.init(named: "Logo"))
+        view.data = (title: "title", details: "details", icon: UIImage.init(named: "logo"))
         return view
     }()
     
@@ -92,6 +92,7 @@ class BasicCellContentView: UIView, CellViewProtocol {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = 5.0
+        layout()
     }
     
     //MARK:- Inits
@@ -101,29 +102,19 @@ class BasicCellContentView: UIView, CellViewProtocol {
     
     //MARK:- Layout
     func layout() {
-        var views: [String: UIView] = ["title": titleLbl, "details": detailsLbl]
+        let views: [String: UIView] = ["title": titleLbl, "details": detailsLbl, "icon": iconImgV]
         var layoutConstraints: [NSLayoutConstraint] = []
-
-        if  data?.icon != nil {
-            views["icon"] = iconImgV
-        }
         
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
         }
         
-        if data?.icon != nil {
             layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[icon(25)]-(10)-|", options: [], metrics: nil, views: views)
-            layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[icon(25)]-(10)-[title]", options: [], metrics: nil, views: views)
-        } else {
-            layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[title]", options: [], metrics: nil, views: views)
-        }
+            layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[icon(25)]-(10)-[title]-(10)-[details]-(10)-|", options: [], metrics: nil, views: views)
         
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[title]-(10)-[details]-(10)-|", options: [], metrics: nil, views: views)
-        
-         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title]-(10)-|", options: [], metrics: nil, views: views)
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[details]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[details]-(10)-|", options: [], metrics: nil, views: views)
         
         NSLayoutConstraint.activate(layoutConstraints)
     }
