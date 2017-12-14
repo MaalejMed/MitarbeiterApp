@@ -15,16 +15,16 @@ class AssociateService {
     static let basicStringURL = "http://localhost:8080"
     
     //MARK:-
-    static func fetchProfileData(associateID: String, completion: @escaping ((DataResponse<Any>)->())) {
-        let stringURL = basicStringURL+"/profile?associateID="+associateID
+    static func fetchData(associateID: String, completion: @escaping ((DataResponse<Any>)->())) {
+        let stringURL = basicStringURL+"/data?associateID="+associateID
         Alamofire.request(stringURL).responseJSON(completionHandler: { response in
                 completion(response)
         })
     }
     
     //MARK:-
-    static func changeProfilePhoto(dic: [String: Any], completion: @escaping ((DataResponse<String>)->())) {
-        let stringURL = basicStringURL+"/ChangeProfilePhoto"
+    static func updatePhoto(dic: [String: Any], completion: @escaping ((DataResponse<String>)->())) {
+        let stringURL = basicStringURL+"/photo"
         Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
             completion(response)
         })

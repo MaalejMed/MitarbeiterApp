@@ -33,7 +33,7 @@ class FeedManager: Subject {
     }
     
     //MARK:- Operations
-    static func selectFeeds() {
+    static func fetch() {
         var feeds: [Feed] = []
         FeedService.fetch(completion: { response in
             guard response.result.isSuccess == true else {

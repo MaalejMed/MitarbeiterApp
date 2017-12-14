@@ -33,11 +33,11 @@ class TimeManager: Subject {
     }
     
     //MARK:-
-    static func insert(timesheet: Timesheet, completion: @escaping ((ServerResponse?)->()) ) {
+    static func submit(timesheet: Timesheet, completion: @escaping ((ServerResponse?)->()) ) {
         guard let dic = timesheet.convertToJson() else {
             return completion(ServerResponse(serverStatus: .badRequest))
         }
-        TimeService.submitTimesheet(dic: dic, completion: { response in
+        TimeService.submit(dic: dic, completion: { response in
             guard response.result.isSuccess == true else {
                 return completion(ServerResponse(serverStatus: .serviceUnavailable))
             }
@@ -48,8 +48,8 @@ class TimeManager: Subject {
     }
     
     //MARK:-
-    static func SelectLastSubmittedDay(associateID: String) {
-        TimeService.lastSubmittedDay(associateID: associateID, completion: { response in
+    static func fetchLastDay(associateID: String) {
+        TimeService.fetchLastDay(associateID: associateID, completion: { response in
              guard response.result.isSuccess == true else {
                 return
             }

@@ -14,16 +14,16 @@ class TimeService {
     static let basicStringURL = "http://localhost:8080"
     
     //MARK:-
-    static func submitTimesheet(dic: [String: Any], completion: @escaping ((DataResponse<String>)->())) {
-        let stringURL = basicStringURL + "/SubmitTimesheet"
+    static func submit(dic: [String: Any], completion: @escaping ((DataResponse<String>)->())) {
+        let stringURL = basicStringURL + "/submit"
         Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
             completion(response)
         })
     }
     
     //MARK:-
-    static func lastSubmittedDay(associateID: String, completion: @escaping ((DataResponse<String>)->())) {
-        let stringURL = basicStringURL+"/LastSubmittedDay?associateID="+associateID
+    static func fetchLastDay(associateID: String, completion: @escaping ((DataResponse<String>)->())) {
+        let stringURL = basicStringURL+"/lastDay?associateID="+associateID
         Alamofire.request(stringURL).responseString(completionHandler: { response in
                 completion(response)
         })

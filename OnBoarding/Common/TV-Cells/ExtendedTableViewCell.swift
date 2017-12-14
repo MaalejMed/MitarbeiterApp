@@ -47,7 +47,7 @@ class ExtendedCellContentView: UIView, CellViewProtocol {
     //MARK:- Properties
     static var dummy: CellViewProtocol = {
         let view = ExtendedCellContentView()
-        view.data = (title: "title", description: "description", details: "details", icon: nil)
+        view.data = (title: "title", description: "description", details: "details", icon: UIImage.init(named: "logo"))
         return view
     }()
     
@@ -108,7 +108,7 @@ class ExtendedCellContentView: UIView, CellViewProtocol {
         var layoutConstraints: [NSLayoutConstraint] = []
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[icon(30)]-(10)-[title(>=100@250)]-(10)-[details(>=50@1000)]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "H:[description]-(10)-|", options: [], metrics: nil, views: views)
-        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title]-(5)-[description]-(10)-|", options: [], metrics: nil, views: views)
+        layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:|-(10)-[title]-(5)-[description(==title)]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints +=  NSLayoutConstraint.constraints(withVisualFormat: "V:[icon(30)]", options: [], metrics: nil, views: views)
         layoutConstraints += [
             descriptionLbl.leftAnchor.constraint(equalTo: titleLbl.leftAnchor),

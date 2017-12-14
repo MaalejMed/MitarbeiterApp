@@ -33,8 +33,8 @@ class AssociateManager: Subject {
     }
     
     //MARK:-
-    static func fetchProfileData(associateID: String) {
-        AssociateService.fetchProfileData(associateID: associateID, completion: { response in
+    static func fetchData(associateID: String) {
+        AssociateService.fetchData(associateID: associateID, completion: { response in
             guard response.result.isSuccess == true else {
                 notify()
                 return
@@ -55,8 +55,8 @@ class AssociateManager: Subject {
     }
     
     //MARK:-
-    func updateAssociatePhoto(dic: [String: Any], completion: @escaping ((ServerResponse?)->()) ) {
-        AssociateService.changeProfilePhoto(dic: dic, completion: { response in
+    func updatePhoto(dic: [String: Any], completion: @escaping ((ServerResponse?)->()) ) {
+        AssociateService.updatePhoto(dic: dic, completion: { response in
             guard response.result.isSuccess == true else {
                 return completion(ServerResponse(serverStatus: .serviceUnavailable))
             }

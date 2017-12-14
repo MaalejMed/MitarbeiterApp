@@ -159,7 +159,7 @@ class HomeViewController: UIViewController, Observer {
     func setupTriggerView() {
         triggerView.data = (title:"No Feed available", icon: UIImage.init(named:"NoMails"), action: {
             self.triggerView.status = .loading
-            FeedManager.selectFeeds()
+            FeedManager.fetch()
         })
         self.triggerView.status = .loading
         self.presentTriggerView()
