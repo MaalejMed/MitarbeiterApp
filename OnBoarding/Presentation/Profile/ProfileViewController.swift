@@ -114,8 +114,7 @@ class ProfileViewController: UIViewController {
             "photo": profileImageString
         ]
         
-        let associateManager = AssociateManager()
-        associateManager.updatePhoto(dic: dic, completion:{[weak self] response in
+        AssociateManager.updatePhoto(dic: dic, completion:{[weak self] response in
             self?.serverResponseView.present(serverResponse: response!)
         })
     }

@@ -79,8 +79,7 @@ class LoginViewController: UIViewController {
     //MARK:- Network calls
     func login(username: String, password: String) {
         loginView.loginBtn.status = .loading
-        let authManager = AuthenticationManager()
-        authManager.login(username: username, password: password, completion: {[weak self] serverResponse in
+        AuthenticationManager.login(username: username, password: password, completion: {[weak self] serverResponse in
             guard serverResponse?.status == .success else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
                 self?.loginView.loginBtn.status = .idle

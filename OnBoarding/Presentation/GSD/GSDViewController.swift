@@ -15,26 +15,14 @@ class GSDViewController: UIViewController {
     let triggerView = TriggerView(frame: .zero)
     let messageTV = MessageTableView(frame: .zero)
     
-    var messages: [Message] = [] {
-        didSet {
-            guard messages.count > 0 else {
-                triggerView.status = .idle
-                presentTriggerView()
-                return
-            }
-            self.messageTV.dataSource = self.messages
-            presentMessagesTableView()
-        }
-    }
-
     //MARK:- Views lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNaviBarButtons()
+        setupNavBarButtons()
         setupGSDInfoView()
         setupTriggerView()
         setupMessageTableView()
-        setupMessagesDataSource()
+        fetchMessages()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +31,6 @@ class GSDViewController: UIViewController {
         self.title = "GSD"
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.navBarBgColor
-        //presentContentView()
     }
     
     //MARK:-Layout
@@ -62,7 +49,7 @@ class GSDViewController: UIViewController {
     }
     
     //MARK- Setup views
-    func setupNaviBarButtons() {
+    func setupNavBarButtons() {
         let button = UIButton.init(type: .custom)
         button.setImage(UIImage.init(named: "Add")!, for: .normal)
         button.addTarget(self, action: #selector(addMessageButtonTapped), for: .touchUpInside)
@@ -81,16 +68,17 @@ class GSDViewController: UIViewController {
     
     func setupTriggerView() {
         triggerView.data = (title:"No Mails are available", icon: UIImage.init(named:"NoMails"), action: { [weak self] in
-            self?.setupMessagesDataSource()
+            self?.fetchMessages()
         })
     }
 
-    //MARK:-
-    func presentMessagesTableView() {
+    //MARK:- present views
+    func reloadTableView() {
         if triggerView.superview != nil {
            triggerView.removeFromSuperview()
         }
         layout(contentView: messageTV)
+        messageTV.dataSource = DataManager.sharedInstance.messages
     }
     
     func presentTriggerView() {
@@ -103,13 +91,13 @@ class GSDViewController: UIViewController {
     //MARK:- Selectors
     @objc func addMessageButtonTapped() {
         let msgVC = MessageViewController.init(type: .main, mainMessage: nil)
-        msgVC.messageDelegate = self
+        msgVC.messageSentCompletion = { [unowned self] in self.reloadTableView() }
         let msgNC = UINavigationController.init(rootViewController: msgVC)
         self.navigationController?.present(msgNC, animated: true, completion: nil)
     }
     
     //MARK:-
-    func setupMessagesDataSource() {
+    func fetchMessages() {
         guard let associate = DataManager.sharedInstance.associate else {
             return
         }
@@ -117,36 +105,19 @@ class GSDViewController: UIViewController {
         triggerView.status = .loading
         self.presentTriggerView()
         
-        DataManager.sharedInstance.updateMessages(associateID: associate.identifier!, completion: {[weak self] serverResponse in
-            guard serverResponse == nil else {
+        MessageManager.fetchMessages(associateID: associate.identifier!, completion: { [weak self] messages in
+            guard messages != nil else {
                 self?.triggerView.status = .idle
-                self?.presentTriggerView()
                 return
             }
-            self?.messages = DataManager.sharedInstance.messages
+            self?.reloadTableView()
         })
-    }
-}
-
-extension GSDViewController : MessageViewControllerDelegate {
-    func didSendMessage(messageVC: MessageViewController?, message: Message) {
-        messages = DataManager.sharedInstance.messages
-    }
-}
-
-extension GSDViewController: MessageDetailsViewControllerDelegate {
-    func didSendSubMessage(MessageDetailsVC: MessageDetailsViewController, subMessage: SubMessage, message: Message) {
-        guard let index = self.messages.index(of: message) else {
-            return
-        }
-        self.messages[index].subMessages.append(subMessage)
     }
 }
 
 extension GSDViewController: MessageTableViewDelegate {
     func didSelectMessage(messageTableView: MessageTableView, message: Message) {
         let messageDetailsVC = MessageDetailsViewController()
-        messageDetailsVC.delegate = self
         messageDetailsVC.message = message
         self.navigationController?.pushViewController(messageDetailsVC, animated: true)
     }

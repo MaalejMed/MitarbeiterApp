@@ -10,13 +10,35 @@ import Foundation
 
 class MessageManager {
     
-    //MARK:-
-    func insert(message: Message, completion: @escaping ((ServerResponse?)->()) ) {
+    //MARK:- Message
+    static func fetchMessages(associateID: String, completion: @escaping (([Message]?)->())) {
+        var messages: [Message] = []
+        MessageService.fetchMessages(associateID: associateID, completion: { response in
+            guard response.result.isSuccess == true else {
+                return completion(nil)
+            }
+            
+            guard let payload = response.result.value as? [[String: Any]] else {
+                return completion(nil)
+            }
+            
+            for jsonItem in payload {
+                guard let aMessage = Message(json: jsonItem) else {
+                    continue
+                }
+                messages.append(aMessage)
+            }
+            DataManager.sharedInstance.messages = messages
+            completion(messages)
+        })
+    }
+    
+    static func send(message: Message, completion: @escaping ((ServerResponse?)->()) ) {
         guard let dic = message.convertToJson() else {
             return completion(ServerResponse.init(serverStatus: .badRequest))
         }
         
-        MessageService.submitMessage(dic: dic, completion: { response in
+        MessageService.sendMessage(dic: dic, completion: { response in
             guard response.result.isSuccess == true else {
                 return completion(ServerResponse.init(serverStatus: .serviceUnavailable))
             }
@@ -27,49 +49,16 @@ class MessageManager {
         })
     }
     
-    func insert(subMessage: SubMessage, completion: @escaping ((ServerResponse?)->()) ) {
-        guard let dic = subMessage.convertToJson() else {
-            return completion(ServerResponse.init(serverStatus: .badRequest))
-        }
-        MessageService.submitSubMessage(dic: dic, completion: { response in
-            guard response.result.isSuccess == true else {
-                return completion(ServerResponse.init(serverStatus: .serviceUnavailable))
-            }
-            return completion(ServerResponse.init(serverStatus: response.result.value!))
-        })
-    }
-    
-    func selectMessagesFor(associateID: String, completion: @escaping ((ServerResponse?, [Message]?)->())) {
-        var messages: [Message] = []
-        MessageService.fetch(associateID: associateID, completion: { response in
-            guard response.result.isSuccess == true else {
-                return completion(ServerResponse.init(serverStatus: .serviceUnavailable), nil)
-            }
-            
-            guard let payload = response.result.value as? [[String: Any]] else {
-                return completion(ServerResponse.init(serverStatus: .badRequest), nil)
-            }
-            
-            for jsonItem in payload {
-                guard let aMessage = Message(json: jsonItem) else {
-                    continue
-                }
-                messages.append(aMessage)
-            }
-            
-            return completion(nil, messages)
-        })
-    }
-    
-    func selectSubMessage(messageID: String, completion: @escaping ((ServerResponse?, [SubMessage]?)->())) {
+    //MARK:- Submessage
+    static func fetchSubMessages(messageID: String, completion: @escaping (([SubMessage]?)->())) {
         var messages: [SubMessage] = []
         MessageService.fetchSubMessage(messageID: messageID, completion: { response in
             guard response.result.isSuccess == true else {
-                return completion(ServerResponse.init(serverStatus: .serviceUnavailable), nil)
+                return completion(nil)
             }
             
             guard let payload = response.result.value as? [[String: Any]] else {
-                return completion(ServerResponse.init(serverStatus: .unknown), nil)
+                return completion(nil)
             }
             
             for jsonItem in payload {
@@ -79,7 +68,19 @@ class MessageManager {
                 messages.append(aSubMessage)
             }
             
-            return completion(nil, messages)
+            return completion(messages)
+        })
+    }
+    
+    static func send(subMessage: SubMessage, completion: @escaping ((ServerResponse?)->()) ) {
+        guard let dic = subMessage.convertToJson() else {
+            return completion(ServerResponse.init(serverStatus: .badRequest))
+        }
+        MessageService.submitSubMessage(dic: dic, completion: { response in
+            guard response.result.isSuccess == true else {
+                return completion(ServerResponse.init(serverStatus: .serviceUnavailable))
+            }
+            return completion(ServerResponse.init(serverStatus: response.result.value!))
         })
     }
 }

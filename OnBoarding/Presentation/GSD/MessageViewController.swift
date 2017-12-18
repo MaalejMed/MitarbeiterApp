@@ -13,13 +13,6 @@ enum MessageType {
     case sub
 }
 
-protocol MessageViewControllerDelegate: class {
-    func didSendMessage(messageVC: MessageViewController?, message: Message)
-}
-
-protocol SubMessageViewControllerDelegate: class {
-    func didSendSubMessage(messageVC: MessageViewController, subMessage: SubMessage, message: Message)
-}
 class MessageViewController: UIViewController {
     
     //MARK:- Properties
@@ -30,8 +23,8 @@ class MessageViewController: UIViewController {
     var messageType: MessageType
     var mainMessage: Message?
     
-    weak var messageDelegate: MessageViewControllerDelegate?
-    weak var subMessageDelegate: SubMessageViewControllerDelegate?
+    var messageSentCompletion:(()->())?
+    var subMessageSentCompetion: ((SubMessage)->())?
     
     //MARK:- Init
     init(type: MessageType, mainMessage: Message?) {
@@ -103,29 +96,31 @@ class MessageViewController: UIViewController {
     }
     
     @objc func sendButtonTapped() {
-        guard let associate = DataManager.sharedInstance.associate else {
-            return
-        }
         sendBtn.status = .loading
         guard messageView.titleTxtF.text != nil, messageView.messageTxtV.text != nil else {
             return
         }
-        let _ = messageType == . main ? sendMessage(associate: associate) : sendSubMessage(message: mainMessage!)
+        let _ = messageType == . main ? send() : sendSubMessage(message: mainMessage!)
     }
     
     //MARK:- Message
-    func sendMessage(associate: Associate) {
+    func send() {
+        guard let associate = DataManager.sharedInstance.associate else {
+            return
+        }
         let message = Message(identifier: String.random(), associateID: associate.identifier!, title: messageView.titleTxtF.text!, body: messageView.messageTxtV.text, subMessages: [], date: Date())
         
-        let messageManager = MessageManager()
-        messageManager.insert(message: message, completion: {[weak self] serverResponse in
+        
+        MessageManager.send(message: message, completion: {[weak self] serverResponse in
             guard serverResponse?.status == .success else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
                 self?.sendBtn.status = .idle
                 return
             }
             self?.serverResponseView.present(serverResponse: serverResponse!)
-            self?.messageDelegate?.didSendMessage(messageVC: self, message: message)
+            if self?.messageSentCompletion != nil {
+                self?.messageSentCompletion!()
+            }
             self?.dismissVC()
         })
     }
@@ -137,18 +132,20 @@ class MessageViewController: UIViewController {
         }
         let subMessage = SubMessage.init(identifier: String.random(), body: body, messageID: msgID, date: Date(), owner: true)
         
-        let messageManager = MessageManager()
-        messageManager.insert(subMessage: subMessage, completion: { [weak self] serverResponse in
+        MessageManager.send(subMessage: subMessage, completion: { [weak self] serverResponse in
             guard serverResponse?.status == .success else {
                 self?.serverResponseView.present(serverResponse: serverResponse!)
                 self?.sendBtn.status = .idle
                 return
             }
             self?.serverResponseView.present(serverResponse: serverResponse!)
-            self?.subMessageDelegate?.didSendSubMessage(messageVC: self!, subMessage: subMessage, message: message)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
                 self?.dismissVC()
             })
+            guard let completion = self?.subMessageSentCompetion else {
+                return
+            }
+            completion(subMessage)
         })
     }
 }

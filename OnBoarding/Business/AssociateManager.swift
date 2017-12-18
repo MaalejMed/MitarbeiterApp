@@ -55,7 +55,7 @@ class AssociateManager: Subject {
     }
     
     //MARK:-
-    func updatePhoto(dic: [String: Any], completion: @escaping ((ServerResponse?)->()) ) {
+    static func updatePhoto(dic: [String: Any], completion: @escaping ((ServerResponse?)->()) ) {
         AssociateService.updatePhoto(dic: dic, completion: { response in
             guard response.result.isSuccess == true else {
                 return completion(ServerResponse(serverStatus: .serviceUnavailable))

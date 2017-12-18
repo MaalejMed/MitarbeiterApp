@@ -13,10 +13,25 @@ class MessageService {
     
     static let basicStringURL = "http://localhost:8080"
 
-    //MARK:-
-    static func submitMessage(dic: [String: Any], completion: @escaping ((DataResponse<String>)->())) {
+    //MARK:- Message
+    static func fetchMessages(associateID: String, completion: @escaping ((DataResponse<Any>)->())) {
+        let stringURL = basicStringURL + "/Message?associateID="+associateID
+        Alamofire.request(stringURL).responseJSON(completionHandler: { response in
+            completion(response)
+        })
+    }
+    
+    static func sendMessage(dic: [String: Any], completion: @escaping ((DataResponse<String>)->())) {
         let stringURL = basicStringURL + "/SubmitMessage"
         Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
+            completion(response)
+        })
+    }
+    
+    //MARK:- SubMessage
+    static func fetchSubMessage(messageID: String, completion: @escaping ((DataResponse<Any>)->())) {
+        let stringURL = basicStringURL + "/SubMessage?messageID="+messageID
+        Alamofire.request(stringURL).responseJSON(completionHandler: { response in
             completion(response)
         })
     }
@@ -24,22 +39,6 @@ class MessageService {
     static func submitSubMessage(dic: [String: Any], completion: @escaping ((DataResponse<String>)->())) {
         let stringURL = basicStringURL + "/SubmitSubMessage"
         Alamofire.request(stringURL, method: .post, parameters: dic, encoding: JSONEncoding.default).responseString(completionHandler: { response in
-            completion(response)
-        })
-    }
-    
-    //MARK:-
-    static func fetch(associateID: String, completion: @escaping ((DataResponse<Any>)->())) {
-        let stringURL = basicStringURL + "/Message?associateID="+associateID
-        Alamofire.request(stringURL).responseJSON(completionHandler: { response in
-            completion(response)
-        })
-    }
-    
-    //MARK:-
-    static func fetchSubMessage(messageID: String, completion: @escaping ((DataResponse<Any>)->())) {
-        let stringURL = basicStringURL + "/SubMessage?messageID="+messageID
-        Alamofire.request(stringURL).responseJSON(completionHandler: { response in
             completion(response)
         })
     }

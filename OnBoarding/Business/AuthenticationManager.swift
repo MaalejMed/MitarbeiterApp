@@ -13,7 +13,7 @@ import Foundation
 class AuthenticationManager {
     
     //MARK:-Login
-    func login(username: String, password: String, completion: @escaping ((ServerResponse?) -> ())){
+    static func login(username: String, password: String, completion: @escaping ((ServerResponse?) -> ())){
         AuthenticationService.login(username: username, password: password, completion: { response in
             guard response.result.isSuccess == true else {
                 let failure = ServerResponse(serverStatus: .serviceUnavailable)
