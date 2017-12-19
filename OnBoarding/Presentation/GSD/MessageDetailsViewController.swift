@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol MessageDetailsViewControllerDelegate: class {
-    func didSendSubMessage(MessageDetailsVC: MessageDetailsViewController, subMessage: SubMessage, message: Message)
-}
-
 class MessageDetailsViewController: UIViewController {
     
     //MARK:- Properties
@@ -24,8 +20,6 @@ class MessageDetailsViewController: UIViewController {
         }
     }
     
-    weak var delegate: MessageDetailsViewControllerDelegate?
-            
     //MARK:- Init
     override func viewDidLoad() {
         self.view.backgroundColor = .white
