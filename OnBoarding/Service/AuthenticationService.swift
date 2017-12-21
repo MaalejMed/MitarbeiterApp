@@ -12,7 +12,7 @@ import Alamofire
 class AuthenticationService {
     
     //MARK:- Properties
-    static let basicStringURL = "http://localhost:8080"
+    static let basicStringURL = "http://localhost:7111"
     
     //MARK:- Login
     static func login(username: String, password: String, completion: @escaping ((DataResponse<String>)->())) {

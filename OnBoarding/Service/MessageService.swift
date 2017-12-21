@@ -11,7 +11,7 @@ import Alamofire
 
 class MessageService {
     
-    static let basicStringURL = "http://localhost:8080"
+    static let basicStringURL = "http://localhost:7111"
 
     //MARK:- Message
     static func fetchMessages(associateID: String, completion: @escaping ((DataResponse<Any>)->())) {

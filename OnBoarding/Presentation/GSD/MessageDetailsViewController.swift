@@ -26,8 +26,8 @@ class MessageDetailsViewController: UIViewController {
         setupNavBarButtons()
         setupTriggerView()
         setupMessageView()
-        layout()
         fetchSubMessages()
+        layout()
     }
     
     //MARK:- Layout
@@ -51,7 +51,7 @@ class MessageDetailsViewController: UIViewController {
         for  subMessageView in subMessagesViews {
             subMessageView.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(subMessageView)
-            subMessageView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
+            subMessageView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
             subMessageView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
             subMessageView.topAnchor.constraint(equalTo: upperView.bottomAnchor, constant: 10).isActive = true
             subMessageView.bottomAnchor.constraint(equalTo: upperView.bottomAnchor, constant: subMessageView.height! + 10).isActive = true
@@ -59,7 +59,7 @@ class MessageDetailsViewController: UIViewController {
         }
     }
     
-    //MARK:- SetupViews
+    //MARK:- Setup views
     func setupNavBarButtons() {
         let respondBtn = UIBarButtonItem.init(title: "Answer", style: .done, target: self, action: #selector(answerBtnTapped))
         self.navigationItem.rightBarButtonItem = respondBtn
@@ -67,7 +67,7 @@ class MessageDetailsViewController: UIViewController {
     func setupMessageView() {
         messageView.titleTxtF.isEnabled = false
         messageView.messageTxtV.isEditable = false
-        messageView.type = .main
+        messageView.type = .mainMessage
     }
     
     func setupTriggerView() {
@@ -94,7 +94,7 @@ class MessageDetailsViewController: UIViewController {
         })
     }
     
-    //MARK:- SubMessages
+    //MARK:- Sub messages
     func reloadMessageView() {
         let subMessageViews = setupSubMessageViews()
         guard subMessageViews.count > 0 else {
@@ -114,7 +114,7 @@ class MessageDetailsViewController: UIViewController {
         }
         for submessage in subMsgs.reversed() {
             let subMessageView = SubMessageView(frame: .zero)
-            subMessageView.data = (body: submessage.body, isOwner: submessage.owner)
+            subMessageView.data = (subMessage: submessage, isOwner: submessage.owner)
             subMessageViews.append(subMessageView)
         }
         return subMessageViews
@@ -122,7 +122,7 @@ class MessageDetailsViewController: UIViewController {
 
     //MARK:- Selector
     @objc func answerBtnTapped() {
-        let msgVC = MessageViewController.init(type: .sub, mainMessage: message)
+        let msgVC = MessageViewController.init(type: .subMessage, message: message)
         msgVC.subMessageSentCompetion = { [weak self] subMessage in
             self?.message?.subMessages.append(subMessage)
             self?.reloadMessageView()

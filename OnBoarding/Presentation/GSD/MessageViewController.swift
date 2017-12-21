@@ -9,8 +9,8 @@
 import UIKit
 
 enum MessageType {
-    case main
-    case sub
+    case mainMessage
+    case subMessage
 }
 
 class MessageViewController: UIViewController {
@@ -21,15 +21,15 @@ class MessageViewController: UIViewController {
     let serverResponseView = ServerResponseView(frame: .zero)
     
     var messageType: MessageType
-    var mainMessage: Message?
+    var message: Message?
     
     var messageSentCompletion:(()->())?
     var subMessageSentCompetion: ((SubMessage)->())?
     
     //MARK:- Init
-    init(type: MessageType, mainMessage: Message?) {
+    init(type: MessageType, message: Message?) {
         self.messageType = type
-        self.mainMessage = mainMessage
+        self.message = message
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -40,7 +40,7 @@ class MessageViewController: UIViewController {
     //MARK:- Views lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNaviBarButtons()
+        setupNavBar()
         setupSendButton()
         setupMessageView()
         layout()
@@ -48,9 +48,9 @@ class MessageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.topItem?.title = "New message"
         self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarBgColor
         self.view.backgroundColor = UIColor.BgColor
+        self.title = messageType == .mainMessage ? "New message" : self.message?.title
     }
     
     //MARK:- Layout
@@ -72,7 +72,8 @@ class MessageViewController: UIViewController {
     }
     
     //MARK:- Setup views
-    func setupNaviBarButtons() {
+    func setupNavBar() {
+        //buttons
         let button = UIButton.init(type: .custom)
         button.setImage(UIImage(named:"Close"), for: .normal)
         button.contentMode = .scaleAspectFit
@@ -96,20 +97,25 @@ class MessageViewController: UIViewController {
     }
     
     @objc func sendButtonTapped() {
-        sendBtn.status = .loading
-        guard messageView.titleTxtF.text != nil, messageView.messageTxtV.text != nil else {
-            return
-        }
-        let _ = messageType == . main ? send() : sendSubMessage(message: mainMessage!)
+        let _ = messageType == .mainMessage ? sendMessage() : sendSubMessage()
     }
     
     //MARK:- Message
-    func send() {
+    func sendMessage() {
         guard let associate = DataManager.sharedInstance.associate else {
             return
         }
-        let message = Message(identifier: String.random(), associateID: associate.identifier!, title: messageView.titleTxtF.text!, body: messageView.messageTxtV.text, subMessages: [], date: Date())
         
+        guard let subject = messageView.titleTxtF.text else {
+            return
+        }
+        
+        guard let body = messageView.messageTxtV.text, body != "Message" else {
+            return
+        }
+        
+        sendBtn.status = .loading
+        let message = Message(identifier: String.random(), associateID: associate.identifier!, title: subject.trimmingCharacters(in: .whitespaces), body: body.trimmingCharacters(in: .whitespaces) , subMessages: [], date: Date())
         
         MessageManager.send(message: message, completion: {[weak self] serverResponse in
             guard serverResponse?.status == .success else {
@@ -126,10 +132,15 @@ class MessageViewController: UIViewController {
     }
     
     //MARK:-
-    func sendSubMessage(message: Message) {
-        guard let msgID = message.identifier, let body = messageView.messageTxtV.text else {
+    func sendSubMessage() {
+        guard let msgID = self.message?.identifier else {
             return
         }
+        
+        guard let body = messageView.messageTxtV.text else {
+            return
+        }
+        
         let subMessage = SubMessage.init(identifier: String.random(), body: body, messageID: msgID, date: Date(), owner: true)
         
         MessageManager.send(subMessage: subMessage, completion: { [weak self] serverResponse in
@@ -139,13 +150,12 @@ class MessageViewController: UIViewController {
                 return
             }
             self?.serverResponseView.present(serverResponse: serverResponse!)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [weak self] in
-                self?.dismissVC()
-            })
+            
             guard let completion = self?.subMessageSentCompetion else {
                 return
             }
             completion(subMessage)
+            self?.dismissVC()
         })
     }
 }

@@ -14,6 +14,8 @@ class SubMessageView: UIView {
     static let topPadding: CGFloat = 10
     static let bottomPadding: CGFloat = 10
     static let bodyFont = UIFont.systemFont(ofSize: 14)
+    static let dateFont = UIFont.boldSystemFont(ofSize: 12)
+
 
     let bodyLbl: UILabel = {
         let label = UILabel()
@@ -23,9 +25,18 @@ class SubMessageView: UIView {
         return label
     }()
     
-    var data: (body:String?, isOwner: Bool?)? {
+    let dateLbl: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = SubMessageView.bodyFont
+        return label
+    }()
+    
+    var data: (subMessage:SubMessage?, isOwner: Bool?)? {
         didSet {
-            bodyLbl.text = data?.body
+            bodyLbl.text = data?.subMessage?.body
+            dateLbl.text = data?.subMessage?.date?.simpleHoursFormat()
             self.backgroundColor = ( data?.isOwner == true) ? UIColor.myMessageBgColor : UIColor.BgColor
             layout()
         }
@@ -50,15 +61,17 @@ class SubMessageView: UIView {
     
     //MARK:- Layout
     func layout() {
-        let views: [String: UIView] = ["body": bodyLbl]
+        let views: [String: UIView] = ["body": bodyLbl, "date": dateLbl]
         for (_, view) in views {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
         }
         
         var layoutConstraints: [NSLayoutConstraint] = []
-        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[body]-(5)-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[body]-(>=5)-[date]-(10)-|", options: [], metrics: nil, views: views)
         layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(\(SubMessageView.topPadding))-[body]-(\(SubMessageView.bottomPadding))-|", options: [], metrics: nil, views: views)
+        layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(\(SubMessageView.topPadding))-[date]", options: [], metrics: nil, views: views)
+        
         NSLayoutConstraint.activate(layoutConstraints)
     }
 }

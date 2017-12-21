@@ -12,7 +12,7 @@ import Alamofire
 class AssociateService {
     
     //MARK:- Properties
-    static let basicStringURL = "http://localhost:8080"
+    static let basicStringURL = "http://localhost:7111"
     
     //MARK:-
     static func fetchData(associateID: String, completion: @escaping ((DataResponse<Any>)->())) {

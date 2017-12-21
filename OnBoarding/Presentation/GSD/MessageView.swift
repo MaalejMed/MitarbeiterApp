@@ -42,7 +42,8 @@ class MessageView: UIView {
     }()
     
     var height: CGFloat? {
-        return type == .main ?  titleTxtFHeight + messageTxtVHeight + 1 : messageTxtVHeight
+        messageTxtV.sizeToFit()
+        return type == .mainMessage ?  titleTxtFHeight + messageTxtV.frame.size.height + 10 : messageTxtVHeight
     }
     
     var data: (subject: String?, body: String?)? {
@@ -72,7 +73,7 @@ class MessageView: UIView {
     //MARK:- Layout
     func layout() {
         var views: [String: UIView] = ["message": messageTxtV]
-        if type == .main {
+        if type == .mainMessage {
             views["title"] = titleTxtF
             views["line"] = lineImgV
         }
@@ -84,13 +85,14 @@ class MessageView: UIView {
             self.addSubview(view)
         }
         
-        if  type == .main {
+        if  type == .mainMessage {
             layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[title]-(0)-|", options: [], metrics: nil, views: views)
             layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[line]-(0)-|", options: [], metrics: nil, views: views)
             layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[message]-(0)-|", options: [], metrics: nil, views: views)
 
             layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[title(\(titleTxtFHeight))]-(0)-[line(1)]-(0)-[message(\(messageTxtVHeight))]-(0)-|", options: [], metrics: nil, views: views)
         } else {
+            
              layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[message(\(messageTxtVHeight))]-(0)-|", options: [], metrics: nil, views: views)
             layoutConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[message]-(0)-|", options: [], metrics: nil, views: views)
         }

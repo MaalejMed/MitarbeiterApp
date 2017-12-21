@@ -11,7 +11,7 @@ import Alamofire
 class FeedService {
     
     //MARK:- Properties
-    static let basicStringURL = "http://localhost:8080/feed?"
+    static let basicStringURL = "http://localhost:7111/feed?"
     
     //MARK:- Fetch
     static func fetch(completion: @escaping ((DataResponse<Any>)->())) {

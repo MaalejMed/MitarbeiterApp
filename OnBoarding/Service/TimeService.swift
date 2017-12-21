@@ -11,7 +11,7 @@ import Alamofire
 
 class TimeService {
     
-    static let basicStringURL = "http://localhost:8080"
+    static let basicStringURL = "http://localhost:7111"
     
     //MARK:-
     static func submit(dic: [String: Any], completion: @escaping ((DataResponse<String>)->())) {

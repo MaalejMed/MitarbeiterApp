@@ -90,7 +90,7 @@ class GSDViewController: UIViewController {
     
     //MARK:- Selectors
     @objc func addMessageButtonTapped() {
-        let msgVC = MessageViewController.init(type: .main, mainMessage: nil)
+        let msgVC = MessageViewController.init(type: .mainMessage, message: nil)
         msgVC.messageSentCompletion = { [unowned self] in self.reloadTableView() }
         let msgNC = UINavigationController.init(rootViewController: msgVC)
         self.navigationController?.present(msgNC, animated: true, completion: nil)
